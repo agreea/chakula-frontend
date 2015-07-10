@@ -73,6 +73,7 @@ $('.input-number').focusin(function(){
     $(".order-button").click(function(e){
         e.preventDefault();
         order-msg = $(".order-title").text().replace(/ /g, '+');
+        alert(order-msg);
         $.ajax({
             url: "http://corner.rhye.org/api/truck",
         type: 'POST',
@@ -81,5 +82,4 @@ $('.input-number').focusin(function(){
         data: 'method=message&number='+$(".phone-number").val()+
                 '&message=Pat+wants:%0a'+order-msg+'%0aFries,+old+bay%0aPickup:+12:30pm'
     });
-        alert(order-msg);
 });
