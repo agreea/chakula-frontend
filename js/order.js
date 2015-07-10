@@ -1,5 +1,9 @@
 $(document).ready(function(event){
-	$('.btn-number').click(function(e){
+	title_w_spaces = window.location.pathname.substring(str.lastIndexOf("#")+1,str.lastIndexOf("&")).split('_').join(' ');
+    $('order-title').text(title_w_spaces);
+    $('order-price').text(
+        "$" + window.location.pathname.substring(str.lastIndexOf("&")+1)))
+    $('.btn-number').click(function(e){
     e.preventDefault();
     
     fieldName = $(this).attr('data-field');
