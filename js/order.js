@@ -84,6 +84,6 @@ $('.input-number').focusin(function(){
         error: function(data){
             alert(JSON.stringify(data));
         }});
-        alert($(".phone-number").val();
+        alert($(".phone-number").val());
     });
 });
