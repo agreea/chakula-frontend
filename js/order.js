@@ -72,7 +72,7 @@ $('.input-number').focusin(function(){
 
     $(".order-button").click(function(e){
         e.preventDefault();
-        order-msg = $(".title").text().replace(/ /g, '+');
+        order-msg = $(".order-title").text().replace(/ /g, '+');
         $.ajax({
             url: "http://corner.rhye.org/api/truck",
         type: 'POST',
