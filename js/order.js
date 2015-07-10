@@ -1,9 +1,8 @@
 $(document).ready(function(event){
 	str = window.location.pathname;
-    title_w_spaces = str.substring(str.lastIndexOf("#")+1,str.lastIndexOf("+")).split('_').join(' ');
-    $('order-title').text(title_w_spaces);
+    $('order-title').text(str);
     $('order-price').text(
-        "$" + window.location.pathname.split("+")[1]);
+        "$" + str);
     $('.btn-number').click(function(e){
     e.preventDefault();
     
