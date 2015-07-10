@@ -1,5 +1,5 @@
 $(document).ready(function(event){
-	str = window.location.pathname
+	str = window.location.pathname;
     title_w_spaces = str.substring(str.lastIndexOf("#")+1,str.lastIndexOf("+")).split('_').join(' ');
     $('order-title').text(title_w_spaces);
     $('order-price').text(
