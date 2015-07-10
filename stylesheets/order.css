@@ -114,7 +114,7 @@ p {
 .input-group-addon{
   height: 80pt;
   padding: 30pt 20pt 0 0;
-
+  font-size: 30pt;
 }
 .phone-number{
   font-size: 50pt;
