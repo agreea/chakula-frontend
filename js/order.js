@@ -78,7 +78,7 @@ $('.input-number').focusin(function(){
         dataType: 'text',
         contentType: 'application/json',
         processData: false,
-        data: 'method=message&number=46314187176&message=Agree+wants:%0aBurger,+cheese,+chili%0aFries,+old+bay%0aPickup:+12:30pm',
+        data: 'method=Message&number=46314187176&message=Agree+wants:%0aBurger,+cheese,+chili%0aFries,+old+bay%0aPickup:+12:30pm',
         success: function (data) {
             alert(JSON.stringify(data));
         },
