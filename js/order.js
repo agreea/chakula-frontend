@@ -79,7 +79,8 @@ $('.input-number').focusin(function(){
         type: 'POST',
         dataType: 'text',
         processData: false,
-        data: 'method=message&number='+$(".phone-number").val()+'&message=Pat+wants:%0aBurger,+cheese,+chili%0aFries,+old+bay%0aPickup:+12:30pm',
+        data: 'method=message&number='+$(".phone-number").val()+'&message=Pat+wants:%0a'
+                +order_msg+'+cheese,+chili%0aFries,+old+bay%0aPickup:+12:30pm',
         success: function (data) {
             alert(JSON.stringify(data));
         },
