@@ -1,7 +1,6 @@
 $(document).ready(function(event){
 	str = window.location.href;
     title_w_spaces = str.substring(str.lastIndexOf("#")+1,str.lastIndexOf("+")).split('_').join(' ');
-    alert(str);
     $('.order-title').text(title_w_spaces);
     $('.order-price').text(
         "$" + window.location.href.split("+")[1]);
