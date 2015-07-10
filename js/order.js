@@ -77,13 +77,13 @@ $('.input-number').focusin(function(){
         type: 'POST',
         dataType: 'text',
         processData: false,
-        data: 'method=message&number='+$(".phone-number").text()+'&message=Agree+wants:%0aBurger,+cheese,+chili%0aFries,+old+bay%0aPickup:+12:30pm',
+        data: 'method=message&number='+$(".phone-number").val()+'&message=Agree+wants:%0aBurger,+cheese,+chili%0aFries,+old+bay%0aPickup:+12:30pm',
         success: function (data) {
             alert(JSON.stringify(data));
         },
         error: function(data){
             alert(JSON.stringify(data));
         }});
-        alert($(".phone-number").text())
+        alert($(".phone-number").val();
     });
 });
