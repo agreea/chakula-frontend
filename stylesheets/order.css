@@ -1,0 +1,113 @@
+/*******************************************************************************
+Custom Theme by Agree
+*******************************************************************************/
+
+html, 
+body, 
+div, 
+span, 
+applet, 
+object, 
+iframe,
+h1, h2, h3, h4, h5, h6, 
+p, {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-family: Lato;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+h1 {
+  font-size: 100pt;
+}
+
+h2 {
+  font-size: 75pt;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 60pt;
+  font-weight: 300;
+}
+
+.quant-picker {
+    padding-top: 30pt;
+}
+
+.dropdown {
+  padding-top: 30pt;
+  height: 80pt;
+}
+.dropdown-btn {
+  height: 60pt;
+  width: 100%;
+  font-size: 45pt;
+}
+
+.dropdown-menu {
+  width: 100%;
+}
+li{
+  height: 45pt;
+  font-size: 40pt;
+  padding-bottom: 15pt;
+  width: 100%;
+}
+p {
+  font-size: 72pt;
+  font-weight: 300;
+}
+.container{
+  width: 100%;
+  padding: 0;
+}
+.row {
+  padding: 0 72pt;
+}
+.no-padding, 
+.navbar {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: #fff;
+}
+
+.input-number, .btn {
+  height: 80pt;
+}
+.btn {
+  width: 80pt;
+}
+.input-number {
+  font-size: 32pt;
+}
+.total {
+  margin-top: 24pt;
+  background: #dfdfdf;
+}
+.item-price {
+  font-weight: 400;
+}
+
+.order {
+  margin-top: 50pt;
+  font-size: 50pt;
+  width: 100%
+}
+
+.order-button {
+  background: rgb(30, 50, 240);
+  color: #fff;
+}
+.cancel-button {
+  background: #ededed;
+  color: #888;
+}
