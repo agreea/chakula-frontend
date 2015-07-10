@@ -72,14 +72,14 @@ $('.input-number').focusin(function(){
 
     $(".order-button").click(function(e){
         e.preventDefault();
-        alert($(".order-title").text());
-        order_msg = $(".order-title").text().split(' ').join('+');;
+        // alert($(".order-title").text());
+        // order_msg = $(".order-title").text().split(' ').join('+');;
         $.ajax({
             url: "http://corner.rhye.org/api/truck",
         type: 'POST',
         dataType: 'text',
         processData: false,
         data: 'method=message&number='+$(".phone-number").val()+
-                '&message=Pat+wants:%0a'+order_msg+'%0aFries,+old+bay%0aPickup:+12:30pm'
+                '&message=Pat+wants:%0a%0aFries,+old+bay%0aPickup:+12:30pm'
     });
 });
