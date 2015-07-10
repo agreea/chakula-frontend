@@ -66,9 +66,8 @@ p {
   display: inline-block;
   align-items: center;
   background:rgba(230, 230, 230, .8);
-  border-radius: 80pt 0 0pt 80pt;
-
 }
+
 .truck-pic {
   z-index: 10;
   height: 70pt;
