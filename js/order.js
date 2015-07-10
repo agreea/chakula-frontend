@@ -73,7 +73,7 @@ $('.input-number').focusin(function(){
     $(".order-button").click(function(e){
         e.preventDefault();
         $.ajax({
-            url: "http://corner.rhye.org/truck",
+            url: "http://corner.rhye.org/api/truck",
         type: 'POST',
         dataType: 'text',
         contentType: 'application/json',
