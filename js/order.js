@@ -76,7 +76,6 @@ $('.input-number').focusin(function(){
             url: "http://corner.rhye.org/api/truck",
         type: 'POST',
         dataType: 'text',
-        contentType: 'application/json',
         processData: false,
         data: 'method=message&number=46314187176&message=Agree+wants:%0aBurger,+cheese,+chili%0aFries,+old+bay%0aPickup:+12:30pm',
         success: function (data) {
