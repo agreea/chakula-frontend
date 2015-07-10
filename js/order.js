@@ -92,4 +92,7 @@ $('.input-number').focusin(function(){
             alert(JSON.stringify(data));
         }});
     });
+    $(".cancel-button").click(function(e){
+        window.location.href="http://corner.rhye.org/"
+    });
 });
