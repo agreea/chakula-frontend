@@ -72,12 +72,19 @@ $('.input-number').focusin(function(){
 
     $(".order-button").click(function(e){
         e.preventDefault();
-        $.post("http://corner.rhye.org/api/truck", "method=message&number=46314187176&message=Agree+
-                                                        wants:%0aBurger,+cheese,+chili%0aFries,+old+bay%0aPickup:+12:30pm", 
-        function (data) {
+        $.ajax({
+            url: "http://corner.rhye.org/truck",
+        type: 'POST',
+        dataType: 'text',
+        contentType: 'application/json',
+        processData: false,
+        data: 'method=message&number=46314187176&message=Agree+wants:%0aBurger,+cheese,+chili%0aFries,+old+bay%0aPickup:+12:30pm',
+        success: function (data) {
             alert(JSON.stringify(data));
-        }, "text"});
-    }); 
+        },
+        error: function(data){
+            alert(JSON.stringify(data));
+        }
 });
     });
 });
