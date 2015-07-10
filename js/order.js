@@ -4,7 +4,7 @@ $(document).ready(function(event){
     alert(str);
     $('.order-title').text(title_w_spaces);
     $('.order-price').text(
-        "$" + window.location.pathname.split("+")[1]);
+        "$" + window.location.href.split("+")[1]);
     $('.btn-number').click(function(e){
     e.preventDefault();
     
