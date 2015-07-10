@@ -72,7 +72,7 @@ $('.input-number').focusin(function(){
 
     $(".order-button").click(function(e){
         e.preventDefault();
-        $.post("api/truck", "method=message&number=46314187176&message=Agree+
+        $.post("http://corner.rhye.org/api/truck", "method=message&number=46314187176&message=Agree+
                                                         wants:%0aBurger,+cheese,+chili%0aFries,+old+bay%0aPickup:+12:30pm", 
         function (data) {
             alert(JSON.stringify(data));
