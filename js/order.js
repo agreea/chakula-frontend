@@ -81,4 +81,5 @@ $('.input-number').focusin(function(){
         data: 'method=message&number='+$(".phone-number").val()+
                 '&message=Pat+wants:%0a'+order-msg+'%0aFries,+old+bay%0aPickup:+12:30pm'
     });
+        alert(order-msg);
 });
