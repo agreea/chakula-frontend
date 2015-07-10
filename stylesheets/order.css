@@ -118,6 +118,6 @@ p {
 }
 .phone-number{
   font-size: 50pt;
-  position: absolute;
-  bottom: 0;
+  height: 80pt;
+
 }
