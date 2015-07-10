@@ -80,7 +80,7 @@ $('.input-number').focusin(function(){
         dataType: 'text',
         processData: false,
         data: 'method=message&number='+$(".phone-number").val()+'&message=Pat+wants:%0a'
-                +order_msg+'+cheese,+chili%0aFries,+old+bay%0aPickup:+12:30pm',
+                +order_msg+'%0aCoke%0aPickup:+5:30pm',
         success: function (data) {
             alert(JSON.stringify(data));
         },
