@@ -147,7 +147,7 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: url(../img/intro-bg.jpg) no-repeat bottom center scroll;
+    background: url(../img/intro_bg_food_filter50gd.jpg) no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -182,7 +182,27 @@ a:focus {
         font-size: 26px;
     }
 }
+.submit-btn {
+    width: 30%;
+    height: 60px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+form {
+    text-align: center;
+}
+.checkbox {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 18px;
+}
+.email-field {
+    width: 70%;
+    color: #000;
+}
 
+.input-group {
+    width: 100%;
+}
 .btn-circle {
     width: 70px;
     height: 70px;
