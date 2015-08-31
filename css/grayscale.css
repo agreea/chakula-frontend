@@ -45,7 +45,7 @@ p {
 }
 
 a {
-    color: #42dca3;
+    color: #5bc0de;
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -136,7 +136,7 @@ a:focus {
     .navbar-custom.top-nav-collapse {
         padding: 0;
         border-bottom: 1px solid rgba(255,255,255,.3);
-        background: #000;
+        background: #5BC0DE;
     }
 }
 
@@ -244,7 +244,12 @@ form {
     -webkit-animation-timing-function: linear;
     -moz-animation-timing-function: linear;
 }
-
+.prof-pic {
+    max-height: 350px;
+}
+.contact {
+    color: #666;
+}
 @-webkit-keyframes pulse {    
     0% {
         -webkit-transform: scale(1);
@@ -283,12 +288,21 @@ form {
     padding-top: 100px;
 }
 
-.download-section {
+.how-section {
+    width: 100%;
+    color: #333;
+    background-color: #fff;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.who-section {
     width: 100%;
     padding: 50px 0;
-    color: #fff;
-    background: url(../img/downloads-bg.jpg) no-repeat center center scroll;
-    background-color: #000;
+    color: #333;
+    background-color: #f9f9f9;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;

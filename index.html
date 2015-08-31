@@ -51,7 +51,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">Become a Host</a>
+                        <a class="page-scroll" href="#about">How It Works</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#download">About</a>
@@ -78,13 +78,13 @@
                 </div>
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <p class="intro-text">Popup meals hosted by Georgetown's best chefs.</p>
-          <form action="#">
+                        <p class="intro-text">Unforgettable popup meals hosted by Georgetown's best chefs.</p>
+          <form id="signup" role="form">
             <div class="input-group">
               <input class="email-field btn-lg" name="email" id="email" type="email" placeholder="Your georgetown.edu email" required>
-              <button class="submit-btn btn-info btn-lg" type="submit">Signup</button>
+              <button class="submit-btn btn-info btn-lg" type="button" onClick="validate(); return false;">Signup</button>
               <div class="checkbox">
-                    <label><input type="checkbox">I can cook and wanna host!</label>
+                    <label><input type="checkbox" id="host-check">I can cook and wanna get paid to host!</label>
               </div>
             </div>
           </form>
@@ -98,39 +98,57 @@
     </header>
 
     <!-- About Section -->
-    <section id="about" class="container content-section text-center">
-        <div class="row">
+    <section id="about" class="how container content-section text-center">
+        <div class="how-section row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>How it Works</h2>
-                <p>Chakula connects the best cooks at Georgetown with guests who are hungry for a new way to dine.</p>
-                <p>Every week we send out an email of upcoming meals prepared by our incredible hosts. See something you like? Request a spot at the table. We will get your payment info but will only charge you if the host welcomes you to join their meal.</p>
-                <p>Once the host welcomes you, we'll send you their address.</p>
+                <ol>
+                </ol>
+                <p>Chakula connects the best cooks at Georgetown with guests who are hungry for a new way to dine. Hosts make money doing what they love and guests get an unforgetable meal.</p>
+                <p>1. <b> Discover upcoming meals </b> prepared by our incredible hosts in our weekly email.</p> 
+                <p>2. <b> See something you like? </b> Request a spot at the table. We'll get your payment info but will only charge you after the meal.</p>
+                <p>3. Once the host welcomes you to their meal, we'll send you their address. <b> Bon appetit!</b> </p>
             </div>
         </div>
     </section>
-    <!-- Download Section -->
+    <!-- About Us -->
     <section id="download" class="content-section text-center">
-        <div class="download-section">
+        <div class="who-section">
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <h2>Download Grayscale</h2>
-                    <p>You can download Grayscale for free on the preview page at Start Bootstrap.</p>
-    </div>
-                    <a href="http://startbootstrap.com/template-overviews/grayscale/" class="btn btn-default btn-lg">Visit Download Page</a>
+                    <h2>Who Are We?</h2>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <img class="prof-pic img-circle img-responsive" src="img/prof-agree.jpg">
+                            <p>Agree</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <img class="prof-pic img-circle img-responsive" src="img/prof-pat.jpg">
+                            <p>Pat</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <img class="prof-pic img-circle img-responsive" src="img/prof-ross.jpg">
+                            <p>Ross</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p>We're 3 friends (2 Hoyas, 1 Jumbo) who love to cook and love to host. Combined, we've hosted well over 70 large Sunday dinners for friends and acquaintances. Now we want to show the world what happens when amazing people connect over an amazing meal, starting with Georgetown.</p>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="container content-section text-center">
+    <section id="contact" class="contact container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Say Hi!</h2>
                 <p>Feel free to email us about anything</p>
-                <p><a href="mailto:aka61@georgetown.edu">feedback@startbootstrap.com</a>
+                <p><a href="mailto:yaychakula@gmail.com">yaychakula@gmail.com</a>
                 </p>
-                <ul class="list-inline banner-social-buttons">
+<!--                 <ul class="list-inline banner-social-buttons">
                     <li>
                         <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
                     </li>
@@ -141,17 +159,14 @@
                         <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
                     </li>
                 </ul>
-            </div>
+ -->            </div>
         </div>
     </section>
-
-    <!-- Map Section -->
-    <div id="map"></div>
 
     <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p>Copyright &copy; Your Website 2014</p>
+            <p>Copyright &copy; Chakula 2015</p>
         </div>
     </footer>
 
@@ -163,10 +178,49 @@
 
     <!-- Plugin JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
+    <script>
+        function validateEmail(email) { 
+  // http://stackoverflow.com/a/46181/11236
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|((georgetown+\.)+edu))$/;
+            return re.test(email);
+        }
 
-    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
-
+        api_call = function(api_fragment, data) {
+            var response = $.ajax({
+                url: api_fragment,
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                async: false,
+              }).responseText;
+              var resp = JSON.parse(response);
+              if (resp.Success){
+                return resp.Return;
+              } else {
+                return undefined;
+              }
+        };
+        function validate(){
+          $("#result").text("");
+          var userEmail = $("#email").val().toLowerCase();
+          if (validateEmail(userEmail)) {
+            var form = document.getElementById("signup");
+            var successMsg = document.createElement("p");
+            successMsg.innerHTML = "Welcome to Chakula! We'll be in touch soon";
+            form.parentNode.replaceChild(successMsg, form);
+            console.log("Valid email")
+            resp = api_call('kitchen', {
+                method: "Register",
+                email: userEmail,
+                host: $('#host-check').is(':checked')
+            });
+            console.log(resp)
+          } else {
+            console.log("invalid email")
+          }
+          return false;
+        }
+    </script>
     <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
 
