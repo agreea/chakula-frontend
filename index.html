@@ -210,7 +210,7 @@
             resp = api_call('api/kitchen', {
                 method: "Register",
                 email: userEmail,
-                host: $('#host-check').is(':checked')
+                host: document.getElementById("host-check").checked
             });
             console.log(resp)
           } else {
