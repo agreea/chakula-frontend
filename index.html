@@ -204,14 +204,16 @@
           if (validateEmail(userEmail)) {
             var form = document.getElementById("signup");
             var successMsg = document.createElement("p");
+            checkedStatus = document.getElementById("host-check").checked
             successMsg.innerHTML = "Welcome to Chakula! We'll be in touch soon";
             form.parentNode.replaceChild(successMsg, form);
             console.log("Valid email")
             resp = api_call('api/kitchen', {
                 method: "Register",
                 email: userEmail,
-                host: document.getElementById("host-check").checked
+                host: checkedStatus
             });
+            console.log(checkedStatus)
             console.log(resp)
           } else {
             console.log("invalid email")
