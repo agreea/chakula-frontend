@@ -97,6 +97,8 @@
     statusChangeCallback(response);
     if (response.status === 'connected') {
       console.log(response.authResponse.accessToken);
+      console.log(response.id)
+      // todo: send token to Ross
     }
   });
 
@@ -116,7 +118,7 @@
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.accessToken);
+      console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
