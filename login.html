@@ -125,10 +125,7 @@
     FB.api("/10153547967605406/picture", function (response) {
       if (response && !response.error) {
         var proPic;
-        console.log(response.data)
-        // for proPic in response.data {
-        //   console.log(proPic.url);
-        // }
+        console.log(response.data.url)
       }
     });
   }
