@@ -122,6 +122,16 @@
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
+    FB.api(
+    "/me/picture",
+    function (response) {
+      if (response && !response.error) {
+        for proPic in response.data {
+          console.log(proPic.url)
+        }
+      }
+    }
+);
   }
 </script>
 
