@@ -41,24 +41,35 @@
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 <script>
-  // This is called with the results from from FB.getLoginStatus().
+  api_call = function(api_fragment, data) {
+    var response = $.ajax({
+                      url: api_fragment,
+                      method: 'POST',
+                      data: data,
+                      dataType: 'json',
+                      async: false,}).responseText;
+    var resp = JSON.parse(response);
+  }
+
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
     if (response.status === 'connected') {
-      // Logged into your app and Facebook.
       testAPI();
+      resp = api_call('kitchenuser', {
+            method: "login",
+            fbToken: response.authResponse.accessToken,
+            });
+      console.log(resp)
+      if (resp.Success){
+       return resp.Return;
+      } else {
+        return undefined;
+      }
     } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
     } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
     }
@@ -82,17 +93,6 @@
     version    : 'v2.2' // use version 2.2
   });
 
-  // Now that we've initialized the JavaScript SDK, we call 
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
     if (response.status === 'connected') {
@@ -100,7 +100,6 @@
       // todo: send token to Ross
     }
   });
-
   };
 
   // Load the SDK asynchronously
@@ -121,12 +120,6 @@
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
-    });
-    FB.api("/10153547967605406/picture?width=9999", function (response) {
-      if (response && !response.error) {
-        var proPic;
-        console.log(response.data.url)
-      }
     });
   }
 </script>
@@ -158,51 +151,6 @@
 
     <!-- Plugin JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
-    <script>
-        function validateEmail(email) { 
-  // http://stackoverflow.com/a/46181/11236
-            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|((georgetown+\.)+edu))$/;
-            return re.test(email);
-        }
-
-        api_call = function(api_fragment, data) {
-            var response = $.ajax({
-                url: api_fragment,
-                method: 'POST',
-                data: data,
-                dataType: 'json',
-                async: false,
-              }).responseText;
-              var resp = JSON.parse(response);
-              if (resp.Success){
-                return resp.Return;
-              } else {
-                return undefined;
-              }
-        };
-        function validate(){
-          $("#result").text("");
-          var userEmail = $("#email").val().toLowerCase();
-          if (validateEmail(userEmail)) {
-            var form = document.getElementById("signup");
-            var successMsg = document.createElement("p");
-            checkedStatus = document.getElementById("host-check").checked
-            successMsg.innerHTML = "Welcome to Chakula! We'll be in touch soon";
-            form.parentNode.replaceChild(successMsg, form);
-            console.log("Valid email")
-            resp = api_call('api/kitchen', {
-                method: "Register",
-                email: userEmail,
-                host: checkedStatus
-            });
-            console.log(checkedStatus)
-            console.log(resp)
-          } else {
-            console.log("invalid email")
-          }
-          return false;
-        }
-    </script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -229,6 +177,7 @@
         var token = response.id;
         // Insert the token into the form so it gets submitted to the server
         $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        // $form.append($('<input type="hidden" name="chakulaToken" />').val({chakulaToken}))
         // and re-submit
         $form.get(0).submit();
       }
