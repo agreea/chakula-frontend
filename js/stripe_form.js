@@ -1,5 +1,5 @@
     // This identifies your website in the createToken call below
-    Stripe.setPublishableKey('YOUR_PUBLISHABLE_KEY');
+    Stripe.setPublishableKey('pk_test_BIZGDe0MftvY6O5JiSj2rBJ8');
     var stripeResponseHandler = function(status, response) {
       var $form = $('#payment-form');
       if (response.error) {
@@ -9,8 +9,9 @@
       } else {
         // token contains id, last4, and card type
         var token = response.id;
+        console.log("Stripe response: " + token);
         // Insert the token into the form so it gets submitted to the server
-        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        $form.append($('<input type="hidden" name="stripeToken"/>').val(token));
         // $form.append($('<input type="hidden" name="session" />').val({chakulaToken}))
         // and re-submit
         $form.get(0).submit();
