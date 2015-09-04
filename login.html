@@ -55,6 +55,7 @@
     console.log('statusChangeCallback');
     console.log(response);
     if (response.status === 'connected') {
+      console.log("Token: " + response.authResponse.accessToken)
       testAPI();
       resp = api_call('kitchenuser', {
             method: "Login",
