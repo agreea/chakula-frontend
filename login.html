@@ -61,8 +61,10 @@
           if (resp.Success) {
             console.log("Here is the result: " + resp.Return.Session_token);
             createCookie("session", resp.Return.Session_token);
-            console.log("from cookie: " + getCookie("session"))
+            console.log("from cookie: " + cookie)
           }
+      } else {
+            console.log("from cookie: " + cookie)
       }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
