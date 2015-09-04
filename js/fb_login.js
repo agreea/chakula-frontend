@@ -30,7 +30,7 @@
             console.log("from cookie: " + getCookie("session"))
           }
       } else {
-          console.log("from cookie: " + cookie)
+          console.log("Didn't call API. from cookie: " + cookie)
       }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
