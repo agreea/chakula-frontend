@@ -63,8 +63,8 @@
             });
       console.log("Here is the result: ")
       alert(JSON.stringify(resp))
-      // var obj = JSON.parse(resp)
-      console.log(obj.Return)
+      var obj = JSON.parse(resp)
+      console.log(obj)
       if (resp.Success){
        return resp.Return;
       } else {
