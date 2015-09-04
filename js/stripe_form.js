@@ -1,5 +1,5 @@
     // This identifies your website in the createToken call below
-    Stripe.setPublishableKey('pk_test_BIZGDe0MftvY6O5JiSj2rBJ8');
+    Stripe.setPublishableKey('pk_live_N4yRGKt9KwKwi9WfpAtnPdMs');
     
     var stripeResponseHandler = function(status, response) {
       var $form = $('#payment-form');
@@ -21,7 +21,7 @@
                       });
         if (resp.Success) {
           // Show the meal has been requested
-          console.log(resp.Return)
+          console.log(resp.Success)
         } else {
           console.log(resp.Error)
           // show an error message, offer the user to resend, enable the submit button
