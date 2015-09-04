@@ -62,7 +62,7 @@
             fbToken: response.authResponse.accessToken,
             });
       console.log("Here is the result: ")
-      alert(JSON.stringify(resp))
+      alert(resp.Return.Session_token)
       var obj = JSON.parse(resp)
       console.log(JSON.stringify(obj))
       if (resp.Success){
