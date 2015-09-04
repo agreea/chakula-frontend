@@ -70,7 +70,7 @@
           if (resp.Success) {
             console.log("Here is the result: " + resp.Return.Session_token);
             createCookie("session", resp.Return.Session_token);
-            console.log("from cookie: " + cookie)
+            console.log("from cookie: " + getCookie("session"))
           }
       } else {
           console.log("from cookie: " + cookie)
