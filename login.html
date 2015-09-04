@@ -62,7 +62,7 @@
             fbToken: response.authResponse.accessToken,
             });
       console.log("Here is the result: ")
-      console.log(resp)
+      console.log(resp.Return.Session_token)
       if (resp.Success){
        return resp.Return;
       } else {
@@ -137,7 +137,6 @@
 
 <div id="status">
 </div>
-
     <!-- Footer -->
     <footer>
         <div class="container text-center">
