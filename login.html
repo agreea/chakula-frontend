@@ -40,100 +40,7 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-<script>
-  api_call = function(api_fragment, data) {
-    var response = $.ajax({
-                      url: 'api/' + api_fragment,
-                      method: 'POST',
-                      data: data,
-                      dataType: 'json',
-                      async: false,}).responseText;
-    return JSON.parse(response);
-  }
-
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    if (response.status === 'connected') {
-      console.log("Token: " + response.authResponse.accessToken)
-      testAPI();
-      resp = api_call('kitchenuser', {
-            method: "Login",
-            fbToken: response.authResponse.accessToken,
-            });
-      console.log("Here is the result: ")
-      alert(resp.Return.Session_token)
-      var obj = JSON.parse(resp)
-      console.log(JSON.stringify(obj))
-      if (resp.Success){
-       return resp.Return;
-      } else {
-        return undefined;
-      }
-    } else if (response.status === 'not_authorized') {
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '828767043907424',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.2' // use version 2.2
-  });
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-    if (response.status === 'connected') {
-      console.log(response.authResponse.accessToken);
-      // todo: send token to Ross
-    }
-  });
-  };
-
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log(response.id)
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }
-</script>
-
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-
+<script type="text/javascript" src="js/fb_login.js"></script>
 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 </fb:login-button>
 
@@ -165,45 +72,13 @@
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
   <!-- jQuery is used only for this example; it isn't required to use Stripe -->
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-  <script type="text/javascript">
-    // This identifies your website in the createToken call below
-    Stripe.setPublishableKey('YOUR_PUBLISHABLE_KEY');
-    var stripeResponseHandler = function(status, response) {
-      var $form = $('#payment-form');
-      if (response.error) {
-        // Show the errors on the form
-        $form.find('.payment-errors').text(response.error.message);
-        $form.find('button').prop('disabled', false);
-      } else {
-        // token contains id, last4, and card type
-        var token = response.id;
-        // Insert the token into the form so it gets submitted to the server
-        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
-        // $form.append($('<input type="hidden" name="chakulaToken" />').val({chakulaToken}))
-        // and re-submit
-        $form.get(0).submit();
-      }
-    };
-    jQuery(function($) {
-      $('#payment-form').submit(function(e) {
-        var $form = $(this);
-        // Disable the submit button to prevent repeated clicks
-        $form.find('button').prop('disabled', true);
-        Stripe.card.createToken($form, stripeResponseHandler);
-        // Prevent the form from submitting with the default action
-        return false;
-      });
-    });
-  </script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  <script type="text/javascript" src="js/stripe_form.js"></script>
 </head>
 <body>
   <h1>Charge $10 with Stripe</h1>
-
   <form action="" method="POST" id="payment-form">
     <span class="payment-errors"></span>
-
     <div class="form-row">
       <label>
         <span>Card Number</span>
