@@ -48,7 +48,7 @@
                       data: data,
                       dataType: 'json',
                       async: false,}).responseText;
-    var resp = JSON.parse(response);
+    return JSON.parse(response);
   }
 
   function statusChangeCallback(response) {
@@ -62,7 +62,7 @@
             fbToken: response.authResponse.accessToken,
             });
       console.log("Here is the result: ")
-      alert(JSON.stringify(resp))
+      alert(resp)
       var obj = JSON.parse(resp)
       console.log(obj)
       if (resp.Success){
