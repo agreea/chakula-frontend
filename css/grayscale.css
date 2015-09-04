@@ -186,9 +186,12 @@ a:focus {
     border-radius: 0;
     border: 1px solid transparent;
 }
+
 form {
-    text-align: center;
+    text-align: right;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+
 .checkbox {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 18px;
