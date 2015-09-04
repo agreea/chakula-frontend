@@ -12,8 +12,6 @@
         var token = response.id;
         console.log("Stripe response: " + token);
         // Insert the token into the form so it gets submitted to the server
-        $form.append($('<input type="hidden" name="stripeToken"/>').val(token));
-        $form.append($('<input type="hidden" name="session" />').val(getCookie("session"));
         var resp = api_call("kitchenuser", {
                       method: "AddStripe",
                       session: getCookie("session"),
