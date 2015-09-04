@@ -12,11 +12,10 @@
         var token = response.id;
         console.log("Stripe response: " + token);
         console.log("Output from get cookie: " + getCookie("session"));
-        // Insert the token into the form so it gets submitted to the server
         var resp = api_call("kitchenuser", {
                       method: "AddStripe",
                       session: getCookie("session"),
-                      stripeToken: token
+                      StripeToken: token
                       });
         if (resp.Success) {
           // Show the meal has been requested
