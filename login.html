@@ -53,7 +53,7 @@
       // Logged into your app and Facebook.
       console.log("Token: " + response.authResponse.accessToken)
       var cookie = getCookie("session")
-      if cookie === "" {
+      if (cookie === "") {
           resp = api_call('kitchenuser', {
                 method: "Login",
                 fbToken: response.authResponse.accessToken,
