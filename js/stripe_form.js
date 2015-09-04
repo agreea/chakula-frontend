@@ -1,5 +1,6 @@
     // This identifies your website in the createToken call below
     Stripe.setPublishableKey('pk_test_BIZGDe0MftvY6O5JiSj2rBJ8');
+    
     var stripeResponseHandler = function(status, response) {
       var $form = $('#payment-form');
       if (response.error) {
@@ -12,11 +13,24 @@
         console.log("Stripe response: " + token);
         // Insert the token into the form so it gets submitted to the server
         $form.append($('<input type="hidden" name="stripeToken"/>').val(token));
-        // $form.append($('<input type="hidden" name="session" />').val({chakulaToken}))
+        $form.append($('<input type="hidden" name="session" />').val(getCookie("session"));
+        var resp = api_call("kitchenuser", {
+                      method: "AddStripe",
+                      session: getCookie("session"),
+                      stripeToken: token
+                      });
+        if (resp.Success) {
+          // Show the meal has been requested
+          console.log(resp.Return)
+        } else {
+          console.log(resp.Error)
+          // show an error message, offer the user to resend, enable the submit button
+        }
         // and re-submit
         // $form.get(0).submit();
       }
     };
+
     jQuery(function($) {
       $('#payment-form').submit(function(e) {
         var $form = $(this);
