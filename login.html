@@ -57,7 +57,7 @@
     if (response.status === 'connected') {
       testAPI();
       resp = api_call('kitchenuser', {
-            method: "login",
+            method: "Login",
             fbToken: response.authResponse.accessToken,
             });
       console.log(resp)
