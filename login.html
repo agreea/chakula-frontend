@@ -64,7 +64,7 @@
       console.log("Here is the result: ")
       alert(resp)
       var obj = JSON.parse(resp)
-      console.log(obj.Return)
+      console.log(JSON.stringify(obj))
       if (resp.Success){
        return resp.Return;
       } else {
