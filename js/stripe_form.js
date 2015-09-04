@@ -14,7 +14,7 @@
         $form.append($('<input type="hidden" name="stripeToken"/>').val(token));
         // $form.append($('<input type="hidden" name="session" />').val({chakulaToken}))
         // and re-submit
-        $form.get(0).submit();
+        // $form.get(0).submit();
       }
     };
     jQuery(function($) {
