@@ -32,6 +32,9 @@
       } else {
           console.log("Didn't call API. from cookie: " + cookie)
       }
+      if (getCookie("last4") === "") {
+          $('#modal-body').load('include/stripe_form.html');
+      }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +

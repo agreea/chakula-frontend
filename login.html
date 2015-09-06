@@ -40,7 +40,7 @@
     </script>
     <script type="text/javascript">
            $(document).ready(function(){
-                if(getCookie("session") != "") {
+                if(getCookie("session") === "") {
                   console.log("No session")
                    $('#modal-body').load('include/fb_login.html');
                 } else if(getCookie("last4") === "") {
