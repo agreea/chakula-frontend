@@ -12,20 +12,19 @@
         var token = response.id;
         console.log("Stripe response: " + token);
         console.log("Output from get cookie: " + getCookie("session"));
-        var resp = api_call("kitchenuser", {
+        var api_resp = api_call("kitchenuser", {
                       method: "AddStripe",
                       session: getCookie("session"),
                       StripeToken: token
                       });
-        if (resp.Success) {
+        if (api_resp.Success) {
           // Show the meal has been requested
-          console.log(resp.Success)
+          console.log(api_resp.Return)
+          createCookie("last4", response.last4, 365 * 25)
         } else {
-          console.log(resp.Error)
+          console.log(api_resp.Error)
           // show an error message, offer the user to resend, enable the submit button
         }
-        // and re-submit
-        // $form.get(0).submit();
       }
     };
 
