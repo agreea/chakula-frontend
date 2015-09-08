@@ -15,7 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/grayscale.css" rel="stylesheet">
+    <link href="css/request.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -61,53 +61,22 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-<script src="js/fb_login.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script src="js/stripe_form.js"></script>
-
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Request Meal</button>
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" id="request-meal-btn">&times;</button>
-        <h4 class="modal-title text-center">Request Meal</h4>
-      </div>
-      <div class="modal-body row" id="modal-body">
-      </div>
-    </div>
-
+  <div class="row text-center">
+      <img class="img-circle" src="https://pbs.twimg.com/profile_images/378800000442759461/b483cdd049f470928e7b20051f95b8cc.jpeg">
   </div>
-</div>
-
-<div id="status">
-</div>
-    <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <p>Copyright &copy; Chakula 2015</p>
-            <img class="img-circle"src="https://graph.facebook.com/10153547967605406/picture?width=400">
-        </div>
-    </footer>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Plugin JavaScript -->
-    <script src="js/jquery.easing.min.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="js/grayscale.js"></script>
-
+  <div class="row text-center">
+      <h3 id="guest-name">Izzie</h3>
+      <p>wants to join <b id="meal-name">Da Rillest Feast</b></p>
+      <p>Waddaya say?</p>
+  </div>
+  <div class="row">
+    <button class="btn-decline col-xs-3 col-sm-4 col-sm-offset-1 col-xs-offset-2 btn">
+      Decline
+    </button>
+    <button class="col-xs-3 col-sm-4 col-sm-offset-2 col-xs-offset-2 btn btn-welcome">
+      Welcome
+    </button>
+  </div>
 </body>
-
 </html>
 

@@ -61,52 +61,9 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-<script src="js/fb_login.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script src="js/stripe_form.js"></script>
-
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Request Meal</button>
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" id="request-meal-btn">&times;</button>
-        <h4 class="modal-title text-center">Request Meal</h4>
-      </div>
-      <div class="modal-body row" id="modal-body">
-      </div>
-    </div>
-
+  <div class="row">
+    <img class="img-circle" src="http://i3.cpcache.com/product/1168240610/smiley_faces_square_sticker_3_x_3.jpg?height=225&width=225">
   </div>
-</div>
-
-<div id="status">
-</div>
-    <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <p>Copyright &copy; Chakula 2015</p>
-            <img class="img-circle"src="https://graph.facebook.com/10153547967605406/picture?width=400">
-        </div>
-    </footer>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Plugin JavaScript -->
-    <script src="js/jquery.easing.min.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="js/grayscale.js"></script>
-
 </body>
 
 </html>
