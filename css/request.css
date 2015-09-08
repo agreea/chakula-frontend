@@ -44,19 +44,6 @@ p {
     }
 }
 
-a {
-    color: #5bc0de;
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-}
-
-a:hover,
-a:focus {
-    text-decoration: none;
-    color: #1d9b6c;
-}
-
 img {
     padding: 40px;
 }
@@ -120,7 +107,7 @@ img {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
-    line-height: 1.2;
+    line-height: 1.8;
     background-color: #5bc0de;
     color: #fff;
     -webkit-transition: all .3s ease-in-out;

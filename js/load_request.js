@@ -22,10 +22,7 @@ $(document).ready(function() {
 		$("#guest-name").html(request.Guest_name);
 		$("#guest-name").html(request.Guest_name);
 		$("#meal-title").html(request.Meal_title);
-
-		console.log()
-		console.log(request.Guest_pic)
-		console.log(request.Meal_title)
+		$("#meal-name").attr("src",request.Guest_pic);
 	} else {
 		alert("Couldn't load your request! Please try again!")
 	}
