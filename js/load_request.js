@@ -13,10 +13,16 @@ function getUrlVars() {
 $(document).ready(function() {
 	params = getUrlVars();
 	console.log(params.Id)
-	// resp = api_call('mealrequest', {
- //                method: "GetRequest",
- //                requestId: params.Id,
- //            });
+	resp = api_call('mealrequest', {
+                method: "GetRequest",
+                requestId: params.Id,
+            });
+	if (resp.Success) {
+		request = resp.Return
+		console.log(request.Guest_name)
+		console.log(request.Guest_pic)
+		console.log(request.Meal_title)
+	}
 // get request according to id
 // getRequest returns 	{ guestName: String, imgUrl: string, mealTitle: String}
 // change img source
