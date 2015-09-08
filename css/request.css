@@ -46,7 +46,7 @@ p {
 
 img {
     padding: 40px;
-    max-width: 300px;
+    max-width: 350px;
 }
 
 @media(max-width:400px) {
