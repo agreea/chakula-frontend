@@ -19,9 +19,15 @@ $(document).ready(function() {
             });
 	if (resp.Success) {
 		request = resp.Return
-		console.log(request.Guest_name)
+		$("#guest-name").html(request.Guest_name);
+		$("#guest-name").html(request.Guest_name);
+		$("#meal-title").html(request.Meal_title);
+
+		console.log()
 		console.log(request.Guest_pic)
 		console.log(request.Meal_title)
+	} else {
+		alert("Couldn't load your request! Please try again!")
 	}
 // get request according to id
 // getRequest returns 	{ guestName: String, imgUrl: string, mealTitle: String}
