@@ -20,11 +20,10 @@ $(document).ready(function() {
 	if (resp.Success) {
 		request = resp.Return
 		$("#guest-name").html(request.Guest_name);
-		$("#guest-name").html(request.Guest_name);
 		$("#meal-title").html(request.Meal_title);
-		$("#meal-name").attr("src",request.Guest_pic);
+		$("#guest-pic").attr("src",request.Guest_pic);
 	} else {
-		alert("Couldn't load your request! Please try again!")
+		alert("Couldn't load your request. Please try again!")
 	}
 // get request according to id
 // getRequest returns 	{ guestName: String, imgUrl: string, mealTitle: String}
