@@ -20,8 +20,7 @@ $(document).ready(function() {
 	if (resp.Success) {
 		request = resp.Return
 		$("#guest-name").html(request.Guest_name);
-		$("#join-text").html("wants to join 
-        <b>" + request.Meal_title + "</b>");
+		$("#join-text").html("wants to join <b>" + request.Meal_title + "</b>");
 		$("#guest-pic").attr("src",request.Guest_pic);
 	} else {
 		alert("Couldn't load your request. Please try again!")
