@@ -39,25 +39,7 @@
       ga('create', 'UA-66943306-1', 'auto');
       ga('send', 'pageview');
     </script>
-    <script type="text/javascript">
-           $(document).ready(function(){
-                if(getCookie("session") === "") {
-                  console.log("No session")
-                   $('#modal-body').load('include/fb_login.html');
-                } else if(getCookie("last4") === "") {
-                    console.log("No card")
-                   $('#modal-body').load('include/stripe_form.html');
-                } else {
-                  // $('#request-meal-btn').click(function() {
-                  //   var api_resp = api_call("kitchenRequest", {
-                  //     method: "sendRequest",
-                  //     session: getCookie("session"),
-                  //     meal: 1
-                  //     });
-                  //   });
-                }
-           });
-    </script>   
+    <script src="load_request.js"></script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
