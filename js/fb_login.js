@@ -25,6 +25,8 @@
       }
       if (getCookie("last4") === "") {
           $('#modal-body').load('include/stripe_form.html');
+      } else {
+        
       }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.

@@ -48,13 +48,14 @@
                     console.log("No card")
                    $('#modal-body').load('include/stripe_form.html');
                 } else {
-                  // $('#request-meal-btn').click(function() {
-                  //   var api_resp = api_call("kitchenRequest", {
-                  //     method: "sendRequest",
-                  //     session: getCookie("session"),
-                  //     meal: 1
-                  //     });
-                  //   });
+                  $('#request-meal-btn').click(function() {
+                    var api_resp = api_call("kitchenRequest", {
+                      method: "sendRequest",
+                      session: getCookie("session"),
+                      meal: 1
+                      });
+                    });
+                   $("#request-meal-btn").attr("data-target", "");
                 }
            });
     </script>   
@@ -90,7 +91,7 @@
       </div>
     </div>
     <div class="">
-      <button type="button" class="btn btn-info btn-lg row" data-toggle="modal" data-target="#request-modal">Request Meal</button>
+      <button type="button" class="btn btn-info btn-lg row" id="request-meal-btn" data-toggle="modal" data-target="#request-modal">Request Meal</button>
     </div>
 <!--  Start host pic/name row -->
     <div class="row">
