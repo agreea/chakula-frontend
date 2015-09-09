@@ -15,7 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/grayscale.css" rel="stylesheet">
+    <link href="css/meal.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -41,10 +41,21 @@
     </script>
     <script type="text/javascript">
            $(document).ready(function(){
-                $('#modal-body').load('include/fb_login.html');
                 if(getCookie("session") === "") {
                   console.log("No session")
-                } 
+                   $('#modal-body').load('include/fb_login.html');
+                } else if(getCookie("last4") === "") {
+                    console.log("No card")
+                   $('#modal-body').load('include/stripe_form.html');
+                } else {
+                  // $('#request-meal-btn').click(function() {
+                  //   var api_resp = api_call("kitchenRequest", {
+                  //     method: "sendRequest",
+                  //     session: getCookie("session"),
+                  //     meal: 1
+                  //     });
+                  //   });
+                }
            });
     </script>   
 </head>
@@ -59,12 +70,44 @@
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
 -->
-
+<div class="row"> 
+  <div class="col-sm-8 pic-gallery" style="background: #ff0000">
+    <img class="img-responsive" src="http://photographyinspired.com/wp-content/uploads/2014/08/368875.jpg">
+  </div>
+  <div class="col-sm-4 info-col">
+    <div class="row text-center vital-info-row">
+      <div class="col-sm-4">
+        <h3>3</h3>
+        <p>seats available</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>7:00PM</h3>
+        <p>dinner on Sept. 19</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>7</h3>
+        <p>days til RSVPs close</p>
+      </div>
+    </div>
+    <div class="">
+      <button type="button" class="btn btn-info btn-lg row" data-toggle="modal" data-target="#request-modal">Request Meal</button>
+    </div>
+<!--  Start host pic/name row -->
+    <div class="row">
+      <p class="text-center"> Hosted by </p>
+    </div>
+    <div class="row">
+        <img class="img-circle chef-pic"src="https://graph.facebook.com/10153547967605406/picture?width=120">
+    </div>
+    <div class="row">
+        <h3 class="chef-name text-center">Agree</h3>
+    </div>
+  </div>
+</div>
 <!-- Trigger the modal with a button -->
-<button type="button" class="btn-info btn-lg btn" data-toggle="modal" data-target="#myModal">Request Meal</button>
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="request-modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -86,7 +129,6 @@
     <footer>
         <div class="container text-center">
             <p>Copyright &copy; Chakula 2015</p>
-            <img class="img-circle"src="https://graph.facebook.com/10153547967605406/picture?width=400">
         </div>
     </footer>
     <!-- Bootstrap Core JavaScript -->
@@ -99,4 +141,3 @@
 </body>
 
 </html>
-
