@@ -44,18 +44,7 @@
                 $('#modal-body').load('include/fb_login.html');
                 if(getCookie("session") === "") {
                   console.log("No session")
-                } else if(getCookie("last4") === "") {
-                    console.log("No card")
-                   $('#modal-body').load('include/stripe_form.html');
-                } else {
-                  // $('#request-meal-btn').click(function() {
-                  //   var api_resp = api_call("kitchenRequest", {
-                  //     method: "sendRequest",
-                  //     session: getCookie("session"),
-                  //     meal: 1
-                  //     });
-                  //   });
-                }
+                } 
            });
     </script>   
 </head>
