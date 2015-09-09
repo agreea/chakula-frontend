@@ -11,16 +11,15 @@
         // token contains id, last4, and card type
         var token = response.id;
         console.log("Stripe response: " + token);
-        console.log("Output from get cookie: " + getCookie("session"));
         var api_resp = api_call("kitchenuser", {
                       method: "AddStripe",
-                      session: getCookie("session"),
+                      session: Cookies.get("session"),
                       StripeToken: token
                       });
         if (api_resp.Success) {
           // Show the meal has been requested
           console.log(api_resp.Return)
-          createCookie("last4", response.last4, 365 * 25)
+          Cookies.set("last4", response.last4, 365 * 25)
         } else {
           console.log(api_resp.Error)
           // show an error message, offer the user to resend, enable the submit button

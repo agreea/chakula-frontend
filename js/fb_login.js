@@ -9,24 +9,24 @@
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       console.log("Token: " + response.authResponse.accessToken)
-      var cookie = getCookie("session")
-      if (cookie === "") {
+      var cookie = Cookies.get("session")
+      if (cookie === undefined) {
           resp = api_call('kitchenuser', {
                 method: "Login",
                 fbToken: response.authResponse.accessToken,
                 });
           if (resp.Success) {
             console.log("Here is the result: " + resp.Return.Session_token);
-            createCookie("session", resp.Return.Session_token, 60);
-            console.log("from cookie: " + getCookie("session"))
+            Cookies.set("session", resp.Return.Session_token, { expires: 50 });
+            console.log("from cookie: " + Cookies.get("session"))
           }
       } else {
           console.log("Didn't call API. from cookie: " + cookie)
       }
-      if (getCookie("last4") === "") {
+      if (Cookies.get("last4") === undefined) {
           $('#modal-body').load('include/stripe_form.html');
       } else {
-        
+
       }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.

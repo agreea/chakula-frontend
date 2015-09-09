@@ -22,7 +22,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <script src="js/jquery.js"></script>
-    <script src="js/cookie.js"></script>
+    <script src="js/js-cookie.js"></script>
     <script src="js/api_call.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -40,19 +40,22 @@
       ga('send', 'pageview');
     </script>
     <script type="text/javascript">
+      // on page load, check if you have a cookie for the request
+      // if you do, check with the server if you are attending or not attending this meal
            $(document).ready(function(){
-                if(getCookie("session") === "") {
-                  console.log("No session")
+                urlVars = getUrlVars();
+                if(Cookies.get("session") === undefined) {
+                  console.log("No session");
                    $('#modal-body').load('include/fb_login.html');
-                } else if(getCookie("last4") === "") {
-                    console.log("No card")
+                } else if(Cookies.get("last4") === undefined) {
+                    console.log("No card");
                    $('#modal-body').load('include/stripe_form.html');
                 } else {
                   $('#request-meal-btn').click(function() {
                     var api_resp = api_call("kitchenRequest", {
                       method: "sendRequest",
-                      session: getCookie("session"),
-                      meal: 1
+                      session: Cookies.get("session"),
+                      meal: urlVars["Id"] 
                       });
                     });
                    $("#request-meal-btn").attr("data-target", "");
