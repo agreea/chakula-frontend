@@ -16,7 +16,7 @@
         if (response.status === 'connected') {
           // Logged into your app and Facebook.
           console.log("Checkmark checked: ");
-          console.log($('subscribe-check').prop('checked'));
+          console.log($('subscribe-check').checked);
           console.log("Token: " + response.authResponse.accessToken);
           var cookie = Cookies.get("session")
           if (cookie === undefined) {
@@ -49,10 +49,7 @@
             'into Facebook.';
         }
       });
-        FB.getLoginStatus(function(response) {
-          statusChangeCallback(response);
-        });
-      };
+    };
 
       // Load the SDK asynchronously
       (function(d, s, id) {
