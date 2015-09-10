@@ -4,8 +4,7 @@
     console.log(response);
     console.log("Check box checked?");
     checkbox = $('#modal-body').find('#subscribe-check');
-    console.log(checkbox.prop('checked'));
-
+    console.log(checkbox.prop('checked'))
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -18,6 +17,7 @@
           resp = api_call('kitchenuser', {
                 method: "Login",
                 fbToken: response.authResponse.accessToken,
+                subscribe: checkbox.prop('checked'),
                 });
           if (resp.Success) {
             console.log("Here is the result: " + resp.Return.Session_token);
