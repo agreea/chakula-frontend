@@ -3,7 +3,7 @@
     console.log('statusChangeCallback');
     console.log(response);
     console.log("Check box checked?");
-    console.log($('#subscribe').checked);
+    console.log($('#subscribe-check'));
 
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
