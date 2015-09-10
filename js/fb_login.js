@@ -16,7 +16,7 @@
           resp = api_call('kitchenuser', {
                 method: "Login",
                 fbToken: response.authResponse.accessToken,
-                subscribe:
+                subscribe: false
                 });
           if (resp.Success) {
             console.log("Here is the result: " + resp.Return.Session_token);
