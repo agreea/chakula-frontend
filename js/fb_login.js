@@ -1,13 +1,4 @@
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '828767043907424',
-          cookie     : true,  // enable cookies to allow the server to access 
-                              // the session
-          xfbml      : true,  // parse social plugins on this page
-          version    : 'v2.2' // use version 2.2
-        });
-        console.log("In fbAsyncInit");
-        FB.Event.subscribe('auth.login', function(response) {
+    var loginCallback = function(response) {
             console.log('statusChangeCallback');
             console.log(response);
             // The response object is returned with a status field that lets the
@@ -49,7 +40,18 @@
               document.getElementById('status').innerHTML = 'Please log ' +
                 'into Facebook.';
             }
-      });
+      };
+
+    window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '828767043907424',
+          cookie     : true,  // enable cookies to allow the server to access 
+                              // the session
+          xfbml      : true,  // parse social plugins on this page
+          version    : 'v2.2' // use version 2.2
+        });
+        console.log("In fbAsyncInit");
+        FB.Event.subscribe('auth.login', loginCallback);
     };
 
       // Load the SDK asynchronously
