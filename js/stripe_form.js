@@ -5,6 +5,7 @@
       var $form = $('#payment-form');
       if (response.error) {
         // Show the errors on the form
+        console.log("There was an error")
         $form.find('.payment-errors').text(response.error.message);
         $form.find('button').prop('disabled', false);
       } else {
