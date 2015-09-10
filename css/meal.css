@@ -89,3 +89,7 @@ form {
 .btn-payment {
     width: 60%;
 }
+.fb-login {
+    max-height: 50px;
+    cursor: pointer; 
+}
