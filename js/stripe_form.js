@@ -35,6 +35,6 @@
         $form.find('button').prop('disabled', true);
         Stripe.card.createToken($form, stripeResponseHandler);
         // Prevent the form from submitting with the default action
-        return true;
+        return false;
       });
     });
