@@ -86,3 +86,7 @@ form {
     transition: all .3s ease-in-out;
 }
 
+.btn-payment {
+    width: 60%;
+    display: block;
+}
