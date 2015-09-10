@@ -4,7 +4,7 @@
     console.log(response);
     console.log("Check box checked?");
     checkbox = $('#modal-body').find('#subscribe-check');
-    console.log(checkbox.checked);
+    console.log(checkbox.prop('checked'));
 
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
