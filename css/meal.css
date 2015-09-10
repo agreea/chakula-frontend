@@ -92,4 +92,5 @@ form {
 .fb-login {
     max-height: 50px;
     cursor: pointer; 
+    margin: 0 auto;
 }
