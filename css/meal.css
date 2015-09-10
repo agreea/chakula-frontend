@@ -36,7 +36,7 @@ p {
 }
 
 form {
-    text-align: right;
+    text-align: left;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 .pic-gallery {
@@ -88,5 +88,4 @@ form {
 
 .btn-payment {
     width: 60%;
-    display: block;
 }
