@@ -3,7 +3,8 @@
     console.log('statusChangeCallback');
     console.log(response);
     console.log("Check box checked?");
-    console.log($('#subscribe-check'));
+    checkbox = $('#modal-body').find('#subscribe-check');
+    console.log(checkbox);
 
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
