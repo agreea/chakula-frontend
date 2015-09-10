@@ -75,3 +75,23 @@
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+
+  var login_event = function(response) {
+      console.log("login_event");
+      console.log("Checkmark checked: ");
+      console.log($('subscribe-check').prop('checked'));
+      console.log("Token: " + response.authResponse.accessToken);
+      var cookie = Cookies.get("session")
+      if (cookie === undefined) {
+          resp = api_call('kitchenuser', {
+                method: "Login",
+                fbToken: response.authResponse.accessToken,
+                subscribe: false
+                });
+          if (resp.Success) {
+            console.log("Here is the result: " + resp.Return.Session_token);
+            Cookies.set("session", resp.Return.Session_token, { expires: 50 });
+            console.log("from cookie: " + Cookies.get("session"))
+          }  
+      }
+  }
