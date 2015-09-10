@@ -6,6 +6,7 @@
           xfbml      : true,  // parse social plugins on this page
           version    : 'v2.2' // use version 2.2
         });
+        FB.Event.subscribe('auth.login', login_event);
         FB.Event.subscribe('auth.login', function(response) {
         console.log('statusChangeCallback');
         console.log(response);
