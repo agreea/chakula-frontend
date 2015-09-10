@@ -48,7 +48,7 @@
                 }
            });
     </script>   
-
+    <script src="js/fb_login.js"></script>
     <script> 
       window.fbAsyncInit = function() {
         FB.init({
@@ -58,7 +58,7 @@
           xfbml      : true,  // parse social plugins on this page
           version    : 'v2.2' // use version 2.2
         });
-        FB.Event.subscribe('auth.login', login_event);
+        FB.Event.subscribe('auth.login', statusChangeCallback);
         FB.getLoginStatus(function(response) {
           statusChangeCallback(response);
         });
@@ -72,26 +72,6 @@
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-
-      var login_event = function(response) {
-          console.log("login_event");
-          console.log("Checkmark checked: ");
-          console.log($('subscribe-check').prop('checked'));
-          console.log("Token: " + response.authResponse.accessToken);
-          var cookie = Cookies.get("session")
-          if (cookie === undefined) {
-              resp = api_call('kitchenuser', {
-                    method: "Login",
-                    fbToken: response.authResponse.accessToken,
-                    subscribe: false
-                    });
-              if (resp.Success) {
-                console.log("Here is the result: " + resp.Return.Session_token);
-                Cookies.set("session", resp.Return.Session_token, { expires: 50 });
-                console.log("from cookie: " + Cookies.get("session"))
-              }  
-          }
-      }
     </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -163,9 +143,17 @@
         <h4 class="modal-title text-center">Request Meal</h4>
       </div>
       <div class="modal-body row" id="modal-body">
+        <div class="row">
+          <h3 class="text-center">First, Login With Facebook</h3>
+          <img class="fb-login img-responsive" src="img/fb-login.svg" onclick="FB.login()">
+          <div class="col-sm-8 col-sm-offset-2">
+            <div class="checkbox">
+                <label><input type="checkbox" id="subscribe-check">I want to receive weekly emails of upcoming meals on campus.</label>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
 </div>
 

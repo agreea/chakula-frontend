@@ -1,5 +1,5 @@
   // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
+  var statucChangeCallback = function(response) {
     console.log('statusChangeCallback');
     console.log(response);
     // The response object is returned with a status field that lets the
@@ -50,47 +50,4 @@
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
     });
-  }
-
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '828767043907424',
-      cookie     : true,  // enable cookies to allow the server to access 
-                          // the session
-      xfbml      : true,  // parse social plugins on this page
-      version    : 'v2.2' // use version 2.2
-    });
-    FB.Event.subscribe('auth.login', login_event);
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  };
-
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  var login_event = function(response) {
-      console.log("login_event");
-      console.log("Checkmark checked: ");
-      console.log($('subscribe-check').prop('checked'));
-      console.log("Token: " + response.authResponse.accessToken);
-      var cookie = Cookies.get("session")
-      if (cookie === undefined) {
-          resp = api_call('kitchenuser', {
-                method: "Login",
-                fbToken: response.authResponse.accessToken,
-                subscribe: false
-                });
-          if (resp.Success) {
-            console.log("Here is the result: " + resp.Return.Session_token);
-            Cookies.set("session", resp.Return.Session_token, { expires: 50 });
-            console.log("from cookie: " + Cookies.get("session"))
-          }  
-      }
   }
