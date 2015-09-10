@@ -48,7 +48,7 @@
           document.getElementById('status').innerHTML = 'Please log ' +
             'into Facebook.';
         }
-      };
+      });
     };
 
       // Load the SDK asynchronously
