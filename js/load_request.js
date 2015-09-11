@@ -21,4 +21,19 @@ $(document).ready(function() {
 	} else {
 		alert("Couldn't load your request. Please try again!")
 	}
+	$('.btn-welcome').click(function(){
+		api_resp = api_call('mealrequest', {
+                method: "Respond",
+                requestId: params.Id,
+                response: 1
+            });
+		console.log(api_resp);
+	})
+	$('.btn-decline').click(function(){
+		api_resp = api_call('mealrequest', {
+			method: "Respond",
+			requestId: params.Id,
+			response: -1
+		})
+	})
 });
