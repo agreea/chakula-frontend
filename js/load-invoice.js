@@ -16,7 +16,7 @@ $('#modal-body').find('#send-request-btn').click(function() {
     var api_resp = api_call("mealrequest", {
                       method: "sendRequest",
                       session: Cookies.get("session"),
-                      meal: urlVars["Id"],
+                      mealId: urlVars["Id"],
                       last4: 1234
                     });
     console.log(api_resp);
@@ -24,6 +24,7 @@ $('#modal-body').find('#send-request-btn').click(function() {
       // save the request in the cookies
       // disable the request buton
     } else {
+        $('#modal-body').find('#request-errors').text(api_resp.Error);
       // show that the request didn't process, ask them to try again
     }
 })
