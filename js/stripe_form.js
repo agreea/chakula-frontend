@@ -1,28 +1,39 @@
     // This identifies your website in the createToken call below
     Stripe.setPublishableKey('pk_live_N4yRGKt9KwKwi9WfpAtnPdMs');
     
-    var stripeResponseHandler = function(status, response) {
+    var stripeResponseHandler = function(status, stripe_resp) {
       var $form = $('#payment-form');
-      if (response.error) {
+      if (stripe_resp.error) {
         // Show the errors on the form
         console.log("There was an error")
-        $form.find('.payment-errors').text(response.error.message);
+        $form.find('.payment-errors').text(stripe_resp.error.message);
         $form.find('button').prop('disabled', false);
       } else {
         // token contains id, last4, and card type
-        var token = response.id;
+        var token = stripe_resp.id;
         console.log("Stripe response: " + token);
+        console.lgo("Stripe last 4: " + stripe_resp.last4)
         var api_resp = api_call("kitchenuser", {
                       method: "AddStripe",
                       session: Cookies.get("session"),
-                      StripeToken: token
+                      StripeToken: token,
+                      last4: stripe_resp.last4
                       });
         if (api_resp.Success) {
-          // Show the meal has been requested
+          // Save the card
           console.log(api_resp.Return)
-          Cookies.set("last4", response.last4, 365 * 25)
+          Cookies.getJSON('cards')
+          if (cards === undefined) { // create the last4 digits array if you don't have one already
+            var cards = [stripe_resp.last4]
+            Cookies.set('cards', cards)
+          } else {
+            cards = Cookies.getJSON('cards')
+            cards.push(stripe_resp.last4)
+            Cookies.set('cards', cards)
+          }
           $('#modal-body').load("include/request_invoice.html")
         } else {
+          $form.find('button').prop('disabled', true);
           console.log(api_resp.Error)
           // show an error message, offer the user to resend, enable the submit button
         }
