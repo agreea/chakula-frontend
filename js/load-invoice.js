@@ -18,6 +18,7 @@ $('#modal-body').find('#send-request-btn').click(function() {
                       meal: urlVars["Id"],
                       last4: 1234
                     });
+    console.log(api_resp);
     if (api_resp.Success) {
       // save the request in the cookies
       // disable the request buton
