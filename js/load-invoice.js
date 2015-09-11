@@ -11,7 +11,8 @@ $('#last-4').text("..." + cards[cards.length - 1])
 // add 2.9% + 30 cents
 // show dat
 $('#modal-body').find('#send-request-btn').click(function() {
-    console.log("Sending request...")
+    console.log("Sending request for id: " + urlVars["Id"])
+
     var api_resp = api_call("mealrequest", {
                       method: "sendRequest",
                       session: Cookies.get("session"),

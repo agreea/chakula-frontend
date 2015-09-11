@@ -26,11 +26,12 @@
     <script src="js/api_call.js"></script>
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript">
+      urlVars = getUrlVars();
+      console.log(urlVars);
       // on page load, check if you have a cookie for the request
       // if you do, check with the server if you are attending or not attending this meal
            $(document).ready(function(){
-                urlVars = getUrlVars();
-                id = urlVars["Id"]
+                id = urlVars["Id"];
                 if(Cookies.get("session") === undefined) {
                   console.log("No session");
                 } else if(Cookies.getJSON("cards") === undefined || Cookies.getJSON("cards")[0] === null) {
