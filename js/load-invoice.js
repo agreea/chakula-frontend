@@ -12,7 +12,7 @@ $('#last-4').text("..." + cards[cards.length - 1])
 // show dat
 $('#modal-body').find('#send-request-btn').click(function() {
     console.log("Sending request...")
-    var api_resp = api_call("kitchenRequest", {
+    var api_resp = api_call("mealrequest", {
                       method: "sendRequest",
                       session: Cookies.get("session"),
                       meal: urlVars["Id"],
