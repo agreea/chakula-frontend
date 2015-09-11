@@ -160,7 +160,6 @@ body {
         padding: 20px;
     }
     .guest-pic {
-        max-height: 100px;
+        max-height: 200px;
     }
 }
-
