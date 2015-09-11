@@ -46,11 +46,11 @@
            });
            cards = Cookies.get('cc')
               console.log(cards)
-              if (cards === undefined) {
+           var cards = [1234, 3333, 4444, 5555]
+            Cookies.set('cc', cards)
+            console.log(Cookies.get('cc'))
+            if (cards === undefined) {
                 console.log("There were no cards")
-                var cards = [1234, 3333, 4444, 5555]
-                Cookies.set('cc', cards)
-                console.log(Cookies.get('cc'))
               }
     </script>   
     <script src="js/fb_login.js"></script>
