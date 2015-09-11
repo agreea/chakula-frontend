@@ -103,6 +103,8 @@ form {
 .invoice-text {
     font-size: 12px;
 }
-.invoice-row {
-    background: #ddd;
+
+a {
+    cursor: pointer;
+    font-size: 10px;
 }
