@@ -103,7 +103,9 @@ form {
 .invoice-text {
     font-size: 12px;
 }
-
+.error-field {
+    color: #ff2222;
+}
 a {
     cursor: pointer;
     font-size: 10px;

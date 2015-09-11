@@ -6,7 +6,7 @@
       if (stripe_resp.error) {
         // Show the errors on the form
         console.log("There was an error")
-        $form.find('.payment-errors').text(stripe_resp.error.message);
+        $form.find('#payment-errors').text(stripe_resp.error.message);
         $form.find('button').prop('disabled', false);
       } else {
         // token contains id, last4, and card type
