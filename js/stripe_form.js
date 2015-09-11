@@ -33,7 +33,7 @@
           }
           $('#modal-body').load("include/request_invoice.html")
         } else {
-          $form.find('button').prop('disabled', true);
+          $form.find('button').prop('disabled', false);
           console.log(api_resp.Error)
           // show an error message, offer the user to resend, enable the submit button
         }
