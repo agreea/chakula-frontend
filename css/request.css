@@ -49,14 +49,6 @@ img {
     max-width: 350px;
 }
 
-@media(max-width:500px) {
-    img {
-        padding: 20px;
-    }
-    .guest-pic {
-        max-height: 100px;
-    }
-}
 
 .light {
     font-weight: 400;
@@ -162,3 +154,13 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
+
+@media(max-width:500px) {
+    img {
+        padding: 20px;
+    }
+    .guest-pic {
+        max-height: 100px;
+    }
+}
+
