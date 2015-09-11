@@ -53,7 +53,7 @@ img {
     img {
         padding: 20px;
     }
-    .prof-pic {
+    .guest-pic {
         max-height: 100px;
     }
 }
@@ -102,7 +102,7 @@ img {
     -moz-animation-timing-function: linear;
 }
 
-.prof-pic {
+.guest-pic {
     max-height: 350px;
 }
 
