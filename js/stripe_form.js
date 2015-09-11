@@ -25,7 +25,7 @@
           console.log(api_resp.Return)
           Cookies.getJSON('cards')
           if (cards === undefined) { // create the last4 digits array if you don't have one already
-            var cards = [stripe_resp.last4]
+            var cards = [stripe_resp.card.last4]
             Cookies.set('cards', cards)
           } else {
             cards = Cookies.getJSON('cards')
