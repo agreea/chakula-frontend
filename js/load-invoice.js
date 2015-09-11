@@ -16,7 +16,7 @@ $('#modal-body').find('#send-request-btn').click(function() {
     var api_resp = api_call("mealrequest", {
                       method: "sendRequest",
                       session: Cookies.get("session"),
-                      meal: urlVars["Id"],
+                      mealId: urlVars["Id"],
                       last4: 1234
                     });
     console.log(api_resp);
