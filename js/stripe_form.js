@@ -17,7 +17,7 @@
                       method: "AddStripe",
                       session: Cookies.get("session"),
                       StripeToken: token,
-                      last4: stripe_resp.last4
+                      last4: stripe_resp.card.last4
                       });
         if (api_resp.Success) {
           // Save the card
