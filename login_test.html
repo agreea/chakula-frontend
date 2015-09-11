@@ -54,14 +54,6 @@
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script src="js/stripe_form.js"></script>
 <script>
-  cards = Cookies.get('cards')
-  console.log(cards)
-  if (cards === undefined) {
-    console.log("There were no cards")
-    var cards = [1234, 3333, 4444, 5555]
-    Cookies.set('cards', '7')
-    console.log(Cookies.get('cards'))
-  }
 </script>
 <!--
   Below we include the Login Button social plugin. This button uses
