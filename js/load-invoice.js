@@ -24,6 +24,8 @@ $('#modal-body').find('#send-request-btn').click(function() {
       // save the request in the cookies
       // disable the request buton
     } else {
+      $('#modal-body').('request-errors').text(api_resp.Error);
+
       // show that the request didn't process, ask them to try again
     }
 })
