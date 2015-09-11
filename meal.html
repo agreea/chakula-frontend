@@ -30,22 +30,28 @@
       // if you do, check with the server if you are attending or not attending this meal
            $(document).ready(function(){
                 urlVars = getUrlVars();
+                id = urlVars["Id"]
                 if(Cookies.get("session") === undefined) {
                   console.log("No session");
-                } else if(Cookies.get("last4") === undefined) {
-                    console.log("No card");
-                   $('#modal-body').load('include/stripe_form.html');
+                } else if(Cookies.getJSON("cards") === undefined || ) {
+                  console.log("No card");
+                  $('#modal-body').load('include/stripe_form.html');
+                } else if(Cookies.getJSON("requests") === undefined || Cookies.getJSON("requests")[id] === undefined) {
+                  $('#modal-body').load('include/request_invoice.html');
                 } else {
-                  $('#request-meal-btn').click(function() {
-                    var api_resp = api_call("kitchenRequest", {
-                      method: "sendRequest",
-                      session: Cookies.get("session"),
-                      meal: urlVars["Id"] 
-                      });
-                    });
-                   $("#request-meal-btn").attr("data-target", "");
+                  // disable the request button, 
+                  // show that the user has requested the meal
+                  // (very soon) show that status of the request
                 }
            });
+           cards = Cookies.get('cards')
+              console.log(cards)
+              if (cards === undefined) {
+                console.log("There were no cards")
+                var cards = [1234, 3333, 4444, 5555]
+                Cookies.set('cards', '7')
+                console.log(Cookies.get('cards'))
+              }
     </script>   
     <script src="js/fb_login.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -125,7 +131,7 @@
                 </fb:login-button>
           </div>
 <!--           <img class="fb-login img-responsive" src="img/fb-login.svg" onclick="FB.login()">
- -->          <div class="col-sm-8 col-sm-offset-2">
+ -->      <div class="col-sm-8 col-sm-offset-2">
             <div class="checkbox">
                 <label><input type="checkbox" id="subscribe-check" checked>I want to receive weekly emails of upcoming meals on campus.</label>
             </div>

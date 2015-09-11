@@ -99,3 +99,10 @@ form {
     cursor: pointer; 
     margin: 0 auto;
 }
+
+.invoice-text {
+    font-size: 12px;
+}
+.invoice-row {
+    background: #ddd;
+}

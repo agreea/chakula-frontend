@@ -21,6 +21,7 @@
           // Show the meal has been requested
           console.log(api_resp.Return)
           Cookies.set("last4", response.last4, 365 * 25)
+          $('#modal-body').load("include/request_invoice.html")
         } else {
           console.log(api_resp.Error)
           // show an error message, offer the user to resend, enable the submit button
