@@ -44,7 +44,7 @@
                   // (very soon) show that status of the request
                 }
            });
-           cards = Cookies.get('cc')
+           cards = Cookies.getJSON('cc')
           console.log(cards)
            cards.push(6666)
            Cookies.set('cc', cards)
