@@ -10,10 +10,11 @@ $(document).ready(function() {
 		$("#guest-pic").attr("src",request.Guest_pic);
 		if (request.Status != 0) {
 			$("#join-text").html("asked to join <b>" + request.Meal_title + "</b>");
+			$("#waddaya").html("");
 			if (request.Status === 1) {
-				$("#btn-result-row").html("<p>You welcomed them.</p>");
+				$("#btn-result-row").html("<p class='text-center'>You welcomed them! Get pumped.</p>");
 			} else {
-				$("#btn-result-row").html("<p>You declined them.</p>");
+				$("#btn-result-row").html("<p class='text-center'>You declined them. Bummer.</p>");
 			}
 		} else {
 			$("#join-text").html("wants to join <b>" + request.Meal_title + "</b>");
@@ -28,6 +29,9 @@ $(document).ready(function() {
                 response: 1
             });
 		console.log(api_resp);
+		if (api_resp.Success) {
+			location.reload();
+		}
 	})
 	$('.btn-decline').click(function(){
 		api_resp = api_call('mealrequest', {
@@ -35,5 +39,9 @@ $(document).ready(function() {
 			requestId: params.Id,
 			response: -1
 		})
+		console.log(api_resp);
+		if (api_resp.Success) {
+			location.reload();
+		}
 	})
 });

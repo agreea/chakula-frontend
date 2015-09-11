@@ -49,9 +49,12 @@ img {
     max-width: 350px;
 }
 
-@media(max-width:400px) {
+@media(max-width:500px) {
     img {
         padding: 20px;
+    }
+    .prof-pic {
+        max-height: 200px;
     }
 }
 
