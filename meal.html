@@ -45,13 +45,17 @@
                 }
            });
            cards = Cookies.get('cc')
-              console.log(cards)
-           var cards = [1234, 3333, 4444, 5555]
-            Cookies.set('cc', cards)
-            console.log(Cookies.get('cc'))
-            if (cards === undefined) {
-                console.log("There were no cards")
-              }
+          console.log(cards)
+           cards.push(6666)
+           Cookies.set('cc', cards)
+           console.log(Cookies.get('cc'))
+
+           // var cards = [1234, 3333, 4444, 5555]
+
+           //  Cookies.set('cc', cards)
+           //  if (cards === undefined) {
+           //      console.log("There were no cards")
+           //    }
     </script>   
     <script src="js/fb_login.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
