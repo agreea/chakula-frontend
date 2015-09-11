@@ -12,15 +12,9 @@ $(document).ready(function() {
 			$("#join-text").html("asked to join <b>" + request.Meal_title + "</b>");
 			$("#waddaya").html("");
 			if (request.Status === 1) {
-				$("#btn-result-row").html("
-					<div class='col-sm-8 col-sm-offset-2'>
-						<p class='text-center'>You welcomed them! Get pumped.</p>
-					</div>");
+				$("#btn-result-row").html("<div class='col-sm-8 col-sm-offset-2'><p class='text-center'>You welcomed them! Get pumped.</p></div>");
 			} else {
-				$("#btn-result-row").html("
-					<div class='col-sm-8 col-sm-offset-2'>
-						<p class='text-center'>You declined them. Bummer.</p>
-					</div>");
+				$("#btn-result-row").html("<div class='col-sm-8 col-sm-offset-2'><p class='text-center'>You declined them. Bummer.</p></div>");
 			}
 		} else {
 			$("#join-text").html("wants to join <b>" + request.Meal_title + "</b>");
