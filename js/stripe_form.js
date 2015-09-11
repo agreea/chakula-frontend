@@ -12,6 +12,7 @@
         // token contains id, last4, and card type
         var token = stripe_resp.id;
         console.log("Stripe response: " + token);
+        console.log("Stripe last 4: " + stripe_resp.card.last4)
         console.log(stripe_resp)
         var api_resp = api_call("kitchenuser", {
                       method: "AddStripe",
