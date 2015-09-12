@@ -106,6 +106,9 @@ form {
 .error-field {
     color: #ff2222;
 }
+.meal-description, .meal-title {
+    padding: 0 50px;
+}
 a {
     cursor: pointer;
     font-size: 10px;
