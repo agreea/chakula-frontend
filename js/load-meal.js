@@ -27,7 +27,7 @@ function getMeal(){
       request_button.css("background-color", "#8cd3e8");
       request_button.css("color", "#2e464c");
     } else if (meal_data.Status === "ATTENDING") {
-      request_button.html("<span class='glyphicon glyphicon-okay' aria-hidden='true'></span> Attending");
+      request_button.html("<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Attending");
       request_button.css("background-color", "#19a347");
       request_button.css("color", "#fff");
     } else if (meal_data.Status === "DECLINED") {
