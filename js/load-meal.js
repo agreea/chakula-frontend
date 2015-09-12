@@ -1,5 +1,5 @@
-getMeal();
-function getMeal(){
+// getMeal();
+// function getMeal(){
   urlVars = getUrlVars();
   api_resp = api_call("meal", {
                       method: "getMeal",
@@ -49,4 +49,4 @@ function getMeal(){
   Pics      []string    
           */       
   }
-}
+// }
