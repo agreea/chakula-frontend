@@ -11,7 +11,7 @@ function getMeal(){
     $('#meal-title').text(meal_data.Title);
     $('#meal-description').text(meal_data.Description);
     $('#host-name').text(meal_data.Host_name);
-    $('#host-pic').attr("src", smeal_data.Host_pic);
+    $('#host-pic').attr("src", meal_data.Host_pic);
     // $('#price').text(meal_data.Price)
     $('#open-spots').text(meal_data.Open_spots);
     request_button = $('#request-meal-btn');
