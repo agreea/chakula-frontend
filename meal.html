@@ -31,7 +31,7 @@
       // on page load, check if you have a cookie for the request
       // if you do, check with the server if you are attending or not attending this meal
            $(document).ready(function(){
-                getMeal();
+                // getMeal();
                 id = urlVars["Id"];
                 if(Cookies.get("session") === undefined) {
                   console.log("No session");
@@ -79,7 +79,7 @@
   the FB.login() function when clicked.
 -->
 <div class="row"> 
-  <div class="col-sm-8 pic-gallery">
+  <div class="col-sm-8 meal-pic-title-desc">
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
 <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">

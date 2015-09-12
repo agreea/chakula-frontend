@@ -52,8 +52,10 @@ form {
     font-size: 10px;
     color: #555;
 }
-.pic-gallery {
+.meal-pic-title-desc {
     padding: 0;
+    background: #eee;
+    color: #414141;
 }
 .info-col {
     margin-top: 20px;
