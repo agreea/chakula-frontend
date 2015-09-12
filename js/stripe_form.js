@@ -20,6 +20,7 @@
                       StripeToken: token,
                       last4: stripe_resp.card.last4
                       });
+        console.log(api_resp)
         if (api_resp.Success) {
           // Save the card
           console.log(api_resp.Return)
