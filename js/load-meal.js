@@ -11,7 +11,7 @@ function getMeal(){
     $('#meal-title').text(meal_data.Title);
     $('#meal-description').text(meal_data.Description);
     $('#host-name').text(meal_data.Host_name);
-    $('#host-pic').text(meal_data.Host_pic);
+    $('#host-pic').attr("src", smeal_data.Host_pic);
     // $('#price').text(meal_data.Price)
     $('#open-spots').text(meal_data.Open_spots);
     request_button = $('#request-meal-btn');
@@ -22,6 +22,8 @@ function getMeal(){
     if (meal_data.Status != "NONE") {
       request_button.text(meal_data.Status);
       request_button.prop('disabled', true);
+    } else {
+      request_button.text("Request Meal - " + meal_data.Price);
     }
     if (meal_data.Status === "PENDING") {
       request_button.css("background-color", "#8cd3e8");
