@@ -1,6 +1,6 @@
 function sendStripeData() {
 	params = getUrlVars();
-	session = getCookie("session")
+	session = Cookies.get("session")
 	api_resp = api_call('host', {
                 method: "StripeConnect",
                 auth: params.code,
