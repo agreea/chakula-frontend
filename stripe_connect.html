@@ -15,7 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/request.css" rel="stylesheet">
+    <link href="css/stripe_connect.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -24,7 +24,29 @@
     <script src="js/jquery.js"></script>
     <script src="js/cookie.js"></script>
     <script src="js/api_call.js"></script>
-
+    <script src="js/stripe_connect.js"></script>
+    <script src="js/fb_stripe_connect.js"></script>
+    <script>
+        $(document).ready(function(){
+            urlParams = getUrlParams();
+            if (params["error"] != undefined) {
+                $('#status-label').text("We couldn't connect your Stripe Account. Please press back and try again.")
+                $('#fb').hide();
+                return;
+            }
+            if(Cookies.get("session") != undefined && Cookies.get("session") != "") {
+                sendStripeData();
+                $('#fb').hide();
+            }
+        });
+    // get url params 
+    // if params contain error ==> update status message accordingly
+    // check the session
+    // no session ==> Offer Log into facebok
+    // yes session ==> call stripeConnect
+    // if success show it
+    // if no success show it
+    </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -42,6 +64,16 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+            <h1 id="status-label"> Connecting Your Stripe Account...</h1>
+            <div class="text-center" id="fb">
+                <h2> Please Login With Facebook to Connect Your Stripe Account With Chakula </h2> 
+                <fb:login-button class="fb-login" scope="public_profile,email" onlogin="checkLoginState();">
+                    </fb:login-button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 

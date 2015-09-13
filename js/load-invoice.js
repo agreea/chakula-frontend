@@ -21,6 +21,11 @@ $('#modal-body').find('#send-request-btn').click(function() {
                     });
     console.log(api_resp);
     if (api_resp.Success) {
+      $('#modal-body').load("include/add_phone.html")
+      $('#request-meal-btn').text("Pending");
+      request_button.css("background-color", "#8cd3e8");
+      request_button.css("color", "#2e464c");
+      request_button.prop('disabled', true);
       // save the request in the cookies
       // disable the request buton
     } else {

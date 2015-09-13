@@ -3,12 +3,6 @@
     console.log('statusChangeCallback');
     console.log(response);
     console.log("Check box checked?");
-    checkbox = $('#modal-body').find('#subscribe-check');
-    console.log(checkbox.prop('checked'))
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       console.log("Token: " + response.authResponse.accessToken)
@@ -17,20 +11,17 @@
           resp = api_call('kitchenuser', {
                 method: "Login",
                 fbToken: response.authResponse.accessToken,
-                subscribe: checkbox.prop('checked'),
+                subscribe: false,
                 });
           if (resp.Success) {
             console.log("Here is the result: " + resp.Return.Session_token);
             Cookies.set("session", resp.Return.Session_token, { expires: 50 });
+            sendStripeData();
             console.log("from cookie: " + Cookies.get("session"))
+            // call stripeconnect
           }
       } else {
           console.log("Didn't call API. from cookie: " + cookie)
-      }
-      if (Cookies.get("last4") === undefined || Cookies.get("last4").length === 0) {
-          $('#modal-body').load('include/stripe_form.html');
-      } else {
-          $('#modal-body').load('include/request_invoice.html');
       }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.

@@ -41,7 +41,7 @@
     </script>
     <script type="text/javascript">
            $(document).ready(function(){
-                $('#modal-body').load('include/fb_login.html');
+                $('#modal-body').load('include/add_phone.html');
                 if(Cookies.get("session") === undefined) {
                   console.log("No session")
                 } 
@@ -72,28 +72,22 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" id="request-meal-btn">&times;</button>
-        <h4 class="modal-title text-center">Request Meal</h4>
-        <div class="row">
-          <div class="col-sm-6 col-sm-offset-2 invoice-text">
-            <p>Subtotal</p>
-            <p>Processing</p>
-            <p> </p>
-            <p>Total</p>
-            <p>Payment <a>change</a></p>
-          </div>
-          <div class="col-sm-2">
-            <p id="subtotal-price">$10.00</p>
-            <p id="processing-price">$0.59</p>
-            <p id="total-price">$10.59</p>
-            <p id="last-4">...<i>6399</i></p>
-          </div>
-        </div>
-        <div class="row text-center">
-          <button type="button" class="btn-info btn-lg btn"> Send Request </div>
-        </div>
-      </div>
       <div class="modal-body row" id="modal-body">
-      </div>
+<script src="js/add_phone.js"></script>
+ <div class="col-sm-8 col-sm-offset-2 text-center">
+    <h3 class="modal-subheader">Request Sent!<h3>
+      <p>We'll hit up the email you use for Facebook once the host responds.</p>
+      <p>Or, we can shoot you a text instead.</p>
+    <span class="error-field" id="phone-errors"></span>
+    <div class="form-row">
+      <label>
+         <input id="phone-field" type="text" size="10" placeholder="Phone #"/>
+      </label>
+    </div>
+    <button class="btn btn-payment" id="add-phone-btn">Text Me</button>
+ </div>
+</div>
+   </div>
     </div>
 
   </div>
