@@ -4,7 +4,7 @@ function sendStripeData() {
 	api_resp = api_call('host', {
                 method: "StripeConnect",
                 auth: params.code,
- 				sessionId: session 
+ 				session: session 
             });
 	if (api_resp.Success) {
 		console.log("We did it!")
