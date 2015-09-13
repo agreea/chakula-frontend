@@ -36,6 +36,7 @@
                 if(Cookies.get("session") === undefined) {
                   console.log("No session");
                 } else if(Cookies.getJSON("cards") === undefined || Cookies.getJSON("cards")[0] === null) {
+                  // getCards(session) from server
                   console.log("No card");
                   $('#modal-body').load('include/stripe_form.html');
                 } else if(Cookies.getJSON("requests") === undefined || Cookies.getJSON("requests")[id] === undefined) {

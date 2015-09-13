@@ -36,8 +36,8 @@ function getMeal(){
       request_button.css("background-color", "#71ccdb")
       request_button.css("color", "#233f44");
     } else if (meal_data.Open_spots === 0) {
-      request_button.prop('disabled', true);
-      request_button.text("Sold out!");
+      // request_button.prop('disabled', true);
+      // request_button.text("Sold out!");
     }
           /* 
   Title       string
