@@ -12,7 +12,6 @@ function getMeal(){
     $('#meal-description').text(meal_data.Description);
     $('#host-name').text(meal_data.Host_name);
     $('#host-pic').attr("src", meal_data.Host_pic);
-    // $('#price').text(meal_data.Price)
     $('#open-spots').text(meal_data.Open_spots);
     request_button = $('#request-meal-btn');
     // TODO: show meal time
@@ -23,7 +22,7 @@ function getMeal(){
       request_button.text(meal_data.Status);
       request_button.prop('disabled', true);
     } else {
-      request_button.text("Request Meal - " + meal_data.Price);
+      request_button.text("Request Meal - $" + meal_data.Price);
     }
     if (meal_data.Status === "PENDING") {
       request_button.css("background-color", "#8cd3e8");
@@ -51,5 +50,15 @@ function getMeal(){
   Status      string
   Pics      []string    
           */       
+  }
+}
+
+function getCards() {
+  api_resp = api_call("kitchenuser", {
+                      method: "getLast4s",
+                      session: Cookies.get("session")
+                    });
+  if (api_resp.Success) {
+    Cookies.set('cards', api_resp.Return)
   }
 }

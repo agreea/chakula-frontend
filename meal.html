@@ -35,10 +35,16 @@
                 id = urlVars["Id"];
                 if(Cookies.get("session") === undefined) {
                   console.log("No session");
-                } else if(Cookies.getJSON("cards") === undefined || Cookies.getJSON("cards")[0] === null) {
-                  // getCards(session) from server
-                  console.log("No card");
-                  $('#modal-body').load('include/stripe_form.html');
+                } else if(Cookies.getJSON("cards") === undefined || 
+                          Cookies.getJSON("cards").length === 0 || 
+                          Cookies.getJSON("cards")[0] === null) {
+                  getCards();
+                  if(Cookies.getJSON("cards") === undefined ||
+                      Cookies.getJSON("cards").length === 0 || 
+                      Cookies.getJSON("cards")[0] === null) {
+                    console.log("No card");
+                    $('#modal-body').load('include/stripe_form.html');
+                  }
                 } else if(Cookies.getJSON("requests") === undefined || Cookies.getJSON("requests")[id] === undefined) {
                   $('#modal-body').load('include/request_invoice.html');
                 } else {
