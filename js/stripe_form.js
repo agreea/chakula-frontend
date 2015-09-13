@@ -17,7 +17,7 @@
         var api_resp = api_call("kitchenuser", {
                       method: "AddStripe",
                       session: Cookies.get("session"),
-                      StripeToken: token,
+                      stripeToken: token,
                       last4: stripe_resp.card.last4
                       });
         console.log(api_resp)
