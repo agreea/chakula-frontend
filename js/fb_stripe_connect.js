@@ -21,7 +21,8 @@
             // call stripeconnect
           }
       } else {
-          console.log("Didn't call API. from cookie: " + cookie)
+          console.log("Didn't call API. from cookie: " + cookie);
+          sendStripeData();
       }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.

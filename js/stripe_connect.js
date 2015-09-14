@@ -10,7 +10,8 @@ function sendStripeData() {
 		console.log("We did it!")
 		$('#status-label').text("Successfully Connected Your Stripe Account!")
 	} else {
-		$('#status-label').text(api_resp.Error)
+		$('#status-label').text(api_resp.Error);
+		console.log(api_resp.Error);
 		// show failure
 	}
 }
