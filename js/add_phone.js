@@ -11,7 +11,7 @@ jQuery(function($) {
                         phone: $phone_field.val(),
                         });
           if (api_resp.Success) {
-            $('#modal-body').load('phone_add_success.html')
+            $('#modal-body').load('include/phone_add_success.html')
             // show the success screen
           } else {
             $('#phone-errors').text(api_resp.Error)
