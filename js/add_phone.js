@@ -11,12 +11,13 @@ jQuery(function($) {
                         phone: $phone_field.val(),
                         });
           if (api_resp.Success) {
+            $('#modal-body').load('phone_add_success.html')
             // show the success screen
           } else {
-            // show error in error field
+            $('#phone-errors').text(api_resp.Error)
           }
         } else {
-          // show error in error field
+            $('#phone-errors').text("Please enter numbers only.")
         }
         // check if the entry is 10 digits
         // if it is, send it to the server
