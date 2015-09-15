@@ -155,7 +155,7 @@ function setUpCarousel(pics) {
   picsHTML = "";
   for (pic in pics) {
     console.log(pic)
-    if (pic === 0) {
+    if (pic == 0) {
       outerDiv = "<div class='item active'>";
     } else {
       outerDiv = "<div class='item'>";
