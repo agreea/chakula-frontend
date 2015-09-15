@@ -13,6 +13,8 @@ function getMeal(){
     $('#host-name').text(meal_data.Host_name);
     $('#host-pic').attr("src", meal_data.Host_pic);
     $('#open-spots').text(meal_data.Open_spots);
+    pics = meal_data.Pics;
+    setUpCarousel(pics);
     request_button = $('#request-meal-btn');
     // TODO: show meal time
     // TODO: show RSVP-by-time
@@ -137,7 +139,7 @@ function getDayOfWeek(day) {
 
 function getHumanTime(hour, minutes) {
   if (minutes === 0) {
-    minutes = "00"
+    minutes = "00";
   }
   if (hour < 12) {
     time = hour + ":" + minutes + " AM";
@@ -145,6 +147,20 @@ function getHumanTime(hour, minutes) {
     time = (hour - 12) + ":" + minutes + " PM";
   }
   return time;
+}
+
+function setUpCarousel(pics) {
+  picsHTML = "";
+  for (pic in pics) {
+    picsHTML += "<div class='item'>
+      <img src='img/" + pic.Name + "alt='...'>
+      <div class='carousel-caption'>" +
+        pic.Caption +
+      "</div>
+    </div>"
+  }
+  console.log(picsHTML);
+  $('#carousel').find('#carousel-pics').html(picsHTML);
 }
 
 function getCards() {
