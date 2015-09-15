@@ -51,7 +51,7 @@ form {
     margin-bottom: 0;
 }
 .row {
-    margin-left: 0 inherit;
+    margin: 0 inherit;
 }
 .disclaimer-text {
     font-size: 10px;
