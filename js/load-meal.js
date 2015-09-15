@@ -152,6 +152,7 @@ function getHumanTime(hour, minutes) {
 function setUpCarousel(pics) {
   picsHTML = "";
   for (pic in pics) {
+    console.log(pic)
     picsHTML += "<div class='item'> <img src='img/" + 
                 pic.Name + 
                 "alt='...'> <div class='carousel-caption'>" +
