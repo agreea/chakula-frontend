@@ -28,7 +28,7 @@
       } else {
           console.log("Didn't call API. from cookie: " + cookie)
       }
-      if (Cookies.get("last4") === undefined || Cookies.get("last4").length === 0) {
+      if (Cookies.get("cards") === undefined || Cookies.get("cards").length === 0) {
           $('#modal-body').load('include/stripe_form.html');
       } else {
           $('#modal-body').load('include/request_invoice.html');
