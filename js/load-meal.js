@@ -164,7 +164,7 @@ function setUpCarousel(pics) {
   console.log(picsHTML);
 
   $('#carousel').find('#carousel-pics').html("<div class='item active'>
-      <img src='img/IMG_0818.JPG' alt='...'>
+      <img src='http://www.wallpaper77.com/upload/DesktopWallpapers/cache/Delicious-Grill-fast-food-wallpapers-food-wallpaper-1680x1050.jpg' alt='...'>
       <div class='carousel-caption'>
         And another
       </div>
