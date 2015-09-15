@@ -62,10 +62,13 @@ function processDates(start_time, rsvp_by) {
   // get the time in days, month, and time. Set that to the subtext
   date = new Date(start_time);
   month = getShortMonth(date.getMonth()+1);
+  console.log("Month: " + date.getMonth());
+  console.log("Date: " + date.getDate());
+  console.log("Day: " + date.getDay());
   date_day = date.getDate();
-  week_day = date.getDate();
+  week_day = date.getDay();
   time_text = getHumanTime(date.getHours(), date.getMinutes());
-  time_subtext = "on " + week_day + " " + month + " " + date_day;
+  time_subtext = "on " + week_day + ", " + month + " " + date_day;
   $('#meal-time').text(time_text);
   $('#meal-time-subtext').text(time_subtext);
   // RSVP time:
