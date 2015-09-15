@@ -60,7 +60,7 @@
                 }
                 if(Cookies.get("session") != undefined) {
                   console.log("there was a session");
-                  $('#signin-dropdown').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agree</a>'); // TODO: get user data from chakula.
+                  $('.navbar').find('#signin-dropdown').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agree</a>'); // TODO: get user data from chakula.
                 }
            });
            // var cards = [1234, 3333, 4444, 5555]
