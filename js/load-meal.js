@@ -38,7 +38,7 @@ function getMeal(){
       request_button.prop('disabled', true);
       request_button.text("Sold out!");
     }
-    start = Date.parse(meal_data.Start);
+    start = Date.parse(meal_data.Starts);
     console.log("Start date: " + start);
     console.log("RSVP by: " + meal_data.Rsvp_by);
 
