@@ -49,6 +49,7 @@ form {
 }
 .navbar {
     margin-bottom: 0;
+    border-radius: 0;
 }
 .row {
     margin-left: 0;
