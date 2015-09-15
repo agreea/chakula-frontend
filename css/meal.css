@@ -47,7 +47,9 @@ form {
     src: url(../fonts/quicksand-bold-webfont.woff);
     font-weight: bold;
 }
-
+.navbar {
+    margin-bottom: 0;
+}
 .disclaimer-text {
     font-size: 10px;
     color: #555;
