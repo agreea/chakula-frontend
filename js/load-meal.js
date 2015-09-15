@@ -157,7 +157,7 @@ function setUpCarousel(pics) {
     console.log(pic)
     picsHTML += "<div class='item'> <img src='img/" + 
                 pics[pic].Name + 
-                "alt='...'> <div class='carousel-caption'>" +
+                + "' " + "alt='...'> <div class='carousel-caption'>" +
                 pics[pic].Caption +
                 "</div> </div>"
   }
