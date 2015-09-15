@@ -50,6 +50,9 @@ form {
 .navbar {
     margin-bottom: 0;
 }
+.row {
+    margin-left: 0 inherit;
+}
 .disclaimer-text {
     font-size: 10px;
     color: #555;
