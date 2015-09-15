@@ -155,14 +155,18 @@ function setUpCarousel(pics) {
   picsHTML = "";
   for (pic in pics) {
     console.log(pic)
-    // picsHTML += "<div class='item'> <img src='img/" + 
-    //             pics[pic].Name + 
-    //             "' " + "alt='...'> <div class='carousel-caption'>" +
-    //             pics[pic].Caption +
-    //             "</div> </div>"
+    if (pic === 0) {
+      outerDiv = "<div class='item active'>";
+    } else {
+      outerDiv = "<div class='item'>";
+    }
+    picsHTML += outerDiv + "<img src='img/" + 
+                pics[pic].Name + 
+                "' " + "alt='...'> <div class='carousel-caption'>" +
+                pics[pic].Caption +
+                "</div> </div>"
   }
   console.log(picsHTML);
-
   $('#carousel').find('#carousel-pics').html("<div class='item active'><img src='http://www.wallpaper77.com/upload/DesktopWallpapers/cache/Delicious-Grill-fast-food-wallpapers-food-wallpaper-1680x1050.jpg' alt='...'><div class='carousel-caption'>And another</div></div>");
 }
 
