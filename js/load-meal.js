@@ -77,7 +77,7 @@ function processDates(start_time, rsvp_by) {
 }
 
 function getShortMonth(month) {
-  switch month {
+  switch (month) {
     case 1:
       return "Jan";
     case 2:
