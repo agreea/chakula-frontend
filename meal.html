@@ -36,6 +36,7 @@
       // if you do, check with the server if you are attending or not attending this meal
            $(document).ready(function(){
                 getMeal();
+                $('#nav').load('include/nav_bar.html');
                 id = urlVars["Id"];
                 if(Cookies.get("session") === undefined) {
                   console.log("No session");
@@ -82,7 +83,8 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-
+<div id="nav">
+</div>
 <!--
   Below we include the Login Button social plugin. This button uses
   the JavaScript SDK to present a graphical Login button that triggers
@@ -172,8 +174,6 @@
     </footer>
     <!-- Plugin JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="js/grayscale.js"></script>
 
 </body>
 
