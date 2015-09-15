@@ -14,6 +14,7 @@ function getMeal(){
     $('#host-pic').attr("src", meal_data.Host_pic);
     $('#open-spots').text(meal_data.Open_spots);
     pics = meal_data.Pics;
+    console.log(pics);
     setUpCarousel(pics);
     request_button = $('#request-meal-btn');
     // TODO: show meal time
