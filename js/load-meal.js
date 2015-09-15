@@ -153,12 +153,6 @@ function getHumanTime(hour, minutes) {
 
 function setUpCarousel(pics) {
   picsHTML = "";
-    for(var i=0 ; i< m.length ; i++) {
-    $('<li data-target="#carousel-example-generic" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
-
-  }
-  $('.item').first().addClass('active');
-
   for (pic in pics) {
     console.log(pic)
     $('<div class="item"><img src="img/'+pics[pic].Name +'"><div class="carousel-caption">'+ pics[pic].Caption +'</div>   </div>').appendTo('.carousel-inner');
