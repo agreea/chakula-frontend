@@ -114,7 +114,7 @@ function getShortMonth(month) {
   }
 }
 
-function getDayofWeek(day) {
+function getDayOfWeek(day) {
   switch (day) {
     case 0:
       return "Sun";
