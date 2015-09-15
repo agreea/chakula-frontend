@@ -28,6 +28,7 @@
           }
       } else {
           console.log("Didn't call API. from cookie: " + cookie)
+          $('#signin-dropdown').text('Agree') // TODO: get user data from chakula.
       }
       if (Cookies.get("cards") === undefined || Cookies.get("cards").length === 0) {
           $('#modal-body').load('include/stripe_form.html');

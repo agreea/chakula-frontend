@@ -40,7 +40,7 @@
                 id = urlVars["Id"];
                 if(Cookies.get("session") === undefined) {
                   console.log("No session");
-                  $('#signin-dropdown').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in</a>')
+                  $('#signin-dropdown').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in</a>');
                 } else if(Cookies.getJSON("cards") === undefined || 
                           Cookies.getJSON("cards").length === 0 || 
                           Cookies.getJSON("cards")[0] === null) {
