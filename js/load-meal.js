@@ -70,7 +70,7 @@ function processDates(start_time, rsvp_by) {
   console.log("Date: " + date.getDate());
   console.log("Day: " + date.getDay());
   date_day = date.getDate();
-  week_day = date.getDay();
+  week_day = getDayOfWeek(date.getDay());
   time_text = getHumanTime(date.getHours(), date.getMinutes());
   time_subtext = "on " + week_day + ", " + month + " " + date_day;
   $('#meal-time').text(time_text);
@@ -114,7 +114,31 @@ function getShortMonth(month) {
   }
 }
 
+function getDayofWeek(day) {
+  switch (day) {
+    case 0:
+      return "Sun";
+    case 1:
+      return "Mon";
+    case 2:
+      return "Tues";
+    case 3:
+      return "Wed";
+    case 4:
+      return "Thurs";
+    case 5:
+      return "Friday";
+    case 6:
+      return "Saturday";
+    default:
+      return "";
+  }
+}
+
 function getHumanTime(hour, minutes) {
+  if (minutes === 0) {
+    minutes = "00"
+  }
   if (hour < 12) {
     time = hour + ":" + minutes + " AM";
   } else {
