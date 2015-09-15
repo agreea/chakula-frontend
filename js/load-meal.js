@@ -155,14 +155,21 @@ function setUpCarousel(pics) {
   picsHTML = "";
   for (pic in pics) {
     console.log(pic)
-    picsHTML += "<div class='item'> <img src='img/" + 
-                pics[pic].Name + 
-                "' " + "alt='...'> <div class='carousel-caption'>" +
-                pics[pic].Caption +
-                "</div> </div>"
+    // picsHTML += "<div class='item'> <img src='img/" + 
+    //             pics[pic].Name + 
+    //             "' " + "alt='...'> <div class='carousel-caption'>" +
+    //             pics[pic].Caption +
+    //             "</div> </div>"
   }
   console.log(picsHTML);
-  $('#carousel').find('#carousel-pics').html(picsHTML);
+
+  $('#carousel').find('#carousel-pics').html("<div class='item active'>
+      <img src='img/IMG_0818.JPG' alt='...'>
+      <div class='carousel-caption'>
+        And another
+      </div>
+    </div>"
+);
 }
 
 function getCards() {
