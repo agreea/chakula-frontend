@@ -38,6 +38,9 @@ function getMeal(){
       request_button.prop('disabled', true);
       request_button.text("Sold out!");
     }
+    start = Date.parse(meal_data.Start)
+    rsvp_by = Date.parse(meal_data.Rsvp_by)
+    processDates(start, rsvp_by)
           /* 
   Title       string
   Description   string
@@ -51,6 +54,66 @@ function getMeal(){
   Pics      []string    
           */       
   }
+}
+
+function processDates(start_time, rsvp_by) {
+  // start time:
+  // get the time in hours & minutes. Set that to the main #
+  // get the time in days, month, and time. Set that to the subtext
+  date = new Date(start_time);
+  month = getShortMonth(date.getMonth()+1);
+  date_day = date.getDate();
+  week_day = date.getDate();
+  time_text = getHumanTime(date.getHours(), date.getMinutes());
+  time_subtext = "on " + week_day + " " + month + " " + date_day;
+  $('#meal-time').text(time_text);
+  $('#meal-time-subtext').text(time_subtext);
+  // RSVP time:
+  // get the current time, run a diff
+  // if rsvp_by - now > 24 hours ==> "# days left"
+  // else if rsvp_by - now > 1 hour ==> "# hours left" (text is yellow)
+  // else if rsvp_by - now > 1 minute ==> "# minutes left" (text is red)
+  // else ==> "Closed" (text is grey)
+}
+
+function getShortMonth(month) {
+  switch month {
+    case 1:
+      return "Jan";
+    case 2:
+      return "Feb";
+    case 3: 
+      return "Mar";
+    case 4:
+      return "Apr";
+    case 5:
+      return "May";
+    case 6:
+      return "Jun";
+    case 7:
+      return "Jul";
+    case 8:
+      return "Aug";
+    case 9:
+      return "Sep";
+    case 10:
+      return "Oct";
+    case 11:
+      return "Nov";
+    case 12:
+      return "Dec";
+    default:
+      return "";
+  }
+}
+
+function getHumanTime(hours, minutes) {
+  if hour < 12 {
+    time = hour + ":" + minutes + " AM";
+  } else {
+    time = (hour - 12) + ":" + minutes + " PM";
+  }
+  return time;
 }
 
 function getCards() {

@@ -25,10 +25,10 @@
           // Save the card
           console.log(api_resp.Return)
           Cookies.getJSON('cards')
-          if (cards === undefined) { // create the last4 digits array if you don't have one already
+          if (cards === undefined) { // create the last4 digits array
             var cards = [stripe_resp.card.last4]
             Cookies.set('cards', cards)
-          } else {
+          } else { // you have one so just get it and append
             cards = Cookies.getJSON('cards')
             cards.push(stripe_resp.last4)
             Cookies.set('cards', cards)

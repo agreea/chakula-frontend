@@ -22,6 +22,7 @@
           if (resp.Success) {
             console.log("Here is the result: " + resp.Return.Session_token);
             Cookies.set("session", resp.Return.Session_token, { expires: 50 });
+            getCards();
             console.log("from cookie: " + Cookies.get("session"))
           }
       } else {
