@@ -108,7 +108,7 @@ function getShortMonth(month) {
 }
 
 function getHumanTime(hour, minutes) {
-  if hour < 12 {
+  if (hour < 12) {
     time = hour + ":" + minutes + " AM";
   } else {
     time = (hour - 12) + ":" + minutes + " PM";
