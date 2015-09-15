@@ -59,7 +59,8 @@
                   // (very soon) show that status of the request
                 }
                 if(Cookies.get("session") != undefined) {
-                  $('#signin-dropdown').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agree</a>') // TODO: get user data from chakula.
+                  console.log("there was a session");
+                  $('#signin-dropdown').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agree</a>'); // TODO: get user data from chakula.
                 }
            });
            // var cards = [1234, 3333, 4444, 5555]
