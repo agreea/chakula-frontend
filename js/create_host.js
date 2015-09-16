@@ -4,6 +4,7 @@ function setupHostData(guestData) {
 	console.log(guestData.First_name);
 	$host_data.find('input[id="first-name"]').val(guestData.First_name);
 	$('#last-name').val(guestData.Last_name);
+	$('#asdfas').val("teehee");
 	$host_data.find('#email').val(guestData.Email);
 	$("input[type='text']").change(function() {
 		console.log("detected a disturbance in the force");
