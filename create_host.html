@@ -60,9 +60,11 @@
                   $('#fb').hide();
                   api_resp = getHostData();
                   if (api_resp.Success) {
+                    console.log("success");
                     // populate the host data fields
                     setupHostData(api_resp.Return);
                   } else {
+                    console.log("failure");
                     // show an error message or fb login
                   }
                 }
