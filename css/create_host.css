@@ -4,7 +4,9 @@ ul {
 	color: #666;
 	margin: 8px;
 }
-
+.error-field {
+	color: #ff0000;
+}
 .btn {
 	width: 60%;
 }
