@@ -2,9 +2,6 @@
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
-    console.log("Check box checked?");
-    checkbox = $('#modal-body').find('#subscribe-check');
-    console.log(checkbox.prop('checked'))
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -22,17 +19,19 @@
           if (resp.Success) {
             console.log("Here is the result: " + resp.Return.Session_token);
             Cookies.set("session", resp.Return.Session_token, { expires: 50 });
-            $('#host-data').load('include/host-data.html');
+            $('.host-data').show();
+            $('#fb').hide();
             console.log("from cookie: " + Cookies.get("session"));
           }
       } else {
         console.log("Didn't call API. from cookie: " + cookie);
         api_resp = api_call('kitchenuser', {
-                            method: 'getGuestData',
+                            method: 'getHostData',
                             session: Cookies.get('session')
                             });
         if (api_resp.Success) {
           // set up the form
+          setupHostData();
         }
       }
       // set up the damn form
