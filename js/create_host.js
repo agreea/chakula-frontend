@@ -64,7 +64,7 @@ function sendHostData() {
 	var email = $host_data.find('#email').val();
 	var phone = $host_data.find('#phone').val();
 	var address = $host_data.find('#address').val();
-
+	console.log("first: " + firstName + ". Last: " + lastName + ". Email: " + email + ". Phone: " + phone + ". Address: " + address);
 	api_resp = api_call('host', {
 						method: 'updateHost',
 						session: Cookies.get('session'),
