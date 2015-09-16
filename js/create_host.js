@@ -5,14 +5,21 @@ function getHostData() {
 }
 
 function setupHostData(hostData) {
-	$host_data = $('.host-data');
+	$host_inputs = $('.host-data');
 	console.log(hostData.Prof_pic);
 	$('#prof-pic').attr("src", hostData.Prof_pic);
-	$host_data.find('#first-name').val(hostData.First_name);
-	$host_data.find('#last-name').val(hostData.Last_name);
-	$host_data.find('#email').val(hostData.Email);
-	$host_data.find('#phone').val(hostData.Phone);
-	$host_data.find('#address').val(hostData.Address);
+	$host_inputs.find('#first-name').val(hostData.First_name);
+	$host_inputs.find('#last-name').val(hostData.Last_name);
+	$host_inputs.find('#email').val(hostData.Email);
+	$host_inputs.find('#phone').val(hostData.Phone);
+	$host_inputs.find('#address').val(hostData.Address);
+	if (!hostData.Stripe_connect) {
+		$('#stripe-warning').html(
+        "<li><span class='glyphicon glyphicon-cutlery' aria-hidden='true'></span>" +
+          "Please save your data BEFORE you connect with Stripe. You must connect with Stripe to host on Chakula." +
+          "</li>"
+			);
+	}
 	$("input").keypress(function() {
 		console.log("detected a disturbance in the force");
 		$host_data.find('button').prop('disabled', false);
@@ -71,7 +78,6 @@ function sendHostData() {
 	$host_data.find('#last-name').val();
 	$host_data.find('#email').val();
 	$host_data.find('#phone').val();
-
 	var firstName = $host_data.find('#first-name').val();
 	var lastName = $host_data.find('#last-name').val();
 	var email = $host_data.find('#email').val();
