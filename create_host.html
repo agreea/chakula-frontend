@@ -60,7 +60,7 @@
                   api_resp = getGuestData();
                   if (api_resp.Success) {
                     // populate the host data fields
-                    setupHostData(guestData);
+                    setupHostData(api_resp.Return);
                   } else {
                     // show an error message or fb login
                   }
