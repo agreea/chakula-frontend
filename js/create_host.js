@@ -1,6 +1,5 @@
 function setupHostData(guestData) {
 	$host_data = $('.host-data');
-	// $host_data.load('include/host_data.html');
 	console.log(guestData.First_name);
 	$host_data.find('#first-name').val(guestData.First_name);
 	$host_data.find('#last-name').val(guestData.Last_name);
@@ -18,7 +17,7 @@ function attemptSendHostData() {
 	var submittable = true;
 	var errorHtml = ""
 	$host_data = $('#host-data');
-	if (!$host_data.find('Efirst-name').val()) {
+	if (!$host_data.find('#first-name').val()) {
 		submittable = false;
 		errorHtml += "<li>First name is mandatory</li>"
 	}
