@@ -21,6 +21,6 @@ function getUrlVars() {
 
 function getGuestData() {
   return api_call('kitchenuser', {
-                    method: 'getGuest',
+                    method: 'Get',
                     session: Cookies.get('session')});
 }
