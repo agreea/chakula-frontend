@@ -81,6 +81,28 @@ function processDates(start_time, rsvp_by) {
   $('#meal-time-subtext').text(time_subtext);
   // RSVP time:
   // get the current time, run a diff
+  second = 1000;
+  minute = second * 60;
+  hour = minute * 60;
+  day = hour * 24;
+  time_left = rsvp_by - Date.now()
+  if (time_left > day) {
+    // $('#time-left').text(time_left/day)
+    // $('#time-left-subtext').text('days til requests close.')
+    // show how many days left
+  } else if (time_left > hour) {
+    // $('#time-left').text(time_left/hour)
+    // $('#time-left-subtext').text('hours til requests close.')
+    // $('#time-left-subtext').css("color", "#00ff00") // set text to yellow
+  } else if (time_left > minute) {
+    // $('#time-left').text(time_left/hour)
+    // $('#time-left-subtext').text('minutes til requests close.')
+    // $('#time-left-subtext').css("color", "#ff0000") // set text to yellow
+  } else if (time_left < 0) {
+    // $('#time-left').text(0)
+    // $('#time-left-subtext').text('Requests are now closed.')
+    // $('#time-left-subtext').css("color", "#aaa") // set text to yellow
+  }
   // if rsvp_by - now > 24 hours ==> "# days left"
   // else if rsvp_by - now > 1 hour ==> "# hours left" (text is yellow)
   // else if rsvp_by - now > 1 minute ==> "# minutes left" (text is red)

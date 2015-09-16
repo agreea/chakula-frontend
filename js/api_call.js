@@ -18,3 +18,9 @@ function getUrlVars() {
     }
     return vars;
 }
+
+function getGuestData() {
+  return api_call('kitchenuser', {
+                    method: 'getGuest',
+                    session: Cookies.get('session')});
+}
