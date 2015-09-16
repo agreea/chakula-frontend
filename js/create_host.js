@@ -23,6 +23,7 @@ function setupHostData(hostData) {
 	$("input").keypress(function() {
 		console.log("detected a disturbance in the force");
 		$host_inputs.find('button').prop('disabled', false);
+		// TODO: set text to "save", remove checkmark, restore old color styling
     });
 	$host_inputs.find('button').click(function() {
 		attemptSendHostData();
