@@ -48,7 +48,9 @@ function attemptSendHostData() {
 	}
 	if (submittable) {
 		sendHostData();
-	} 
+	} else {
+		$('#error-field').html(errorHtml);
+	}
 }
 function sendHostData() {
 	$host_data = $('#host-data');
