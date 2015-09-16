@@ -59,12 +59,17 @@ function attemptSendHostData() {
 
 function sendHostData() {
 	$host_data = $('#host-data');
+	$host_data.find('#first-name').val();
+	$host_data.find('#last-name').val();
+	$host_data.find('#email').val();
+	$host_data.find('#phone').val();
+
 	var firstName = $host_data.find('#first-name').val();
 	var lastName = $host_data.find('#last-name').val();
 	var email = $host_data.find('#email').val();
 	var phone = $host_data.find('#phone').val();
 	var address = $host_data.find('#address').val();
-	console.log("first: " + firstName + ". Last: " + lastName + ". Email: " + email + ". Phone: " + phone + ". Address: " + address);
+	console.log("first: " + $host_data.find('#first-name').val() + ". Last: " + lastName + ". Email: " + email + ". Phone: " + phone + ". Address: " + address);
 	api_resp = api_call('host', {
 						method: 'updateHost',
 						session: Cookies.get('session'),
