@@ -45,7 +45,7 @@ function attemptSendHostData() {
 		submittable = false;
 		errorHtml += "<li>Address is mandatory</li>"
 	}
-	if (!Cookies.get('#session')) {
+	if (!Cookies.get('session')) {
 		// show fb login
 		submittable = false;
 	}
