@@ -50,11 +50,13 @@ function attemptSendHostData() {
 		submittable = false;
 	}
 	if (submittable) {
+		console.log("Submitting");
 		sendHostData();
 	} else {
 		$('#error-field').html(errorHtml);
 	}
 }
+
 function sendHostData() {
 	$host_data = $('#host-data');
 	var firstName = $host_data.find('#first-name').val();
