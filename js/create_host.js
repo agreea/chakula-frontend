@@ -22,9 +22,9 @@ function setupHostData(hostData) {
 	}
 	$("input").keypress(function() {
 		console.log("detected a disturbance in the force");
-		$host_data.find('button').prop('disabled', false);
+		$host_inputs.find('button').prop('disabled', false);
     });
-	$host_data.find('button').click(function() {
+	$host_inputs.find('button').click(function() {
 		attemptSendHostData();
 	});
 }
