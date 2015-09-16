@@ -19,6 +19,7 @@ function attemptSendHostData() {
 	var submittable = true;
 	var errorHtml = ""
 	$host_data = $('#host-data');
+	console.log("First name @attemptSend:" + $host_data.find('#first-name').val());
 	if (!$host_data.find('#first-name').val()) {
 		submittable = false;
 		errorHtml += "<li>First name is mandatory</li>"
