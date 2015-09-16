@@ -5,6 +5,7 @@ function setupHostData(guestData) {
 	$host_data.find('#first-name').val(guestData.First_name);
 	$host_data.find('#last-name').val(guestData.Last_name);
 	$host_data.find('#email').val(guestData.Email);
+	$host_data.find('#phone').val(guestData.Phone);
 	$("input[type='text']").change(function() {
 		console.log("detected a disturbance in the force");
 		$host_data.find('button').prop('disabled', false);
