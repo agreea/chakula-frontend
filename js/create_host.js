@@ -14,6 +14,7 @@ function setupHostData(guestData) {
 }
 
 function attemptSendHostData() {
+	console.log("attempting to send host data");
 	var submittable = true;
 	var errorHtml = ""
 	$host_data = $('#host-data');
