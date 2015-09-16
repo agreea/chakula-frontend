@@ -25,7 +25,7 @@
             api_resp = getHostData()
             if (api_resp.Success) {
               // set up the form
-              setupHostData(api_resp);
+              setupHostData(api_resp.Return);
             }
           }
       } else {
