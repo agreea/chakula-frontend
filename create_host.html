@@ -58,7 +58,7 @@
                   */
                 } else {
                   $('#fb').hide();
-                  api_resp = getGuestData();
+                  api_resp = getHostData();
                   if (api_resp.Success) {
                     // populate the host data fields
                     setupHostData(api_resp.Return);

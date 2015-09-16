@@ -1,10 +1,17 @@
-function setupHostData(guestData) {
+function getHostData() {
+  return api_call('host', {
+                    method: 'GetHost',
+                    session: Cookies.get('session')});
+}
+
+function setupHostData(hostData) {
 	$host_data = $('.host-data');
 	console.log(guestData.First_name);
-	$host_data.find('#first-name').val(guestData.First_name);
-	$host_data.find('#last-name').val(guestData.Last_name);
-	$host_data.find('#email').val(guestData.Email);
-	$host_data.find('#phone').val(guestData.Phone);
+	$host_data.find('#first-name').val(hostData.First_name);
+	$host_data.find('#last-name').val(hostData.Last_name);
+	$host_data.find('#email').val(hostData.Email);
+	$host_data.find('#phone').val(hostData.Phone);
+	$host_data.find('#address').val(hostData.Address);
 	$("input").keypress(function() {
 		console.log("detected a disturbance in the force");
 		$host_data.find('button').prop('disabled', false);
