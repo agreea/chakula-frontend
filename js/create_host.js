@@ -58,7 +58,7 @@ function attemptSendHostData() {
 }
 
 function sendHostData() {
-	$host_data = $('#host-data');
+	$host_data = $('.host-data');
 	$host_data.find('#first-name').val();
 	$host_data.find('#last-name').val();
 	$host_data.find('#email').val();
