@@ -1,5 +1,5 @@
 function setupHostData(guestData) {
-	$host_data = $('#host-data');
+	$host_data = $('.host-data');
 	$host_data.load('include/host_data.html');
 	console.log(guestData.First_name);
 	$host_data.find('input[id="first-name"]').val(guestData.First_name);
