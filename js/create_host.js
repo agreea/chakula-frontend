@@ -9,7 +9,7 @@ function setupHostData(guestData) {
 		console.log("detected a disturbance in the force");
 		$host_data.find('button').prop('disabled', false);
     });
-	$host_data.find('button').click(attemptSendHostData());
+	// $host_data.find('button').click(attemptSendHostData());
 }
 
 function attemptSendHostData() {
