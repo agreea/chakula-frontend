@@ -22,16 +22,18 @@
             $('.host-data').show();
             $('#fb').hide();
             console.log("from cookie: " + Cookies.get("session"));
+            api_resp = getHostData()
+            if (api_resp.Success) {
+              // set up the form
+              setupHostData(api_resp);
+            }
           }
       } else {
         console.log("Didn't call API. from cookie: " + cookie);
-        api_resp = api_call('kitchenuser', {
-                            method: 'getHostData',
-                            session: Cookies.get('session')
-                            });
+        api_resp = getHostData()
         if (api_resp.Success) {
           // set up the form
-          setupHostData();
+          setupHostData(api_resp);
         }
       }
       // set up the damn form
