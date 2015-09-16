@@ -6,7 +6,7 @@ function getHostData() {
 
 function setupHostData(hostData) {
 	$host_data = $('.host-data');
-	console.log(guestData.First_name);
+	console.log(hostData.First_name);
 	$host_data.find('#first-name').val(hostData.First_name);
 	$host_data.find('#last-name').val(hostData.Last_name);
 	$host_data.find('#email').val(hostData.Email);
