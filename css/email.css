@@ -55,16 +55,9 @@ form {
 .img-banner {
     margin: 0 auto;
 }
-.disclaimer-text {
-    font-size: 10px;
-    color: #555;
+.letter {
+    margin: 32px;
 }
-.meal-pic-title-desc {
-    padding: 0;
-    background: #eee;
-    color: #414141;
-}
-
 .btn {
     border-radius: 0;
     text-transform: uppercase;
