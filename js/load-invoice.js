@@ -1,9 +1,6 @@
 // get the meal details
 cards = Cookies.getJSON('cards')
 // var subtotal = 
-$('#subtotal-price').text("$" + 10.50);
-$('#processing-price').text()
-$('#total-price')
 $('#last-4').text("..." + cards[cards.length - 1])
 
 // get the meal id

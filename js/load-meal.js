@@ -26,7 +26,7 @@ function getMeal(){
       request_button.text(meal_data.Status);
       request_button.prop('disabled', true);
     } else {
-      request_button.text("Request Meal - $" + meal_data.Price);
+      request_button.text("Request Meal - $" + Math.round(meal_data.Price*100)/100);
     }
     if (meal_data.Status === "PENDING") {
       request_button.css("background-color", "#8cd3e8");
