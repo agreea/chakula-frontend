@@ -83,10 +83,11 @@ form {
 .nav-icon {
     max-height: 30px;
     margin-right: 8px;
-/*    display: inline-block;
+/*    
 */ 
 /*    float: none;
 */}
 .navbar-brand {
     vertical-align: middle;
+    display: inline-block;
 }
