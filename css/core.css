@@ -83,6 +83,7 @@ form {
 .nav-icon {
     max-height: 30px;
     margin-right: 8px;
+    vertical-align: middle;
 /*    
 */ 
 /*    float: none;
@@ -90,4 +91,8 @@ form {
 .navbar-brand {
     vertical-align: middle;
     display: inline-block;
+/*    max-height: 30px;
+*/}
+span {
+    vertical-align: middle;
 }
