@@ -84,6 +84,9 @@ form {
     max-height: 30px;
     margin-right: 8px;
 /*    display: inline-block;
-*/    vertical-align: middle;
+*/ 
 /*    float: none;
 */}
+.navbar-brand {
+    vertical-align: middle;
+}
