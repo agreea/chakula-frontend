@@ -21,6 +21,7 @@ $('#modal-body').find('#send-request-btn').click(function() {
                     });
     console.log(api_resp);
     if (api_resp.Success) {
+      // if user.phone = "" (does this really matter??. No. It doesn't.)
       $('#modal-body').load("include/add_phone.html")
       $('#request-meal-btn').text("Pending");
       request_button.css("background-color", "#8cd3e8");
