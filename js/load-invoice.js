@@ -2,7 +2,11 @@
 cards = Cookies.getJSON('cards')
 // var subtotal = 
 $('#last-4').text("..." + cards[cards.length - 1])
-
+api_resp = getMeal();
+if (api_resp.Success) {
+  meal_data = api_resp.Return
+  $('#total').text(meal_data.Price);
+}
 // get the meal id
 // get the meal's cost (in cents)
 // add 2.9% + 30 cents
