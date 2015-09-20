@@ -1,6 +1,8 @@
 // getMeal();
 function setupMeal() {
-    meal_data = getMeal();
+  api_resp = getMeal();
+  if (api_resp.Success) {
+    meal_data = api_resp.Return
     $('#meal-title').text(meal_data.Title);
     $('#meal-description').text(meal_data.Description);
     $('#host-name').text(meal_data.Host_name);
@@ -41,7 +43,7 @@ function setupMeal() {
 
     rsvp_by = Date.parse(meal_data.Rsvp_by);
     processDates(start, rsvp_by);
-
+  }
 }
 
 function getMeal(){
