@@ -46,11 +46,13 @@ function setupMeal() {
 
 function getMeal(){
   urlVars = getUrlVars();
-  return api_call("meal", {
+  api_resp = api_call("meal", {
                       method: "getMeal",
                       session: Cookies.get("session"),
                       mealId: urlVars["Id"],
                     });
+  console.log(api_resp);
+  return api_resp;
 }
 
 function processDates(start_time, rsvp_by) {
