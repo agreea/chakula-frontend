@@ -4,7 +4,7 @@ cards = Cookies.getJSON('cards')
 $('#last-4').text("..." + cards[cards.length - 1])
 api_resp = getMeal();
 if (api_resp.Success) {
-  $('#total').text("$" + meal_data.Price);
+  $('#total').text("$" + Math.round(meal_data.Price*100)/100);
 }
 // get the meal id
 // get the meal's cost (in cents)
