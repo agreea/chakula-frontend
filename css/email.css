@@ -88,8 +88,9 @@ form {
 }
 .card span.card-title {
     color: #fff;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 300;
+    text-transform: uppercase;
 }
 
 .card .card-image {
