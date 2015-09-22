@@ -14,6 +14,10 @@ function setupMeal() {
       $('#attendees').append('<div class="col-xs-6 col-sm-4 col-md-3"> <img class="img-responsive img-circle" src="'+ 
         attendees[i].Prof_pic_url + '"><p>' + attendees[i].First_name + '</p></div>')
     }
+    if (attendees.length === 0) {
+      $('#attendees').append('<div class="col-xs-6 col-sm-4 col-md-3"><p>' 
+        + 'Be the first'+ '</p></div>');
+    }
     pics = meal_data.Pics;
     console.log(pics);
     console.log(pics[0]);
