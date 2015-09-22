@@ -10,7 +10,7 @@ function setupMeal() {
     $('#open-spots').text(meal_data.Open_spots);
     attendees = meal_data.Attendees;
     for (i in attendees) {
-      console.log(attendees[attendee])
+      console.log(attendees[i])
       $('#attendees').append('<div class="col-xs-6 col-sm-4 col-md-3"> <img class="img-responsive img-circle" src="'+ 
         attendees[i].Prof_pic_url + '"><p>' + attendees[i].First_name + '</p></div>')
     }
