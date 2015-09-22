@@ -8,9 +8,11 @@ function setupMeal() {
     $('#host-name').text(meal_data.Host_name);
     $('#host-pic').attr("src", meal_data.Host_pic);
     $('#open-spots').text(meal_data.Open_spots);
-    for (attendee in meal_data.Attendees) {
+    attendees = meal_data.Attendees;
+    for (i in attendees) {
+      console.log(attendees[attendee])
       $('#attendees').append('<div class="col-xs-6 col-sm-4 col-md-3"> <img class="img-responsive img-circle" src="'+ 
-        attendees[attendee].Prof_pic_url + '"><p>' + attendees[attendee].First_name + '</p></div>')
+        attendees[i].Prof_pic_url + '"><p>' + attendees[i].First_name + '</p></div>')
     }
     pics = meal_data.Pics;
     console.log(pics);
