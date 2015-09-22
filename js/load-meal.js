@@ -16,7 +16,7 @@ function setupMeal() {
     }
     if (attendees.length === 0) {
       $('#attendees').append('<div class="col-xs-6 col-sm-4 col-md-3"><p>' 
-        + 'Be the first'+ '</p></div>');
+        + 'Be the first!'+ '</p></div>');
     }
     pics = meal_data.Pics;
     console.log(pics);
