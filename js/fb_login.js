@@ -31,7 +31,7 @@
           // $('#signin-dropdown').text('Agree') // TODO: get user data from chakula.
       }
       cards = Cookies.get("cards")
-      if (card === undefined || cards.length === 0 || cards[0] === undefined) {
+      if (cards === undefined || cards.length === 0 || cards[0] === undefined) {
           $('#modal-body').load('include/stripe_form.html');
       } else {
           $('#modal-body').load('include/request_invoice.html');
