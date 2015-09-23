@@ -32,6 +32,8 @@
       }
       cards = Cookies.get("cards")
       if (cards === undefined || cards.length === 0 || cards[cards.length - 1] === undefined) {
+        console.log("Here's what i see:")
+        console.log(cards[cards.length - 1])
           $('#modal-body').load('include/stripe_form.html');
       } else {
           $('#modal-body').load('include/request_invoice.html');
