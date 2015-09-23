@@ -30,7 +30,7 @@
           console.log("Didn't call API. from cookie: " + cookie)
           // $('#signin-dropdown').text('Agree') // TODO: get user data from chakula.
       }
-      cards = Cookies.get("cards")
+      cards = Cookies.getJSON("cards")
       if (cards === undefined || cards.length === 0 || cards[cards.length - 1] === undefined) {
           $('#modal-body').load('include/stripe_form.html');
       } else {
