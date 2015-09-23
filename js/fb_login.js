@@ -28,9 +28,10 @@
           }
       } else {
           console.log("Didn't call API. from cookie: " + cookie)
-          $('#signin-dropdown').text('Agree') // TODO: get user data from chakula.
+          // $('#signin-dropdown').text('Agree') // TODO: get user data from chakula.
       }
-      if (Cookies.get("cards") === undefined || Cookies.get("cards").length === 0) {
+      cards = Cookies.get("cards")
+      if (card === undefined || cards.length === 0 || cards[0] === undefined) {
           $('#modal-body').load('include/stripe_form.html');
       } else {
           $('#modal-body').load('include/request_invoice.html');
