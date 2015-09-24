@@ -8,6 +8,7 @@ function setupMeal() {
     $('#host-name').text(meal_data.Host_name);
     $('#host-pic').attr("src", meal_data.Host_pic);
     $('#open-spots').text(meal_data.Open_spots);
+    $('#host-bio').text(meal_data.Host_bio);
     attendees = meal_data.Attendees;
     for (i in attendees) {
       console.log(attendees[i])

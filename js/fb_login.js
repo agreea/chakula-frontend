@@ -59,7 +59,12 @@
       statusChangeCallback(response);
     });
   }
-
+// create a button with a listener
+// listener is a FB.login() function:
+// FB.login(function(response) {
+   // handle the response
+// }, {scope: 'public_profile,email,likes'});
+//
   window.fbAsyncInit = function() {
       FB.init({
         appId      : '828767043907424',
