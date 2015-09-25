@@ -24,7 +24,6 @@ function setupMeal() {
     console.log(pics[0]);
     setupCarousel(pics);
     setupReviews(meal_data.Host_reviews);
-    setup
     request_button = $('#request-meal-btn');
     // Set the button text, text color, and background color according to meal status
     if (meal_data.Status != "NONE") {
