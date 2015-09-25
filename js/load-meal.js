@@ -197,9 +197,9 @@ function getCards() {
 
 function setupReviews(reviews) {
   for (i in reviews) { 
-    stars_html = ''
+    stars_html = '';
     for (j = 0; j < reviews[i].Rating; j++) {
-      stars_html +='<span class="glyphicon glyphicon-star" aria-hidden="true"></span>'
+      stars_html +='<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
     }
     $('<div class="row"><div class="col-sm-3 text-center col-sm-offset-1"><img class="img-circle guest-pic" id="guest-pic" src="'+ 
       reviews[i].Prof_pic_url +'"><p class="reviewer-name">'+ 
