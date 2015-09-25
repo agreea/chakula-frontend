@@ -65,4 +65,7 @@ form {
     background: #EB7A7A;
     color: #701D1D;
 }
-
+.star-btn {
+    background: rgba(0,0,0,0);
+    border: 0px;
+}
