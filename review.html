@@ -70,8 +70,8 @@
       }
       function submit() {
           urlVars = getUrlVars();
-          api_resp = api_call("meal", {
-                      method: "leaveReview",
+          api_resp = api_call("review", {
+                      method: "LeaveReview",
                       session: Cookies.get("session"),
                       rating: rating_state,
                       comment: "Here's a test",
