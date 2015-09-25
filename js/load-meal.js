@@ -203,7 +203,8 @@ function setupReviews(reviews) {
   }
   for (i in reviews) { 
     stars_html = '';
-    date = Date.parse(reviews[i].Date);
+    date_ts = Date.parse(reviews[i].Date);
+    date = new Date(date_ts);
     console.log("Here's the date: ")
     console.log(date);
     for (j = 0; j < reviews[i].Rating; j++) {
