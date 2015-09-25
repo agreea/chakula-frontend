@@ -22,11 +22,10 @@ function setupMeal() {
     pics = meal_data.Pics;
     console.log(pics);
     console.log(pics[0]);
-    setUpCarousel(pics);
+    setupCarousel(pics);
+    setupReviews(meal_data.Host_reviews);
+    setup
     request_button = $('#request-meal-btn');
-    // TODO: show meal time
-    // TODO: show RSVP-by-time
-    // TODO: show pics
     // Set the button text, text color, and background color according to meal status
     if (meal_data.Status != "NONE") {
       request_button.text(meal_data.Status);
@@ -51,7 +50,6 @@ function setupMeal() {
     start = Date.parse(meal_data.Starts);
     console.log("Start date: " + start);
     console.log("RSVP by: " + meal_data.Rsvp_by);
-
     rsvp_by = Date.parse(meal_data.Rsvp_by);
     processDates(start, rsvp_by);
   }
@@ -178,10 +176,9 @@ function getHumanTime(hour, minutes) {
   return time;
 }
 
-function setUpCarousel(pics) {
+function setupCarousel(pics) {
   picsHTML = "";
   for (pic in pics) {
-    console.log(pic)
     $('<div class="item"><img src="img/'+pics[pic].Name +'"><div class="carousel-caption">'+ pics[pic].Caption +'</div>   </div>').appendTo('.carousel-inner');
   }
   $('.item').first().addClass('active');
@@ -196,5 +193,20 @@ function getCards() {
                     });
   if (api_resp.Success) {
     Cookies.set('cards', api_resp.Return)
+  }
+}
+
+function setupReviews(reviews) {
+  for (i in reviews) { 
+    stars_html = ""
+    for (int i = 0; i < reviews.Rating; i++) {
+      stars_html += '<span class="glyphicon glyphicon-star" aria-hidden="true"></span>'
+    }
+    $('<div class="row"><div class="col-sm-3 text-center col-sm-offset-1"><img class="img-circle guest-pic" id="guest-pic" src="'+ 
+      reviews[i].Prof_pic_url +'"><p class="reviewer-name">'+ 
+      reviews[i].First_name + '</p></div><div class="col-sm-7 review-text"><p class="star-rating">' + 
+      stars_html + '</p><p>' + 
+      reviews[i].Comment + '</p><p><i>' + 
+      reviews[i].Date +'</i></p></div></div>').appendTo('#reviews');
   }
 }
