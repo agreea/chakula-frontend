@@ -197,6 +197,10 @@ function getCards() {
 }
 
 function setupReviews(reviews) {
+  if (reviews === undefined || reviews.length === 0) {
+    $('<p>No reviews for this host yet!</p>').appendTo('#reviews');
+    return;
+  }
   for (i in reviews) { 
     stars_html = '';
     date = new Date(reviews[i].Date);
