@@ -199,7 +199,7 @@ function getCards() {
 
 function setupReviews(reviews) {
   if (reviews === undefined || reviews.length === 0) {
-    $('<p>No reviews for this host yet!</p>').appendTo('#reviews');
+    $('<p class="text-center">No reviews for this host yet!</p>').appendTo('#reviews');
     return;
   }
   for (i in reviews) { 
