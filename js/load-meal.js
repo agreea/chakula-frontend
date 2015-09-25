@@ -97,9 +97,10 @@ function processDates(start_time, rsvp_by) {
   } else if (time_left > minute) {
     $('#time-left').text(Math.round(time_left/hour));
     $('#time-left-subtext').text('minutes til requests close.');
-    $('#time-left-subtext').css("color", "#ff0000") // set text to red
+    $('#time-left-subtext').css("color", "#ff0000"); // set text to red
   } else if (time_left < 0) {
-    $('#time-left').html('<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>') 
+    $('#time-left').html('<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>'); 
+    $('#time-left').css("color", "#aaa") // set text to grey
     $('#time-left-subtext').text('Requests are now closed.')
     $('#time-left-subtext').css("color", "#aaa") // set text to grey
     request_button = $('#request-meal-btn').prop('disabled', true);
