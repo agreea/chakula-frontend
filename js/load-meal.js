@@ -207,6 +207,8 @@ function setupReviews(reviews) {
     date = new Date(date_ts);
     console.log("Here's the date: ")
     console.log(date);
+    console.log("Here's the year: ")
+    console.log(date.getYear());
     for (j = 0; j < reviews[i].Rating; j++) {
       stars_html +='<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
     }
