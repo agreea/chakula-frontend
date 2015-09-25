@@ -204,7 +204,7 @@ function setupReviews(reviews) {
   for (i in reviews) { 
     stars_html = '';
     date = new Date(reviews[i].Date);
-
+    console.log(date);
     for (j = 0; j < reviews[i].Rating; j++) {
       stars_html +='<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
     }
