@@ -203,7 +203,8 @@ function setupReviews(reviews) {
   }
   for (i in reviews) { 
     stars_html = '';
-    date = new Date(reviews[i].Date);
+    date = Date.parse(reviews[i].Date);
+    console.log("Here's the date: ")
     console.log(date);
     for (j = 0; j < reviews[i].Rating; j++) {
       stars_html +='<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
@@ -213,7 +214,7 @@ function setupReviews(reviews) {
       reviews[i].First_name + '</p></div><div class="col-sm-9 review-text"><p class="star-rating">' + 
       stars_html + '</p><p>' + 
       reviews[i].Comment + '</p><p><i>' + 
-      getShortMonth(date.getMonth()) + ' ' +
+      getShortMonth(date.getMonth()+1) + ' ' +
       date.getDate() + ', ' + 
       date.getYear() +'</i></p></div></div>').appendTo('#reviews');
   }
