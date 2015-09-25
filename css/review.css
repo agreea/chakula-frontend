@@ -61,4 +61,8 @@ form {
 .pic {
     margin: 0 auto;
 }
+.error-field{ 
+    background: #EB7A7A;
+    color: #701D1D;
+}
 
