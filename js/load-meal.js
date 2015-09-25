@@ -209,6 +209,6 @@ function setupReviews(reviews) {
       reviews[i].First_name + '</p></div><div class="col-sm-9 review-text"><p class="star-rating">' + 
       stars_html + '</p><p>' + 
       reviews[i].Comment + '</p><p><i>' + 
-      date +'</i></p></div></div>').appendTo('#reviews');
+      date_s +'</i></p></div></div>').appendTo('#reviews');
   }
 }
