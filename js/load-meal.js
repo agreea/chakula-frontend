@@ -199,6 +199,8 @@ function getCards() {
 function setupReviews(reviews) {
   for (i in reviews) { 
     stars_html = '';
+    date = new Date(reviews[i].Date);
+    date_s = date.getDate();
     for (j = 0; j < reviews[i].Rating; j++) {
       stars_html +='<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
     }
@@ -207,6 +209,6 @@ function setupReviews(reviews) {
       reviews[i].First_name + '</p></div><div class="col-sm-9 review-text"><p class="star-rating">' + 
       stars_html + '</p><p>' + 
       reviews[i].Comment + '</p><p><i>' + 
-      reviews[i].Date +'</i></p></div></div>').appendTo('#reviews');
+      date +'</i></p></div></div>').appendTo('#reviews');
   }
 }
