@@ -43,7 +43,6 @@
     <script>
       $(document).ready(function(){
         $('#nav').load('include/nav_bar.html');
-        id = urlVars["Id"];
         if(Cookies.get("session") === undefined) {
           $('#fb').html('<div id="fb">' +
                         '<h3 class="text-center">Login With Facebook to leave a review</h3>' +
