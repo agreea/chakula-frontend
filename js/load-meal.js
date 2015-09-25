@@ -102,7 +102,8 @@ function processDates(start_time, rsvp_by) {
     $('#time-left').html('<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>') 
     $('#time-left-subtext').text('Requests are now closed.')
     $('#time-left-subtext').css("color", "#aaa") // set text to grey
-    request_button = $('#request-meal-btn').prop('disabled', true)
+    request_button = $('#request-meal-btn').prop('disabled', true);
+    request_button.text('Meal closed');
 
   }
   // if rsvp_by - now > 24 hours ==> "# days left"
