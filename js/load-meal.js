@@ -208,7 +208,7 @@ function setupReviews(reviews) {
     console.log("Here's the date: ")
     console.log(date);
     console.log("Here's the year: ")
-    console.log(date.getYear());
+    console.log(date.getFullYear());
     for (j = 0; j < reviews[i].Rating; j++) {
       stars_html +='<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
     }
@@ -219,6 +219,6 @@ function setupReviews(reviews) {
       reviews[i].Comment + '</p><p><i>' + 
       getShortMonth(date.getMonth()+1) + ' ' +
       date.getDate() + ', ' + 
-      date.getYear() +'</i></p></div></div>').appendTo('#reviews');
+      date.getFullYear() +'</i></p></div></div>').appendTo('#reviews');
   }
 }
