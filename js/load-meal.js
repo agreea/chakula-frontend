@@ -213,7 +213,7 @@ function setupReviews(reviews) {
     for (j = 0; j < reviews[i].Rating; j++) {
       stars_html +='<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
     }
-    $('<div class="row"><div class="col-sm-2 text-center"><img class="img-circle guest-pic" id="guest-pic" src="'+ 
+    $('<div class="row"><div class="col-sm-2 text-center"><img class="img-circle guest-pic img-responsive" id="guest-pic" src="'+ 
       reviews[i].Prof_pic_url +'"><p class="reviewer-name">'+ 
       reviews[i].First_name + '</p></div><div class="col-sm-10 review-text"><p class="star-rating">' + 
       stars_html + '</p><p>' + 
