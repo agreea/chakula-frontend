@@ -91,6 +91,11 @@
       }
 
       function submit() {
+        if (!$('#comment').val()) {
+          $('.error-field').html('<p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">' +
+                                  '</span>' + 'Please comment on your experience.' + '</p>');
+          return;
+        }
           urlVars = getUrlVars();
           api_resp = api_call("review", {
                       method: "LeaveReview",
@@ -141,7 +146,7 @@
           <span class="glyphicon glyphicon-star grey-star" aria-hidden="true"></span>
         </button>
       </p>
-    <textarea class="form-control" rows="4" placeholder="Please tell us about your experience. You've got our undivided attention."></textarea>
+    <textarea class="form-control" id="comment" rows="4" placeholder="Please tell us about your experience. You've got our undivided attention."></textarea>
     <h4>Gratiuity</h4>
     <p>If Izzy's meal exceeded your expectations, please consider thanking her with gratuity.</p>
       <div class="btn-group" role="group" aria-label="...">
