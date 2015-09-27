@@ -101,7 +101,7 @@
                       method: "LeaveReview",
                       session: Cookies.get("session"),
                       rating: rating_state,
-                      comment: "Here's a test",
+                      comment: $('#comment').val(),
                       mealId: urlVars["Id"],
                       tipPercent: tip_state
                     });
