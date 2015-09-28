@@ -1,3 +1,6 @@
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
 .disclaimer-text {
     font-size: 10px;
     color: #555;
