@@ -221,5 +221,5 @@ function setupReviews(reviews) {
     //   getShortMonth(date.getMonth()+1) + ' ' +
     //   date.getDate() + ', ' + 
     //   date.getFullYear() +'</i></p></div></div>').appendTo('#reviews');
-  }
+  // }
 }
