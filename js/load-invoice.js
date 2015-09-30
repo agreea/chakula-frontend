@@ -2,7 +2,7 @@
 cards = Cookies.getJSON('cards')
 
 // set the card # and total price (assuming one seat)
-plate_price = Math.round(meal_data.Price*100)/100;
+var plate_price = Math.round(meal_data.Price*100)/100;
 $('#last-4').text("..." + cards[cards.length - 1]);
 $('#total').text("$" + plate_price);
 
