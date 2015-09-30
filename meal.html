@@ -31,9 +31,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script type="text/babel">
-    api_resp = getMeal();
-      if (api_resp.Success){
-        var reviewData = api_resp.Return.Host_reviews;
+        var reviewData = meal_data.Host_reviews;
         var ReviewBox = React.createClass({
           render: function() {
             return (
@@ -118,15 +116,6 @@
           <ReviewBox data={reviewData}/>,
           document.getElementById('reviews')
         );
-      }
-      //
-      /* - CommentBox
-          - CommentList
-            - Comment
-          - CommentForm
-      */
-      // To get started with this tutorial running your own code, simply remove
-      // the script tag loading scripts/example.js and start writing code here.
     </script>
 
     <!-- Bootstrap Core JavaScript -->

@@ -1,8 +1,9 @@
-// getMeal();
+var api_resp = getMeal();
+var meal_data;
+if (api_resp.Success) {
+  meal_data = api_resp.Return;
+}
 function setupMeal() {
-  api_resp = getMeal();
-  if (api_resp.Success) {
-    meal_data = api_resp.Return
     $('#meal-title').text(meal_data.Title);
     $('#meal-description').text(meal_data.Description);
     $('#host-name').text(meal_data.Host_name);
@@ -195,31 +196,4 @@ function getCards() {
   if (api_resp.Success) {
     Cookies.set('cards', api_resp.Return)
   }
-}
-
-function setupReviews(reviews) {
-  // if (reviews === undefined || reviews.length === 0) {
-  //   $('<p class="text-center">No reviews for this host yet!</p>').appendTo('#reviews');
-  //   return;
-  // }
-  // for (i in reviews) { 
-  //   stars_html = '';
-  //   date_ts = Date.parse(reviews[i].Date);
-  //   date = new Date(date_ts);
-  //   console.log("Here's the date: ")
-  //   console.log(date);
-  //   console.log("Here's the year: ")
-  //   console.log(date.getFullYear());
-  //   for (j = 0; j < reviews[i].Rating; j++) {
-  //     stars_html +='<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
-  //   }
-    // $('<div class="row"><div class="col-sm-2 text-center"><img class="img-circle guest-pic img-responsive" id="guest-pic" src="'+ 
-    //   reviews[i].Prof_pic_url +'"><p class="reviewer-name">'+ 
-    //   reviews[i].First_name + '</p></div><div class="col-sm-10 review-text"><p class="star-rating">' + 
-    //   stars_html + '</p><p>' + 
-    //   reviews[i].Comment + '</p><p><i>' + 
-    //   getShortMonth(date.getMonth()+1) + ' ' +
-    //   date.getDate() + ', ' + 
-    //   date.getFullYear() +'</i></p></div></div>').appendTo('#reviews');
-  // }
 }
