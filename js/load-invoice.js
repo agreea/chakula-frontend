@@ -1,4 +1,4 @@
-  console.log("I am outside");
+console.log("I am outside");
 
 $('#invoice').ready(function(){
   console.log("Did this work?? I am inside");
