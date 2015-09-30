@@ -44,15 +44,15 @@ $('#modal-body').find('#send-request-btn').click(function() {
 //   $('#total').text("$" + plate_price);
 
 //   // set up the +1 options; cap at the lesser of 4 or open seats
-//   var max_seats = 4;
-//   if (meal_data.Open_spots < 4) {
-//     max_seats = meal_data.Open_spots;
-//   }
-//   for (var i = 0; i < max_seats; i++) {
-//     $('<li><a onclick="setSeats(' +
-//       (i+1) + ')">' + 
-//       (i+1) + '</a></li>').appendTo('#seats-dropdown-options');
-//   }
+  var max_seats = 4;
+  if (meal_data.Open_spots < 4) {
+    max_seats = meal_data.Open_spots;
+  }
+  for (var i = 0; i < max_seats; i++) {
+    $('<li><a onclick="setSeats(' +
+      (i+1) + ')">' + 
+      (i+1) + '</a></li>').appendTo('#seats-dropdown-options');
+  }
 
 //   $('#modal-body').find('#send-request-btn').click(function() {
 //       console.log("Sending request for id: " + urlVars["Id"])
@@ -80,12 +80,12 @@ $('#modal-body').find('#send-request-btn').click(function() {
 //       }
 //   });
 
-// var seats = 1;
-// setSeats(count) {
-//     seats = count;
-//     $('#seats-dropdown').html(seats + ' <span class="caret"></span>');
-//     // set the dropdown text to the seat count
-//     // set the total price
-//     $('#total').text("$" + (plate_price * seats));
-// }
+var seats = 1;
+setSeats(count) {
+    seats = count;
+    $('#seats-dropdown').html(seats + ' <span class="caret"></span>');
+    // set the dropdown text to the seat count
+    // set the total price
+    $('#total').text("$" + (plate_price * seats));
+}
 
