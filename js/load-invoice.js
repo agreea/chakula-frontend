@@ -81,7 +81,7 @@ $('#modal-body').find('#send-request-btn').click(function() {
 //   });
 
 var seats = 1;
-setSeats(count) {
+function setSeats(count) {
     seats = count;
     $('#seats-dropdown').html(seats + ' <span class="caret"></span>');
     // set the dropdown text to the seat count
