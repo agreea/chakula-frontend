@@ -1,11 +1,33 @@
 // get the meal details
 cards = Cookies.getJSON('cards')
-// var subtotal = 
-$('#last-4').text("..." + cards[cards.length - 1])
-api_resp = getMeal();
-if (api_resp.Success) {
-  $('#total').text("$" + Math.round(meal_data.Price*100)/100);
+
+// set the card # and total price (assuming one seat)
+plate_price = Math.round(meal_data.Price*100)/100;
+$('#last-4').text("..." + cards[cards.length - 1]);
+$('#total').text("$" + plate_price);
+
+// set up the +1 options; cap at the lesser of 4 or open seats
+var max_seats = 4;
+if (meal_data.Open_spots < 4) {
+  max_seats = meal_data.Open_spots;
 }
+for (var i = 0; i < max_seats; i++) {
+  $('<li><a onclick="setSeats(' +
+    (i+1) + ')">' + 
+    (i+1) + '</a></li>').appendTo('#seats-dropdown-options');
+}
+
+// called whenever user selects a dropdown
+var seats = 1;
+setSeats(count) {
+  seats = count;
+  $('#seats-dropdown').html(seats + ' <span class="caret"></span>');
+  // set the dropdown text to the seat count
+  // set the total price
+  $('#total').text("$" + (plate_price * seats));
+}
+// for each 
+
 // get the meal id
 // get the meal's cost (in cents)
 // add 2.9% + 30 cents
@@ -17,6 +39,7 @@ $('#modal-body').find('#send-request-btn').click(function() {
                       method: "sendRequest",
                       session: Cookies.get("session"),
                       mealId: urlVars["Id"],
+                      seats: seats,
                       last4: 1234
                     });
     console.log(api_resp);

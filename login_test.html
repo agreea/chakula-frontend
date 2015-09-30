@@ -126,15 +126,15 @@
   </div>
   <div class="col-sm-2">
     <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Dropdown
+      <button class="btn btn-default dropdown-toggle" type="button" id="seats-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        1
         <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="seats-dropdown-options">
+        <li><a onclick="setSeats(1)">1</a></li>
+        <li><a onclick="setSeats(2)">2</a></li>
+        <li><a onclick="setSeats(3)">3</a></li>
+        <li><a onclick="setSeats(4)">4</a></li>
       </ul>
     </div>
     <p id="total"></p>
