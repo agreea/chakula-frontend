@@ -1,4 +1,7 @@
+  console.log("I am outside");
+
 $('#invoice').ready(function(){
+  console.log("Did this work?? I am inside");
   cards = Cookies.getJSON('cards')
   // set the card # and total price (assuming one seat)
   var plate_price = Math.round(meal_data.Price*100)/100;
