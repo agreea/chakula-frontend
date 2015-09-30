@@ -28,6 +28,130 @@
     <script src="js/api_call.js"></script>
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script src="js/load-meal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script type="text/babel">
+    var data = [
+      {
+        First_name: "Agree",
+        Prof_pic_url: "https://graph.facebook.com/10153547967605406/picture?width=200\u0026height=200",
+        Meal_id: 3,
+        Rating: 5,
+        Comment: "Izzy's dinner was perfect. The food was fresh and packed with flavor. Everybody left feeling stuffed. Who knew Cuban food was so filling? She was also a great host. Somehow the 10 person dinner still felt very intimate. I very very strongly recommend you try to get a seat at her next dinner. I know I will.",
+        Datets: "2015-09-27T16:05:35Z"
+      },
+      {
+        First_name: "Jonathan",
+        Prof_pic_url: "https://graph.facebook.com/10207062062125874/picture?width=200\u0026height=200",
+        Meal_id: 3,
+        Rating: 5,
+        Comment: "Terrific food and ambience!",
+        Datets: "2015-09-27T17:02:42Z"
+      },
+      {
+        First_name: "Rekha",
+        Prof_pic_url: "https://graph.facebook.com/10156043259845693/picture?width=200\u0026height=200",
+        Meal_id: 3,
+        Rating: 5,
+        Comment: "Izzy was kind enough to open up her home to both friends and strangers, and created a delicious and satisfying meal experience for us. The communal sharing of dishes, great conversation, and fantastic playlist makes me keen to return to one of Izzy's meals in the future! ",
+        Datets: "2015-09-27T21:01:07Z"
+      }
+    ];
+
+      var ReviewBox = React.createClass({
+        render: function() {
+          return (
+            <div className="reviewBox">
+              <h3 className="text-center">Reviews</h3>
+              <ReviewList data={this.props.data}/>
+              <ReviewForm />
+            </div>
+          );
+        }
+      });
+
+      var Star = React.createClass({
+        render: function() {
+          return (
+            <span className="glyphicon glyphicon-star"/>
+          );
+        }
+      });
+
+      var Review = React.createClass({
+        render: function() {
+          var stars = [];
+          for (var i = 0; i < this.props.rating; i++) {
+            stars.push(<Star/>);
+          }
+          return (
+            <div className="review row">
+              <div className="col-sm-2 text-center">
+                  <img className="img-circle guest-pic img-responsive" src={this.props.pic_url}/>
+                  <p className="reviewer-name">
+                    {this.props.first_name}
+                  </p>
+              </div>
+              <div className="col-sm-10 review-text">
+                <p className="star-rating">
+                  {stars}
+                </p>
+                {this.props.children}
+                <p>
+                  {this.props.date}
+                </p>
+              </div>
+            </div>
+          );
+        }
+      });
+
+      var ReviewList = React.createClass({
+        render: function() {
+          var reviewNodes = this.props.data.map(function (review) {
+            var date_ts = Date.parse(review.Datets);
+            var date = new Date(date_ts);
+            return (
+              <Review first_name= {review.First_name} 
+                      date= {getShortMonth(date.getMonth()+1) + ' ' +
+                            date.getDate() + ', ' + 
+                            date.getFullYear()} 
+                      pic_url= {review.Prof_pic_url}
+                      rating= {review.Rating}>
+                {review.Comment}
+              </Review>
+            );
+          });
+          return (
+            <div className="reviewList">
+              {reviewNodes}
+            </div>
+          );
+        }
+      });
+
+      var ReviewForm = React.createClass({
+        render: function() {
+          return (
+            <div className="reviewForm">
+            </div>
+          );
+        }
+      });
+      React.render(
+        <ReviewBox data={data}/>,
+        document.getElementById('reviews')
+      );
+      //
+      /* - CommentBox
+          - CommentList
+            - Comment
+          - CommentForm
+      */
+      // To get started with this tutorial running your own code, simply remove
+      // the script tag loading scripts/example.js and start writing code here.
+    </script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
@@ -95,6 +219,9 @@
   the FB.login() function when clicked.
 -->
 <div class="row">
+<div id="content">
+</div>
+
 <div id="nav">
 </div>
   <div class="col-sm-8 meal-pic-title-desc">
@@ -117,9 +244,7 @@
       Meal description.
     </p>
     <div class="row">
-      <h3 class="text-center">Reviews </h3>
       <div class="col-sm-12" id="reviews">
-
       </div>
     </div>
 
