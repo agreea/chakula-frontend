@@ -51,28 +51,36 @@
                                 });
         if (api_resp.Success) {
             // populate that shit
+            var Meal = React.createClass({
+                render: function() {
+                   return (
+                        <div class="card">
+                            <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">
+                                <div className="card-image">
+                                    <img className="img-responsive" src={'img/' + this.props.Pic}>
+                                    <span className="card-title">
+                                        {this.props.Title + ' - ' + this.props.Price}
+                                    </span>
+                                </div>
+                                <div className="card-action">
+                                    <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">7PM Saturday, October 3rd</a>
+                                    <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">{this.props.Open_spots + ' Seats Available'}</a>
+                                </div>
+                            </a>
+                        </div>            
+                   ); 
+                }
+            });
+
             var Meals = React.createClass({
               render: function() {
                 var mealNodes = this.props.data.map(function (meal) {
-                  var date_ts = Date.parse(review.Date);
-                  var date = new Date(date_ts);
                   return (
-                    <div className='card'>
-                        <a href={'http://yaychakula.com/meal.html?Id='+meal.Id} target='new_blank'>
-                            <div className='card-image'>
-                                <img className="img-responsive" src={'img/'+meal.Pics[0]}>
-                                <span className="card-title">{meal.Title + ' - ' + meal.Price}</span>
-                            </div>
-                            <div className='card-action'>
-                                <a href={'http://yaychakula.com/meal.html?Id='+meal.Id}>
-                                {"TIME TIME TIME"}
-                                <a/>
-                                <a href={'http://yaychakula.com/meal.html?Id='+meal.Id} target='new_blank'>
-                                    {meal.Open_spots + ' seats available'}
-                                </a>
-                            </div>
-                        </a>
-                    </div>
+                    <Meal Id={meal.Id} 
+                            Pic={meal.Pics[0]} 
+                            Price={meal.Price} 
+                            Title={meal.Title} 
+                            Open_spots={meal.Open_spots} />
                   );
                 });
                 return (
