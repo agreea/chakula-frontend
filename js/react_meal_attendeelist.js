@@ -17,15 +17,15 @@ var Attendees = React.createClass({
   render: function() {
     // get all of the attendees, including guests into an array
     var all_attendees = [];
-    this.props.data.map(function (attendee) {
-      console.log(attendee);
+    this.props.data.map(function (attendee_data) {
+      console.log(attendee_data);
       console.log(attendee.Seats);
-      var attendee = {name: attendee.First_name, 
-                    pic: attendee.Prof_pic_url};
+      var attendee = {name: attendee_data.First_name, 
+                    pic: attendee_data.Prof_pic_url};
       all_attendees.push(attendee);
-      if (attendee.Seats != 1) {
-        var attendee_guest = {name: attendee.First_name + "'s Guest",
-                           pic: attendee.Prof_pic_url};
+      if (attendee_data.Seats > 1) {
+        var attendee_guest = {name: attendee_data.First_name + "'s Guest",
+                           pic: attendee_data.Prof_pic_url};
         console.log(attendee_guest);
         all_attendees.push(attendee_guest);
       }
