@@ -4,7 +4,7 @@ var AttendeeList = React.createClass({
     if (this.props.data.length === 0) {
       return(
         <div className='col-xs-6 col-sm-4 col-md-3'>
-          <p> Be the first! </p>
+          <p>Be the first!</p>
         </div>
       );
     } else {
@@ -15,9 +15,8 @@ var AttendeeList = React.createClass({
 
 var Attendees = React.createClass({
   render: function() {
-    attendeeData = this.props.data
     // get all of the attendees, including guests into an array
-    all_attendees = attendeeData.map(function (attendee) {
+    all_attendees = this.props.data.map(function (attendee) {
       attendee = {name: attendee.First_name, 
                     pic: attendee.Prof_pic_url};
       all_attendees.push(attendee);
