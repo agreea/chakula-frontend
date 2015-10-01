@@ -19,6 +19,7 @@ var Attendees = React.createClass({
     var all_attendees = [];
     this.props.data.map(function (attendee) {
       console.log(attendee);
+      console.log(attendee.Seats);
       var attendee = {name: attendee.First_name, 
                     pic: attendee.Prof_pic_url};
       all_attendees.push(attendee);
