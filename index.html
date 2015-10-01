@@ -25,6 +25,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
         <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    <script src="js/api_call.js"></script>
 
     <script>
            $(document).ready(function(){
@@ -178,21 +179,6 @@
             return re.test(email);
         }
 
-        api_call = function(api_fragment, data) {
-            var response = $.ajax({
-                url: api_fragment,
-                method: 'POST',
-                data: data,
-                dataType: 'json',
-                async: false,
-              }).responseText;
-              var resp = JSON.parse(response);
-              if (resp.Success){
-                return resp.Return;
-              } else {
-                return undefined;
-              }
-        };
         function validate(){
           $("#result").text("");
           var userEmail = $("#email").val().toLowerCase();
@@ -203,7 +189,7 @@
             successMsg.innerHTML = "Welcome to Chakula! We'll be in touch soon";
             form.parentNode.replaceChild(successMsg, form);
             console.log("Valid email")
-            resp = api_call('api/kitchen', {
+            resp = api_call('kitchen', {
                 method: "Register",
                 email: userEmail,
                 host: checkedStatus
