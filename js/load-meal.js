@@ -9,6 +9,9 @@ function setupMeal() {
     $('#host-name').text(meal_data.Host_name);
     $('#host-pic').attr("src", meal_data.Host_pic);
     $('#open-spots').text(meal_data.Open_spots);
+    if (meal_data.Open_spots === 1) {
+      $('#open-spots-subtext').text('seat available')
+    }
     $('#host-bio').text(meal_data.Host_bio);
     // attendees = meal_data.Attendees;
     // for (i in attendees) {

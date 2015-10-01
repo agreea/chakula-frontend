@@ -35,7 +35,7 @@ var Attendees = React.createClass({
       return (
         <div className="col-xs-6 col-sm-4 col-md-3">
           <img className="img-responsive img-circle" src={attendee.pic}/>
-          <p>{attendee.name}</p>
+          <p className="text-center">{attendee.name}</p>
         </div>
       );
     });
