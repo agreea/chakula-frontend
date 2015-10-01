@@ -42,7 +42,7 @@ var Attendees = React.createClass({
     return (
       <div className="attendees">
         <h3 className="text-center">Attendees</h3>
-        <div className="attendees-list">
+        <div className="attendees-list row">
           {attendee_profiles}
         </div>
       </div>
