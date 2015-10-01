@@ -19,12 +19,13 @@ var Attendees = React.createClass({
     var all_attendees = [];
     this.props.data.map(function (attendee) {
       console.log(attendee);
-      attendee = {name: attendee.First_name, 
+      var attendee = {name: attendee.First_name, 
                     pic: attendee.Prof_pic_url};
       all_attendees.push(attendee);
       if (attendee.Seats > 1) {
-        attendee_guest = {name: attendee.First_name + "'s Guest",
+        var attendee_guest = {name: attendee.First_name + "'s Guest",
                            pic: attendee.Prof_pic_url};
+        console.log(attendee_guest);
         all_attendees.push(attendee_guest);
       }
     });
