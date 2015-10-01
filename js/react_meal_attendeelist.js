@@ -18,6 +18,7 @@ var Attendees = React.createClass({
     // get all of the attendees, including guests into an array
     var all_attendees = [];
     this.props.data.map(function (attendee) {
+      console.log(attendee);
       attendee = {name: attendee.First_name, 
                     pic: attendee.Prof_pic_url};
       all_attendees.push(attendee);
