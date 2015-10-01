@@ -23,7 +23,7 @@ var Attendees = React.createClass({
       var attendee = {name: attendee.First_name, 
                     pic: attendee.Prof_pic_url};
       all_attendees.push(attendee);
-      if (attendee.Seats > 1) {
+      if (attendee.Seats != 1) {
         var attendee_guest = {name: attendee.First_name + "'s Guest",
                            pic: attendee.Prof_pic_url};
         console.log(attendee_guest);
