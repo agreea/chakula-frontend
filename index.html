@@ -43,7 +43,7 @@
             var Meal = React.createClass({
                 render: function() {
                    return (
-                        <div class="card">
+                        <div className="card">
                             <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">
                                 <div className="card-image">
                                     <img className="img-responsive" src={'img/' + this.props.Pic}/>
@@ -66,7 +66,7 @@
                 var mealNodes = this.props.data.map(function (meal) {
                   return (
                     <Meal Id={meal.Id} 
-                            Pic={meal.Pics[0]} 
+                            Pic={meal.Pics[0].Name} 
                             Price={meal.Price} 
                             Title={meal.Title} 
                             Open_spots={meal.Open_spots} />
