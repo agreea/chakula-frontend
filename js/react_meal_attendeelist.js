@@ -1,7 +1,7 @@
 var attendees_data = meal_data.Attendees;
 var AttendeeList = React.createClass({
   render: function() {
-    if (this.props.attendees.length === 0) {
+    if (this.props.data.length === 0) {
       return(
         <div className='col-xs-6 col-sm-4 col-md-3'>
           <p> Be the first! </p>
