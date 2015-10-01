@@ -8,9 +8,8 @@ var AttendeeList = React.createClass({
         </div>
       );
     } else {
-      <Attendees data={this.props.data}/>
+      return (<Attendees data={this.props.data}/>);
     }
-    // if 
   }
 });
 
