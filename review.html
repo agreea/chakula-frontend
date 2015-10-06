@@ -58,9 +58,9 @@
                       session: Cookies.get("session"),
                       mealId: urlVars["Id"],
                       });
-          if (api_resp.Success){
+          if (api_resp.Success) {
             meal_data = api_resp.Return;
-            $('#title').text("Review"+ meal_data.Host_name "'s" + meal_data.Title);
+            $('#title').text("Review" + meal_data.Host_name + "'s" + meal_data.Title);
             $('#gratuity-message').text("If" + meal_data.Host_name + "'s meal exceeded your expectations, please consider thanking her with gratuity.");
             $('#host-pic').attr("src", meal_data.Host_pic);
             $('#comment').attr("placeholder", "Please tell us about your experience. Would you recommend " + meal_data.Host_name + "'s to others?");
