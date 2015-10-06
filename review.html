@@ -51,6 +51,20 @@
                         '<fb:login-button class="fb-login" scope="public_profile,email"' + 
                         'onlogin="checkLoginState();"></fb:login-button></div></div>');
           $('#review-ui').hide();
+        } else {
+          urlVars = getUrlVars();
+          api_resp = api_call("meal", {
+                      method: "GetMeal",
+                      session: Cookies.get("session"),
+                      mealId: urlVars["Id"],
+                      });
+          if (api_resp.Success){
+            meal_data = api_resp.Return;
+            $('#title').text("Review"+ meal_data.Host_name "'s" + meal_data.Title);
+            $('#gratuity-message').text("If" + meal_data.Host_name + "'s meal exceeded your expectations, please consider thanking her with gratuity.");
+            $('#host-pic').attr("src", meal_data.Host_pic);
+            $('#comment').attr("placeholder", "Please tell us about your experience. Would you recommend " + meal_data.Host_name + "'s to others?");
+          }
         }
       });
     </script>
@@ -93,8 +107,12 @@
       function submit() {
         if (!$('#comment').val()) {
           $('.error-field').html('<p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">' +
-                                  '</span>' + 'Please comment on your experience.' + '</p>');
+            '</span>' + 'Please comment on your experience.' + '</p>');
           return;
+        } else if (rating_state === 0) {
+          $('.error-field').html('<p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">' +
+            '</span>' + 'Please rate your experience on a scale of 1 - 5 stars.' + '</p>');
+
         }
           urlVars = getUrlVars();
           api_resp = api_call("review", {
@@ -122,8 +140,8 @@
   </div>
   <div class="row">
     <div class="text-center">
-      <h3>Review Isabel's Cuban Paladar</h3>
-      <img class="img-circle img-responsive pic" src="https://graph.facebook.com/10154160244824409/picture?width=200&height=200"></img>
+      <h3 id="title"></h3>
+      <img class="img-circle img-responsive pic" id="host-pic" src="https://graph.facebook.com/10154160244824409/picture?width=200&height=200"></img>
     </div>
     <div class="col-xs-10 col-xs-offset-1 text-center" id="fb">
     </div>
@@ -150,7 +168,7 @@
       </p>
     <textarea class="form-control" id="comment" rows="4" placeholder="Please tell us about your experience. Would you recommend Izzy as a host to others?"></textarea>
     <h4>Gratiuity</h4>
-    <p>If Izzy's meal exceeded your expectations, please consider thanking her with gratuity.</p>
+    <p id="gratuity-message"></p>
       <div class="btn-group" role="group" aria-label="...">
         <button type="button" class="btn btn-tip" id="tip0" onclick="setTip(0)">0</button>
         <button type="button" class="btn btn-tip" id="tip1" onclick="setTip(1)">10%</button>
