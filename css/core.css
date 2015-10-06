@@ -56,6 +56,11 @@ form {
     padding-top: 60px;
 }
 
+.glyphicon {
+    line-height: 1.5;
+    top: 0;
+}
+
 .brand-btn {
     border-radius: 0;
     text-transform: uppercase;
