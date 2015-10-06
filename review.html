@@ -61,7 +61,7 @@
           if (api_resp.Success) {
             meal_data = api_resp.Return;
             $('#title').text("Review " + meal_data.Host_name + "'s " + meal_data.Title);
-            $('#gratuity-message').text("If " + meal_data.Host_name + "'s meal exceeded your expectations, please consider thanking them with gratuity.");
+            $('#gratuity-message').text("If " + meal_data.Host_name + "'s meal exceeded your expectations, please consider showing thanks with gratuity.");
             $('#host-pic').attr("src", meal_data.Host_pic);
             $('#comment').attr("placeholder", "Please tell us about your experience. Would you recommend " + meal_data.Host_name + "'s meals to others?");
           }
@@ -166,7 +166,7 @@
           <span class="glyphicon glyphicon-star grey-star" aria-hidden="true"></span>
         </button>
       </p>
-    <textarea class="form-control" id="comment" rows="4" placeholder="Please tell us about your experience. Would you recommend Izzy as a host to others?"></textarea>
+    <textarea class="form-control" id="comment" rows="4"></textarea>
     <h4>Gratuity</h4>
     <p id="gratuity-message"></p>
       <div class="btn-group" role="group" aria-label="...">
