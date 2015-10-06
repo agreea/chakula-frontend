@@ -107,11 +107,11 @@
       function submit() {
         if (!$('#comment').val()) {
           $('.error-field').html('<p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">' +
-            '</span>' + 'Please comment on your experience.' + '</p>');
+            '</span>' + ' Please comment on your experience.' + '</p>');
           return;
         } else if (rating_state === 0) {
           $('.error-field').html('<p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">' +
-            '</span>' + 'Please rate your experience on a scale of 1 - 5 stars.' + '</p>');
+            '</span>' + ' Please rate your experience on a scale of 1 - 5 stars.' + '</p>');
 
         }
           urlVars = getUrlVars();
