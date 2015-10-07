@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Chakula - Better than Restaurants</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/core.css" rel="stylesheet">
+    <link href="css/meal.css" rel="stylesheet">
+    <link href="css/create_meal.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,900' rel='stylesheet' type='text/css'>
+    <script src="js/jquery.js"></script>
+    <script src="js/js-cookie.js"></script>
+    <script src="js/api_call.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="js/load-meal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script type="text/babel" src="js/react_meal_reviewlist.js"></script>
+    <script type="text/babel" src="js/react_meal_attendeelist.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      urlVars = getUrlVars();
+      // on page load, check if you have a cookie for the request
+      // if you do, check with the server if you are attending or not attending this meal
+           $(document).ready(function(){
+                setupMeal();
+                $('#nav').load('include/nav_bar.html');
+                id = urlVars["Id"];
+                if(Cookies.get("session") === undefined) {
+                  console.log("No session");
+                  $('#signin-dropdown').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in</a>');
+                } else if(Cookies.getJSON("cards") === undefined || 
+                          Cookies.getJSON("cards").length === 0 || 
+                          Cookies.getJSON("cards")[0] === null) {
+                  getCards();
+                  if(Cookies.getJSON("cards") === undefined ||
+                      Cookies.getJSON("cards").length === 0 || 
+                      Cookies.getJSON("cards")[0] === null) {
+                    console.log("No card");
+                    $('#modal-body').load('include/stripe_form.html');
+                  }
+                } else if(Cookies.getJSON("requests") === undefined || Cookies.getJSON("requests")[id] === undefined) {
+                  $('#modal-body').load('include/request_invoice.html');
+                } else {
+                  // disable the request button, 
+                  // show that the user has requested the meal
+                  // (very soon) show that status of the request
+                }
+                if(Cookies.get("session") != undefined) {
+                  console.log("there was a session");
+                  // todo: show name and signout in navbar
+                }
+           });
+           // var cards = [1234, 3333, 4444, 5555]
+
+           //  Cookies.set('cc', cards)
+           //  if (cards === undefined) {
+           //      console.log("There were no cards")
+           //    }
+    </script>
+    <script src="js/fb_login.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-66943306-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<div id="nav">
+</div>
+  <div class="col-sm-8 meal-pic-title-desc">
+    <div class="photos"> 
+      <img class="upload-img img-responsive" src=""/>
+      <div id="carousel-example-generic" class="carousel slide text-center" data-ride="carousel" data-interval="false">
+      <!-- Wrapper for slides -->
+        <div class="carousel-inner" id="carousel-pics" role="listbox">
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <h2><input class="form-control" id="title" type="text" placeholder="Give your meal a snazzy title"/></h2>
+    <p class="meal-description" id="meal-description">
+        <textarea class="form-control" id="description" type="text" placeholder="Describe your meal. What's in it? What inspired you to make it?"></textarea>
+    </p>
+    <div class="row">
+      <div class="col-sm-12" id="reviews">
+      </div>
+    </div>
+
+  </div>
+  <div class="col-sm-4 info-col">
+    <div class="text-center vital-info-row">
+      <div class="col-sm-4">
+        <h3 id="open-spots">
+                    <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" id="seats" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              2
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a onclick="setGuests(2)">2</a></li>
+              <li><a onclick="setGuests(3)">3</a></li>
+              <li><a onclick="setGuests(4)">4</a></li>
+              <li><a onclick="setGuests(5)">5</a></li>
+              <li><a onclick="setGuests(6)">6</a></li>
+              <li><a onclick="setGuests(7)">7</a></li>
+              <li><a onclick="setGuests(8)">8</a></li>
+              <li><a onclick="setGuests(9)">9</a></li>
+              <li><a onclick="setGuests(10)">10</a></li>
+              <li><a onclick="setGuests(11)">11</a></li>
+              <li><a onclick="setGuests(12)">12</a></li>
+            </ul>
+          </div>
+
+        </h3>
+        <p class="vital-subtext" id="open-spots-subtext">seats available</p>
+      </div>
+      <div class="col-sm-4">
+        <h3 id="meal-time">7:00PM</h3>
+        <p class="vital-subtext" id="meal-time-subtext">dinner on Sept. 19</p>
+      </div>
+      <div class="col-sm-4">
+        <h3 id="time-left">7</h3>
+        <p class="vital-subtext" id="time-left-subtext">days til RSVPs close</p>
+      </div>
+    </div>
+      <button type="button" class="brand-btn btn-info btn-lg btn" id="request-meal-btn" data-toggle="modal" data-target="#request-modal">Request Meal</button>
+<!--  Start host pic/name row -->
+    <p class="text-center"> Hosted by </p>
+    <img class="img-circle host-pic" id="host-pic"src="https://www.bludot.com/media/catalog/product/cache/1/image/428x/9df78eab33525d08d6e5fb8d27136e95/p/c/pc_grey_blue_11_2_1.png">
+    <h3 class="host-name text-center" id="host-name">Loading Host</h3>
+    <div class="col-sm-12">
+      <p id="host-bio"></p>
+    </div>
+    <div class="row text-center">
+      <h4>Attending</h4>
+      <div id="attendees">
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
