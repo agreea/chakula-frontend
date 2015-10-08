@@ -44,6 +44,15 @@ var pic_preview_urls = [];
 var formData = new FormData();
 var xhr = new XMLHttpRequest();
 xhr.open('POST', 'api/meal', true);
+xhr.onload = function () {
+  console.log(xhr.responseText)
+  if (xhr.status === 200) {
+        // File(s) uploaded.
+  } else {
+    alert('An error occurred!');
+  }
+};
+
 var price = 0;
 var seats = 2;
 var title = '';
@@ -86,15 +95,6 @@ function setGuests(count) {
   $('#seats').html(count + ' <span class="caret"></span>');
   $('#payout-val').text('$' + seats * price);
 }
-
-xhr.onload = function () {
-      if (xhr.status === 200) {
-        // File(s) uploaded.
-        console.log(xhr.responseText)
-      } else {
-        alert('An error occurred!');
-      }
-};
 
 var Pic = React.createClass({
   render: function() {
