@@ -36,12 +36,40 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.datetimepicker.full.min.js"></script>
-
+    <script>
+      var formData = new FormData();
+      var price = 0;
+      var seats = 2;
+      var title = '';
+      var description = '';
+      var starts = 0;
+      var rsvpBy = 0;
+      var saveData = function(){
+        formData.append('method', 'saveMealDraft');
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('starts', starts);
+        formData.append('rsvpBy',rsvpBy);
+        formData.append('price', price);
+        formData.append('seats', seats);
+        var urlVars = getUrlVars();
+        console.log('starts: ' + starts);
+        console.log('rsvpBy: ' + rsvpBy);
+        console.log('seats: ' + seats);
+        console.log('price: ' + price);
+        console.log('title: ' + title);
+        console.log('description: ' + description);
+        var api_resp = api_call('meal', {method: 'saveMealDraft', formdata: formData});
+        console.log(api_resp);
+        // do something
+        // do something else
+        // do another fucking thing
+      }
+    </script>
     <script type="text/babel">
 // Documentation for the datepicker: http://xdsoft.net/jqplugins/datetimepicker/
 
 var pic_preview_urls = [];
-var formData = new FormData();
 var xhr = new XMLHttpRequest();
 xhr.open('POST', 'api/meal', true);
 xhr.onload = function () {
@@ -53,12 +81,6 @@ xhr.onload = function () {
   }
 };
 
-var price = 0;
-var seats = 2;
-var title = '';
-var description = '';
-var starts = 0;
-var rsvpBy = 0;
 Date.parseDate = function(input, format){
   return moment(input,format).toDate();
 };
@@ -160,27 +182,7 @@ function setListeners() {
     console.log("We are dealing w seats: " + $(this).text());
     setGuests($(this).text());
   });
-  $('#save').click(function(){
-    formData.append('method', 'saveMealDraft');
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('starts', starts);
-    formData.append('rsvpBy',rsvpBy);
-    formData.append('price', price);
-    formData.append('seats', seats);
-    console.log('starts: ' + starts);
-    console.log('rsvpBy: ' + rsvpBy);
-    console.log('seats: ' + seats);
-    console.log('price: ' + price);
-    console.log('title: ' + title);
-    console.log('description: ' + description);
-    var urlVars = getUrlVars();
-    var api_resp = api_call('meal', {method: 'saveMealDraft', formdata: formData});
-    console.log(api_resp);
-    // do something
-    // do something else
-    // do another fucking thing
-  });
+  $('#save').click(saveData());
   $('#title').change(function(){
     title = $(this).val();
   });
