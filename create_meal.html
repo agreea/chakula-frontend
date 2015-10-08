@@ -48,7 +48,7 @@
     <script type="text/babel">
 // Documentation for the datepicker: http://xdsoft.net/jqplugins/datetimepicker/
 
-var pic_preview_urls = [];
+var pics = [];
 var xhr = new XMLHttpRequest();
 xhr.open('POST', 'api/meal', true);
 xhr.onload = function () {
@@ -136,11 +136,10 @@ function readURL(input) {
         if (!file.type.match('image.*')) {
           continue;
         }
-        formData.append('photos[]', file, file.name);
         var reader = new FileReader();
         reader.onload = function (e) {
-          pic_preview_urls.push(e.target.result);
-          render(pic_preview_urls);
+          pics.push(e.target.result);
+          render(pics);
         }
         reader.readAsDataURL(file);
       }
@@ -162,6 +161,17 @@ function setListeners() {
     setGuests($(this).text());
   });
   $('#save').click(function(){
+    api_resp = api_call('saveMealDraft', 
+      {
+        method: 'saveMealDraft',
+        title: title,
+        description: description,
+        starts: starts,
+        rsvpBy: rsvpBy,
+        price: price,
+        seats: seats,
+        pics: pics
+      });
         formData.append('method', 'saveMealDraft');
         formData.append('title', title);
         formData.append('description', description);
@@ -175,7 +185,8 @@ function setListeners() {
         console.log('price: ' + price);
         console.log('title: ' + title);
         console.log('description: ' + description);
-        xhr.send(formData);
+        console.log('pics: ' + pics);
+        // xhr.send(formData);
         // do something
         // do something else
         // do another fucking thing
