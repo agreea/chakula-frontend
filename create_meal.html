@@ -174,9 +174,8 @@ function setListeners() {
     console.log('price: ' + price);
     console.log('title: ' + title);
     console.log('description: ' + description);
-
-    console.log(formData);
-    xhr.send(formData);
+    api_resp = api_call('meal', {method: 'saveMealDraft', formdata: formData});
+    console.log(api_resp);
     // do something
     // do something else
     // do another fucking thing
