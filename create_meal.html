@@ -161,7 +161,7 @@ function setListeners() {
     setGuests($(this).text());
   });
   $('#save').click(function(){
-    formData.append('method', 'saveDraft');
+    formData.append('method', 'saveMealDraft');
     formData.append('title', title);
     formData.append('description', description);
     formData.append('starts', starts);
