@@ -52,7 +52,7 @@ var pic_preview_urls = [];
 var xhr = new XMLHttpRequest();
 xhr.open('POST', 'api/meal', true);
 xhr.onload = function () {
-  console.log(xhr.responseText)
+  console.log(xhr.responseText);
   if (xhr.status === 200) {
         // File(s) uploaded.
   } else {
@@ -169,15 +169,13 @@ function setListeners() {
         formData.append('rsvpBy',rsvpBy);
         formData.append('price', price);
         formData.append('seats', seats);
-        var urlVars = getUrlVars();
         console.log('starts: ' + starts);
         console.log('rsvpBy: ' + rsvpBy);
         console.log('seats: ' + seats);
         console.log('price: ' + price);
         console.log('title: ' + title);
         console.log('description: ' + description);
-        var api_resp = api_call('meal', {method: 'saveMealDraft', $(formData).serialize()});
-        console.log(api_resp);
+        xhr.send(formData);
         // do something
         // do something else
         // do another fucking thing
