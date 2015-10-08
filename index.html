@@ -34,57 +34,7 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-    <script type="text/babel">
-        var api_resp = api_call("meal", {
-                                  method: "getUpcomingMeals",
-                                });
-        if (api_resp.Success) {
-            // populate that shit
-            var Meal = React.createClass({
-                render: function() {
-                   return (
-                        <div className="card">
-                            <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">
-                                <div className="card-image">
-                                    <img className="img-responsive" src={'img/' + this.props.Pic}/>
-                                    <span className="card-title">
-                                        {this.props.Title + ' - ' + this.props.Price}
-                                    </span>
-                                </div>
-                                <div className="card-action">
-                                    <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">7PM Saturday, October 3rd</a>
-                                    <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">{this.props.Open_spots + ' Seats Available'}</a>
-                                </div>
-                            </a>
-                        </div>            
-                   ); 
-                }
-            });
-
-            var Meals = React.createClass({
-              render: function() {
-                var mealNodes = this.props.data.map(function (meal) {
-                  return (
-                    <Meal Id={meal.Id} 
-                            Pic={meal.Pics[0].Name} 
-                            Price={meal.Price} 
-                            Title={meal.Title} 
-                            Open_spots={meal.Open_spots} />
-                  );
-                });
-                return (
-                  <div className="Meals">
-                    {mealNodes}
-                  </div>
-                );
-              }
-            });
-            React.render(
-              <Meals data={api_resp.Return}/>,
-              document.getElementById('meals')
-            );
-        }
-    </script>
+    <script type="text/babel" src="js/react_upcoming_meals.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

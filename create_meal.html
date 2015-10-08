@@ -24,6 +24,9 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,400italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,900' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/js-cookie.js"></script>
     <script src="js/api_call.js"></script>
@@ -32,29 +35,189 @@
     <script src="js/create_meal.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.datetimepicker.full.min.js"></script>
 
+    <script type="text/babel">
+// Documentation for the datepicker: http://xdsoft.net/jqplugins/datetimepicker/
+
+var pic_preview_urls = [];
+var formData = new FormData();
+var xhr = new XMLHttpRequest();
+xhr.open('POST', 'api/meal', true);
+var price = 0;
+var seats = 2;
+var title = '';
+var description = '';
+var starts = 0;
+var rsvpBy = 0;
+Date.parseDate = function(input, format){
+  return moment(input,format).toDate();
+};
+
+Date.prototype.dateFormat = function(format){
+  return moment(this).format(format);
+};
+
+ $(document).ready(function(){
+  $('#nav').load('include/nav_bar.html');
+  $('#guests-pay').text('Guests will pay: $' + price * 1.28);
+  $('#payout-val').text('$' + price * seats);
+  initDatepickers();
+  setListeners();
+  var session = Cookies.get('session');
+    if (session === undefined || session === "") {
+    // $('.meal-data').hide();
+    } else {
+      $('#fb').hide();
+      api_resp = getHostData();
+      if (api_resp.Success) {
+        console.log("success");
+        // // populate the host data fields
+        // setupHostData(api_resp.Return);
+      } else {
+        console.log("failure");
+        // show an error message or fb login
+      }
+    }
+  });
+
+function setGuests(count) {
+  seats = count;
+  $('#seats').html(count + ' <span class="caret"></span>');
+  $('#payout-val').text('$' + seats * price);
+}
+
+xhr.onload = function () {
+      if (xhr.status === 200) {
+        // File(s) uploaded.
+        console.log(xhr.responseText)
+      } else {
+        alert('An error occurred!');
+      }
+};
+
+var Pic = React.createClass({
+  render: function() {
+    return (
+        <img className="img-responsive pic" src={this.props.pic_url}/>
+    );
+    }
+  });
+
+var PicList = React.createClass({
+  render: function() {
+    var picNodes = this.props.data.map(function (picUrl) {
+      return (
+        <div className="col-sm-4 pic-card">
+          <Pic pic_url={picUrl}></Pic>
+          <input className="form-control" type="text" placeholder="Caption?"></input>
+        </div>
+      );
+    });
+    return (
+      <div className="picList row">
+        {picNodes}
+      </div>
+    );
+  }
+});
+
+function render(pic_preview_urls) {
+    React.render(
+      <PicList data={pic_preview_urls} />,
+      document.getElementById('pic-grid'));
+}
+
+function readURL(input) {
+      var files = input.files;
+      for (var i in files) {
+        var file = files[i]
+        if (!file.type.match('image.*')) {
+          continue;
+        }
+        formData.append('photos[]', file, file.name);
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          pic_preview_urls.push(e.target.result);
+          render(pic_preview_urls);
+        }
+        reader.readAsDataURL(file);
+      }
+}
+
+function setListeners() {
+  $('#price').change(function(){
+    price = $(this).val();
+    console.log(price);
+    $('#payout-val').text('$' + price * seats);
+    $('#guests-pay').text('Guests will pay: $' + price * 1.28);
+  });
+  $("#img-upload").change(function(){
+    console.log("How about now?");
+    readURL(this);
+  });
+  $('.seat').click(function(){
+    console.log("We are dealing w seats: " + $(this).text());
+    setGuests($(this).text());
+  });
+  $('#save').click(function(){
+    formData.append('method', 'saveDraft');
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('starts', starts);
+    formData.append('rsvpBy',rsvpBy);
+    formData.append('price', price);
+    formData.append('seats', seats);
+    console.log('starts: ' + starts);
+    console.log('rsvpBy: ' + rsvpBy);
+    console.log('seats: ' + seats);
+    console.log('price: ' + price);
+    console.log('title: ' + title);
+    console.log('description: ' + description);
+
+    console.log(formData);
+    xhr.send(formData);
+    // do something
+    // do something else
+    // do another fucking thing
+  });
+  $('#title').change(function(){
+    title = $(this).val();
+  });
+  $('#description').change(function(){
+    description = $(this).val();  
+  });
+}
+
+function initDatepickers() {
+  $('#rsvp-by-time').datetimepicker({
+    format:'MM.DD.YYYY h:mm a',
+    formatTime:'h:mm a',
+    formatDate:'DD.MM.YYYY',
+    inline:false,
+    lang:'en',
+    onChangeDateTime:function(dp,$input){
+      var date_time = Date.parseDate($input.val(), 'MM.DD.YYYY h:mm a');
+      starts = date_time.getTime();
+      console.log(starts);
+    }
+  });
+  $('#starts-time').datetimepicker({
+    format:'MM.DD.YYYY h:mm a',
+    formatTime:'h:mm a',
+    formatDate:'DD.MM.YYYY',
+    inline:false,
+    lang:'en',
+    onChangeDateTime:function(dp,$input){
+      var date_time = Date.parseDate($input.val(), 'MM.DD.YYYY h:mm a');
+      rsvpBy = date_time.getTime();
+      console.log(rsvpBy);
+    }
+  });
+}
+    </script>
     <script type="text/javascript">
       urlVars = getUrlVars();
-      // on page load, check if you have a cookie for the request
-      // if you do, check with the server if you are attending or not attending this meal
-           $(document).ready(function(){
-                $('#nav').load('include/nav_bar.html');
-                var session = Cookies.get('session');
-                if (session === undefined || session === "") {
-                  // $('.meal-data').hide();
-                } else {
-                  $('#fb').hide();
-                  api_resp = getHostData();
-                  if (api_resp.Success) {
-                    console.log("success");
-                    // populate the host data fields
-                    setupHostData(api_resp.Return);
-                  } else {
-                    console.log("failure");
-                    // show an error message or fb login
-                  }
-                }
-           });
     </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -90,70 +253,70 @@
   </div>
   <div class="meal-data">
           <h2 class="text-center">Your Meal</h2>
-      <div class="photos"> 
-      <img class="upload-img img-responsive" src=""/>
-      <div id="carousel-example-generic" class="carousel slide text-center" data-ride="carousel" data-interval="false">
-      <!-- Wrapper for slides -->
-        <div class="carousel-inner" id="carousel-pics" role="listbox">
-        </div>
-        <!-- Controls -->
-      </div>
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-        <button class="add-photo-btn btn">GO</button>
-        <form class="upload-img-form">
-          <input class="form-control" type="file" accept="image/jpeg, image/png" multiple />
-        </form>
-      </div>
-
     <div class="col-md-8 col-md-offset-2">
-        <input class="form-control" id="title" type="text" placeholder="What's the title of your meal? Make it snazzy"/>
-        <textarea class="form-control" id="description" type="text" placeholder="Describe your meal. What's in it? What inspired you to make it?"></textarea>
-        <div class="input-group">
-          <span class="input-group-addon">$</span>
-          <input class="form-control" id="price" type="text" placeholder="Price per plate (guests will pay 28% more)">
-        </div>
+        <input class="form-control meal-title" id="title" type="text" placeholder="Give your meal a snazzy title."/>
+        <textarea class="form-control" id="description" type="text" rows="8" placeholder="Describe your meal. What's in it? What inspired you to make it?"></textarea>
         <div class="row">
-          <h4>Guest Seats</h4>
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" id="seats" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              2
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a onclick="setGuests(2)">2</a></li>
-              <li><a onclick="setGuests(3)">3</a></li>
-              <li><a onclick="setGuests(4)">4</a></li>
-              <li><a onclick="setGuests(5)">5</a></li>
-              <li><a onclick="setGuests(6)">6</a></li>
-              <li><a onclick="setGuests(7)">7</a></li>
-              <li><a onclick="setGuests(8)">8</a></li>
-              <li><a onclick="setGuests(9)">9</a></li>
-              <li><a onclick="setGuests(10)">10</a></li>
-              <li><a onclick="setGuests(11)">11</a></li>
-              <li><a onclick="setGuests(12)">12</a></li>
-            </ul>
+          <div class="col-sm-6">
+            <h4>Price per plate</h4>
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <input class="form-control" id="price" type="text" placeholder="Price per plate (guests will pay 28% more)">
+            </div>
+            <p id="guests-pay">Guests will pay: $0</p>
+           </div> 
+          <div class="col-sm-4">
+            <h4>Guest Seats</h4>
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" id="seats" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                2
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a class='seat'>2</a></li>
+                <li><a class='seat'>3</a></li>
+                <li><a class='seat'>4</a></li>
+                <li><a class='seat'>5</a></li>
+                <li><a class='seat'>6</a></li>
+                <li><a class='seat'>7</a></li>
+                <li><a class='seat'>8</a></li>
+                <li><a class='seat'>9</a></li>
+                <li><a class='seat'>10</a></li>
+                <li><a class='seat'>11</a></li>
+                <li><a class='seat'>12</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <h4>Max Pay</h4>
+            <p id="payout-val">$0</p>
           </div>
         </div>
-
       <div class="row">
-        <h4>Meal Start Time</h4>
-        <input class="form-control" id="starts-time" type="text" size="20" placeholder="Start time?"/>
-      </div>
-      <div class="row">
-        <h4>RSVP By Time</h4>
-        <input class="form-control" id="rsvp-by-time" type="text" size="40" placeholder="Rsvp by?"/>
+        <div class="col-sm-6">
+          <h4>Meal Start Time</h4>
+          <input class="form-control" id="starts-time" type="text" size="20" placeholder="Start time?"/>
+        </div>
+        <div class="col-sm-6">
+          <h4>RSVP By Time</h4>
+          <input class="form-control" id="rsvp-by-time" type="text" size="40" placeholder="Rsvp by?"/>
+        </div>
       </div>
       <ul class="error-field" id="error-field">
       </ul>
-      <button class="brand-btn btn-info btn-lg btn" id="Save" type="button">Save</button>
-      <button class="brand-btn btn-info btn-lg btn" id="Publish" type="button">Publish</button>
+      <div class="upload-img-form">
+        <div class="fileUpload btn btn-primary">
+          <span>Upload</span>
+          <input class="upload" id="img-upload" type="file" multiple/>
+        </div>
+      </div>
+      <div class="photos">
+        <div class="pic-grid" id="pic-grid">
+        </div>
+      </div>
+
+      <button class="brand-btn btn-info btn-lg btn" id="save" type="button">Save</button>
+      <button class="brand-btn btn-info btn-lg btn" id="publish" type="button">Publish</button>
     </div>
   </div> 
     <!-- Footer -->
@@ -167,12 +330,4 @@
     </footer>
 
 </body>
-<script src="js/jquery.datetimepicker.full.min.js"></script>
-<script>
-  $('#rsvp-by-time, #starts-time').datetimepicker({
-    format:'d.m.Y H:i',
-    inline:true,
-    lang:'en'
-  });
-</script> 
 </html>
