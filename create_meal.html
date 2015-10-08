@@ -182,7 +182,7 @@ function setListeners() {
     console.log("We are dealing w seats: " + $(this).text());
     setGuests($(this).text());
   });
-  $('#save').click(saveData());
+  $('#save').click(saveData);
   $('#title').change(function(){
     title = $(this).val();
   });
