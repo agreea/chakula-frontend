@@ -161,8 +161,7 @@ function setListeners() {
     setGuests($(this).text());
   });
   $('#save').click(function(){
-    var api_resp = api_call('meal', 
-      {
+    var data = {
         method: 'saveMealDraft',
         title: title,
         description: description,
@@ -171,20 +170,18 @@ function setListeners() {
         price: price,
         seats: seats,
         pics: pics
-      });
+      };
+    var api_resp = api_call('meal', 
+      );
+    console.log(data);
       console.log(api_resp);
-        formData.append('seats', seats);
-        console.log('starts: ' + starts);
-        console.log('rsvpBy: ' + rsvpBy);
-        console.log('seats: ' + seats);
-        console.log('price: ' + price);
-        console.log('title: ' + title);
-        console.log('description: ' + description);
-        console.log('pics: ' + pics);
-        // xhr.send(formData);
-        // do something
-        // do something else
-        // do another fucking thing
+        // console.log('starts: ' + starts);
+        // console.log('rsvpBy: ' + rsvpBy);
+        // console.log('seats: ' + seats);
+        // console.log('price: ' + price);
+        // console.log('title: ' + title);
+        // console.log('description: ' + description);
+        // console.log('pics: ' + pics);
       }
 );
   $('#title').change(function(){
