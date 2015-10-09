@@ -169,7 +169,7 @@ function setListeners() {
         rsvpBy: rsvpBy,
         price: price,
         seats: seats,
-        pics: ["one", "two", "skip to my", "lou"]
+        pics: JSON.stringify(pics)
       };
     var api_resp = api_call('meal', data);
     console.log(data);
