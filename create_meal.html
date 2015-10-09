@@ -138,7 +138,7 @@ function readURL(input) {
         }
         var reader = new FileReader();
         reader.onload = function (e) {
-          pics.push(JSON.stringify(e.target.result));
+          pics.push(e.target.result);
           render(pics);
         }
         reader.readAsDataURL(file);
