@@ -26,7 +26,7 @@
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,900' rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/js-cookie.js"></script>
     <script src="js/api_call.js"></script>
@@ -169,7 +169,7 @@ function setListeners() {
         rsvpBy: rsvpBy,
         price: price,
         seats: seats,
-        pics: pics
+        pics: JSON.stringify(["one", "two", "skip to", "my lou"])
       };
     var api_resp = api_call('meal', data);
     console.log(data);
