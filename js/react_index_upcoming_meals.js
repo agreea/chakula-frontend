@@ -39,7 +39,8 @@ if (api_resp.Success) {
             Pic={meal.Pics[0].Name} 
             Price={meal.Price} 
             Title={meal.Title} 
-            Open_spots={meal.Open_spots} />
+            Open_spots={meal.Open_spots}
+            Starts={meal.Starts} />
         );
       });
       return (
