@@ -30,14 +30,17 @@
           console.log("Didn't call API. from cookie: " + cookie)
           // $('#signin-dropdown').text('Agree') // TODO: get user data from chakula.
       }
-      cards = Cookies.getJSON("cards")
-      if (cards === undefined || cards.length === 0 || cards[cards.length - 1] === undefined) {
-          $('#modal-body').load('include/stripe_form.html');
+      if (!meal_data.Has_email) {
+        $('#modal-body').load('include/stripe_form.html');
       } else {
-        console.log("Here's what i see:")
-        console.log(cards[cards.length - 1])
-
+        cards = Cookies.getJSON("cards")
+        if (cards === undefined || cards.length === 0 || cards[cards.length - 1] === undefined) {
+            $('#modal-body').load('include/stripe_form.html');
+        } else {
+          console.log("Here's what i see:")
+          console.log(cards[cards.length - 1])
           $('#modal-body').load('include/request_invoice.html');
+        }
       }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
