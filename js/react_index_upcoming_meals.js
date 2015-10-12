@@ -6,7 +6,7 @@ if (api_resp.Success) {
   var Meal = React.createClass({
     render: function() {
        return (
-        <div className="card">
+        <div className="card col-sm-6 col-xs-12">
              <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">
             <div className="card-image">
                 <img className="img-responsive" src={'img/' + this.props.Pic}/>
