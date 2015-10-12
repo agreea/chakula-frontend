@@ -1,4 +1,4 @@
-jQuery(function($) {
+jQuery(function($) { // TODO: handle logins with someone who already has an account AND already has an email registered
       $('#add-email-btn').click(function(e) {
         var $email_field = $('#email-field');
         var email_input = $email_field.val()
