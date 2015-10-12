@@ -67,6 +67,8 @@ function getMeal(){
   return api_resp;
 }
 
+// Takes dates as iso8601 formatted string, assigns start time as 8:30 PM Sun, October 15
+// assigns rsvp_by in days, hours, or minutes left
 function processDates(start_time, rsvp_by) {
   // start time:
   // get the time in hours & minutes. Set that to the main #
