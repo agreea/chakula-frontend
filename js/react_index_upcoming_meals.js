@@ -6,19 +6,25 @@ if (api_resp.Success) {
   var Meal = React.createClass({
     render: function() {
        return (
-        <div className="card col-sm-6 col-xs-12">
-             <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">
-            <div className="card-image">
-                <img className="img-responsive" src={'img/' + this.props.Pic}/>
-                <span className="card-title">
-                    {this.props.Title + ' - ' + this.props.Price}
-                </span>
-            </div>
-            <div className="card-action">
-                <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">{getHumanDate(this.props.Starts)}</a>
-                <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">{this.props.Open_spots + ' Seats Available'}</a>
-            </div>
-            </a>
+        <div className="col-sm-6 col-xs-12">
+          <div className="card">
+               <a href={"http://yaychakula.com/meal.html?Id=" + 
+                this.props.Id} target="new_blank">
+              <div className="card-image">
+                  <img className="img-responsive" src={'img/' + this.props.Pic}/>
+                  <span className="card-title">
+                      {this.props.Title + ' - ' + this.props.Price}
+                  </span>
+              </div>
+              <div className="card-action">
+                  <a href={"http://yaychakula.com/meal.html?Id=" + 
+                    this.props.Id} target="new_blank">{getHumanDate(this.props.Starts)}</a>
+                  <a href={"http://yaychakula.com/meal.html?Id=" + 
+                    this.props.Id} target="new_blank">{this.props.Open_spots + 
+                    ' Seats Available'}</a>
+              </div>
+              </a>
+          </div>
         </div>            
        ); 
     }
@@ -58,6 +64,13 @@ function getHumanDate(starts) {
   var week_day = getDayOfWeek(date.getDay()); // Sun
   var time_text = getHumanTime(date.getHours(), date.getMinutes()); // 8:30 PM
   var final_date_text = time_text + " " + week_day + ", " + month + " " + date_day;
+  console.log("starts: " + starts);
+  console.log("date_parse: " + date_parse);
+  console.log("date: " + date);
+  console.log("month: " + month);
+  console.log("date_day: " + date_day);
+  console.log("time_text: " + time_text);
+
   return final_date_text;
 }
 
