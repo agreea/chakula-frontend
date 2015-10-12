@@ -51,7 +51,7 @@ if (api_resp.Success) {
 
 // Takes date as iso8601 formatted string, returns 8:30 PM Sun, October 15
 function getHumanDate(starts) {
-  var date_parse = Date.parseDate(starts); // iso8601 --> unix ts milliseconds
+  var date_parse = Date.parse(starts); // iso8601 --> unix ts milliseconds
   var date = new Date(date_parse); // unix ts --> JS Date object
   var month = getShortMonth(date.getMonth()+1);
   var date_day = date.getDate(); // 15
