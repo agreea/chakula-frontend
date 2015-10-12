@@ -46,6 +46,8 @@
                 if(Cookies.get("session") === undefined) {
                   console.log("No session");
                   $('#signin-dropdown').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in</a>');
+                } else if(!meal_data.Has_email) {
+                  $('#modal-body').load('include/add_email.html');
                 } else if(Cookies.getJSON("cards") === undefined || 
                           Cookies.getJSON("cards").length === 0 || 
                           Cookies.getJSON("cards")[0] === null) {
