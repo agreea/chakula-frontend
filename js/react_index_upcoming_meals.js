@@ -13,7 +13,7 @@ if (api_resp.Success) {
               <div className="card-image">
                   <img className="img-responsive" src={'img/' + this.props.Pic}/>
                   <span className="card-title">
-                      {this.props.Title + ' - ' + this.props.Price}
+                      {this.props.Title + ' - ' + Math.round(this.props.Price*100)/100}
                   </span>
               </div>
               <div className="card-action">
