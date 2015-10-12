@@ -2,7 +2,7 @@ jQuery(function($) {
       $('#add-email-btn').click(function(e) {
         var $email_field = $('#email-field');
         var email_input = $email_field.val()
-        var re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+        var reg = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
         console.log(reg.test(email_input));
         if (reg.test(email_input)) { // if the email is valid
           api_resp = api_call("kitchenuser", {
