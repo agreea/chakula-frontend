@@ -61,7 +61,7 @@ for (var i = 0; i < max_seats; i++) {
                         session: Cookies.get("session"),
                         mealId: urlVars["Id"],
                         seats: seats,
-                        last4: 1234
+                        last4: cards[0]
                       });
       console.log(api_resp);
       if (api_resp.Success) {
