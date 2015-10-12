@@ -8,7 +8,7 @@ jQuery(function($) {
           api_resp = api_call("kitchenuser", {
                         method: "AddEmail",
                         session: Cookies.get("session"),
-                        email: $email_input,
+                        email: email_input,
                         subscribe: true
                         });
           if (api_resp.Success) {

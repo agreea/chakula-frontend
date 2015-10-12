@@ -8,7 +8,7 @@ jQuery(function($) {
           api_resp = api_call("kitchenuser", {
                         method: "AddPhone",
                         session: Cookies.get("session"),
-                        phone: $phone_input.val(),
+                        phone: phone_input,
                         });
           if (api_resp.Success) {
             $('#modal-body').load('include/phone_add_success.html')
