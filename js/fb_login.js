@@ -31,7 +31,7 @@
           // $('#signin-dropdown').text('Agree') // TODO: get user data from chakula.
       }
       if (!meal_data.Has_email) {
-        $('#modal-body').load('include/stripe_form.html');
+        $('#modal-body').load('include/add_email.html');
       } else {
         cards = Cookies.getJSON("cards")
         if (cards === undefined || cards.length === 0 || cards[cards.length - 1] === undefined) {
