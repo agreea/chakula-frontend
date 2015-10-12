@@ -15,7 +15,7 @@ if (api_resp.Success) {
                 </span>
             </div>
             <div className="card-action">
-                <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">{getHumanData(this.props.Starts)}</a>
+                <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">{getHumanDate(this.props.Starts)}</a>
                 <a href={"http://yaychakula.com/meal.html?Id=" + this.props.Id} target="new_blank">{this.props.Open_spots + ' Seats Available'}</a>
             </div>
             </a>
