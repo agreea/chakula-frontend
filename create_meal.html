@@ -101,13 +101,14 @@ var Caption = React.createClass({
     console.log("Did this get called??")
     this.setState({value: event.target.value});
     // update the ufckin array
-    var index = event.target.id;
+    var index = this.props.i;
+    console.log("index: " + index);
     pics[index].caption = event.target.value;
     console.log(pics[index].caption);
   },
   render: function() {
     return (
-      <div className="form-control" type="text" placeholder="Caption?" onchange={this.handleChange} />
+      <input className="form-control" type="text" placeholder="Caption?" onChange={this.handleChange} i={this.props.i}/>
     );
   }
 });
@@ -116,9 +117,10 @@ var PicList = React.createClass({
   render: function() {
     var index = 0;
     var picNodes = this.props.data.map(function (pic) {
-        var picNode = (<div className="col-sm-4 pic-card">
+      console.log("Here is the index at PicList's render:" + index);
+      var picNode = (<div className="col-sm-4 pic-card">
                         <Pic pic_url={pic.url}></Pic>
-                        <Caption value={pic.caption}/>
+                        <Caption defaultValue={pic.caption} i={index}/>
                       </div>);
       index++;
       return (picNode);
@@ -160,7 +162,6 @@ function setListeners() {
     $('#guests-pay').text('Guests will pay: $' + price * 1.28);
   });
   $("#img-upload").change(function(){
-    console.log("How about now?");
     readURL(this);
   });
   $('.seat').click(function(){
