@@ -234,7 +234,7 @@ function initDatepickers() {
     lang:'en',
     onChangeDateTime:function(dp,$input){
       var date_time = Date.parseDate($input.val(), 'MM.DD.YYYY h:mm a');
-      starts = date_time.getTime()/100000;
+      starts = date_time.getTime()/10000;
       console.log(starts);
     }
   });
@@ -246,7 +246,7 @@ function initDatepickers() {
     lang:'en',
     onChangeDateTime:function(dp,$input){
       var date_time = Date.parseDate($input.val(), 'MM.DD.YYYY h:mm a');
-      rsvpBy = date_time.getTime()/100000;
+      rsvpBy = date_time.getTime()/10000;
       console.log(rsvpBy);
     }
   });
