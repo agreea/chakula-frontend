@@ -178,6 +178,7 @@ function setListeners() {
     console.log(api_resp);
     if (api_resp.Success) {
       // SHOW error!!!
+      $('#error-field').hide();
     } else {
       $('#error-field').html('<li>' + api_resp.Error + '</li>');
     }
