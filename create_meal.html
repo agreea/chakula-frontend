@@ -66,7 +66,7 @@ var PriceSeatsRow = React.createClass({
     price = event.target.value;
     console.log(price);
     // render();
-    this.setState({price: price total_payout: this.state.seats * price});
+    this.setState({price: price, total_payout: this.state.seats * price});
   },
   seatsChanged: function(seat_count) {
     seats = seat_count;
