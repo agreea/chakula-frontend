@@ -50,16 +50,6 @@
 // Documentation for the datepicker: http://xdsoft.net/jqplugins/datetimepicker/
 
 var pics = [];
-var xhr = new XMLHttpRequest();
-xhr.open('POST', 'api/meal', true);
-xhr.onload = function () {
-  console.log(xhr.responseText);
-  if (xhr.status === 200) {
-        // File(s) uploaded.
-  } else {
-    alert('An error occurred!');
-  }
-};
 
 Date.parseDate = function(input, format){
   return moment(input,format).toDate();
@@ -103,18 +93,37 @@ var Pic = React.createClass({
     return (
         <img className="img-responsive pic" src={this.props.pic_url}/>
     );
-    }
-  });
+  }
+});
+
+var Caption = React.createClass({
+
+  handleChange: function(event) {
+    this.setState({value: event.target.value});
+    // update the ufckin array
+    var index = event.target.id;
+    pics[index].caption = event.target.value;
+    console.log(pics[index].caption);
+  },
+  render: function() {
+    return (
+      <div className="form-control" type="text" placeholder="Caption?"
+        onChange={this.handleChange} />
+    );
+  }
+});
 
 var PicList = React.createClass({
   render: function() {
-    var picNodes = this.props.data.map(function (picUrl) {
-      return (
-        <div className="col-sm-4 pic-card">
-          <Pic pic_url={picUrl}></Pic>
-          <input className="form-control" type="text" placeholder="Caption?"></input>
-        </div>
-      );
+    var index = 0;
+    var picNodes = this.props.data.map(function (pic) {
+        picNode = (<div className="col-sm-4 pic-card">
+                    <Pic pic_url={pic.url}></Pic>
+                    <input className="form-control" type="text" placeholder="Caption?" 
+                      id={index} defaultValue={pic.caption}/>                      
+                  </div>);
+      index++;
+      return (picNode);
     });
     return (
       <div className="picList row">
@@ -126,10 +135,12 @@ var PicList = React.createClass({
 
 function render(pic_preview_urls) {
     React.render(
-      <PicList data={pic_preview_urls} />,
+      <PicList data={pics} />,
       document.getElementById('pic-grid'));
 }
-
+function updateCaption(index) {
+  pics[index].caption = 
+}
 function readURL(input) {
       var files = input.files;
       for (var i in files) {
@@ -139,7 +150,7 @@ function readURL(input) {
         }
         var reader = new FileReader();
         reader.onload = function (e) {
-          pics.push(e.target.result);
+          pics.push({url: e.target.result, caption: ""});
           render(pics);
         }
         reader.readAsDataURL(file);
@@ -171,7 +182,7 @@ function setListeners() {
         price: price,
         seats: seats,
         pics: JSON.stringify(pics),
-        session: Cookies.get('session')
+        session: Cookies.get('session'),
       };
     var api_resp = api_call('meal', data);
     console.log(data);
