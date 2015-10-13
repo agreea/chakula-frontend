@@ -99,6 +99,7 @@ var Pic = React.createClass({
 var Caption = React.createClass({
 
   handleChange: function(event) {
+    console.log("Did this get called??")
     this.setState({value: event.target.value});
     // update the ufckin array
     var index = event.target.id;
@@ -107,8 +108,8 @@ var Caption = React.createClass({
   },
   render: function() {
     return (
-      <div className="form-control" type="text" placeholder="Caption?"
-        onChange={this.handleChange} />
+      var value = this.state.value;
+      <div className="form-control" type="text" value={value} placeholder="Caption?" onChange={this.handleChange} />
     );
   }
 });
