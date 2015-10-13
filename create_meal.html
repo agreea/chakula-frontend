@@ -21,9 +21,7 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,400italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,900' rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script src="js/jquery.js"></script>
@@ -59,34 +57,60 @@ Date.prototype.dateFormat = function(format){
   return moment(this).format(format);
 };
 
- $(document).ready(function(){
-  $('#nav').load('include/nav_bar.html');
-  $('#guests-pay').text('Guests will pay: $' + price * 1.28);
-  $('#payout-val').text('$' + price * seats);
-  initDatepickers();
-  setListeners();
-  var session = Cookies.get('session');
-    if (session === undefined || session === "") {
-    // $('.meal-data').hide();
-    } else {
-      $('#fb').hide();
-      // api_resp = getHostData();
-      // if (api_resp.Success) {
-      //   console.log("success");
-      //   // // populate the host data fields
-      //   // setupHostData(api_resp.Return);
-      // } else {
-      //   console.log("failure");
-      //   // show an error message or fb login
-      // }
-    }
-  });
-
-function setGuests(count) {
-  seats = count;
-  $('#seats').html(count + ' <span class="caret"></span>');
-  $('#payout-val').text('$' + seats * price);
-}
+var PriceSeatsRow = React.createClass({
+  getInitialState: function() {
+    total_payout = this.props.price * this.props.current_seats;
+    return {price: this.props.price, current_seats: this.props.current_seats total_payout: total_payout};
+  },
+  priceChanged: function(event) {
+    price = event.target.value;
+    console.log(price);
+    // render();
+    this.setState({price: price total_payout: this.state.seats * price});
+  },
+  seatsChanged: function(seat_count) {
+    seats = seat_count;
+    console.log(seats);
+    this.setState({current_seats: seats, total_payout: this.state.price * seats});
+  },
+  // seatsChanged: function(event) {
+  //   seats = 
+  // },
+  render: function() {
+    return (
+        <div className="row">
+          <div className="col-sm-6">
+            <h4>Price per plate</h4>
+            <div className="input-group">
+              <span className="input-group-addon">$</span>
+              <input className="form-control" id="price" type="text" defaultValue={this.state.price} onChange={this.priceChanged} placeholder="Price per plate (guests will pay 28% more)"/>
+            </div>
+            <p id="guests-pay">{"Guests will pay: $" + this.state.price * 1.28}</p>
+           </div> 
+          <div className="col-sm-4">
+            <h4>Guest Seats</h4>
+            <div className="dropdown">
+              <button className="btn btn-default dropdown-toggle" id="seats" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                {this.state.current_seats}
+                <span class="caret"></span>
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+                { this.props.possible_seats.map(function(seat_count, i) {
+                    return (
+                      <li><a className='seat' onClick={this.seatsChanged.bind(this, seat_count)} key={i}>{seat_count}</a></li>
+                    );
+                  }, this)}
+              </ul>
+            </div>
+          </div>
+          <div className="col-sm-2">
+            <h4>Max Pay</h4>
+            <p id="payout-val">{this.state.total_payout}</p>
+          </div>
+        </div>
+  );
+ }
+});
 
 var Pic = React.createClass({
   render: function() {
@@ -114,7 +138,7 @@ var PicList = React.createClass({
     var index = 0;
     var picNodes = this.props.data.map(function (pic) {
       console.log("Here is the index at PicList's render:" + index);
-      var picNode = (<div className="col-sm-4 pic-card">
+      var picNode = (<div className="col-sm-4 pic-card text-center">
                         <Pic pic_url={pic.Name}></Pic>
                         <Caption defaultValue={pic.Caption} i={index}/>
                       </div>);
@@ -129,10 +153,13 @@ var PicList = React.createClass({
   }
 });
 
-function render(pic_preview_urls) {
+function render() {
     React.render(
       <PicList data={pics} />,
       document.getElementById('pic-grid'));
+    React.render(
+      <PriceSeatsRow price={price} current_seats={seats} possible_seats={[2,3,4,5,6,7,8,9,10,11,12]} />,
+      document.getElementById('price-plates-row'));
 }
 function readURL(input) {
       var files = input.files;
@@ -144,7 +171,7 @@ function readURL(input) {
         var reader = new FileReader();
         reader.onload = function (e) {
           pics.push({Name: e.target.result, Caption: ""});
-          render(pics);
+          render();
         }
         reader.readAsDataURL(file);
       }
@@ -159,10 +186,6 @@ function setListeners() {
   });
   $("#img-upload").change(function(){
     readURL(this);
-  });
-  $('.seat').click(function(){
-    console.log("We are dealing w seats: " + $(this).text());
-    setGuests($(this).text());
   });
   $('#save').click(function(){
     var data = {
@@ -211,7 +234,7 @@ function initDatepickers() {
     lang:'en',
     onChangeDateTime:function(dp,$input){
       var date_time = Date.parseDate($input.val(), 'MM.DD.YYYY h:mm a');
-      starts = date_time.getTime();
+      starts = date_time.getTime()/100000;
       console.log(starts);
     }
   });
@@ -223,11 +246,35 @@ function initDatepickers() {
     lang:'en',
     onChangeDateTime:function(dp,$input){
       var date_time = Date.parseDate($input.val(), 'MM.DD.YYYY h:mm a');
-      rsvpBy = date_time.getTime();
+      rsvpBy = date_time.getTime()/100000;
       console.log(rsvpBy);
     }
   });
 }
+
+ $(document).ready(function(){
+  $('#nav').load('include/nav_bar.html');
+  $('#guests-pay').text('Guests will pay: $' + price * 1.28);
+  $('#payout-val').text('$' + price * seats);
+  initDatepickers();
+  setListeners();
+  render();
+  var session = Cookies.get('session');
+    if (session === undefined || session === "") {
+      // $('.meal-data').hide();
+    } else {
+      $('#fb').hide();
+      // api_resp = getHostData();
+      // if (api_resp.Success) {
+      //   console.log("success");
+      //   // // populate the host data fields
+      //   // setupHostData(api_resp.Return);
+      // } else {
+      //   console.log("failure");
+      //   // show an error message or fb login
+      // }
+    }
+  });
     </script>
     <script type="text/javascript">
       urlVars = getUrlVars();
@@ -269,42 +316,8 @@ function initDatepickers() {
     <div class="col-md-8 col-md-offset-2">
         <input class="form-control meal-title" id="title" type="text" placeholder="Give your meal a snazzy title."/>
         <textarea class="form-control" id="description" type="text" rows="8" placeholder="Describe your meal. What's in it? What inspired you to make it?"></textarea>
-        <div class="row">
-          <div class="col-sm-6">
-            <h4>Price per plate</h4>
-            <div class="input-group">
-              <span class="input-group-addon">$</span>
-              <input class="form-control" id="price" type="text" placeholder="Price per plate (guests will pay 28% more)">
-            </div>
-            <p id="guests-pay">Guests will pay: $0</p>
-           </div> 
-          <div class="col-sm-4">
-            <h4>Guest Seats</h4>
-            <div class="dropdown">
-              <button class="btn btn-default dropdown-toggle" id="seats" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                2
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a class='seat'>2</a></li>
-                <li><a class='seat'>3</a></li>
-                <li><a class='seat'>4</a></li>
-                <li><a class='seat'>5</a></li>
-                <li><a class='seat'>6</a></li>
-                <li><a class='seat'>7</a></li>
-                <li><a class='seat'>8</a></li>
-                <li><a class='seat'>9</a></li>
-                <li><a class='seat'>10</a></li>
-                <li><a class='seat'>11</a></li>
-                <li><a class='seat'>12</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <h4>Max Pay</h4>
-            <p id="payout-val">$0</p>
-          </div>
-        </div>
+        <div id="price-plates-row">
+      </div>
       <div class="row">
         <div class="col-sm-6">
           <h4>Meal Start Time</h4>
