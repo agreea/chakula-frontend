@@ -174,8 +174,13 @@ function setListeners() {
         session: Cookies.get('session')
       };
     var api_resp = api_call('meal', data);
-      console.log(data);
-      console.log(api_resp);
+    console.log(data);
+    console.log(api_resp);
+    if (api_resp.Success) {
+      // SHOW error!!!
+    } else {
+      $('#error-field').html('<li>' + api_resp.Error + '</li>');
+    }
         // console.log('starts: ' + starts);
         // console.log('rsvpBy: ' + rsvpBy);
         // console.log('seats: ' + seats);
@@ -306,8 +311,6 @@ function initDatepickers() {
           <input class="form-control" id="rsvp-by-time" type="text" size="40" placeholder="Rsvp by?"/>
         </div>
       </div>
-      <ul class="error-field" id="error-field">
-      </ul>
       <div class="upload-img-form">
         <div class="fileUpload btn btn-primary">
           <span>Upload</span>
@@ -318,7 +321,8 @@ function initDatepickers() {
         <div class="pic-grid" id="pic-grid">
         </div>
       </div>
-
+      <ul class="error-field" id="error-field">
+      </ul>
       <button class="brand-btn btn-info btn-lg btn" id="save" type="button">Save</button>
       <button class="brand-btn btn-info btn-lg btn" id="publish" type="button">Publish</button>
     </div>
