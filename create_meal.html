@@ -107,8 +107,8 @@ var Caption = React.createClass({
     console.log(pics[index].caption);
   },
   render: function() {
+    var value = this.state.value;
     return (
-      var value = this.state.value;
       <div className="form-control" type="text" value={value} placeholder="Caption?" onChange={this.handleChange} />
     );
   }
