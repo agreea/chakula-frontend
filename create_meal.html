@@ -60,7 +60,7 @@ Date.prototype.dateFormat = function(format){
 var PriceSeatsRow = React.createClass({
   getInitialState: function() {
     total_payout = this.props.price * this.props.current_seats;
-    return {price: this.props.price, current_seats: this.props.current_seats total_payout: total_payout};
+    return {price: this.props.price, current_seats: this.props.current_seats, total_payout: total_payout};
   },
   priceChanged: function(event) {
     price = event.target.value;
