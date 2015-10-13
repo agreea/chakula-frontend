@@ -119,10 +119,9 @@ var PicList = React.createClass({
     var index = 0;
     var picNodes = this.props.data.map(function (pic) {
         var picNode = (<div className="col-sm-4 pic-card">
-                    <Pic pic_url={pic.url}></Pic>
-                    <input className="form-control" type="text" placeholder="Caption?" 
-                      id={index} defaultValue={pic.caption}/>                      
-                  </div>);
+                        <Pic pic_url={pic.url}></Pic>
+                        <Caption/>
+                      </div>);
       index++;
       return (picNode);
     });
