@@ -300,7 +300,10 @@ function setListeners() {
 }
 
 function getMealDraft() {
-  var api_resp = api_call('meal', {mealId: urlVars['Id'], session: Cookies.get('session')});
+  var api_resp = api_call('meal', 
+    {method: 'getMealDraft',
+    mealId: urlVars['Id'], 
+    session: Cookies.get('session')});
   if (api_resp.Success) {
     var meal_draft = api_resp.Return;
     title = meal_draft.Title;
