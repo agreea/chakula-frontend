@@ -36,17 +36,18 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.datetimepicker.full.min.js"></script>
     <script>
-      var formData = new FormData();
-      var price = 0;
-      var seats = 2;
-      var title = '';
-      var description = '';
+      var price = 10.50;
+      var seats = 5;
+      var title = 'Teehee';
+      var description = 'Check out this shit';
       var starts = 0;
       var rsvpBy = 0;
+      var starts_s = "2015-05-01T09:00:00Z";
+      var rsvpBy_s = "0001-01-01T00:00:00Z";
     </script>
     <script type="text/babel">
 // Documentation for the datepicker: http://xdsoft.net/jqplugins/datetimepicker/
-
+var urlVars = getUrlVars();
 var pics = [];
 
 Date.parseDate = function(input, format){
@@ -56,6 +57,28 @@ Date.parseDate = function(input, format){
 Date.prototype.dateFormat = function(format){
   return moment(this).format(format);
 };
+
+var TitleDescription = React.createClass({
+  getInitialState: function() {
+    return {title: this.props.title, description: this.props.description};
+  },
+  titleChanged: function() {
+    this.setState({title: this.props.title});
+  },
+  descriptionChanged: function() {
+    this.setState({description: this.props.description});
+  },
+  render: function() {
+    return(
+      <div>
+        <input className="form-control meal-title" id="title" type="text" 
+          placeholder="Give your meal a snazzy title." defaultValue={this.state.title}/>
+        <textarea className="form-control" id="description" type="text" rows="8" 
+          placeholder="Describe your meal. What's in it? What inspired you to make it?" defaultValue={this.state.description}></textarea>
+      </div>
+    );
+  }
+});
 
 var PriceSeatsRow = React.createClass({
   getInitialState: function() {
@@ -83,14 +106,17 @@ var PriceSeatsRow = React.createClass({
             <h4>Price per plate</h4>
             <div className="input-group">
               <span className="input-group-addon">$</span>
-              <input className="form-control" id="price" type="text" defaultValue={this.state.price} onChange={this.priceChanged} placeholder="Price per plate (guests will pay 28% more)"/>
+              <input className="form-control" id="price" type="text" 
+                defaultValue={this.state.price} onChange={this.priceChanged} 
+                placeholder="Price per plate (guests will pay 28% more)"/>
             </div>
             <p id="guests-pay">{"Guests will pay: $" + this.state.price * 1.28}</p>
            </div> 
           <div className="col-sm-4">
             <h4>Guest Seats</h4>
             <div className="dropdown">
-              <button className="btn btn-default dropdown-toggle" id="seats" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <button className="btn btn-default dropdown-toggle" id="seats" 
+                type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 {this.state.current_seats}
                 <span class="caret"></span>
               </button>
@@ -111,7 +137,35 @@ var PriceSeatsRow = React.createClass({
   );
  }
 });
-
+var DatesRow = React.createClass({
+  getInitialState: function() {
+    return {starts: this.props.starts, rsvp_by: this.props.rsvp_by};
+  },
+  startsChanged: function(event) {
+    console.log(price);
+    // render();
+    this.setState({starts: event.target.value});
+  },
+  rsvpChanged: function(event) {
+    this.setState({rsvp_by: event.target.value});
+  },
+  render: function() {
+    return (
+      <div className="row">
+        <div className="col-sm-6">
+          <h4>Meal Start Time</h4>
+          <input className="form-control" id="starts-time" type="text" size="20" 
+            placeholder="Start time?" defaultValue={this.state.starts} onChange={this.startsChanged}/>
+        </div>
+        <div className="col-sm-6">
+          <h4>RSVP By Time</h4>
+          <input className="form-control" id="rsvp-by-time" type="text" size="40" 
+            placeholder="Rsvp by?" defaultValue={this.state.rsvp_by} onChange={this.rvspChanged}/>
+        </div>
+      </div>
+    );
+  }
+});
 var Pic = React.createClass({
   render: function() {
     return (
@@ -153,28 +207,48 @@ var PicList = React.createClass({
   }
 });
 
+var DraftForm = React.createClass({
+  render: function() {
+    console.log(this.props);
+    return(
+      <div>
+        <h2 className="text-center">Your Meal</h2>
+        <TitleDescription title={this.props.title} description={this.props.description} />
+        <PriceSeatsRow possible_seats={this.props.possible_seats} price={this.props.price} current_seats={this.props.current_seats}/>
+        <DatesRow starts={this.props.starts} rsvp_by={this.props.rsvp_by}/>
+        <PicList data={this.props.pics} />
+      </div>
+    );
+  }
+});
+
 function render() {
-    React.render(
-      <PicList data={pics} />,
-      document.getElementById('pic-grid'));
-    React.render(
-      <PriceSeatsRow price={price} current_seats={seats} possible_seats={[2,3,4,5,6,7,8,9,10,11,12]} />,
-      document.getElementById('price-plates-row'));
+  React.render(
+    <DraftForm pics={pics}
+     possible_seats={[2,3,4,5,6,7,8,9,10,11,12]}
+     price={price}
+     current_seats={seats}
+     title={title}
+     description={description}
+     starts={getDatepickerString(starts)}
+     rsvp_by={getDatepickerString(rsvpBy)} />,
+    document.getElementById('price-plates-row'));
 }
+
 function readURL(input) {
-      var files = input.files;
-      for (var i in files) {
-        var file = files[i]
-        if (!file.type.match('image.*')) {
-          continue;
-        }
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          pics.push({Name: e.target.result, Caption: ""});
-          render();
-        }
-        reader.readAsDataURL(file);
-      }
+  var files = input.files;
+  for (var i in files) {
+    var file = files[i]
+    if (!file.type.match('image.*')) {
+      continue;
+    }
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      pics.push({Name: e.target.result, Caption: ""});
+      render();
+    }
+    reader.readAsDataURL(file);
+  }
 }
 
 function setListeners() {
@@ -225,45 +299,88 @@ function setListeners() {
   });
 }
 
+function getMealDraft() {
+  var api_resp = api_call('meal', {mealId: urlVars['Id'], session: Cookies.get('session')});
+  if (api_resp.Success) {
+    var meal_draft = api_resp.Return;
+    title = meal_draft.Title;
+    description = meal_draft.Description;
+    price = meal_draft.Price;
+    starts = Date.parse(meal_draft.Starts);
+    rsvpBy = Date.parse(meal_draft.Rsvp_by);
+    starts_s = getDatepickerString(starts);
+    rsvpBy_s = getDatepickerString(rsvpBy);
+    // get date_string
+  }
+}
+
+// takes a timestamp, returns a string formatted for the datepickers
+function getDatepickerString(timestamp) {
+  // 3:00 pm 10/09/2015
+  console.log("Timestamp: " + Date.parse(starts_s));
+  var date = new Date(timestamp);
+  console.log(date);
+  var month = date.getMonth(); // 10
+  var month_day = date.getDate(); // 09
+  var year = date.getYear(); // 2015
+  var hour = date.getHours(); // 15 (converted to 3 pm below)
+  var am_pm;
+  if (hour > 12 ) {
+    hour -= 12;
+    am_pm = "pm";
+  } else {
+    am_pm = "am";
+  }
+  var minute = date.getMinutes();
+  if (minute === 0){
+    minute = "00";
+  }
+  var datepicker_string = (hour + ":" + minute + " " + am_pm + " " + month + "/" + month_day + "/" + year);
+  console.log(datepicker_string);
+  return datepicker_string;
+}
+
 function initDatepickers() {
   $('#rsvp-by-time').datetimepicker({
-    format:'MM.DD.YYYY h:mm a',
+    format:'h:mm a MM.DD.YYYY',
     formatTime:'h:mm a',
-    formatDate:'DD.MM.YYYY',
+    formatDate:'MM.DD.YYYY',
+    startDate: rsvpBy_s,
     inline:false,
     lang:'en',
     onChangeDateTime:function(dp,$input){
-      var date_time = Date.parseDate($input.val(), 'MM.DD.YYYY h:mm a');
+      var date_time = Date.parseDate($input.val(), 'h:mm a MM/DD/YYYY');
       starts = date_time.getTime()/1000;
       console.log(starts);
     }
   });
   $('#starts-time').datetimepicker({
-    format:'MM.DD.YYYY h:mm a',
+    format:'h:mm a MM.DD.YYYY',
     formatTime:'h:mm a',
-    formatDate:'DD.MM.YYYY',
+    formatDate:'MM.DD.YYYY',
+    startDate: getDatepickerString(Date.parse(starts_s)),
     inline:false,
     lang:'en',
     onChangeDateTime:function(dp,$input){
-      var date_time = Date.parseDate($input.val(), 'MM.DD.YYYY h:mm a');
+      var date_time = Date.parseDate($input.val(), 'h:mm a MM/DD/YYYY');
       rsvpBy = date_time.getTime()/1000;
       console.log(rsvpBy);
     }
   });
 }
 
- $(document).ready(function(){
+$(document).ready(function(){
   $('#nav').load('include/nav_bar.html');
   $('#guests-pay').text('Guests will pay: $' + price * 1.28);
   $('#payout-val').text('$' + price * seats);
   initDatepickers();
   setListeners();
-  render();
   var session = Cookies.get('session');
-    if (session === undefined || session === "") {
-      // $('.meal-data').hide();
-    } else {
-      $('#fb').hide();
+  if (session === undefined || session === "") {
+    // $('.meal-data').hide();
+  } else {
+    $('#fb').hide();
+    getMealDraft();
       // api_resp = getHostData();
       // if (api_resp.Success) {
       //   console.log("success");
@@ -273,11 +390,10 @@ function initDatepickers() {
       //   console.log("failure");
       //   // show an error message or fb login
       // }
-    }
-  });
-    </script>
-    <script type="text/javascript">
-      urlVars = getUrlVars();
+  }
+  render();
+});
+
     </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -311,22 +427,9 @@ function initDatepickers() {
       </fb:login-button>
     </div>
   </div>
-  <div class="meal-data">
-          <h2 class="text-center">Your Meal</h2>
-    <div class="col-md-8 col-md-offset-2">
-        <input class="form-control meal-title" id="title" type="text" placeholder="Give your meal a snazzy title."/>
-        <textarea class="form-control" id="description" type="text" rows="8" placeholder="Describe your meal. What's in it? What inspired you to make it?"></textarea>
-        <div id="price-plates-row">
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <h4>Meal Start Time</h4>
-          <input class="form-control" id="starts-time" type="text" size="20" placeholder="Start time?"/>
-        </div>
-        <div class="col-sm-6">
-          <h4>RSVP By Time</h4>
-          <input class="form-control" id="rsvp-by-time" type="text" size="40" placeholder="Rsvp by?"/>
-        </div>
+  <div class="meal-data col-md-8 col-md-offset-2">
+    <div>
+      <div id="price-plates-row">
       </div>
       <div class="upload-img-form">
         <div class="fileUpload btn btn-primary">
