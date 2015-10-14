@@ -36,14 +36,14 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.datetimepicker.full.min.js"></script>
     <script>
-      var price = 10.50;
-      var seats = 5;
-      var title = 'Teehee';
-      var description = 'Check out this shit';
+      var price = 10;
+      var seats = 2;
+      var title = '';
+      var description = '';
       var starts = 0;
       var rsvpBy = 0;
-      var starts_s = "2015-05-01T09:00:00Z";
-      var rsvpBy_s = "0001-01-01T00:00:00Z";
+      var starts_s = "";
+      var rsvpBy_s = "";
     </script>
     <script type="text/babel">
 // Documentation for the datepicker: http://xdsoft.net/jqplugins/datetimepicker/
@@ -311,6 +311,8 @@ function getMealDraft() {
     starts_s = getDatepickerString(starts);
     rsvpBy_s = getDatepickerString(rsvpBy);
     // get date_string
+  } else {
+    // TODO: show error message....
   }
 }
 
@@ -377,7 +379,7 @@ $(document).ready(function(){
   setListeners();
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    // $('.meal-data').hide();
+    $('.meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
