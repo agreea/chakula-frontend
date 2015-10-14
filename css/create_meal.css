@@ -65,8 +65,16 @@ background-image: none;
 	opacity: 0;
 	filter: alpha(opacity=0);
 }
-.title-field{
+.title-field, .title-field:focus{
 	font-size: 36px;
-	line-height: 36px;
 	width: 100%;
+	outline: none;
+	border: none;
+}
+
+textarea, .description-field, .description-field:focus {
+	font-size: 20px;
+	width: 100%;
+	outline: none;
+	border: none;
 }

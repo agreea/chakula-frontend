@@ -73,7 +73,7 @@ var TitleDescription = React.createClass({
       <div>
         <input className="title-field" id="title" type="text" 
           placeholder="Give your meal a snazzy title." defaultValue={this.state.title}/>
-        <textarea className="form-control description-field" id="description" type="text" rows="8" 
+        <textarea className="description-field" id="description" type="text" rows="8" 
           placeholder="Describe your meal. What's in it? What inspired you to make it?" defaultValue={this.state.description}></textarea>
       </div>
     );
@@ -88,8 +88,7 @@ var PriceSeatsRow = React.createClass({
   priceChanged: function(event) {
     price = event.target.value;
     console.log(price);
-    // render();
-    this.setState({price: price, total_payout: this.state.seats * price});
+    this.setState({price: price, total_payout: this.state.current_seats * price});
   },
   seatsChanged: function(seat_count) {
     seats = seat_count;
@@ -131,7 +130,7 @@ var PriceSeatsRow = React.createClass({
           </div>
           <div className="col-sm-2">
             <h4>Max Pay</h4>
-            <p id="payout-val">{this.state.total_payout}</p>
+            <p id="payout-val">{"$" + this.state.total_payout}</p>
           </div>
         </div>
   );
@@ -212,7 +211,6 @@ var DraftForm = React.createClass({
     console.log(this.props);
     return(
       <div>
-        <h2 className="text-center">Your Meal</h2>
         <TitleDescription title={this.props.title} description={this.props.description} />
         <PriceSeatsRow possible_seats={this.props.possible_seats} price={this.props.price} current_seats={this.props.current_seats}/>
         <DatesRow starts={this.props.starts} rsvp_by={this.props.rsvp_by}/>
@@ -307,6 +305,7 @@ function getMealDraft() {
     rsvpBy = Date.parse(meal_draft.Rsvp_by);
     starts_s = getDatepickerString(starts);
     rsvpBy_s = getDatepickerString(rsvpBy);
+    pics = meal_draft.Pics;
     // get date_string
   } else {
     // TODO: show error message....
