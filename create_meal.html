@@ -71,9 +71,9 @@ var TitleDescription = React.createClass({
   render: function() {
     return(
       <div>
-        <input className="form-control meal-title" id="title" type="text" 
+        <input className="title-field" id="title" type="text" 
           placeholder="Give your meal a snazzy title." defaultValue={this.state.title}/>
-        <textarea className="form-control" id="description" type="text" rows="8" 
+        <textarea className="form-control description-field" id="description" type="text" rows="8" 
           placeholder="Describe your meal. What's in it? What inspired you to make it?" defaultValue={this.state.description}></textarea>
       </div>
     );
@@ -283,14 +283,7 @@ function setListeners() {
     } else {
       $('#error-field').html('<li>' + api_resp.Error + '</li>');
     }
-        // console.log('starts: ' + starts);
-        // console.log('rsvpBy: ' + rsvpBy);
-        // console.log('seats: ' + seats);
-        // console.log('price: ' + price);
-        // console.log('title: ' + title);
-        // console.log('description: ' + description);
-        // console.log('pics: ' + pics);
-      }
+  }
 );
   $('#title').change(function(){
     title = $(this).val();
@@ -357,8 +350,8 @@ function initDatepickers() {
     lang:'en',
     onChangeDateTime:function(dp,$input){
       var date_time = Date.parseDate($input.val(), 'h:mm a MM/DD/YYYY');
-      starts = date_time.getTime()/1000;
-      console.log(starts);
+      rsvpBy = date_time.getTime()/1000;
+      console.log(rsvpBy);
     }
   });
   $('#starts-time').datetimepicker({
@@ -370,8 +363,8 @@ function initDatepickers() {
     lang:'en',
     onChangeDateTime:function(dp,$input){
       var date_time = Date.parseDate($input.val(), 'h:mm a MM/DD/YYYY');
-      rsvpBy = date_time.getTime()/1000;
-      console.log(rsvpBy);
+      starts = date_time.getTime()/1000;
+      console.log(starts);
     }
   });
 }
@@ -384,19 +377,10 @@ $(document).ready(function(){
   setListeners();
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    $('.meal-data').hide();
+    // $('.meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
-      // api_resp = getHostData();
-      // if (api_resp.Success) {
-      //   console.log("success");
-      //   // // populate the host data fields
-      //   // setupHostData(api_resp.Return);
-      // } else {
-      //   console.log("failure");
-      //   // show an error message or fb login
-      // }
   }
   render();
 });
