@@ -199,8 +199,16 @@ var PicList = React.createClass({
       return (picNode);
     });
     return (
-      <div className="picList row">
-        {picNodes}
+      <div>
+        <div className="upload-img-form">
+          <div className="fileUpload btn btn-primary">
+            <span>Upload</span>
+            <input className="upload" id="img-upload" type="file" multiple/>
+          </div>
+        </div>
+        <div className="picList row pic-grid">
+          {picNodes}
+        </div>
       </div>
     );
   }
@@ -306,6 +314,7 @@ function getMealDraft() {
     starts_s = getDatepickerString(starts);
     rsvpBy_s = getDatepickerString(rsvpBy);
     pics = meal_draft.Pics;
+    console.log(pics);
     // get date_string
   } else {
     // TODO: show error message....
@@ -319,7 +328,7 @@ function getDatepickerString(timestamp) {
   console.log("Timestamp: " + Date.parse(starts_s));
   var date = new Date(timestamp);
   console.log(date);
-  var month = date.getMonth(); // 10
+  var month = date.getMonth() + 1; // 10
   var month_day = date.getDate(); // 09
   var year = date.getYear(); // 2015
   var hour = date.getHours(); // 15 (converted to 3 pm below)
@@ -376,7 +385,7 @@ $(document).ready(function(){
   setListeners();
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    $('.meal-data').hide();
+    // $('.meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
@@ -417,15 +426,10 @@ $(document).ready(function(){
       </fb:login-button>
     </div>
   </div>
+
   <div class="meal-data col-md-8 col-md-offset-2">
     <div>
       <div id="price-plates-row">
-      </div>
-      <div class="upload-img-form">
-        <div class="fileUpload btn btn-primary">
-          <span>Upload</span>
-          <input class="upload" id="img-upload" type="file" multiple/>
-        </div>
       </div>
       <div class="photos">
         <div class="pic-grid" id="pic-grid">
