@@ -173,7 +173,7 @@ var Pic = React.createClass({
 var Caption = React.createClass({
   handleChange: function(event) {
     this.setState({value: event.target.value});
-    var index = this.props.i;
+    var index = this.props.key;
     pics[index].caption = event.target.value;
   },
   render: function() {
@@ -190,8 +190,8 @@ var PicList = React.createClass({
       console.log("Here is the index at PicList's render:" + index);
       var picNode = (<div className="col-sm-4 pic-card text-center">
                         <Pic pic_url={pic.Name}></Pic>
-                        <Caption defaultValue={pic.Caption} i={index}/>
-                      </div>);
+                        <Caption defaultValue={pic.Caption} key={index}/>
+                     </div>);
       index++;
       return (picNode);
     });
@@ -382,7 +382,6 @@ $(document).ready(function(){
   $('#guests-pay').text('Guests will pay: $' + price * 1.28);
   $('#payout-val').text('$' + price * seats);
   initDatepickers();
-  setListeners();
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
     $('.meal-data').hide();
@@ -390,6 +389,7 @@ $(document).ready(function(){
     $('#fb').hide();
     getMealDraft();
   }
+  setListeners();
   render();
 });
 
