@@ -33,15 +33,26 @@ background-image: none;
 
 .upload-img-form {
 }
+
 .pic {
 	max-height: 150px;
+	margin: 0 auto;
 }
+
+.add-pic{
+	padding: 16px;
+    max-width: 150px;
+    max-height: 150px;
+}
+
 .form-control {
 	font-family: 'Helvetica-Neue', Arial;
 }
+
 .pic-card {
 	padding-bottom: 16px;
 }
+
 .add-photo-btn {
 	border-radius: 100%;
 	height: 50px;

@@ -165,7 +165,7 @@ var DatesRow = React.createClass({
 var Pic = React.createClass({
   render: function() {
     return (
-        <img className="img-responsive pic" src={"https://yaychakula.com/img/" + this.props.pic_url}/>
+        <img className="img-responsive pic" src={this.props.pic_url}/>
     );
   }
 });
@@ -173,12 +173,12 @@ var Pic = React.createClass({
 var Caption = React.createClass({
   handleChange: function(event) {
     this.setState({value: event.target.value});
-    var index = this.props.key;
+    var index = this.props.k;
     pics[index].caption = event.target.value;
   },
   render: function() {
     return (
-      <input className="form-control" type="text" placeholder="Caption?" onChange={this.handleChange} i={this.props.i}/>
+      <input className="form-control" type="text" placeholder="Caption?" onChange={this.handleChange} k={this.props.k}/>
     );
   }
 });
@@ -187,14 +187,23 @@ var PicList = React.createClass({
   render: function() {
     var index = 0;
     var picNodes = this.props.data.map(function (pic) {
-      console.log("Here is the index at PicList's render:" + index);
+      var pic_src;
+      if (pic.Name.startsWith("data:image")) {
+        pic_src = pic.Name;
+      } else {
+        pic_src = "https://yaychakula.com/img/"+pic.Name;
+      }
       var picNode = (<div className="col-sm-4 pic-card text-center">
-                        <Pic pic_url={pic.Name}></Pic>
-                        <Caption defaultValue={pic.Caption} key={index}/>
+                        <Pic pic_url={pic_src}></Pic>
+                        <Caption defaultValue={pic.Caption} k={index}/>
                      </div>);
       index++;
       return (picNode);
     });
+    picNodes.push(<a className="fileUpload">
+                      <img className="add-pic" src="img/add.svg"/>
+                      <input className="upload" id="img-upload" type="file" multiple/>
+                  </a>);
     return (
       <div>
         <div className="upload-img-form">
@@ -226,6 +235,7 @@ var DraftForm = React.createClass({
 });
 
 function render() {
+  console.log(pics);
   React.render(
     <DraftForm pics={pics}
      possible_seats={[2,3,4,5,6,7,8,9,10,11,12]}
@@ -263,7 +273,7 @@ function setListeners() {
     $('#payout-val').text('$' + price * seats);
     $('#guests-pay').text('Guests will pay: $' + price * 1.28);
   });
-  $("#img-upload").change(function(){
+  $(".upload").change(function(){
     readURL(this);
   });
   $('#save').click(function(){
@@ -384,13 +394,14 @@ $(document).ready(function(){
   initDatepickers();
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    $('.meal-data').hide();
+    // $('.meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
   }
-  setListeners();
   render();
+  setListeners();
+
 });
 
     </script>
