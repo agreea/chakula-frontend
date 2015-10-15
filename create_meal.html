@@ -168,7 +168,7 @@ var DatesRow = React.createClass({
 var Pic = React.createClass({
   render: function() {
     return (
-        <img className="img-responsive pic" src={this.props.pic_url}/>
+        <img className="img-responsive pic" src={"img/" + this.props.pic_url}/>
     );
   }
 });
@@ -259,6 +259,7 @@ function readURL(input) {
 }
 
 function setListeners() {
+  console.log("Url vars: " + urlVars['Id']);
   $('#price').change(function(){
     price = $(this).val();
     console.log(price);
@@ -279,6 +280,7 @@ function setListeners() {
         seats: seats,
         pics: JSON.stringify(pics),
         session: Cookies.get('session'),
+        mealId: urlVars['Id']
       };
     var api_resp = api_call('meal', data);
     console.log(data);
@@ -386,7 +388,7 @@ $(document).ready(function(){
   setListeners();
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    // $('.meal-data').hide();
+    $('.meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
