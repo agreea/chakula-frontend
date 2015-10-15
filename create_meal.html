@@ -178,7 +178,8 @@ var Caption = React.createClass({
   },
   render: function() {
     return (
-      <input className="form-control" type="text" placeholder="Caption?" onChange={this.handleChange} k={this.props.k}/>
+      <input className="form-control" type="text" placeholder="Caption?" onChange={this.handleChange} 
+        k={this.props.k} defaultValue={this.props.caption}/>
     );
   }
 });
@@ -195,7 +196,7 @@ var PicList = React.createClass({
       }
       var picNode = (<div className="col-sm-4 pic-card text-center">
                         <Pic pic_url={pic_src}></Pic>
-                        <Caption defaultValue={pic.Caption} k={index}/>
+                        <Caption caption={pic.Caption} k={index}/>
                      </div>);
       index++;
       return (picNode);
