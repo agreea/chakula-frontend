@@ -209,7 +209,7 @@ var PicList = React.createClass({
       <div>
         <div className="upload-img-form">
           <div className="fileUpload btn btn-primary">
-            <span>Upload Photo</span>
+            <span>Upload Photos</span>
             <input className="upload" id="img-upload" type="file" multiple/>
           </div>
         </div>
@@ -395,7 +395,7 @@ $(document).ready(function(){
   initDatepickers();
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    // $('.meal-data').hide();
+    $('.meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
@@ -442,10 +442,6 @@ $(document).ready(function(){
   <div class="meal-data col-md-8 col-md-offset-2">
     <div>
       <div id="price-plates-row">
-      </div>
-      <div class="photos">
-        <div class="pic-grid" id="pic-grid">
-        </div>
       </div>
       <ul class="error-field" id="error-field">
       </ul>
