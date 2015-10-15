@@ -336,7 +336,10 @@ function setListeners() {
     console.log(data);
     console.log(api_resp);
     if (api_resp.Success) {
-      // SHOW error!!!
+      if (!urlVars['Id']) {
+        window.location.replace("https://yaychakula.com/create_meal.html?Id=" + api_resp.Return);
+      }
+      // reload page
       $('#error-field').hide();
     } else {
       $('#error-field').html('<li>' + api_resp.Error + '</li>');
