@@ -95,9 +95,6 @@ var PriceSeatsRow = React.createClass({
     console.log(seats);
     this.setState({current_seats: seats, total_payout: this.state.price * seats});
   },
-  // seatsChanged: function(event) {
-  //   seats = 
-  // },
   render: function() {
     return (
         <div className="row">
@@ -168,7 +165,7 @@ var DatesRow = React.createClass({
 var Pic = React.createClass({
   render: function() {
     return (
-        <img className="img-responsive pic" src={"img/" + this.props.pic_url}/>
+        <img className="img-responsive pic" src={"https://yaychakula.com/img/" + this.props.pic_url}/>
     );
   }
 });
