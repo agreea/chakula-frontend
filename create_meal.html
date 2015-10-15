@@ -71,10 +71,21 @@ var TitleDescription = React.createClass({
   render: function() {
     return(
       <div>
-        <input className="title-field" id="title" type="text" 
-          placeholder="Give your meal a snazzy title." defaultValue={this.state.title}/>
-        <textarea className="description-field" id="description" type="text" rows="8" 
-          placeholder="Describe your meal. What's in it? What inspired you to make it?" defaultValue={this.state.description}></textarea>
+        <div className="row form-row">
+          <div className="col-sm-8 col-sm-offset-2">
+            <input className="title-field" id="title" type="text" 
+              placeholder="Give your meal a snazzy title." defaultValue={this.state.title}/>
+          </div>
+        </div>
+        <div className="row form-row">
+          <div className="col-xs-4 col-sm-2 form-label">
+            <p className="text-right">Description</p>
+          </div>
+          <div className="col-xs-8">
+            <textarea className="text-field" id="description" type="text" rows="8" 
+              placeholder="What's in your meal? What inspired you to make it?" defaultValue={this.state.description}></textarea>
+          </div>
+        </div>
       </div>
     );
   }
@@ -97,24 +108,37 @@ var PriceSeatsRow = React.createClass({
   },
   render: function() {
     return (
-        <div className="row">
-          <div className="col-sm-6">
-            <h4>Price per plate</h4>
-            <div className="input-group">
+      <div>
+        <div className="row form-row">
+          <div className="col-xs-4 col-sm-2 form-label">
+            <p className="text-right">Price per plate</p>
+          </div>
+          <div className="col-xs-4 col-sm-2">
+            <div className="input-group text-field">
               <span className="input-group-addon">$</span>
-              <input className="form-control" id="price" type="text" 
-                defaultValue={this.state.price} onChange={this.priceChanged} 
-                placeholder="Price per plate (guests will pay 28% more)"/>
+              <input className="text-field" id="price" type="text" 
+                defaultValue={this.state.price} onChange={this.priceChanged}/>
             </div>
-            <p id="guests-pay">{"Guests will pay: $" + this.state.price * 1.28}</p>
-           </div> 
-          <div className="col-sm-4">
-            <h4>Guest Seats</h4>
+          </div>
+        </div>
+        <div className="row form-row">
+          <div className="col-xs-4 col-sm-2 form-label">
+            <p className="text-right" id="guests-pay">Guests pay</p>
+          </div>
+          <div className="col-xs-5 col-sm-4">
+            <p>{"$" + this.state.price * 1.28}</p>
+          </div>
+        </div>
+        <div className="row form-row">
+          <div className="col-xs-4 col-sm-2 form-label">
+            <p className="text-right">Guest Seats</p>
+          </div>
+          <div className="col-xs-2 col-sm-1">
             <div className="dropdown">
-              <button className="btn btn-default dropdown-toggle" id="seats" 
+              <button className="text-field dropdown-toggle" id="seats" 
                 type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                {this.state.current_seats}
-                <span class="caret"></span>
+                {this.state.current_seats + "  "}
+                <span className="caret"></span>
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                 { this.props.possible_seats.map(function(seat_count, i) {
@@ -125,11 +149,16 @@ var PriceSeatsRow = React.createClass({
               </ul>
             </div>
           </div>
-          <div className="col-sm-2">
-            <h4>Max Pay</h4>
+        </div>
+        <div className="row form-row">
+          <div className="col-xs-4 col-sm-2 form-label">
+            <p className="text-right">Max pay</p>
+          </div>
+          <div className="col-xs-8 col-sm-5">
             <p id="payout-val">{"$" + this.state.total_payout}</p>
           </div>
         </div>
+      </div>
   );
  }
 });
@@ -147,16 +176,24 @@ var DatesRow = React.createClass({
   },
   render: function() {
     return (
-      <div className="row">
-        <div className="col-sm-6">
-          <h4>Meal Start Time</h4>
-          <input className="form-control" id="starts-time" type="text" size="20" id="starts-time"
-            placeholder="Start time?" defaultValue={this.state.starts} onChange={this.startsChanged}/>
+      <div>
+        <div className="row form-row">
+          <div className="col-xs-4 col-sm-2 form-label">
+            <p className="text-right">Meal Time</p>
+          </div>
+          <div className="col-xs-6 col-sm-3">
+            <input className="text-field" id="starts-time" type="text" size="20" id="starts-time"
+              placeholder="When do you break bread?" defaultValue={this.state.starts} onChange={this.startsChanged}/>
+          </div>
         </div>
-        <div className="col-sm-6">
-          <h4>RSVP By Time</h4>
-          <input className="form-control" id="rsvp-by-time" type="text" size="40" id="rsvp-by-time"
-            placeholder="Rsvp by?" defaultValue={this.state.rsvp_by} onChange={this.rvspChanged}/>
+        <div className="row form-row">
+          <div className="col-xs-4 col-sm-2 form-label">
+            <p className="text-right">RSVP By</p>
+          </div>
+          <div className="col-xs-6 col-sm-3">
+            <input className="text-field" id="rsvp-by-time" type="text" size="40" id="rsvp-by-time"
+              placeholder="Rsvp by?" defaultValue={this.state.rsvp_by} onChange={this.rvspChanged}/>
+          </div>
         </div>
       </div>
     );
@@ -206,15 +243,20 @@ var PicList = React.createClass({
                       <input className="upload" id="img-upload" type="file" multiple/>
                   </a>);
     return (
-      <div>
-        <div className="upload-img-form">
-          <div className="fileUpload btn btn-primary">
-            <span>Upload Photos</span>
-            <input className="upload" id="img-upload" type="file" multiple/>
-          </div>
+      <div className="row">
+        <div className="col-xs-4 col-sm-2">
+          <p className="form-label text-right">Photos</p>
         </div>
-        <div className="picList row pic-grid">
-          {picNodes}
+        <div className="col-xs-8">
+          <div className="upload-img-form">
+            <div className="fileUpload btn btn-primary">
+              <span>Upload Photos</span>
+              <input className="upload" id="img-upload" type="file" multiple/>
+            </div>
+          </div>
+          <div className="picList row pic-grid">
+            {picNodes}
+          </div>
         </div>
       </div>
     );
@@ -246,7 +288,7 @@ function render() {
      description={description}
      starts={getDatepickerString(starts)}
      rsvp_by={getDatepickerString(rsvpBy)} />,
-    document.getElementById('price-plates-row'));
+    document.getElementById('meal-data'));
   initDatepickers();
 }
 
@@ -438,11 +480,11 @@ $(document).ready(function(){
       </fb:login-button>
     </div>
   </div>
+  <div id="meal-data">
+  </div>
 
-  <div class="meal-data col-md-8 col-md-offset-2">
+  <div class=" col-md-8 col-md-offset-2">
     <div>
-      <div id="price-plates-row">
-      </div>
       <ul class="error-field" id="error-field">
       </ul>
       <button class="brand-btn btn-info btn-lg btn" id="save" type="button">Save</button>
