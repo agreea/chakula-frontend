@@ -64,9 +64,11 @@ var TitleDescription = React.createClass({
   },
   titleChanged: function() {
     this.setState({title: this.props.title});
+    enableSave();
   },
   descriptionChanged: function() {
     this.setState({description: this.props.description});
+    enableSave();
   },
   render: function() {
     return(
@@ -100,11 +102,13 @@ var PriceSeatsRow = React.createClass({
     price = event.target.value;
     console.log(price);
     this.setState({price: price, total_payout: this.state.current_seats * price});
+    enableSave();
   },
   seatsChanged: function(seat_count) {
     seats = seat_count;
     console.log(seats);
     this.setState({current_seats: seats, total_payout: this.state.price * seats});
+    enableSave();
   },
   render: function() {
     return (
@@ -167,12 +171,12 @@ var DatesRow = React.createClass({
     return {starts: this.props.starts, rsvp_by: this.props.rsvp_by};
   },
   startsChanged: function(event) {
-    console.log(price);
-    // render();
     this.setState({starts: event.target.value});
+    enableSave();
   },
   rsvpChanged: function(event) {
     this.setState({rsvp_by: event.target.value});
+    enableSave();  
   },
   render: function() {
     return (
@@ -212,6 +216,7 @@ var Caption = React.createClass({
     this.setState({value: event.target.value});
     var index = this.props.k;
     pics[index].caption = event.target.value;
+    enableSave();
   },
   render: function() {
     return (
@@ -294,6 +299,7 @@ function render() {
 
 function readURL(input) {
   var files = input.files;
+  enableSave();
   for (var i in files) {
     var file = files[i]
     if (!file.type.match('image.*')) {
@@ -342,6 +348,7 @@ function setListeners() {
       // reload page
       $(this).css('background-color', '#19a347');
       $(this).text("Saved");
+      $(this).prop("disabled", true);
       $('#error-field').hide();
     } else {
       $('#error-field').html('<li>' + api_resp.Error + '</li>');
@@ -417,7 +424,7 @@ function initDatepickers() {
     onChangeDateTime:function(dp,$input){
       var date_time = Date.parseDate($input.val(), 'h:mm a MM/DD/YYYY');
       rsvpBy = date_time.getTime()/1000;
-      console.log(rsvpBy);
+      enableSave();
     }
   });
   $('#starts-time').datetimepicker({
@@ -430,11 +437,14 @@ function initDatepickers() {
     onChangeDateTime:function(dp,$input){
       var date_time = Date.parseDate($input.val(), 'h:mm a MM/DD/YYYY');
       starts = date_time.getTime()/1000;
-      console.log(starts);
+      enableSave();
     }
   });
 }
-
+function enableSave(){
+  $('#save').prop("disabled", false);
+  $('#save').css("background-color", '#5bc0de');
+}
 $(document).ready(function(){
   $('#nav').load('include/nav_bar.html');
   $('#guests-pay').text('Guests will pay: $' + price * 1.28);
