@@ -36,12 +36,13 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.datetimepicker.full.min.js"></script>
     <script>
+      var d = new Date();
       var price = 10;
       var seats = 2;
       var title = '';
       var description = '';
-      var starts = 0;
-      var rsvpBy = 0;
+      var starts = d.getTime();
+      var rsvpBy = d.getTime();
       var starts_s = "";
       var rsvpBy_s = "";
     </script>
@@ -62,12 +63,14 @@ var TitleDescription = React.createClass({
   getInitialState: function() {
     return {title: this.props.title, description: this.props.description};
   },
-  titleChanged: function() {
+  titleChanged: function(event) {
     this.setState({title: this.props.title});
+    title = event.target.value;
     enableSave();
   },
-  descriptionChanged: function() {
+  descriptionChanged: function(event) {
     this.setState({description: this.props.description});
+    description = event.target.value;
     enableSave();
   },
   render: function() {
@@ -100,13 +103,11 @@ var PriceSeatsRow = React.createClass({
   },
   priceChanged: function(event) {
     price = event.target.value;
-    console.log(price);
     this.setState({price: price, total_payout: this.state.current_seats * price});
     enableSave();
   },
   seatsChanged: function(seat_count) {
     seats = seat_count;
-    console.log(seats);
     this.setState({current_seats: seats, total_payout: this.state.price * seats});
     enableSave();
   },
@@ -203,13 +204,6 @@ var DatesRow = React.createClass({
     );
   }
 });
-var Pic = React.createClass({
-  render: function() {
-    return (
-        <img className="img-responsive pic" src={this.props.pic_url}/>
-    );
-  }
-});
 
 var Caption = React.createClass({
   handleChange: function(event) {
@@ -220,8 +214,35 @@ var Caption = React.createClass({
   },
   render: function() {
     return (
-      <input className="form-control" type="text" placeholder="Caption?" onChange={this.handleChange} 
+      <input className="caption-field" id="caption-field" type="text" placeholder="Caption?" onChange={this.handleChange} 
         k={this.props.k} defaultValue={this.props.caption}/>
+    );
+  }
+});
+
+var Pic = React.createClass({
+  deletePic: function() {
+    pics.splice(this.props.k, 1);
+    render();
+  },
+  render: function() {
+    var pic = this.props.pic
+    var pic_src;
+    if (pic.Name.startsWith("data:image")) {
+      pic_src = pic.Name;
+    } else {
+      pic_src = "https://yaychakula.com/img/"+pic.Name;
+    }
+    return (
+      <div className="col-sm-4">
+        <div className="pic-card text-center">
+          <a className="btn-delete-photo" onClick={this.deletePic}>
+            <span className=" glyphicon glyphicon-trash delete-icon" aria-hidden="true"></span>
+          </a>
+          <img className="img-responsive pic" src={pic_src}/>
+          <Caption k={this.props.k} caption={pic.Caption}/>
+        </div>
+      </div>
     );
   }
 });
@@ -230,23 +251,20 @@ var PicList = React.createClass({
   render: function() {
     var index = 0;
     var picNodes = this.props.data.map(function (pic) {
-      var pic_src;
-      if (pic.Name.startsWith("data:image")) {
-        pic_src = pic.Name;
-      } else {
-        pic_src = "https://yaychakula.com/img/"+pic.Name;
-      }
-      var picNode = (<div className="col-sm-4 pic-card text-center">
-                        <Pic pic_url={pic_src}></Pic>
-                        <Caption caption={pic.Caption} k={index}/>
-                     </div>);
+      var picNode = <Pic pic={pic} k={index} />;
       index++;
       return (picNode);
     });
-    picNodes.push(<a className="fileUpload">
-                      <img className="add-pic" src="img/add.svg"/>
-                      <input className="upload" id="img-upload" type="file" multiple/>
-                  </a>);
+    picNodes.push(
+      <div className="col-sm-4">
+        <div className="pic-card upload-card fileUpload">
+          <h1 className="text-center">
+            <span className="glyphicon glyphicon-picture upload-icon" aria-hidden="true"></span>
+          </h1>
+          <input className="upload upload-in-card" id="img-upload" type="file" multiple/>
+          <p className="text-center upload-card-text">+Add Picture</p>
+        </div>
+      </div>);
     return (
       <div className="row">
         <div className="col-xs-4 col-sm-2">
@@ -254,11 +272,12 @@ var PicList = React.createClass({
         </div>
         <div className="col-xs-8">
           <div className="upload-img-form">
-            <div className="fileUpload btn btn-primary">
+            <div className="fileUpload btn-upload btn btn-primary">
               <span>Upload Photos</span>
               <input className="upload" id="img-upload" type="file" multiple/>
             </div>
           </div>
+          <hr/>
           <div className="picList row pic-grid">
             {picNodes}
           </div>
@@ -295,6 +314,9 @@ function render() {
      rsvp_by={getDatepickerString(rsvpBy)} />,
     document.getElementById('meal-data'));
   initDatepickers();
+  $(".upload").change(function(){
+    readURL(this);
+  });
 }
 
 function readURL(input) {
@@ -308,25 +330,24 @@ function readURL(input) {
     var reader = new FileReader();
     reader.onload = function (e) {
       pics.push({Name: e.target.result, Caption: ""});
+      console.log("Here's pic's length: " + pics.length);
       render();
     }
     reader.readAsDataURL(file);
   }
+  // $(input).change(function(){
+  //   readURL(input);
+  // });
+  // $(input).val("");
+  // input.value = '';
 }
 
-function setListeners() {
-  console.log("Url vars: " + urlVars['Id']);
-  $('#price').change(function(){
-    price = $(this).val();
-    console.log(price);
-    $('#payout-val').text('$' + price * seats);
-    $('#guests-pay').text('Guests will pay: $' + price * 1.28);
-  });
-  $(".upload").change(function(){
-    readURL(this);
-  });
-  $('#save').click(function(){
-    var data = {
+var attemptSave = function() {
+  if (rsvpBy > starts){
+    $('#error-field').html('<li>' + "Rsvp by time cannot be after meal starts." + '</li>');
+    return;
+  }
+  var data = {
         method: 'saveMealDraft',
         title: title,
         description: description,
@@ -337,29 +358,40 @@ function setListeners() {
         pics: JSON.stringify(pics),
         session: Cookies.get('session'),
         mealId: urlVars['Id']
+  };
+  console.log(data);
+  var api_resp = api_call('meal', data);
+  if (api_resp.Success) {
+    if (!urlVars['Id']) { // reload the page if you haven't done so already
+      window.location.replace("https://yaychakula.com/create_meal.html?Id=" + api_resp.Return);
+    }
+    $(this).css('background-color', '#19a347');
+    $(this).text("Saved");
+    $(this).prop("disabled", true);
+    $('#error-field').hide();
+    $('#publish').prop('disabled', false);
+  } else {
+    $('#error-field').html('<li>' + api_resp.Error + '</li>');
+  }
+}
+
+function setListeners() {
+  console.log("Url vars: " + urlVars['Id']);
+  $('#save').click(attemptSave);
+  $('#publish').click(function(){
+    var data = {
+        method: 'publishMeal',
+        session: Cookies.get('session'),
+        mealId: urlVars['Id']
       };
     var api_resp = api_call('meal', data);
     console.log(data);
     console.log(api_resp);
     if (api_resp.Success) {
-      if (!urlVars['Id']) {
-        window.location.replace("https://yaychakula.com/create_meal.html?Id=" + api_resp.Return);
-      }
-      // reload page
-      $(this).css('background-color', '#19a347');
-      $(this).text("Saved");
-      $(this).prop("disabled", true);
-      $('#error-field').hide();
+        window.location.replace("https://yaychakula.com/meal.html?Id=" + urlVars['Id']);
     } else {
       $('#error-field').html('<li>' + api_resp.Error + '</li>');
     }
-  }
-);
-  $('#title').change(function(){
-    title = $(this).val();
-  });
-  $('#description').change(function(){
-    description = $(this).val();  
   });
 }
 
@@ -369,6 +401,7 @@ function getMealDraft() {
     mealId: urlVars['Id'], 
     session: Cookies.get('session')});
   if (api_resp.Success) {
+    // TODO: if published, disable: mealtime + price
     var meal_draft = api_resp.Return;
     title = meal_draft.Title;
     description = meal_draft.Description;
@@ -379,7 +412,6 @@ function getMealDraft() {
     rsvpBy_s = getDatepickerString(rsvpBy);
     pics = meal_draft.Pics;
     console.log(pics);
-    // get date_string
   } else {
     // TODO: show error message....
   }
@@ -389,6 +421,10 @@ function getMealDraft() {
 // takes a timestamp, returns a string formatted for the datepickers
 function getDatepickerString(timestamp) {
   // 3:00 pm 10/09/2015
+  if (timestamp === 0) {
+    var d = new Date();
+    timestamp = d.getTime();
+  }
   console.log("Timestamp: " + Date.parse(starts_s));
   var date = new Date(timestamp);
   console.log(date);
@@ -410,15 +446,16 @@ function getDatepickerString(timestamp) {
   }
   var datepicker_string = (hour + ":" + minute + " " + am_pm + " " + month + "/" + month_day + "/" + year);
   console.log(datepicker_string);
+
   return datepicker_string;
 }
 
 function initDatepickers() {
   $('#rsvp-by-time').datetimepicker({
-    format:'h:mm a MM.DD.YYYY',
+    format:'h:mm a MM/DD/YYYY',
     formatTime:'h:mm a',
-    formatDate:'MM.DD.YYYY',
-    startDate: rsvpBy_s,
+    formatDate:'h:mm a MM/DD/YYYY',
+    startDate: getDatepickerString(rsvpBy),
     inline:false,
     lang:'en',
     onChangeDateTime:function(dp,$input){
@@ -428,10 +465,10 @@ function initDatepickers() {
     }
   });
   $('#starts-time').datetimepicker({
-    format:'h:mm a MM.DD.YYYY',
+    format:'h:mm a MM/DD/YYYY',
     formatTime:'h:mm a',
-    formatDate:'MM.DD.YYYY',
-    startDate: getDatepickerString(Date.parse(starts_s)),
+    formatDate:'h:mm a MM/DD/YYYY',
+    startDate: getDatepickerString(starts),
     inline:false,
     lang:'en',
     onChangeDateTime:function(dp,$input){
@@ -441,14 +478,20 @@ function initDatepickers() {
     }
   });
 }
+
 function enableSave(){
   $('#save').prop("disabled", false);
   $('#save').css("background-color", '#5bc0de');
+  $('#save').text("Save");
 }
+
 $(document).ready(function(){
   $('#nav').load('include/nav_bar.html');
-  $('#guests-pay').text('Guests will pay: $' + price * 1.28);
-  $('#payout-val').text('$' + price * seats);
+  // $('#guests-pay').text('Guests will pay: $' + price * 1.28);
+  // $('#payout-val').text('$' + price * seats);
+  if (!urlVars['Id']) {
+    $('#publish').prop('disabled', true);
+  }
   initDatepickers();
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
