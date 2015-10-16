@@ -347,6 +347,7 @@ var attemptSave = function() {
     $('#error-field').html('<li>' + "Rsvp by time cannot be after meal starts." + '</li>');
     return;
   }
+  // if starts OR rsvp are in the past, also throw error
   var data = {
         method: 'saveMealDraft',
         title: title,
@@ -458,11 +459,11 @@ function initDatepickers() {
     startDate: getDatepickerString(rsvpBy),
     inline:false,
     lang:'en',
-    onChangeDateTime:function(dp,$input){
-      var date_time = Date.parseDate($input.val(), 'h:mm a MM/DD/YYYY');
-      rsvpBy = date_time.getTime()/1000;
-      enableSave();
-    }
+    // onChangeDateTime:function(dp,$input){
+    //   var date_time = Date.parseDate($input.val(), 'h:mm a MM/DD/YYYY');
+    //   rsvpBy = date_time.getTime()/1000;
+    //   enableSave();
+    // }
   });
   $('#starts-time').datetimepicker({
     format:'h:mm a MM/DD/YYYY',
@@ -471,11 +472,11 @@ function initDatepickers() {
     startDate: getDatepickerString(starts),
     inline:false,
     lang:'en',
-    onChangeDateTime:function(dp,$input){
-      var date_time = Date.parseDate($input.val(), 'h:mm a MM/DD/YYYY');
-      starts = date_time.getTime()/1000;
-      enableSave();
-    }
+    // onChangeDateTime:function(dp,$input){
+    //   var date_time = Date.parseDate($input.val(), 'h:mm a MM/DD/YYYY');
+    //   starts = date_time.getTime()/1000;
+    //   enableSave();
+    // }
   });
 }
 
@@ -540,7 +541,6 @@ $(document).ready(function(){
   </div>
   <div id="meal-data">
   </div>
-
   <div class=" col-md-8 col-md-offset-2">
     <div>
       <ul class="error-field" id="error-field">

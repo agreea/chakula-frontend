@@ -2,6 +2,8 @@ var api_resp = getMeal();
 var meal_data;
 if (api_resp.Success) {
   meal_data = api_resp.Return;
+} else {
+  window.location.replace("https://yaychakula.com");
 }
 function setupMeal() {
     $('#meal-title').text(meal_data.Title);
