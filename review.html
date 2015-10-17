@@ -50,7 +50,7 @@
                         '<div class="row text-center">' +
                         '<fb:login-button class="fb-login" scope="public_profile,email"' + 
                         'onlogin="checkLoginState();"></fb:login-button></div></div>');
-          $('#review-ui').hide();
+          // $('#review-ui').hide();
         } else {
           urlVars = getUrlVars();
           api_resp = api_call("meal", {
@@ -149,20 +149,20 @@
     </div>
     <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 text-center"
           id="review-ui">
-      <p class="star-rating">
-        <button class="star-btn" onclick="rate(1)" id="s0">
+      <p class="row star-rating">
+        <button class="col-xs-2 col-xs-offset-1 star-btn" onclick="rate(1)" id="s0">
           <span class="glyphicon glyphicon-star grey-star" aria-hidden="true"></span>
         </button>
-        <button class="star-btn" onclick="rate(2)" id="s1">
+        <button class="col-xs-2 star-btn" onclick="rate(2)" id="s1">
           <span class="glyphicon glyphicon-star grey-star" aria-hidden="true"></span>
         </button>
-        <button class="star-btn" onclick="rate(3)" id="s2">
+        <button class="col-xs-2 star-btn" onclick="rate(3)" id="s2">
           <span class="glyphicon glyphicon-star grey-star" aria-hidden="true"></span>
         </button>
-        <button class="star-btn" onclick="rate(4)" id="s3">
+        <button class="col-xs-2 star-btn" onclick="rate(4)" id="s3">
           <span class="glyphicon glyphicon-star grey-star" aria-hidden="true"></span>
         </button>
-        <button class="star-btn" onclick="rate(5)" id="s4">
+        <button class="col-xs-2 star-btn" onclick="rate(5)" id="s4">
           <span class="glyphicon glyphicon-star grey-star" aria-hidden="true"></span>
         </button>
       </p>
