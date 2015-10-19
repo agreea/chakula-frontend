@@ -308,11 +308,6 @@ function readURL(input) {
     }
     reader.readAsDataURL(file);
   }
-  // $(input).change(function(){
-  //   readURL(input);
-  // });
-  // $(input).val("");
-  // input.value = '';
 }
 
 var attemptSave = function() {
@@ -470,8 +465,7 @@ function initDatepicker(picker_id, default_string) {
     defaultDate = moment(default_string);
   }
   $(picker_id).datetimepicker({sideBySide: true, 
-    defaultDate: defaultDate});
-  $(picker_id).data("DateTimePicker").change = dateChanged;
+    defaultDate: defaultDate}).on('dp.change', dateChanged);
 }
 
 function enableSave(){
