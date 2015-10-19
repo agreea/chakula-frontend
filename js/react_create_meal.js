@@ -437,13 +437,16 @@ function getMealDraft() {
     price = meal_draft.Price;
     starts_s = meal_draft.Starts;
     rsvpBy_s = meal_draft.Rsvp_by;
-    starts = moment(starts_s);
-    rsvpBy = moment(rsvpBy_s);
     pics = meal_draft.Pics;
     published = meal_draft.Published;
     console.log(pics);
+    $('#save').css('background-color', '#19a347');
+    $('#save').text("Saved");
+    $('#save').prop("disabled", true);
+    $('#publish').prop('disabled', false);
   } else {
     // TODO: show error message....
+    // maybe redirect home? or to meal drafts
   }
   console.log(api_resp);
 }
