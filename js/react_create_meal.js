@@ -323,12 +323,14 @@ var attemptSave = function() {
     error_html += '<li>' + "Rsvp by time cannot be after meal starts." + '</li>';
   }
   if (!isFloat(price) && !isInteger(price)) { // TODO: render error field in React
+    console.log(price);
     error_html += '<li>' + "Price must be a valid dollar value." + '</li>'
   }
   if (error_html !== "") {
     $('#error-field').html(error_html)
     return;
   }
+    console.log("Price is valid!");
   // check price is a number
   // check 
   // if starts OR rsvp are in the past, also throw error
@@ -474,7 +476,7 @@ $(document).ready(function(){
   }
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    $('#meal-data').hide();
+    // $('#meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
