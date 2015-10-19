@@ -321,12 +321,15 @@ var attemptSave = function() {
   var error_html = "";
   price = parseFloat(price);
   console.log("Here is the price: " + price);
-  if (rsvpBy > starts){
-    error_html += '<li>' + "Rsvp by time cannot be after meal starts." + '</li>';
-  }
   if (!isFloat(price) && !isInteger(price)) { // TODO: render error field in React
     console.log(price);
     error_html += '<li>' + "Price must be a valid dollar value." + '</li>'
+  }
+  if (rsvpBy > starts){
+    error_html += '<li>' + "Rsvp by time cannot be after meal starts." + '</li>';
+  }
+  if (rsvpBy < moment()){
+    error_html += '<li>' + "Rsvp by time cannot be in the past." + '</li>';
   }
   if (error_html !== "") {
     $('#error-field').html(error_html)
