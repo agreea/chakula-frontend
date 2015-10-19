@@ -319,6 +319,7 @@ var attemptSave = function() {
   var starts = $('#starts-time').data("DateTimePicker").date();
   var rsvpBy = $('#rsvp-by-time').data("DateTimePicker").date();
   var error_html = "";
+  console.log("Here is the price: " + price);
   if (rsvpBy > starts){
     error_html += '<li>' + "Rsvp by time cannot be after meal starts." + '</li>';
   }
@@ -330,7 +331,7 @@ var attemptSave = function() {
     $('#error-field').html(error_html)
     return;
   }
-    console.log("Price is valid!");
+  console.log("Price is valid!");
   // check price is a number
   // check 
   // if starts OR rsvp are in the past, also throw error
@@ -367,6 +368,7 @@ var attemptPublish = function() {
   var starts = $('#starts-time').data("DateTimePicker").date();
   var rsvpBy = $('#rsvp-by-time').data("DateTimePicker").date();
   var error_html = "";
+  console.log("Here is the price: " + price);
   // check price is a number
   if (!isFloat(price) && !isInteger(price)) { // TODO: render error field in React
     error_html += '<li>' + "Price must be a valid dollar value." + '</li>'
