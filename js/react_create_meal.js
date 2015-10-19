@@ -65,7 +65,6 @@ var PriceSeatsRow = React.createClass({
     return {price: this.props.price, current_seats: this.props.current_seats, total_payout: total_payout};
   },
   priceChanged: function(event) {
-    console.log("did price change? Hell yes");
     price = event.target.value;
     this.setState({price: price, total_payout: this.state.current_seats * price});
     enableSave();
@@ -140,9 +139,6 @@ var DatesRow = React.createClass({
   startsChanged: function(event) {
     this.setState({starts: event.target.value});
     enableSave();
-    console.log("It changed!");
-    var date = $('#starts-time').data("DateTimePicker").date();
-    console.log(date);
   },
   rsvpChanged: function(event) {
     this.setState({rsvp_by: event.target.value});
