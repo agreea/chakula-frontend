@@ -448,38 +448,6 @@ function getMealDraft() {
   console.log(api_resp);
 }
 
-// takes a timestamp, returns a string formatted for the datepickers
-function getDatepickerString(timestamp) {
-  // 3:00 pm 10/09/2015
-  if (timestamp === 0) {
-    var d = new Date();
-    timestamp = d.getTime();
-  }
-  console.log("Timestamp: " + Date.parse(starts_s));
-  var date = new Date(timestamp);
-  console.log(date);
-  var month = date.getMonth() + 1; // 10
-  var month_day = date.getDate(); // 09
-  var year = date.getFullYear(); // 2015
-  console.log("Get year:" + year);
-  var hour = date.getHours(); // 15 (converted to 3 pm below)
-  var am_pm;
-  if (hour > 12 ) {
-    hour -= 12;
-    am_pm = "pm";
-  } else {
-    am_pm = "am";
-  }
-  var minute = date.getMinutes();
-  if (minute === 0){
-    minute = "00";
-  }
-  var datepicker_string = (hour + ":" + minute + " " + am_pm + " " + month + "/" + month_day + "/" + year);
-  console.log(datepicker_string);
-
-  return datepicker_string;
-}
-
 function initDatepicker(picker_id, default_string) {
   var defaultDate;
   if (default_string == "") {
@@ -506,7 +474,7 @@ $(document).ready(function(){
   }
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    // $('#meal-data').hide();
+    $('#meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
