@@ -457,6 +457,11 @@ function getMealDraft() {
   console.log(api_resp);
 }
 
+var dateChanged = function (e) { 
+  enableSave();
+  console.log("Date changed called");
+}
+
 function initDatepicker(picker_id, default_string) {
   var defaultDate;
   if (default_string == "") {
@@ -466,6 +471,7 @@ function initDatepicker(picker_id, default_string) {
   }
   $(picker_id).datetimepicker({sideBySide: true, 
     defaultDate: defaultDate});
+  $(picker_id).data("DateTimePicker").change = dateChanged;
 }
 
 function enableSave(){
@@ -483,7 +489,7 @@ $(document).ready(function(){
   }
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    // $('#meal-data').hide();
+    $('#meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
