@@ -199,6 +199,7 @@ var Caption = React.createClass({
 var Pic = React.createClass({
   deletePic: function() {
     pics.splice(this.props.k, 1);
+    enableSave();
     render();
   },
   render: function() {
