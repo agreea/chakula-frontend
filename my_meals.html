@@ -129,7 +129,7 @@ function render(meals){
     document.getElementById('meal-data'));
 }
 
-function getMealDrafts(){
+function getMeals(){
   var api_resp = api_call('meal', {
     method: 'getMealsForHost',
     session: Cookies.get('session')
