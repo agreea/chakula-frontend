@@ -99,7 +99,9 @@ Meals list styling
 	background-color: #fff;
 	padding: 15px 0 15px 0;
 }
-
+.cost {
+	padding-left:0;
+}
 /* 
 Photo Upload Interface
 */
