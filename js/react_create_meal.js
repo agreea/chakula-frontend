@@ -445,7 +445,8 @@ function getMealDraft() {
     $('#save').text("Saved");
     $('#save').prop("disabled", true);
     $('#publish').prop('disabled', false);
-  } else {
+  } else { // redirect home if you can't get the meal
+    window.location.replace("https://yaychakula.com/";
     // TODO: show error message....
     // maybe redirect home? or to meal drafts
   }

@@ -70,6 +70,7 @@ input[type=text]:focus, textarea:focus {
 	cursor: pointer;
 	z-index: 1004;
 }
+
 #starts {
 	z-index: 100;
 }
@@ -77,6 +78,28 @@ input[type=text]:focus, textarea:focus {
 #rsvp-by-time {
 	z-index: 100;
 }
+
+/*
+Meals list styling
+*/
+
+.meal-list-item {
+	padding: 12px;
+}
+.meal-list-title {
+	margin-top: 0px;
+}
+.non-white {
+	background-color: #eee;
+}
+.live {
+	color: #19a347;
+}
+.meal-list {
+	background-color: #fff;
+	padding: 15px 0 15px 0;
+}
+
 /* 
 Photo Upload Interface
 */
@@ -84,7 +107,10 @@ hr {
 	height: 2px;
 	background-color: #bbb;
 }
-
+.list-hr {
+	height: 1px;
+	background-color: #ddd;
+}
 .btn-delete-photo {
 	float: right;
 	position: absolute;
