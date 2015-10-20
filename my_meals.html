@@ -75,7 +75,7 @@ render: function() {
 
 var MealList = React.createClass({
   render: function() {
-    listItems = this.props.data.map(function(meal_data){
+    var listItems = this.props.data.map(function(meal_data){
       return (<MealListItem 
         title={meal_data.title} 
         start_time={meal_data.start_time}
