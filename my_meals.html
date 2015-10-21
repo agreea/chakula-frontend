@@ -59,6 +59,7 @@ deleteMeal: function() {
   var resp = deleteMeal(this.props.id);
   console.log(resp);
   if (resp.Success){
+    console.log("My key: " + this.props.key);
     meals.splice(this.props.key, 1);
     render();
     $('#myModal').modal('hide');
