@@ -117,6 +117,7 @@ Meals list styling
 
 .meal-list-item:hover .btn-delete-meal {
 	display: inline;
+	border: none;
 }
 
 /* 
