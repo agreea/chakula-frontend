@@ -93,11 +93,12 @@ var MealList = React.createClass({
       if (meal_data.pics) {
         pic = meal_data.Pics[0].Name;
       }
+      var starts_s = moment(meal_data.Starts).format("h:mm a dddd, MMMM Do YYYY");
       return (<MealListItem 
         title={meal_data.Title} 
-        start_time={meal_data.Starts}
+        start_time={starts_s}
         price={meal_data.Price}
-        seats={meal_data.Seats}
+        seats={meal_data.Capacity}
         id={meal_data.Id}
         pic={pic} />);
     });
