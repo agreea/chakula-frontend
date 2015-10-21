@@ -73,6 +73,7 @@ deleteMeal: function() {
 },
 render: function() {
   var pic_src = ""
+  conole.log("Here's the pic url we got here in render: " + this.props.pic);
   if (this.props.pic) {
     pic_src = "https://yaychakula.com/img/" + this.props.pic;
   } else {
@@ -149,6 +150,7 @@ var MealList = React.createClass({
       if (meal_data.pics) {
         pic = meal_data.Pics[0].Name;
       }
+      console.log("here's the pic url..." pic);
       var list_item = <MealListItem 
         title={meal_data.Title} 
         starts={meal_data.Starts}
