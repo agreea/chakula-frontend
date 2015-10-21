@@ -105,6 +105,9 @@ Meals list styling
 .cost {
 	padding-left:0;
 }
+.meal-thumb {
+	background-color: #aaa;
+}
 /* 
 Photo Upload Interface
 */
@@ -115,6 +118,7 @@ hr {
 .list-hr {
 	height: 1px;
 	background-color: #ddd;
+
 }
 .btn-delete-photo {
 	float: right;
