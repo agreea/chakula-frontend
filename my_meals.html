@@ -58,18 +58,25 @@ render: function() {
   } else {
     pic_src = "https://yaychakula.com/img/camera.svg";
   }
+  var edit_link = "https://yaychakula.com/create_meal.html?Id=" + this.props.id;
   return (
     <div>
       <div className="meal-list-item row">
         <div className="col-sm-3 text-center">
-          <img className="img-responsive meal-thumb" src={pic_src}/>
+          <a href={edit_link}>
+            <img className="img-responsive meal-thumb" src={pic_src}/>
+          </a>
         </div>
         <div className="col-sm-8">
-          <h4 className="meal-list-title">{this.props.title}</h4>
+          <h4 className="meal-list-title">
+            <a href={edit_link}>
+              {this.props.title}
+            </a>
+          </h4>
           <p><i className="fa fa-clock-o"></i>{this.props.start_time}</p>
           <div className="row">
             <p className="col-sm-3 cost"><span className="glyphicon glyphicon-usd"></span>{this.props.price}</p>
-            <p className="col-sm-4"> <i className="fa fa-users"></i>{this.props.seats + " seats"}</p>
+            <p className="col-sm-8"> <i className="fa fa-users"></i>{this.props.seats + " seats"}</p>
           </div>
         </div>
       </div>
@@ -91,6 +98,7 @@ var MealList = React.createClass({
         start_time={meal_data.Starts}
         price={meal_data.Price}
         seats={meal_data.Seats}
+        id={meal_data.Id}
         pic={pic} />);
     });
     var list_label;
