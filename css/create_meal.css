@@ -87,7 +87,7 @@ Meals list styling
 */
 
 .meal-list-item {
-	padding: 24px 12px 0 0;
+	padding-top: 24px;
 	background-color: #fff;
 }
 .meal-list-title {
