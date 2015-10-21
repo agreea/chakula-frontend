@@ -59,6 +59,10 @@ render: function() {
     pic_src = "https://yaychakula.com/img/camera.svg";
   }
   var edit_link = "https://yaychakula.com/create_meal.html?Id=" + this.props.id;
+  var title = this.props.title;
+  if (!title) {
+    title = "Untitled";
+  }
   return (
     <div>
       <div className="meal-list-item row">
