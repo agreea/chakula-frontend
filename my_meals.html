@@ -62,7 +62,7 @@ deleteMeal: function() {
     console.log("My key: " + this.props.k);
     meals.splice(this.props.k, 1);
     render();
-    $('#myModal').modal('hide');
+    $('#myModal' + this.props.k).modal('hide');
   } else {
     this.setState({delete_error: resp.Error});
   }
@@ -169,6 +169,7 @@ var MealList = React.createClass({
 
 var CombinedList = React.createClass({
   render: function(){
+    console.log("Rendering combinded list... size: " + this.props.data.length); 
     var draft_list = [];
     var past_list = [];
     var live_list = [];
