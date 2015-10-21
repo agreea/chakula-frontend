@@ -137,8 +137,8 @@ hr {
    	background: #333;
    	border-radius: 50%;
    	cursor: pointer;
-   	display: none;
-}
+/*   	display: none;
+*/}
 
 .delete-icon {
 	color: #fff;
