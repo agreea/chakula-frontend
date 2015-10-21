@@ -81,7 +81,7 @@ render: function() {
   var edit_link = "https://yaychakula.com/create_meal.html?Id=" + this.props.id;
   var title_s = this.props.title;
   var title;
-  var starts_s = moment(meal_data.Starts).format("h:mm a dddd, MMMM Do YYYY");
+  var starts_s = moment(this.props.starts).format("h:mm a dddd, MMMM Do YYYY");
   if (!title_s) {
     title = <p>Untitled</p>;
   } else if (moment(this.props.starts) < moment()) { // show the meal is past
@@ -108,7 +108,7 @@ render: function() {
               {title}
             </a>
           </h4>
-          <p><i className="fa fa-clock-o"></i>{" " + this.props.start_time}</p>
+          <p><i className="fa fa-clock-o"></i>{" " + starts_s}</p>
           <div className="row">
             <p className="col-sm-3 cost"><span className="glyphicon glyphicon-usd"></span>{" " + this.props.price}</p>
             <p className="col-sm-8"> <i className="fa fa-users"></i>{ " " + this.props.seats + " seats"}</p>
