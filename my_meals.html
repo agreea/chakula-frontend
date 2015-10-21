@@ -89,7 +89,7 @@ render: function() {
   } else if (this.props.published) {
     title = <p><i className="fa fa-circle live"></i>{this.props.title}</p>;
   } else {
-    title = <p>this.props.title</p>
+    title = <p>{this.props.title}</p>
   }
   return (
     <div className="meal-list-item">
