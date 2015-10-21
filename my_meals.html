@@ -140,7 +140,11 @@ var CombinedList = React.createClass({
     var lists = [];
     if (draft_list.length > 0) {
       lists.push(<MealList list_name="Drafts" data={draft_list} />);
+    }
+    if (live_list.length > 0) {
       lists.push(<MealList list_name="Live Meals" data={live_list} />);
+    }
+    if (past_list.length > 0) {
       lists.push(<MealList list_name="Past Meals" data={past_list} />);
     }
     return (
