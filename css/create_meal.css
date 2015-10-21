@@ -90,27 +90,39 @@ Meals list styling
 	padding-top: 24px;
 	background-color: #fff;
 }
+
 .meal-list-title {
 	margin-top: 0px;
 }
+
 .non-white {
 	background-color: #eee;
 }
+
 .live {
 	color: #19a347;
 }
+
 .meal-list {
 	padding: 15px 0 15px 0;
 }
+
 .cost {
 	padding-left:0;
 }
+
 .meal-thumb {
 	background-color: #aaa;
 }
+
 .meal-list-item:hover .btn-delete-meal {
 	display: inline;
 }
+
+.btn-delete-meal {
+	top: 10px;
+}
+
 /* 
 Photo Upload Interface
 */
@@ -127,7 +139,6 @@ hr {
 	float: right;
 	position: absolute;
 	right: 30px;
-   	top: 10px;
    	z-index: 1000;
    	font-size: 20px;
    	height: 40px;
@@ -139,6 +150,10 @@ hr {
    	cursor: pointer;
 /*   	display: none;
 */}
+
+.btn-delete-photo{
+   	top: 10px;	
+}
 
 .delete-icon {
 	color: #fff;
