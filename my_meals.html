@@ -64,8 +64,8 @@ render: function() {
     title = "Untitled";
   }
   return (
-    <div>
-      <div className="meal-list-item row">
+    <div className="meal-list-item">
+      <div className="row">
         <div className="col-sm-3 text-center">
           <a href={edit_link}>
             <img className="img-responsive meal-thumb" src={pic_src}/>
@@ -83,8 +83,8 @@ render: function() {
             <p className="col-sm-8"> <i className="fa fa-users"></i>{this.props.seats + " seats"}</p>
           </div>
         </div>
-        <hr className="list-hr"/>
       </div>
+      <hr className="list-hr"/>
     </div>
   );
 }
