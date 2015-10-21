@@ -150,7 +150,7 @@ var MealList = React.createClass({
       if (meal_data.pics) {
         pic = meal_data.Pics[0].Name;
       }
-      console.log("here's the pic url..." pic);
+      console.log("here's the pic url..." + pic);
       var list_item = <MealListItem 
         title={meal_data.Title} 
         starts={meal_data.Starts}
