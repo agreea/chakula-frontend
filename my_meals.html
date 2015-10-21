@@ -61,6 +61,7 @@ deleteMeal: function() {
   if (resp.Success){
     meals.splice(this.props.key, 1);
     render();
+    $('#myModal').modal('hide');
   } else {
     this.setState({delete_error: resp.Error});
   }
@@ -200,6 +201,7 @@ var CombinedList = React.createClass({
 });
 
 function render(){
+  console.log("Render being called");
   React.render(
     <CombinedList data={meals} />,
     document.getElementById('meal-data'));
