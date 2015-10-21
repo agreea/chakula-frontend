@@ -118,7 +118,7 @@ hr {
 .list-hr {
 	height: 1px;
 	background-color: #ddd;
-
+	margin: 0;
 }
 .btn-delete-photo {
 	float: right;
