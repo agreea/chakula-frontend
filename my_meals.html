@@ -56,6 +56,8 @@ getInitialState: function() {
     return {delete_error: ""};
 },
 deleteMeal: function() {
+  console.log("This is what I think I'm deleting...");
+  console.log(meals[this.props.k]);
   var resp = deleteMeal(this.props.id);
   console.log(resp);
   if (resp.Success){
