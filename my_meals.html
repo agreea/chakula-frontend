@@ -114,7 +114,7 @@ render: function() {
           {this.state.delete_error}
         </div>
         <div className="modal-body text-center">
-          <p>{"Are you sure you want to delete " + {this.props.title} + "? This is forever-ever."}</p>
+          <p>{"Are you sure you want to delete " + this.props.title + "? This is forever-ever."}</p>
           <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.deleteMeal}>Cancel</button>
           <button type="button" className="btn-primary">Delete Meal</button>
         </div>
