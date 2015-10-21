@@ -79,9 +79,15 @@ render: function() {
     pic_src = "https://yaychakula.com/img/camera.svg";
   }
   var edit_link = "https://yaychakula.com/create_meal.html?Id=" + this.props.id;
-  var title = this.props.title;
-  if (!title) {
-    title = "Untitled";
+  var title_s = this.props.title;
+  var title;
+  var starts_s = moment(meal_data.Starts).format("h:mm a dddd, MMMM Do YYYY");
+  if (!title_s) {
+    title = <p>Untitled</p>;
+  } else if (moment(this.props.starts) < moment()) { // show the meal is past
+    title = <p>{this.props.title + " [PAST]"}</p>;
+  } else if (this.props.published) {
+    title = <p><i className="fa fa-circle live"></i>{this.props.title}</p>;
   }
   return (
     <div className="meal-list-item">
@@ -141,74 +147,34 @@ var MealList = React.createClass({
       if (meal_data.pics) {
         pic = meal_data.Pics[0].Name;
       }
-      var starts_s = moment(meal_data.Starts).format("h:mm a dddd, MMMM Do YYYY");
       var list_item = <MealListItem 
         title={meal_data.Title} 
-        start_time={starts_s}
+        starts={meal_data.Starts}
         price={meal_data.Price}
         seats={meal_data.Capacity}
         id={meal_data.Id}
         pic={pic}
-        k={index} />;
+        k={index}
+        published={meal_data.Published} />;
       console.log("assigning index..." + index);
         index++;
       return list_item;
     });
-    var list_label;
-    if (this.props.list_name === "Drafts") {
-      list_label = <p className="form-label"><i className="fa fa-pencil"> </i> Drafts</p>
-    } else {
-      list_label = <p className="form-label"><i className="fa fa-circle live"></i> Live</p>
-    }
     return (
       <div className="row non-white">
-        <div className="col-sm-2 text-right">
-          <p>{list_label}</p>
+        <div className="col-sm-2">
         </div>
         <div className="col-sm-8 meal-list">{listItems}</div>
       </div>);
   }
 });
 
-var CombinedList = React.createClass({
-  render: function(){
-    console.log("Rendering combinded list... size: " + this.props.data.length); 
-    var draft_list = [];
-    var past_list = [];
-    var live_list = [];
-    this.props.data.map(function(meal_data){
-      var start_time = moment(meal_data.Starts);
-      if (!meal_data.Published) {
-        draft_list.push(meal_data);
-      } else if (start_time > moment()){
-        live_list.push(meal_data);
-      } else {
-        past_list.push(meal_data);
-      }
-    });
-    var lists = [];
-    if (draft_list.length > 0) {
-      lists.push(<MealList list_name="Drafts" data={draft_list} />);
-    }
-    if (live_list.length > 0) {
-      lists.push(<MealList list_name="Live Meals" data={live_list} />);
-    }
-    if (past_list.length > 0) {
-      lists.push(<MealList list_name="Past Meals" data={past_list} />);
-    }
-    return (
-      <div className="row non-white">
-        {lists}
-      </div>
-    );
-  }
-});
 
 function render(){
   console.log("Render being called");
   console.log(meals);
   React.render(
-    <CombinedList data={meals} />,
+    <MealList data={meals} />,
     document.getElementById('meal-data'));
 }
 
