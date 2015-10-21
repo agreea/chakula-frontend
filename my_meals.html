@@ -52,6 +52,9 @@
     <script type="text/babel">
 var meals;
 var MealListItem = React.createClass({
+getInitialState: function() {
+    return {delete_error: ""};
+},
 deleteMeal: function() {
   var resp = deleteMeal(this.props.id);
   if (resp.Success){
