@@ -120,7 +120,7 @@ hr {
 	background-color: #ddd;
 	margin: 20px 0 0 0;
 }
-.btn-delete-photo {
+.btn-delete-photo, .btn-delete-meal {
 	float: right;
 	position: absolute;
 	right: 30px;
