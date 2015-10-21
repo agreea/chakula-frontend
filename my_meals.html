@@ -57,6 +57,7 @@ getInitialState: function() {
 },
 deleteMeal: function() {
   var resp = deleteMeal(this.props.id);
+  console.log(resp);
   if (resp.Success){
     meals.splice(this.props.key, 1);
     render();
