@@ -426,6 +426,9 @@ function setListeners() {
 }
 
 function getMealDraft() {
+  if (!urlVars['Id']) {
+    return;
+  }
   var api_resp = api_call('meal', 
     {method: 'getMealDraft',
     mealId: urlVars['Id'], 
