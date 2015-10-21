@@ -80,7 +80,7 @@ render: function() {
           <p><i className="fa fa-clock-o"></i>{this.props.start_time}</p>
           <div className="row">
             <p className="col-sm-3 cost"><span className="glyphicon glyphicon-usd"></span>{" " + this.props.price}</p>
-            <p className="col-sm-8"> <i className="fa fa-users"></i>{this.props.seats + " seats"}</p>
+            <p className="col-sm-8"> <i className="fa fa-users"></i>{ " " + this.props.seats + " seats"}</p>
           </div>
         </div>
       </div>
@@ -108,9 +108,9 @@ var MealList = React.createClass({
     });
     var list_label;
     if (this.props.list_name === "Drafts") {
-      list_label = <p className="form-label"><i className="fa fa-pencil"> </i>Drafts</p>
+      list_label = <p className="form-label"><i className="fa fa-pencil"> </i> Drafts</p>
     } else {
-      list_label = <p className="form-label"><i className="fa fa-circle live"> </i>Live</p>
+      list_label = <p className="form-label"><i className="fa fa-circle live"></i> Live</p>
     }
     return (
       <div className="row non-white">
