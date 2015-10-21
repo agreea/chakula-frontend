@@ -108,6 +108,9 @@ Meals list styling
 .meal-thumb {
 	background-color: #aaa;
 }
+.meal-list-item:hover .btn-delete-meal {
+	display: inline;
+}
 /* 
 Photo Upload Interface
 */
@@ -180,7 +183,7 @@ hr {
 	box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.1);
 }
 
-.pic-card:hover .btn-delete-photo{
+.pic-card:hover .btn-delete-photo {
     display: inline;
 }
 
