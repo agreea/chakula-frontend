@@ -52,11 +52,17 @@
     <script type="text/babel">
 var MealListItem = React.createClass({
 render: function() {
+  var pic_src = ""
+  if (this.props.pic) {
+    pic_src = "https://yaychakula.com/img/" + this.props.pic;
+  } else {
+    pic_src = "https://yaychakula.com/img/photo_icon.svg";
+  }
   return (
     <div>
       <div className="meal-list-item row">
         <div className="col-sm-3 text-center">
-          <img className="img-responsive meal-thumb" src={"https://yaychakula.com/img/" + this.props.pic}/>
+          <img className="img-responsive meal-thumb" src={pic_src}/>
         </div>
         <div className="col-sm-8">
           <h4 className="meal-list-title">{this.props.title}</h4>
@@ -80,13 +86,14 @@ var MealList = React.createClass({
         title={meal_data.title} 
         start_time={meal_data.start_time}
         price={meal_data.price}
-        seats={meal_data.seats} />);
+        seats={meal_data.seats}
+        pic={meal_data.pics[0].Name} />);
     });
     var list_label;
     if (this.props.list_name === "Drafts") {
-      list_label = '<i class="fa fa-pencil"></i> Drafts'
+      list_label = <div><i className="fa fa-pencil"> </i>Drafts</div>
     } else {
-      list_label = '<i class="fa fa-circle live"></i> Live'
+      list_label = <div><i className="fa fa-circle"> </i>Live</div>
     }
     return (
       <div className="row non-white">
