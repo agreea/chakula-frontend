@@ -88,6 +88,7 @@ Meals list styling
 
 .meal-list-item {
 	padding: 12px;
+	background-color: #fff;
 }
 .meal-list-title {
 	margin-top: 0px;
@@ -99,7 +100,6 @@ Meals list styling
 	color: #19a347;
 }
 .meal-list {
-	background-color: #fff;
 	padding: 15px 0 15px 0;
 }
 .cost {
