@@ -145,6 +145,7 @@ function getMeals(){
     method: 'getMealsForHost',
     session: Cookies.get('session')
   });
+  console.log(api_resp);
   if (api_resp.Success) {
     return api_resp.Return;
   } else {
