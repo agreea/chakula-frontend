@@ -137,11 +137,15 @@ var CombinedList = React.createClass({
         past_list.push(meal_data);
       }
     });
+    var lists = [];
+    if (draft_list.length > 0) {
+      lists.push(<MealList list_name="Drafts" data={draft_list} />);
+      lists.push(<MealList list_name="Live Meals" data={live_list} />);
+      lists.push(<MealList list_name="Past Meals" data={past_list} />);
+    }
     return (
       <div className="row non-white">
-        <MealList list_name="Drafts" data={draft_list} />
-        <MealList list_name="Live Meals" data={live_list} />
-        <MealList list_name="Past Meals" data={past_list} />
+        {lists}
       </div>
     );
   }
