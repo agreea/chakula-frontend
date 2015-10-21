@@ -223,6 +223,7 @@ function deleteMeal(meal_id){
     session: Cookies.get('session'), 
     mealId: meal_id
   };
+  console.log(data);
   return api_call('meal', data);
 }
 
