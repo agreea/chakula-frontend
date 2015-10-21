@@ -147,7 +147,7 @@ var MealList = React.createClass({
     var index = 0;
     var listItems = this.props.data.map(function(meal_data){
       var pic;
-      if (meal_data.Pics) {
+      if (meal_data.Pics.length != 0) {
         pic = meal_data.Pics[0].Name;
       }
       console.log("here's the pic url..." + pic);
