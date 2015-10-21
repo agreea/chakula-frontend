@@ -56,7 +56,7 @@ render: function() {
   if (this.props.pic) {
     pic_src = "https://yaychakula.com/img/" + this.props.pic;
   } else {
-    pic_src = "https://yaychakula.com/img/photo_icon.svg";
+    pic_src = "https://yaychakula.com/img/camera.svg";
   }
   return (
     <div>
@@ -82,12 +82,16 @@ render: function() {
 var MealList = React.createClass({
   render: function() {
     var listItems = this.props.data.map(function(meal_data){
+      var pic;
+      if (meal_data.pics) {
+        pic = meal_data.pics[0].Name;
+      }
       return (<MealListItem 
         title={meal_data.title} 
         start_time={meal_data.start_time}
         price={meal_data.price}
         seats={meal_data.seats}
-        pic={meal_data.pics[0].Name} />);
+        pic={pic} />);
     });
     var list_label;
     if (this.props.list_name === "Drafts") {
