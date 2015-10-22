@@ -169,7 +169,14 @@ var MealList = React.createClass({
       <div className="row non-white">
         <div className="col-sm-2">
         </div>
-        <div className="col-sm-8 meal-list">{listItems}</div>
+        <div className="col-sm-8 meal-list">
+          <div className="text-center">
+            <a href="https://yaychakula.com/create_meal.html">
+              <img className="img-responsive img-responsive-center" src="img/add-icon.svg"/>
+            </a>
+          </div>
+          {listItems}
+        </div>
       </div>);
   }
 });
