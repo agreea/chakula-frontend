@@ -29,7 +29,7 @@
         xfbml      : true,  // parse social plugins on this page
         version    : 'v2.4' // use version 2.2
       });
-      FB.Event.subscribe('auth.login', fb_handler);
+      // FB.Event.subscribe('auth.login', fb_handler);
       // FB.getLoginStatus(function(response) {
       //   statusChangeCallback(response);
       // });
@@ -51,7 +51,7 @@
         if (response.authResponse) {
             console.log('Welcome!  Fetching your information.... ');
             console.log(response); // dump complete info
-            access_token = response.authResponse.accessToken; //get access token
+            var access_token = response.authResponse.accessToken; //get access token
             user_id = response.authResponse.userID; //get FB UID
             var cookie = Cookies.get("session")
             if (cookie === undefined || cookie === "") {
