@@ -115,10 +115,11 @@ span {
     border-color: #ccc;
 }
 .nav > li * {
-    margin: auto 8px;
+    margin: auto 0;
 }
 .nav > li > a, .nav > li > button {
     padding: 0 15px;
+    border: none;
 }
 .nav > .container-fluid {
     padding-right: 0;
