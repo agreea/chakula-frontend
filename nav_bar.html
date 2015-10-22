@@ -95,7 +95,7 @@
           var pic_src = "https://graph.facebook.com/" + guest.Facebook_id + "/picture?width=200&height=200";
           user_tab = <li className="nav-item" id="signin">
               <span className="nav-text">Sign In</span>
-              <img className="img-responsive nav-icon" alt="Brand" src={pic_src} align="right" />
+              <img className="img-responsive img-circle nav-icon" alt="Brand" src={pic_src} align="right" />
             </li>
         } else {
           user_tab = <li className="nav-item" id="signin" onClick={this.login}>
@@ -113,8 +113,8 @@
               </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav navbar-right">
-                  {user_tab}
                   <li><a href="https://yaychakula.com/about.html"><span>About</span></a></li>
+                  {user_tab}
                 </ul>
               </div>
             </div>
