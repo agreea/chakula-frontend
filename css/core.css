@@ -78,11 +78,13 @@ span {
     -moz-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
+
 .fb-login {
     max-height: 50px;
     cursor: pointer; 
     margin: 0 auto;
 }
+
 .error-field {
     color: #ff2222;
 }
@@ -92,15 +94,18 @@ span {
     border-radius: 0;
     line-height: 2;
 }
+
 .navbar img {
     margin: 4px 12px;
     max-height: 50px;
     vertical-align: middle;
     display: inline-block;
 }
+
 .navbar * {
     background: transparent;
 }
+
 .nav-item-content {
     margin: auto 0px;
 }
@@ -114,13 +119,23 @@ span {
     border-left: 1px solid;
     border-color: #ccc;
 }
+
 .nav > li * {
     margin: auto 0;
 }
+
+.nav > li *:hover {
+    background: transparent;
+}
+
 .nav > li img {
     margin: 4px 12px;
 }
 
+/*.nav > li:hover {
+    background: ;
+}
+*/
 .nav > li > a, .nav > li > button {
     padding: 0 15px;
     border: none;
