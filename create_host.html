@@ -90,7 +90,6 @@
       // on page load, check if you have a cookie for the request
       // if you do, check with the server if you are attending or not attending this meal
            $(document).ready(function(){
-                $('#nav').load('include/nav_bar.html');
                 var session = Cookies.get('session');
                 if (session === undefined || session === "") {
                   $('.host-data').hide();
@@ -125,14 +124,9 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-<div class="row">
-  <div id="nav">
+<div id="nav-bar">
   </div>
+<div class="row">
   <div id="fb">
     <h3 class="text-center">First, Login With Facebook</h3>
     <div class="row text-center">

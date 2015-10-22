@@ -30,6 +30,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script type="text/babel" src="js/react_meal_reviewlist.js"></script>
     <script type="text/babel" src="js/react_meal_attendeelist.js"></script>
+    <script type="text/babel" src="js/nav_bar.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
@@ -41,7 +43,6 @@
       // TODO: HANDLE INVALID SESSION ERRORS... UH UH UH UHUH UH UHU HUHUHUHUH
            $(document).ready(function(){
                 setupMeal();
-                $('#nav').load('include/nav_bar.html');
                 id = urlVars["Id"];
                 if(Cookies.get("session") === undefined) {
                   console.log("No session");
@@ -100,11 +101,10 @@
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
 -->
+<div id="nav-bar">
+</div>
 <div class="row">
 <div id="content">
-</div>
-
-<div id="nav">
 </div>
   <div class="col-sm-8 meal-pic-title-desc">
 <div id="carousel-example-generic" class="carousel slide text-center" data-ride="carousel" data-interval="false">

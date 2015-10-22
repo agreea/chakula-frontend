@@ -28,7 +28,7 @@
     <script src="js/host_fb_login.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-
+    <script src="js/nav_bar.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
@@ -123,10 +123,6 @@
           }
           return (<div className="row">
               <h3 className="text-center">Your Chakula Profile</h3>
-              <div className="row text-center">
-                <img className="img-responsive img-circle text-center img-responsive-center" 
-                  src={"https://graph.facebook.com/" + guest.Facebook_id + "/picture?width=200&height=200"}/>
-              </div>
               <FormTextRow form_name="First Name" 
                 place_holder="First name" 
                 id="first-name"
@@ -165,13 +161,12 @@
       // on page load, check if you have a cookie for the request
       // if you do, check with the server if you are attending or not attending this meal
            $(document).ready(function(){
-                $('#nav').load('include/nav_bar.html');
                 var session = Cookies.get('session');
                 if (session === undefined || session === "") {
                   $('.guest-data').hide();
                 } else {
                   $('#fb').hide();
-                  api_resp = api_call('kitchenuser', {method: 'Get', session: session});
+                  var api_resp = api_call('kitchenuser', {method: 'Get', session: session});
                   if (api_resp.Success) {
                     render(api_resp.Return);
                   } else {
@@ -203,7 +198,7 @@
   the FB.login() function when clicked.
 -->
 <div class="row">
-  <div id="nav">
+  <div id="nav-bar">
   </div>
   <div id="fb">
     <h3 class="text-center">First, Login With Facebook</h3>
