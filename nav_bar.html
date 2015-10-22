@@ -22,6 +22,18 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/babel">
   var guest;
+  var load = function(){
+    var session = Cookies.get('session');
+    if (session) {
+      var api_resp = api_call('kitchenuser', {method: 'Get', data: {session: session}});
+      if (api_resp.Success){
+        guest = api_resp.Return;
+      }
+      console.log(api_resp);
+    }
+    render();
+  }
+
   window.fbAsyncInit = function() {
       FB.init({
         appId      : '828767043907424',
@@ -57,6 +69,7 @@
                   console.log("Here is the result: " + resp.Return.Session_token);
                   Cookies.set("session", resp.Return.Session_token, { expires: 50 });
                   console.log("from cookie: " + Cookies.get("session"));
+                  load;
                 }
                 console.log(resp);
             } else {
@@ -113,17 +126,8 @@ function render(){
     <NavBar />,
     document.getElementById('nav-bar'));
 }
-$(document).ready(function(){
-  var session = Cookies.get('session');
-  if (session) {
-    var api_resp = api_call('kitchenuser', {method: 'Get', data: {session: session}});
-    if (api_resp.Success){
-      guest = api_resp.Return;
-    }
-    console.log(api_resp);
-  }
-  render();
-});
+
+$(document).ready(load);
     </script>
 </head>
 <body>
