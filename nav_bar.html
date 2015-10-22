@@ -58,6 +58,7 @@
                   Cookies.set("session", resp.Return.Session_token, { expires: 50 });
                   console.log("from cookie: " + Cookies.get("session"));
                 }
+                console.log(resp);
             } else {
                 console.log("Didn't call API. from cookie: " + cookie);
             }
