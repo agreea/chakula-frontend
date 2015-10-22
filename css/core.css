@@ -41,6 +41,11 @@ form {
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
+    padding: 15px 15px;
+    line-height: 2;
+}
+.nav-text {
+    padding-top: 1000px;
 }
 .row {
     margin-left: 0;
@@ -59,6 +64,10 @@ form {
 .glyphicon {
     line-height: 1.5;
     top: 0;
+}
+
+span {
+    vertical-align: middle;
 }
 
 .brand-btn {
@@ -86,18 +95,21 @@ form {
     color: #ff2222;
 }
 .nav-icon {
-    max-height: 30px;
-    margin-right: 8px;
-    vertical-align: middle;
-/*    
-*/ 
-/*    float: none;
-*/}
-.navbar-brand {
-    vertical-align: middle;
-    display: inline-block;
-/*    max-height: 30px;
-*/}
-span {
+    max-height: 40px;
+    margin: 0 12px;
     vertical-align: middle;
 }
+.navbar-nav>li>a{
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 2;
+}
+.navbar-brand {
+    display: inline-block;
+    padding: 0;
+    height: auto;
+}
+
+/*span {
+    vertical-align: middle;
+}*/

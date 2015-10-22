@@ -79,11 +79,9 @@
       FB.Event.subscribe('auth.login', function(response) {
         statusChangeCallback(response)
       });
-
       // FB.getLoginStatus(function(response) {
       //   statusChangeCallback(response);
       // });
-
   };
 
   // Load the SDK asynchronously
