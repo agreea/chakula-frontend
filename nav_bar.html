@@ -24,6 +24,7 @@
   var guest;
   var load = function(){
     var session = Cookies.get('session');
+    console.log("Session: " + session);
     if (session) {
       var api_resp = api_call('kitchenuser', {method: 'Get', data: {session: session}});
       if (api_resp.Success){
