@@ -106,6 +106,7 @@ span {
 
 .navbar * {
     background: transparent;
+    color: #333;
 }
 
 .nav-item-content {
