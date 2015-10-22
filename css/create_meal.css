@@ -55,7 +55,7 @@ Meals list styling
 */
 .add-meal-icon {
 	max-height: 70px;
-	margin: 16px;
+	padding: 16px;
 }
 .meal-list-item {
 	padding-top: 24px;
