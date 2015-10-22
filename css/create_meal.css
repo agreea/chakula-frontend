@@ -46,12 +46,12 @@
 /*
 Meals list styling
 */
-.row ul {
+/*.row ul {
 	list-style-type: none;
     font-size: 13px;
     color: #666;
     margin: 8px;
-}
+}*/
 .add-meal-icon {
 	max-height: 90px;
 	padding: 16px;
