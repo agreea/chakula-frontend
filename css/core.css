@@ -105,12 +105,17 @@ span {
     margin: auto 0px;
 }
 
-.nav> li {
+.nav > li {
+    display: inline-flex;
     cursor: pointer;
+    height: 100%;
     margin: auto 0px;
-    padding: 0 8px;
+    padding: 8px;
     border-left: 1px solid;
-    border-color: #999;
+    border-color: #ccc;
+}
+.nav > li * {
+    margin: auto 8px;
 }
 .nav > li > a, .nav > li > button {
     padding: 0 15px;
