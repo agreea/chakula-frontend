@@ -21,6 +21,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <script type="text/babel">
+  var guest;
   window.fbAsyncInit = function() {
       FB.init({
         appId      : '828767043907424',
@@ -29,10 +30,6 @@
         xfbml      : true,  // parse social plugins on this page
         version    : 'v2.4' // use version 2.2
       });
-      // FB.Event.subscribe('auth.login', fb_handler);
-      // FB.getLoginStatus(function(response) {
-      //   statusChangeCallback(response);
-      // });
   };
 
   // Load the SDK asynchronously
@@ -44,16 +41,13 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-    var login = function() {
-      FB.login(fb_handler);
-    }
     var fb_handler = function(response) {
         if (response.authResponse) {
             console.log('Welcome!  Fetching your information.... ');
             console.log(response); // dump complete info
             var access_token = response.authResponse.accessToken; //get access token
             var user_id = response.authResponse.userID; //get FB UID
-            var cookie = Cookies.get("session")
+            var cookie = Cookies.get("session");
             if (cookie === undefined || cookie === "") {
                 resp = api_call('kitchenuser', {
                       method: "Login",
@@ -73,41 +67,65 @@
         } else {
             //user hit cancel button
             console.log('User cancelled login or did not fully authorize.');
-
         }
     }
+    var NavBar = React.createClass({
+      login: function() {
+        FB.login(fb_handler);
+      },
+      render: function() {
+        var user_tab;
+        if (guest) {
+          var pic_src = "https://graph.facebook.com/" + guest.Facebook_id + "/picture?width=200&height=200";
+          user_tab = <li className="nav-item" id="signin">
+              <span className="nav-text">Sign In</span>
+              <img className="img-responsive nav-icon" alt="Brand" src={pic_src} align="right" />
+            </li>
+          }
+        } else {
+          user_tab = <li className="nav-item" id="signin" onClick={this.login}>
+              <span className="nav-text">Sign In</span>
+              <img className="img-responsive nav-icon" alt="Brand" src="img/user-icon.svg" align="right" />
+            </li>
+        }
+        return(
+          <nav className="navbar navbar-default navbar-static-top">
+            <div className="container-fluid">
+              <div className="navbar-header">
+                <a className="navbar-brand" href="https://yaychakula.com/">
+                  <img className="img-responsive nav-icon" alt="Brand" src="img/chakula_icon.svg" align="left">
+                </a>
+              </div>
+              <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul className="nav navbar-nav navbar-right">
+                  {user_tab}
+                  <li><a href="https://yaychakula.com/about.html"><span>About</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        );
+      }
+    });
+function render(){
+  React.render(
+    <NavBar />,
+    document.getElementById('nav-bar'));
+}
     $(document).ready(function(){
-      $('#signin').click(login);
-    })
+      var session = Cookies.get('session');
+      if (session) {
+        var api_resp = api_call('kitchenuser', {method: 'Get', data: {session: session}});
+        if (api_resp.Success){
+          guest = api_resp.Return;
+        }
+      }
+      render();
+    });
     </script>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-static-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="https://yaychakula.com/">
-        <img class="img-responsive nav-icon" alt="Brand" src="img/chakula_icon.svg" align="left">
-      </a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="https://yaychakula.com/about.html"><span>About</span></a></li>
-        <li class="nav-item" id="signin">
-            <span class="nav-text">Sign In</span>
-            <img class="img-responsive nav-icon" alt="Brand" src="img/user-icon.svg" align="right" />
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+  <div id="nav-bar">
+  </div>
 </body>
 </html>
