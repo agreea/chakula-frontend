@@ -14,38 +14,6 @@ ul {
 	color: #ff0000;
 }
 
-.form-control {
-	font-family: 'Helvetica-Neue', Arial;
-}
-
-input[type=text], 
-textarea, 
-.input-group-addon,
-.dropdown-toggle {
-/*	background: rgba(0,0,0,0);
-*/}
-
-input[type=text], textarea {
-	transition: border-color 0.4s ease;
-	border-color: #ddd;
-	border-width: 0 0 2px 0;
-	padding: 8px 0;
-	width: 100%;
-}
-
-input[type=text]:focus, textarea:focus {
-	transition: border-color 0.4s ease;
-	outline: none;
-    border-color: #5bc0de;
-}
-
-.form-row {
-	padding: 4px 0;
-}
-
-.form-label {
-	color: #aaa;
-}
 .dropdown-toggle {
 	border: none;
 }

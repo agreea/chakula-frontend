@@ -36,9 +36,13 @@
       var FormTextRow = React.createClass({
         getInitialState: function() {
           return ({value: this.props.default_val});
-        }
+        },
         formChanged: function(e) {
-          setState({value: e.target.result});
+          this.setState({value: e.target.result});
+          var saveBtn = $('#save');
+          saveBtn.prop('disabled', false);
+          saveBtn.css("background-color", '#5bc0de');
+          saveBtn.text("Save");
         },
         render: function() {
           var default_val = "";
@@ -49,7 +53,7 @@
               <div className="col-xs-4 col-sm-2 form-label">
                 <p className="text-right">{this.props.form_name}</p>
               </div>
-              <div className="col-sm-8">
+              <div className="col-xs-5 col-sm-4">
               <input className="text-field" id={this.props.id} type="text" 
                 defaultValue={default_val} 
                 onChange={this.formChanged}
@@ -60,49 +64,117 @@
       });
       
       var ProfileForm = React.createClass({
+        save: function() {
+          var first_name = $('#first-name').val();
+          var last_name = $('#last-name').val();
+          var email = $('#email').val();
+          var phone = $('#phone').val();
+          var email_reg = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+          var phone_reg = /^\d+$/;
+          var errors = [];
+          console.log({First_name: first_name, 
+                    Last_name: last_name, 
+                    Email: email, 
+                    Phone: phone, 
+                    Facebook_id: this.props.data.Facebook_id});
+          // check that no fields are left blank
+          if (!first_name) {
+            errors.push("First name is required");
+          }
+          if (!last_name) {
+            errors.push("Last name is required");            
+          }
+          if (!email) {
+            errors.push("Email is required");            
+          } else if (!email_reg.test(email)) { 
+          // test email and (if they offered) phone formatting
+            errors.push("Email format is invalid");              
+          }
+          if (phone && !phone_reg.test(phone) || phone.length !== 10) {
+            errors.push("Phone format is invalid. Must be 10 digits only.");              
+          }
+          console.log("Checked everything out");
+          if (errors.length > 0 ) { // don't send if there are any errors
+            render({First_name: first_name, 
+                    Last_name: last_name, 
+                    Email: email, 
+                    Phone: phone, 
+                    Facebook_id: this.props.data.Facebook_id}, 
+                    errors);
+            return;
+          }
+          var data = {method: 'Update', firstName: first_name, lastName: last_name, email: email, phone: phone};
+          var api_resp = api_call('kitchenuser', data);
+          if (api_resp.Success){
+            var saveBtn = $('#save');
+            saveBtn.prop('disabled', true);
+            saveBtn.text('Saved');
+            saveBtn.css('background-color', '#19a347');
+          }
+        },
         render: function() {
+          var guest = this.props.data;
+          var errors = this.props.errors;
+          var errorNodes = [];
+          if (errors) { // construct error list if there are any
+            errorNodes = errors.map(function(error){
+              return <li>{error}</li>;
+            });
+          }
           return (<div className="row">
+              <h3 className="text-center">Your Chakula Profile</h3>
+              <div className="row text-center">
+                <img className="img-responsive img-circle text-center img-responsive-center" 
+                  src={"https://graph.facebook.com/" + guest.Facebook_id + "/picture?width=200&height=200"}/>
+              </div>
               <FormTextRow form_name="First Name" 
                 place_holder="First name" 
                 id="first-name"
-                default_val={this.props.data.First_name}/>
+                default_val={guest.First_name}/>
               <FormTextRow form_name="Last Name" 
                 place_holder="First name" 
                 id="last-name"
-                default_val={this.props.data.Last_name}/>
+                default_val={guest.Last_name}/>
               <FormTextRow form_name="Email" 
                 place_holder="One you actually check" 
                 id="email"
-                default_val={this.props.data.Email}/>
+                default_val={guest.Email}/>
               <FormTextRow form_name="Phone #" 
                 place_holder="01234567890" 
                 id="phone"
-                default_val={this.props.data.Phone}/>
+                default_val={guest.Phone}/>
+              <div className="row">
+                <ul className="error-field col-xs-5 col-sm-4 col-xs-offset-4 col-sm-offset-2" id="error-field">
+                  {errorNodes}
+                </ul>
+              </div>
+              <div className="col-sm-3 col-sm-offset-2">
+                <button type="button" 
+                  className="text-center brand-btn btn-lg btn" 
+                  id="save"
+                  onClick={this.save}>Save</button>
+              </div>
             </div>);
         }
       });
-      function render(guest) {
+      function render(guest, errors) {
         React.render(
-          <ProfileForm data={guest}/>,
+          <ProfileForm data={guest} errors={errors}/>,
           document.getElementById('guest-data'));
       }
-      urlVars = getUrlVars();
       // on page load, check if you have a cookie for the request
       // if you do, check with the server if you are attending or not attending this meal
            $(document).ready(function(){
                 $('#nav').load('include/nav_bar.html');
                 var session = Cookies.get('session');
                 if (session === undefined || session === "") {
-                  $('.host-data').hide();
+                  $('.guest-data').hide();
                 } else {
                   $('#fb').hide();
-                  api_resp = getHostData();
+                  api_resp = api_call('kitchenuser', {method: 'Get', session: session});
                   if (api_resp.Success) {
-                    console.log("success");
-                    // populate the host data fields
-                    setupHostData(api_resp.Return);
+                    render(api_resp.Return);
                   } else {
-                    console.log("failure");
                     // show an error message or fb login
                   }
                 }
@@ -140,76 +212,7 @@
       </fb:login-button>
     </div>
   </div>
-  <div class="host-data">
-      <div class="col-md-8 col-md-offset-2">
-    <h2 class="text-center">Your Host Profile</h2>
-    <div class="row">
-      <p>Your Picture</p>
-      <img class="img-responsive img-circle" id="prof-pic" src="https://graph.facebook.com/10153547967605406/picture?width=200">
-      <ul>
-        <li >
-          <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-            Anyone can see.</li>
-      <li >
-          <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-            Synced with Facebook.</li>
-      </ul>
-    </div>
-    <div class="row">
-      <p>Your Information</p>
-    </div>
-    <div class="row">
-      <input id="first-name" type="text" size="20" placeholder="First Name"/>
-        <ul>
-          <li >
-            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-            Anyone can see.</li>
-        </ul>
-    </div>
-    <div class="row">
-      <input id="last-name" type="text" size="20" placeholder="Last Name"/>
-      <ul>
-        <li >
-          <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
-          Only you can see.</li>
-      </ul>
-    </div>
-    <div class="row">
-      <input id="email" type="text" size="40" placeholder="Email"/>
-      <ul>
-        <li >
-          <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
-          Only you can see.</li>
-        <li >
-          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-          We will send receipts and (soon) guest requests to this email address.</li>
-      <ul>
-    </div>
-    <div class="row">
-      <input id="phone" type="text" size="20" placeholder="Phone #"/>
-      <ul>
-        <li>
-          <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
-        Only you can see.</li>
-        <li class="">
-          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-          We will send guest requests to this number.</li>
-      </ul>
-    </div>
-    <div class="row">
-      <input id="address" type="text" size="40" placeholder="Address"/>
-      <ul>
-        <li >
-          <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
-          Only guests you welcome to your meals can see.</li>
-      </ul>
-    </div>
-    <ul class="error-field" id="error-field">
-    </ul>
-    <button type="button" class="btn-info btn-lg btn">Save</button>
-    <a class="stripe-btn btn-lg btn" href="https://connect.stripe.com/oauth/authorize?response_type=code&amp;client_id=ca_6n8She3UUNpFgbv1sYtB28b6Db7sTLY6&amp;scope=read_write" target="_blank">Connect with Stripe</a>
-    <ul class="warning-field" id="stripe-warning">
-    </ul>
+  <div id="guest-data">
   </div>
   </div> 
     <!-- Footer -->

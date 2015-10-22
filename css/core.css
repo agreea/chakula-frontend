@@ -57,7 +57,9 @@ form {
     line-height: 1.5;
     top: 0;
 }
-
+.img-responsive-center {
+    margin: 0 auto;
+}
 span {
     vertical-align: middle;
 }
@@ -110,16 +112,19 @@ span {
     margin: auto 0px;
 }
 
-.nav > li {
+.nav > li, .navbar-header {
     display: inline-flex;
     cursor: pointer;
     height: 100%;
     margin: auto 0px;
     padding: 8px;
-    border-left: 1px solid;
-    border-color: #ccc;
 }
 
+.nav > li {
+    border-left: 1px solid;
+    border-color: #ccc;
+ 
+}
 .nav > li * {
     margin: auto 0;
 }
@@ -144,6 +149,7 @@ span {
     padding-right: 0;
 }
 .navbar-brand {
+    margin: auto 0;
     display: inline-block;
     padding: 0;
     height: auto;
@@ -156,3 +162,39 @@ span {
 /*span {
     vertical-align: middle;
 }*/
+
+/*
+Form styling
+*/
+.form-control {
+    font-family: 'Helvetica-Neue', Arial;
+}
+
+input[type=text], 
+textarea, 
+.input-group-addon,
+.dropdown-toggle {
+/*  background: rgba(0,0,0,0);
+*/}
+
+input[type=text], textarea {
+    transition: border-color 0.4s ease;
+    border-color: #ddd;
+    border-width: 0 0 2px 0;
+    padding: 8px 0;
+    width: 100%;
+}
+
+input[type=text]:focus, textarea:focus {
+    transition: border-color 0.4s ease;
+    outline: none;
+    border-color: #5bc0de;
+}
+
+.form-row {
+    padding: 4px 0;
+}
+
+.form-label {
+    color: #aaa;
+}
