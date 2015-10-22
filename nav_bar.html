@@ -26,7 +26,7 @@
     var session = Cookies.get('session');
     console.log("Session: " + session);
     if (session) {
-      var api_resp = api_call('kitchenuser', {method: 'Get', data: {session: session}});
+      var api_resp = api_call('kitchenuser', {method: 'Get', session: session});
       if (api_resp.Success){
         guest = api_resp.Return;
       }
