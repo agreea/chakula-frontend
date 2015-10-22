@@ -29,9 +29,7 @@
         xfbml      : true,  // parse social plugins on this page
         version    : 'v2.4' // use version 2.2
       });
-      FB.Event.subscribe('auth.login', function(response) {
-        statusChangeCallback(response)
-      });
+      FB.Event.subscribe('auth.login', fb_handler);
       // FB.getLoginStatus(function(response) {
       //   statusChangeCallback(response);
       // });
@@ -45,7 +43,7 @@
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
-  
+
     var login = function() {
       FB.login(fb_handler);
     }
