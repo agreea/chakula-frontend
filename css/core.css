@@ -38,15 +38,7 @@ form {
     text-align: left;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-.navbar {
-    margin-bottom: 0;
-    border-radius: 0;
-    padding: 15px 15px;
-    line-height: 2;
-}
-.nav-text {
-    padding-top: 1000px;
-}
+
 .row {
     margin-left: 0;
     margin-right: 0;
@@ -94,24 +86,46 @@ span {
 .error-field {
     color: #ff2222;
 }
-.nav-icon {
-    max-height: 40px;
-    margin: 0 12px;
+
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    line-height: 2;
+}
+.navbar img {
+    margin: 4px 12px;
+    max-height: 50px;
     vertical-align: middle;
     display: inline-block;
 }
-.nav-item {
-    cursor: pointer;
+.navbar * {
+    background: transparent;
 }
-.navbar-nav>li>a{
-    padding-top: 0;
-    padding-bottom: 0;
-    line-height: 2;
+.nav-item-content {
+    margin: auto 0px;
+}
+
+.nav> li {
+    cursor: pointer;
+    margin: auto 0px;
+    padding: 0 8px;
+    border-left: 1px solid;
+    border-color: #999;
+}
+.nav > li > a, .nav > li > button {
+    padding: 0 15px;
+}
+.nav > .container-fluid {
+    padding-right: 0;
 }
 .navbar-brand {
     display: inline-block;
     padding: 0;
     height: auto;
+}
+.nav-item-content {
+    padding: 0;
+    border: none;
 }
 
 /*span {

@@ -88,20 +88,45 @@
       login: function() {
         FB.login(fb_handler);
       },
+      signout: function() {
+        Cookies.remove('session');
+        location.reload();
+      },
       render: function() {
         var user_tab;
         console.log(guest);
+        var right_nav;
         if (guest) {
-          var pic_src = "https://graph.facebook.com/" + guest.Facebook_id + "/picture?width=200&height=200";
-          user_tab = <li className="nav-item" id="signin">
+          var pic_src = "https://graph.facebook.com/" + guest.Facebook_id + "/picture?width=100&height=100";
+          user_tab = (<li id="user">
+            <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               <span className="nav-text">{guest.First_name}</span>
               <img className="img-responsive img-circle nav-icon" alt="Brand" src={pic_src} align="right" />
-            </li>
+            </button>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="#"></a></li>
+              <li><a href="#">My Profile</a></li>
+              <li><a onClick={this.signout}>Signout</a></li>
+            </ul>
+          </li>);
+          host_tab = (<li className="nav-item">
+                      <a className="nav-item-content" href={"https://yaychakula.com/my_meals.html?Id="+guest.Id}>
+                        <span>Host</span>
+                        <img className="img-responsive nav-icon" src="img/host-icon.svg"/>
+                      </a>
+                    </li>);
+          right_nav = (<ul className="nav navbar-right">
+                        {user_tab} 
+                        {host_tab}
+                      </ul>);
         } else {
-          user_tab = <li className="nav-item" id="signin" onClick={this.login}>
-              <span className="nav-text">Sign In</span>
-              <img className="img-responsive nav-icon" alt="Brand" src="img/user-icon.svg" align="right" />
-            </li>
+          right_nav = 
+            <ul className="nav navbar-right">
+              <li id="signin"> 
+                <span className="nav-text">Sign In</span>
+                <img className="img-responsive nav-icon" alt="Brand" src="img/user-icon.svg" align="right" />
+              </li>
+            </ul>
         }
         return(
           <nav className="navbar navbar-default navbar-static-top">
@@ -118,10 +143,7 @@
                 </a>
               </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul className="nav navbar-nav navbar-right">
-                  <li className="nav-item"><a href="https://yaychakula.com/about.html">About</a></li>
-                  {user_tab}
-                </ul>
+                {right_nav}
               </div>
             </div>
           </nav>
