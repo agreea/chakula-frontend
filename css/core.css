@@ -117,9 +117,10 @@ span {
 .nav > li * {
     margin: auto 0;
 }
-.nav > li > img {
+.nav > li img {
     margin: 4px 12px;
 }
+
 .nav > li > a, .nav > li > button {
     padding: 0 15px;
     border: none;
