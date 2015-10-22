@@ -94,7 +94,7 @@
         if (guest) {
           var pic_src = "https://graph.facebook.com/" + guest.Facebook_id + "/picture?width=200&height=200";
           user_tab = <li className="nav-item" id="signin">
-              <span className="nav-text">Sign In</span>
+              <span className="nav-text">{guest.First_name}</span>
               <img className="img-responsive img-circle nav-icon" alt="Brand" src={pic_src} align="right" />
             </li>
         } else {
@@ -107,13 +107,19 @@
           <nav className="navbar navbar-default navbar-static-top">
             <div className="container-fluid">
               <div className="navbar-header">
+              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">                
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
                 <a className="navbar-brand" href="https://yaychakula.com/">
                   <img className="img-responsive nav-icon" alt="Brand" src="img/chakula_icon.svg" align="left" />
                 </a>
               </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav navbar-right">
-                  <li className="nav-item"><a href="https://yaychakula.com/about.html"><span>About</span></a></li>
+                  <li className="nav-item"><a href="https://yaychakula.com/about.html">About</a></li>
                   {user_tab}
                 </ul>
               </div>

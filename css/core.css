@@ -98,6 +98,7 @@ span {
     max-height: 40px;
     margin: 0 12px;
     vertical-align: middle;
+    display: inline-block;
 }
 .nav-item {
     cursor: pointer;
