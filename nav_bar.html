@@ -75,6 +75,7 @@
       },
       render: function() {
         var user_tab;
+        console.log(guest);
         if (guest) {
           var pic_src = "https://graph.facebook.com/" + guest.Facebook_id + "/picture?width=200&height=200";
           user_tab = <li className="nav-item" id="signin">
@@ -111,17 +112,17 @@ function render(){
     <NavBar />,
     document.getElementById('nav-bar'));
 }
-    $(document).ready(function(){
-      var session = Cookies.get('session');
-      if (session) {
-        var api_resp = api_call('kitchenuser', {method: 'Get', data: {session: session}});
-        if (api_resp.Success){
-          guest = api_resp.Return;
-        }
-        console.log(api_resp);
-      }
-      render();
-    });
+$(document).ready(function(){
+  var session = Cookies.get('session');
+  if (session) {
+    var api_resp = api_call('kitchenuser', {method: 'Get', data: {session: session}});
+    if (api_resp.Success){
+      guest = api_resp.Return;
+    }
+    console.log(api_resp);
+  }
+  render();
+});
     </script>
 </head>
 <body>
