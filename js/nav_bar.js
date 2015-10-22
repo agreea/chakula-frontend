@@ -114,7 +114,7 @@
       }
     });
 
-load(){
+function load(){
     var session = Cookies.get('session');
     console.log("Session: " + session);
     if (session) {
