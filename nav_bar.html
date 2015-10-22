@@ -21,7 +21,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <script type="text/babel">
-    function login() {
+    var login = function() {
       FB.login(fb_handler);
     }
     var fb_handler = function(response) {
@@ -53,6 +53,9 @@
 
         }
     }
+    $(document).ready(function(){
+      $('#signin').click(login);
+    })
     </script>
 </head>
 <body>
@@ -75,7 +78,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="https://yaychakula.com/about.html"><span>About</span></a></li>
-        <li class="nav-item" onclick="login()">
+        <li class="nav-item" id="signin">
             <span class="nav-text">Sign In</span>
             <img class="img-responsive nav-icon" alt="Brand" src="img/user-icon.svg" align="right" />
         </li>
