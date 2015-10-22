@@ -80,7 +80,9 @@ span {
     -moz-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
-
+.brand-btn:hover {
+    color: #fff;
+}
 .fb-login {
     max-height: 50px;
     cursor: pointer; 
