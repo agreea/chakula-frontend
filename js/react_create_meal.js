@@ -238,6 +238,22 @@ var PicList = React.createClass({
           <p className="text-center upload-card-text">+Add Picture</p>
         </div>
       </div>);
+    var picRows = []; // two dimensional array. Each row contains 3 pic items
+    var thisRow = []; // second dimension of the array. Once a row stores 3 pics, you add it to the pic rows
+    for (var i in picNodes) {
+      // add this row to pic rows if it's full
+      if (thisRow.length === 3) {
+        var fullRow = thisRow;
+        picRows.push(<div className="row">
+          {fullRow}
+        </div>);
+        thisRow.length = 0; // empty the array
+      }
+      thisRow.push(picNodes[i]);
+      if (i === (picNodes.length - 1)) { // if this is the last pic, add the current row once you've added the pic
+        picRows.push(<div className="row">{thisRow}</div>);
+      }
+    }
     return (
       <div className="row">
         <div className="col-xs-4 col-sm-2">
