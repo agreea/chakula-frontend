@@ -372,9 +372,9 @@ function resize(e){
     canvas.getContext('2d').drawImage(img, 0, 0, width, height);
     var dataurl = canvas.toDataURL("image/jpg");
     pics.push({Name: dataurl, Caption: ""});
+    render();
   };
   img.src = e.target.result;
-  render();
 }
 
 var attemptSave = function() {
