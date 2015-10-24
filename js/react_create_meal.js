@@ -310,32 +310,31 @@ function readURL(input) {
 }
 
 function resize(e){
-  var canvas = document.createElement("canvas");
   var img = document.createElement("img");
+  img.onload = function(event) {
+    var canvas = document.createElement("canvas");
+    var MAX_WIDTH = 800;
+    var MAX_HEIGHT = 600;
+    var width = img.width;
+    var height = img.height;
+    if (width > height && width > MAX_WIDTH) { // if landscape, resize by landscape
+      console.log("Logged max width event");
+      height *= MAX_WIDTH / width;
+      width = MAX_WIDTH;
+    } else if (height > MAX_HEIGHT) { // if portrait, resize by portrait
+        console.log("Logged max height event");
+        width *= MAX_HEIGHT / height;
+        height = MAX_HEIGHT;
+    }
+    canvas.width = width;
+    canvas.height = height;
+    console.log("Width: " + width  + ". Height: " + height);
+    canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+    var dataurl = canvas.toDataURL("image/jpg");
+    pics.push({Name: dataurl, Caption: ""});
+    render();
+  };
   img.src = e.target.result;
-  console.log(e.target.result);
-  var MAX_WIDTH = 800;
-  var MAX_HEIGHT = 600;
-  var width = img.width;
-  var height = img.height;
-  var ctx = canvas.getContext("2d");
-  ctx.drawImage(img, 0, 0);
-  if (width > height && width > MAX_WIDTH) { // if landscape, resize by landscape
-    console.log("Logged max width event");
-    height *= MAX_WIDTH / width;
-    width = MAX_WIDTH;
-  } else if (height > MAX_HEIGHT) { // if portrait, resize by portrait
-      console.log("Logged max height event");
-      width *= MAX_HEIGHT / height;
-      height = MAX_HEIGHT;
-  }
-  canvas.width = width;
-  canvas.height = height;
-  console.log("Width: " + width  + ". Height: " + height);
-  ctx.drawImage(img, 0, 0, width, height);
-  var dataurl = canvas.toDataURL("image/jpg");
-  pics.push({Name: dataurl, Caption: ""});
-  render();
 }
 
 var attemptSave = function() {
@@ -522,7 +521,7 @@ $(document).ready(function(){
   }
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    $('#meal-data').hide();
+    // $('#meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
