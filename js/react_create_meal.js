@@ -536,7 +536,7 @@ $(document).ready(function(){
   }
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    // $('#meal-data').hide();
+    $('#meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
