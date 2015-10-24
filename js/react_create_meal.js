@@ -318,6 +318,8 @@ function resize(e){
   var MAX_HEIGHT = 600;
   var width = img.width;
   var height = img.height;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
 
   if (width > height && width > MAX_WIDTH) { // if landscape, resize by landscape
     height *= MAX_WIDTH / width;
@@ -329,7 +331,6 @@ function resize(e){
   canvas.width = width;
   canvas.height = height;
   console.log("Width: " + width  + ". Height: " + height);
-  var ctx = canvas.getContext("2d");
   ctx.drawImage(img, 0, 0, width, height);
   var dataurl = canvas.toDataURL("image/jpg");
   pics.push({Name: dataurl, Caption: ""});
