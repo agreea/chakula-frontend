@@ -221,6 +221,10 @@ var Pic = React.createClass({
 });
 
 var PicList = React.createClass({
+  photoUpload: function(input){
+    readURL(input);
+    console.log("You called on change for photo upload");
+  },
   render: function() {
     var index = 0;
     var picNodes = this.props.data.map(function (pic) {
@@ -268,7 +272,7 @@ var PicList = React.createClass({
           <div className="upload-img-form">
             <div className="fileUpload btn-upload btn btn-primary">
               <span>Upload Photos</span>
-              <input className="upload" id="img-upload" type="file" multiple/>
+              <input className="upload" id="img-upload" type="file" multiple onChange={this.photoUpload}/>
             </div>
           </div>
           <hr/>
