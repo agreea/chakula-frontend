@@ -238,7 +238,7 @@ var PicList = React.createClass({
           <h1 className="text-center">
             <span className="glyphicon glyphicon-picture upload-icon" aria-hidden="true"></span>
           </h1>
-          <input className="upload upload-in-card" id="img-upload" type="file" multiple/>
+          <input className="upload upload-in-card" id="img-upload" type="file" multiple onChange={this.photoUpload}/>
           <p className="text-center upload-card-text">+Add Picture</p>
         </div>
       </div>);
