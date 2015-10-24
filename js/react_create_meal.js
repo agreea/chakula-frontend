@@ -248,7 +248,7 @@ var PicList = React.createClass({
         picRows.push(<div className="row">
           {fullRow}
         </div>);
-        thisRow.length = 0; // empty the array
+        thisRow = []; // empty the array
         console.log("This row filled up!");
       }
       thisRow.push(picNodes[i]);
