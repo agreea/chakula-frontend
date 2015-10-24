@@ -328,6 +328,7 @@ function resize(e){
   }
   canvas.width = width;
   canvas.height = height;
+  console.log("Width: " + width ". Height: " + height);
   var ctx = canvas.getContext("2d");
   ctx.drawImage(img, 0, 0, width, height);
   var dataurl = canvas.toDataURL("image/jpg");
@@ -519,7 +520,7 @@ $(document).ready(function(){
   }
   var session = Cookies.get('session');
   if (session === undefined || session === "") {
-    $('#meal-data').hide();
+    // $('#meal-data').hide();
   } else {
     $('#fb').hide();
     getMealDraft();
