@@ -320,11 +320,12 @@ function resize(e){
   var height = img.height;
   var ctx = canvas.getContext("2d");
   ctx.drawImage(img, 0, 0);
-
   if (width > height && width > MAX_WIDTH) { // if landscape, resize by landscape
+    console.log("Logged max width event");
     height *= MAX_WIDTH / width;
     width = MAX_WIDTH;
   } else if (height > MAX_HEIGHT) { // if portrait, resize by portrait
+      console.log("Logged max height event");
       width *= MAX_HEIGHT / height;
       height = MAX_HEIGHT;
   }
