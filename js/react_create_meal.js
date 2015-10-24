@@ -268,7 +268,7 @@ var PicList = React.createClass({
           </div>
           <hr/>
           <div className="picList row pic-grid">
-            {picNodes}
+            {picRows}
           </div>
         </div>
       </div>
