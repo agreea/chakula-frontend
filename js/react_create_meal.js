@@ -232,16 +232,6 @@ var PicList = React.createClass({
       index++;
       return (picNode);
     });
-    picNodes.push(
-      <div className="col-sm-4">
-        <div className="pic-card upload-card fileUpload">
-          <h1 className="text-center">
-            <span className="glyphicon glyphicon-picture upload-icon" aria-hidden="true"></span>
-          </h1>
-          <input className="upload upload-in-card" id="img-upload" type="file" multiple onChange={this.photoUpload}/>
-          <p className="text-center upload-card-text">+Add Picture</p>
-        </div>
-      </div>);
     var picRows = []; // two dimensional array. Each row contains 3 pic items
     var thisRow = []; // second dimension of the array. Once a row stores 3 pics, you add it to the pic rows
     console.log("Pic node length: " + picNodes.length);
