@@ -4,7 +4,8 @@
                       method: 'POST',
                       data: data,
                       dataType: 'json',
-                      async: false,}).responseText;
+                      async: false,
+                      }).responseText;
     return JSON.parse(response);
   }
 

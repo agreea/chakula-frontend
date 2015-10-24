@@ -334,8 +334,8 @@ function resize(e){
   var img = document.createElement("img");
   img.onload = function(event) {
     var canvas = document.createElement("canvas");
-    var MAX_WIDTH = 800;
-    var MAX_HEIGHT = 600;
+    var MAX_WIDTH = 900;
+    var MAX_HEIGHT = 700;
     var width = img.width;
     var height = img.height;
     if (width > height && width > MAX_WIDTH) { // if landscape, resize by landscape
