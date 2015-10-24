@@ -348,6 +348,10 @@ var attemptSave = function() {
   };
   console.log(data);
   var api_resp = api_call('meal', data);
+  $(this).html('<p>Saving </p><div class="spinner"><div class="bounce1">' + 
+              '</div><div class="bounce2"></div>' +
+              '<div class="bounce3"></div></div>');
+  $(this).prop('disabled', true);
   if (api_resp.Success) {
     if (!urlVars['Id']) { // reload the page if you haven't done so already
       window.location.replace("https://yaychakula.com/create_meal.html?Id=" + api_resp.Return);
@@ -355,10 +359,13 @@ var attemptSave = function() {
     $(this).css('background-color', '#19a347');
     $(this).text("Saved");
     $(this).prop("disabled", true);
+    $(this).html('Saved');
     $('#error-field').hide();
     $('#publish').prop('disabled', false);
   } else {
     $('#error-field').html('<li>' + api_resp.Error + '</li>');
+    $(this).prop('disabled', false);
+    $(this).html('Save');
   }
   return api_resp;
 }
