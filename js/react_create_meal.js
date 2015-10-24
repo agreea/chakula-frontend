@@ -330,7 +330,7 @@ function resize(e){
     canvas.height = height;
     console.log("Width: " + width  + ". Height: " + height);
     canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-    var dataurl = canvas.toDataURL("image/jpg");
+    var dataurl = canvas.toDataURL("image/jpeg");
     pics.push({Name: dataurl, Caption: ""});
     render();
   };
