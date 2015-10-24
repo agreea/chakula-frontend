@@ -241,6 +241,7 @@ var PicList = React.createClass({
     var picRows = []; // two dimensional array. Each row contains 3 pic items
     var thisRow = []; // second dimension of the array. Once a row stores 3 pics, you add it to the pic rows
     for (var i in picNodes) {
+      console.log("Index at: " + i);
       // add this row to pic rows if it's full
       if (thisRow.length === 3) {
         var fullRow = thisRow;
@@ -251,7 +252,7 @@ var PicList = React.createClass({
         console.log("This row filled up!");
       }
       thisRow.push(picNodes[i]);
-      console.log(thisRow);
+      console.log("This row's length:" + thisRow.length);
       if (i === (picNodes.length - 1)) { // if this is the last pic, add the current row once you've added the pic
         picRows.push(<div className="row">{thisRow}</div>);
       }
