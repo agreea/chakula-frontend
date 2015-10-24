@@ -302,12 +302,37 @@ function readURL(input) {
     }
     var reader = new FileReader();
     reader.onload = function (e) {
-      pics.push({Name: e.target.result, Caption: ""});
-      console.log("Here's pic's length: " + pics.length);
-      render();
+      resize(e);
+      console.log(pics);
     }
     reader.readAsDataURL(file);
   }
+}
+
+function resize(e){
+  var img = document.createElement("img");
+  img.src = e.target.result;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+  var MAX_WIDTH = 800;
+  var MAX_HEIGHT = 600;
+  var width = img.width;
+  var height = img.height;
+
+  if (width > height && width > MAX_WIDTH) { // if landscape, resize by landscape
+    height *= MAX_WIDTH / width;
+    width = MAX_WIDTH;
+  } else if (height > MAX_HEIGHT) { // if portrait, resize by portrait
+      width *= MAX_HEIGHT / height;
+      height = MAX_HEIGHT;
+  }
+  canvas.width = width;
+  canvas.height = height;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0, width, height);
+  var dataurl = canvas.toDataURL("image/jpg");
+  pics.push({Name: dataurl, Caption: ""});
+  render();
 }
 
 var attemptSave = function() {
