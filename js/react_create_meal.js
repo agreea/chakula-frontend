@@ -248,8 +248,10 @@ var PicList = React.createClass({
           {fullRow}
         </div>);
         thisRow.length = 0; // empty the array
+        console.log("This row filled up!");
       }
       thisRow.push(picNodes[i]);
+      console.log(thisRow);
       if (i === (picNodes.length - 1)) { // if this is the last pic, add the current row once you've added the pic
         picRows.push(<div className="row">{thisRow}</div>);
       }
