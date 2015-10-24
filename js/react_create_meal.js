@@ -313,6 +313,7 @@ function resize(e){
   var canvas = document.createElement("canvas");
   var img = document.createElement("img");
   img.src = e.target.result;
+  console.log(e.target.result);
   var ctx = canvas.getContext("2d");
   ctx.drawImage(img, 0, 0);
   var MAX_WIDTH = 800;
