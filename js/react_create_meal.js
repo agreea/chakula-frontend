@@ -310,6 +310,7 @@ function readURL(input) {
 }
 
 function resize(e){
+  var canvas = document.createElement("canvas");
   var img = document.createElement("img");
   img.src = e.target.result;
   var ctx = canvas.getContext("2d");
