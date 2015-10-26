@@ -7,17 +7,8 @@ api_call = function(api_fragment, data) {
                       async: false,
                       }).responseText;
   var api_method = data.method;
-  var json_resp = JSON.parse(response);
-  console.log(json_resp);
-  if (api_method.toLowerCase() === "get" && 
-      api_fragment === "kitchenuser" &&
-      json_resp.Success && 
-      json_resp.Return) {
-    guest = json_resp.Return;
-  }
-  return json_resp;
+  return JSON.parse(response);
 }
-var guest;
 
 function getUrlVars() {
     var vars = [], hash;

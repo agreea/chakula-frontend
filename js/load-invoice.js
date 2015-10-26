@@ -2,9 +2,8 @@
 cards = Cookies.getJSON('cards')
 // var subtotal = 
 $('#last-4').text("..." + cards[cards.length - 1])
-api_resp = getMeal();
 
-if (api_resp.Success) {
+if (meal_data) {
   $('#total').text("$" + Math.round(meal_data.Price*100)/100);
 }
 
@@ -36,7 +35,6 @@ for (var i = 0; i < max_seats; i++) {
                       });
       console.log(api_resp);
       if (api_resp.Success) {
-        // if user.phone = "" (does this really matter??. No. It doesn't.)
         if (!guest.Phone) {
           $('#modal-body').load("include/add_phone.html");
         } else {

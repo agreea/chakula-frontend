@@ -1,4 +1,5 @@
 var api_resp = getMeal();
+var guest = api_call('kitchenuser', {method:'Get', session:Cookies.get('session')})
 var meal_data;
 if (api_resp.Success) {
   meal_data = api_resp.Return;
