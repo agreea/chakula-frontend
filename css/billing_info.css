@@ -1,0 +1,27 @@
+/*!
+ * Start Bootstrap - Grayscale Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+.card-hr {
+    margin: 4px 0;
+}
+
+p {
+    margin: 12px 0;
+    font-size: 18px;
+}
+
+a {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.add-card-icon {
+    max-height: 30px;
+}
+
+.add-card-row {
+    display: inline-block;
+}
