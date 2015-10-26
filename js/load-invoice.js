@@ -38,7 +38,7 @@ for (var i = 0; i < max_seats; i++) {
         if (!guest.Phone) {
           $('#modal-body').load("include/add_phone.html");
         } else {
-          $('#modal-body').load("include/final_invoice.html");
+          $('#modal-body').load("include/final_invoice_screen.html");
         }
         $('#request-meal-btn').text("Pending");
         request_button.css("background-color", "#8cd3e8");
