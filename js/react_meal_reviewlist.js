@@ -49,6 +49,13 @@ var Review = React.createClass({
 
 var ReviewList = React.createClass({
   render: function() {
+    if (!this.props.data){
+      return (
+        <div className="reviewList">
+          <p>No reviews yet!</p>
+        </div>
+      );
+    }
     var reviewNodes = this.props.data.map(function (review) {
       var date_ts = Date.parse(review.Date);
       var date = new Date(date_ts);
