@@ -10,7 +10,8 @@ api_call = function(api_fragment, data) {
   var json_resp = JSON.parse(response);
   if (api_method.toLowerCase() === "get" && 
       api_fragment === "kitchenuser" &&
-      json_resp.Success) {
+      json_resp.Success && 
+      json_resp.Return) {
     guest = json_resp.Return;
   }
   return 
