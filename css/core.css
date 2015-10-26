@@ -131,14 +131,21 @@ span {
     border-color: #ccc;
  
 }
+
 .nav > li * {
     margin: auto 0;
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out;
 }
 
 .nav > li *:hover, 
 .nav-item:hover, 
-.nav li:hover {
-    background: transparent;
+.nav li:hover,
+.nav-item-content:hover,
+.nav>li>a:hover
+{
+    background: #fff;
 }
 
 .nav > li img {
