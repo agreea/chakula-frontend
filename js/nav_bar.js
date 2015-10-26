@@ -1,4 +1,4 @@
-  // var guest;
+  var guest;
   window.fbAsyncInit = function() {
       FB.init({
         appId      : '828767043907424',

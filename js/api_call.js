@@ -6,7 +6,14 @@ api_call = function(api_fragment, data) {
                       dataType: 'json',
                       async: false,
                       }).responseText;
-  return JSON.parse(response);
+  var api_method = data.method;
+  var json_resp = JSON.parse(response);
+  if (api_method.toLowerCase() === "get" && 
+      api_fragment === "kitchenuser" &&
+      json_resp.Success) {
+    guest = json_resp.Return;
+  }
+  return 
 }
 var guest;
 
