@@ -135,7 +135,7 @@ span {
     margin: auto 0;
 }
 
-.nav > li *:hover, .nav-item-content:hover {
+.nav > li *:hover, .nav-item-content:hover, .nav li:hover {
     background: transparent;
 }
 
