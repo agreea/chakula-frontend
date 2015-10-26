@@ -33,8 +33,8 @@ for (var i = 0; i < max_seats; i++) {
                         seats: seats,
                         last4: cards[0]
                       });
-      console.log(api_resp);
       if (api_resp.Success) {
+        console.log(guest);
         if (!guest.Phone) {
           $('#modal-body').load("include/add_phone.html");
         } else {
