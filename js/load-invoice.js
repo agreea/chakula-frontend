@@ -66,7 +66,11 @@ for (var i = 0; i < max_seats; i++) {
       console.log(api_resp);
       if (api_resp.Success) {
         // if user.phone = "" (does this really matter??. No. It doesn't.)
-        $('#modal-body').load("include/add_phone.html")
+        if (!guest.Phone) {
+          $('#modal-body').load("include/add_phone.html");
+        } else {
+          $('#modal-body').load("include/final_invoice_page.html");
+        }
         $('#request-meal-btn').text("Pending");
         request_button.css("background-color", "#8cd3e8");
         request_button.css("color", "#2e464c");
