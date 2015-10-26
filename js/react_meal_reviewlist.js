@@ -49,7 +49,7 @@ var Review = React.createClass({
 
 var ReviewList = React.createClass({
   render: function() {
-    if (!this.props.data){
+    if (this.props.data == null){
       return (
         <div className="reviewList">
           <p>No reviews yet!</p>
