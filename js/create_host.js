@@ -4,7 +4,7 @@
       var FormTextRow = React.createClass({
         getInitialState: function() {
           return ({value: this.props.default_val});
-        }
+        },
         formChanged: function(e) {
           setState({value: e.target.result});
         },
