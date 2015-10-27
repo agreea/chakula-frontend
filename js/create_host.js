@@ -75,7 +75,7 @@
 			} else {
 				$('#error-field').html(errorHtml);
 			}
-        }
+        },
         render: function() {
           return (<div className="row">
           	<h3 className="text-center">Your Host Profile</h3>
