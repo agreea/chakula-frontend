@@ -75,7 +75,6 @@ function create_host_render(guest) {
     React.render(
     	<ProfileForm data={guest}/>,
         document.getElementById('host-data'));
-    }
 }
 
 function attemptSendHostData() {
