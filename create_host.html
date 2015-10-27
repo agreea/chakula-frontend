@@ -24,69 +24,17 @@
     <script src="js/jquery.js"></script>
     <script src="js/js-cookie.js"></script>
     <script src="js/api_call.js"></script>
-    <script src="js/create_host.js"></script>
     <script src="js/host_fb_login.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script type="text/babel" src="js/nav_bar.js"></script>
+    <script type="text/babel"src="js/create_host.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
     <script type="text/babel">
-      var FormTextRow = React.createClass({
-        getInitialState: function() {
-          return ({value: this.props.default_val});
-        }
-        formChanged: function(e) {
-          setState({value: e.target.result});
-        },
-        render: function() {
-          var default_val = "";
-          if (this.props.default_val) {
-            default_val = this.props.default_val;
-          }
-          return (<div className="row">
-              <div className="col-xs-4 col-sm-2 form-label">
-                <p className="text-right">{this.props.form_name}</p>
-              </div>
-              <div className="col-sm-8">
-              <input className="text-field" id={this.props.id} type="text" 
-                defaultValue={default_val} 
-                onChange={this.formChanged}
-                placeholder={this.props.placeholder}/>
-              </div>
-            </div>);
-        }
-      });
-      
-      var ProfileForm = React.createClass({
-        render: function() {
-          return (<div className="row">
-              <FormTextRow form_name="First Name" 
-                place_holder="First name" 
-                id="first-name"
-                default_val={this.props.data.First_name}/>
-              <FormTextRow form_name="Last Name" 
-                place_holder="First name" 
-                id="last-name"
-                default_val={this.props.data.Last_name}/>
-              <FormTextRow form_name="Email" 
-                place_holder="One you actually check" 
-                id="email"
-                default_val={this.props.data.Email}/>
-              <FormTextRow form_name="Phone #" 
-                place_holder="01234567890" 
-                id="phone"
-                default_val={this.props.data.Phone}/>
-            </div>);
-        }
-      });
-      function render(guest) {
-        React.render(
-          <ProfileForm data={guest}/>,
-          document.getElementById('guest-data'));
-      }
+
       urlVars = getUrlVars();
       // on page load, check if you have a cookie for the request
       // if you do, check with the server if you are attending or not attending this meal

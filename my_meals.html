@@ -33,7 +33,7 @@
     <script src="js/moment.js"></script>
     <script src="js/bootstrap-datetimepicker.js"></script>
     <script type="text/babel" src="js/nav_bar.js"></script>
-
+    <script type="text/babel" src="js/create_host.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -51,6 +51,14 @@
       // ga('send', 'pageview');
     </script>
     <script type="text/babel">
+if (!Cookies.get('session')) {
+  window.location.replace("http://yaychakula.com");
+}
+var api_resp = api_call('host', {session:Cookies.get('session')});
+if (!api_resp.Success || !api_resp.Return.Stripe_user_id) {
+  window.location.replace("http://yaychakula.com/create_host.html");
+  return;
+}
 var meals;
 var MealListItem = React.createClass({
 getInitialState: function() {
@@ -234,6 +242,8 @@ $(document).ready(function() {
 </div>
 
 <div class="row">
+  <div id="host-data">
+  </div>
   <div id="meal-data">
   </div>
     <!-- Footer -->
