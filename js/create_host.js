@@ -8,10 +8,15 @@
         formChanged: function(e) {
         	if (this.props.id === "phone") {
         		phone = e.target.result;
+        		console.log('Phone: ' + phone);
         	} else if (this.props.id === "email") {
         		email = e.target.result;
+        	        		console.log('Email: ' + email);
+
         	} else if (this.props.id === "address") {
         		address = e.target.result;
+        		        		console.log('Address: ' + address);
+
         	}
 	          this.setState({value: e.target.result});
         },
