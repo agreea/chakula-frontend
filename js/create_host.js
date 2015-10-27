@@ -21,17 +21,13 @@
 	          this.setState({value: e.target.result});
         },
         render: function() {
-          var default_val = "";
-          if (this.props.default_val) {
-            default_val = this.props.default_val;
-          }
           return (<div className="row">
               <div className="col-xs-4 col-sm-2 form-label">
                 <p className="text-right">{this.props.form_name}</p>
               </div>
               <div className="col-sm-8">
               <input className="text-field" id={this.props.id} type="text" 
-                defaultValue={default_val} 
+                defaultValue={this.props.default_value} 
                 onChange={this.formChanged}
                 placeholder={this.props.placeholder}/>
               </div>
@@ -94,15 +90,15 @@
               <FormTextRow form_name="Email" 
                 place_holder="One you actually check" 
                 id="email"
-                default_val={this.state.email}/>
+                default_value={this.state.email}/>
               <FormTextRow form_name="Phone #" 
                 place_holder="01234567890" 
                 id="phone"
-                default_val={this.state.phone}/>
+                default_value={this.state.phone}/>
               <FormTextRow form_name="Address" 
                 place_holder="3700 O St NW" 
                 id="address"
-                default_val={this.state.phone}/>
+                default_value={this.state.phone}/>
                 <div className="row">
                 	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
                 		<button type="button" className="brand-btn btn-info btn-lg btn" 
@@ -133,7 +129,6 @@ function create_host_render(guest) {
 
 function sendHostData() {
 	var $host_data = $('.host-data');
-	console.log("first: " + $host_data.find('#first-name').val() + ". Last: " + lastName + ". Email: " + email + ". Phone: " + phone + ". Address: " + address);
 	var api_resp = api_call('host', {
 						method: 'updateHost',
 						session: Cookies.get('session'),
