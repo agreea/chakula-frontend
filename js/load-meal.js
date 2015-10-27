@@ -179,7 +179,10 @@ function getHumanTime(hour, minutes) {
   if (hour < 12) {
     time = hour + ":" + minutes + " AM";
   } else {
-    time = (hour - 12) + ":" + minutes + " PM";
+    if (hour > 12) {
+      hour -= 12;
+    }
+    time = hour + ":" + minutes + " PM";
   }
   return time;
 }
