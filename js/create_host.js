@@ -7,14 +7,14 @@
         },
         formChanged: function(e) {
         	if (this.props.id === "phone") {
-        		phone = e.target.result;
+        		phone = e.target.value;
         		console.log('Phone: ' + phone);
         	} else if (this.props.id === "email") {
-        		email = e.target.result;
+        		email = e.target.value;
         	        		console.log('Email: ' + email);
 
         	} else if (this.props.id === "address") {
-        		address = e.target.result;
+        		address = e.target.value;
         		        		console.log('Address: ' + address);
 
         	}
