@@ -3,10 +3,17 @@
       var email = "";
       var FormTextRow = React.createClass({
         getInitialState: function() {
-          return ({value: this.props.default_val});
+    	      return ({value: this.props.default_val});
         },
         formChanged: function(e) {
-          this.setState({value: e.target.result});
+        	if (this.props.id === "phone") {
+        		phone = e.target.result;
+        	} else if (this.props.id === "email") {
+        		email = e.target.result;
+        	} else if (this.props.id === "address") {
+        		address = e.target.result;
+        	}
+	          this.setState({value: e.target.result});
         },
         render: function() {
           var default_val = "";
@@ -47,21 +54,21 @@
 			console.log("attempting to send host data");
 			var submittable = true;
 			var errorHtml = ""
-			var $host_data = $('.host-data');
-			if (!$host_data.find('#email').val()) {
+			if (!email) {
 				submittable = false;
 				errorHtml += "<li>Email is mandatory</li>"
 			}
-			var phone_input = $host_data.find('#phone').val()
-			if (!phone_input) {
+			if (!phone) {
 				submittable = false;
 				errorHtml += "<li>Phone is mandatory</li>"
 			}
 			var reg = /^\d+$/;
-			if (!reg.test(phone_input)) {
+			if (!reg.test(phone)) {
 				errorHtml += "<li>Phone must be digits only</li>"
+			} else if (!phone.length != 10) {
+				errorHtml += "<li>Phone must be 10 digits long</li>"
 			}
-			if (!$host_data.find('#address').val()) {
+			if (!address) {
 				submittable = false;
 				errorHtml += "<li>Address is mandatory</li>"
 			}
@@ -92,6 +99,7 @@
                 id="address"
                 default_val={this.state.phone}/>
                 <div className="row">
+                	<div className=""
                 	<button type="button" className="brand-btn btn-info btn-lg btn" onClick={this.attemptSendHostData}>Save</button>
                 </div>
               <div className="row">
@@ -118,9 +126,6 @@ function create_host_render(guest) {
 
 function sendHostData() {
 	var $host_data = $('.host-data');
-	var email = $host_data.find('#email').val();
-	var phone = $host_data.find('#phone').val();
-	var address = $host_data.find('#address').val();
 	console.log("first: " + $host_data.find('#first-name').val() + ". Last: " + lastName + ". Email: " + email + ". Phone: " + phone + ". Address: " + address);
 	var api_resp = api_call('host', {
 						method: 'updateHost',
