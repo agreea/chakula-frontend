@@ -492,6 +492,7 @@ function getMealDraft() {
     rsvpBy_s = meal_draft.Rsvp_by;
     pics = meal_draft.Pics;
     published = meal_draft.Published;
+    seats = meal_draft.Capacity;
     console.log(pics);
     $('#save').css('background-color', '#19a347');
     $('#save').text("Saved");
