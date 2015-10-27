@@ -142,6 +142,7 @@ function sendHostData() {
 	    $host_data.find('button').html("<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Saved");
 	    $host_data.find('button').css("background-color", "#19a347");
 	    $host_data.find('button').css("color", "#fff");
+	    $('#error-field').hide();
 		// show the saved button as green, add check mark, disable
 	}
 }
@@ -152,6 +153,8 @@ if (!Cookies.get('session')) {
 
 var api_resp = api_call('kitchenuser', {method: 'get', session: Cookies.get('session')});
 if (api_resp.Success) {
+	email = api_resp.Return.Email;
+	phone = api_resp.Return.Phone;
 	create_host_render(api_resp.Return);
 }
 create_host_render(api_resp.Return);
