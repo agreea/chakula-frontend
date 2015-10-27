@@ -90,15 +90,14 @@
               <FormTextRow form_name="Email" 
                 place_holder="One you actually check" 
                 id="email"
-                default_value={this.props.data.email}/>
+                default_value={this.props.data.Email}/>
               <FormTextRow form_name="Phone #" 
                 place_holder="01234567890" 
                 id="phone"
-                default_value={this.props.data.phone}/>
+                default_value={this.props.data.Phone}/>
               <FormTextRow form_name="Address" 
                 place_holder="3700 O St NW" 
-                id="address"
-                default_value={this.props.data.phone}/>
+                id="address"/>
                 <div className="row">
                 	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
                 		<button type="button" className="brand-btn btn-info btn-lg btn" 
