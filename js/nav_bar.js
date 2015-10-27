@@ -34,7 +34,7 @@
                   console.log("Here is the result: " + resp.Return.Session_token);
                   Cookies.set("session", resp.Return.Session_token, { expires: 50 });
                   console.log("from cookie: " + Cookies.get("session"));
-                  load;
+                  load();
                 }
                 console.log(resp);
             } else {
