@@ -7,8 +7,8 @@ function sendStripeData() {
  				session: session 
             });
 	if (api_resp.Success) {
-		console.log("We did it!")
-		$('#status-label').text("Successfully Connected Your Stripe Account!")
+		$('#status-label').text("Successfully Connected Your Stripe Account!");
+  		window.location.replace("https://yaychakula.com/my_meals.html");
 	} else {
 		$('#status-label').text(api_resp.Error);
 		console.log(api_resp.Error);
