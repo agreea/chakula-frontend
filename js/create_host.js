@@ -30,7 +30,7 @@
       var ProfileForm = React.createClass({
         getInitialState: function() {
         	return {Email: this.props.email, Address: this.props.Address, Phone: this.props.Phone};
-        }
+        },
         emailChanged: function(e){
           email = e.target.result;
           this.setState({Email: e.target.result}); 
