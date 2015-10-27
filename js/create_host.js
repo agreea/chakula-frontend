@@ -99,7 +99,7 @@
                 id="address"
                 default_val={this.state.phone}/>
                 <div className="row">
-                	<div className=""
+                	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
                 	<button type="button" className="brand-btn btn-info btn-lg btn" onClick={this.attemptSendHostData}>Save</button>
                 </div>
               <div className="row">
