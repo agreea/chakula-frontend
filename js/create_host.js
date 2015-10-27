@@ -43,6 +43,39 @@
           phone = e.target.result;
           this.setState({Phone: e.target.result}); 
         },
+        attemptSendHostData: function() {
+			console.log("attempting to send host data");
+			var submittable = true;
+			var errorHtml = ""
+			var $host_data = $('.host-data');
+			if (!$host_data.find('#email').val()) {
+				submittable = false;
+				errorHtml += "<li>Email is mandatory</li>"
+			}
+			var phone_input = $host_data.find('#phone').val()
+			if (!phone_input) {
+				submittable = false;
+				errorHtml += "<li>Phone is mandatory</li>"
+			}
+			var reg = /^\d+$/;
+			if (!reg.test(phone_input)) {
+				errorHtml += "<li>Phone must be digits only</li>"
+			}
+			if (!$host_data.find('#address').val()) {
+				submittable = false;
+				errorHtml += "<li>Address is mandatory</li>"
+			}
+			if (!Cookies.get('session')) {
+				// show fb login
+				submittable = false;
+			}
+			if (submittable) {
+				console.log("Submitting");
+				sendHostData();
+			} else {
+				$('#error-field').html(errorHtml);
+			}
+        }
         render: function() {
           return (<div className="row">
           	<h3 className="text-center">Your Host Profile</h3>
@@ -81,40 +114,6 @@ function create_host_render(guest) {
     React.render(
     	<ProfileForm data={guest}/>,
         document.getElementById('host-data'));
-}
-
-function attemptSendHostData() {
-	console.log("attempting to send host data");
-	var submittable = true;
-	var errorHtml = ""
-	var $host_data = $('.host-data');
-	if (!$host_data.find('#email').val()) {
-		submittable = false;
-		errorHtml += "<li>Email is mandatory</li>"
-	}
-	var phone_input = $host_data.find('#phone').val()
-	if (!phone_input) {
-		submittable = false;
-		errorHtml += "<li>Phone is mandatory</li>"
-	}
-	var reg = /^\d+$/;
-	if (!reg.test(phone_input)) {
-		errorHtml += "<li>Phone must be digits only</li>"
-	}
-	if (!$host_data.find('#address').val()) {
-		submittable = false;
-		errorHtml += "<li>Address is mandatory</li>"
-	}
-	if (!Cookies.get('session')) {
-		// show fb login
-		submittable = false;
-	}
-	if (submittable) {
-		console.log("Submitting");
-		sendHostData();
-	} else {
-		$('#error-field').html(errorHtml);
-	}
 }
 
 function sendHostData() {
