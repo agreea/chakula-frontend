@@ -6,7 +6,7 @@
           return ({value: this.props.default_val});
         },
         formChanged: function(e) {
-          setState({value: e.target.result});
+          this.setState({value: e.target.result});
         },
         render: function() {
           var default_val = "";
