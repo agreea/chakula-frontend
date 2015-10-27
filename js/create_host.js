@@ -66,7 +66,7 @@
 			var reg = /^\d+$/;
 			if (!reg.test(phone)) {
 				errorHtml += "<li>Phone must be digits only</li>"
-			} else if (!phone.length != 10) {
+			} else if (!phone.length !== 10) {
 				errorHtml += "<li>Phone must be 10 digits long</li>"
 			}
 			if (!address) {
@@ -106,7 +106,7 @@
                 </div>
               <div className="row">
                 <div className="col-xs-4 col-sm-2">
-                  <p className="text-right">Payment</p>
+                  <p className="text-right form-label">Payment</p>
                 </div>
                 <div className="col-xs-6 col-sm-4">
                   <a className="stripe-btn btn-lg btn" 
