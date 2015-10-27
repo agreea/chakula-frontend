@@ -25,7 +25,7 @@
               <div className="col-xs-4 col-sm-2 form-label">
                 <p className="text-right">{this.props.form_name}</p>
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-4 col-xs-8">
               <input className="text-field" id={this.props.id} type="text" 
                 defaultValue={this.props.default_value} 
                 onChange={this.formChanged}
