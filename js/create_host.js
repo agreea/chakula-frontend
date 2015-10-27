@@ -28,6 +28,9 @@
       });
       
       var ProfileForm = React.createClass({
+        getInitialState: function() {
+        	return {Email: this.props.email, Address: this.props.Address, Phone: this.props.Phone};
+        }
         emailChanged: function(e){
           email = e.target.result;
           this.setState({Email: e.target.result}); 
@@ -46,19 +49,22 @@
               <FormTextRow form_name="Email" 
                 place_holder="One you actually check" 
                 id="email"
-                default_val={this.props.data.Email}/>
+                default_val={this.state.email}/>
               <FormTextRow form_name="Phone #" 
                 place_holder="01234567890" 
                 id="phone"
-                default_val={this.props.data.Phone}/>
+                default_val={this.state.phone}/>
               <FormTextRow form_name="Address" 
                 place_holder="3700 O St NW" 
-                id="address"/>
+                id="address"
+                default_val={this.state.phone}/>
+                <div className="row">
+                	<button type="button" className="brand-btn btn-info btn-lg btn" onClick={this.attemptSendHostData}>Save</button>
+                </div>
               <div className="row">
                 <div className="col-xs-4 col-sm-2">
                   <p className="text-right">Payment</p>
                 </div>
-                <button type="button" class="btn-info btn-lg btn" onClick={this.attemptSendHostData}>Save</button>
                 <div className="col-xs-6 col-sm-4">
                   <a className="stripe-btn btn-lg btn" 
                   	href="https://connect.stripe.com/oauth/authorize?response_type=code&amp;client_id=ca_6n8She3UUNpFgbv1sYtB28b6Db7sTLY6&amp;scope=read_write" 
@@ -139,11 +145,8 @@ if (!Cookies.get('session')) {
   window.location.replace("http://yaychakula.com");
 }
 
-var api_resp = api_call('host', {method: 'get', session:Cookies.get('session')});
-
-if (!api_resp.Success || !api_resp.Return.Stripe_user_id) {
-	api_resp = api_call('kitchenuser', {method: 'get', session: Cookies.get('session')});
-	if (api_resp.Success) {
-		create_host_render(api_resp.Return);
-	}
+var api_resp = api_call('kitchenuser', {method: 'get', session: Cookies.get('session')});
+if (api_resp.Success) {
+	create_host_render(api_resp.Return);
 }
+create_host_render(api_resp.Return);
