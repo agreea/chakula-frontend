@@ -90,7 +90,8 @@
                 default_value={this.props.data.Phone}/>
               <FormTextRow form_name="Address" 
                 place_holder="3700 O St NW" 
-                id="address"/>
+                id="address"
+                default_value={this.props.data.Address}/>
               <div className="row">
               	<div className="col-sm-2 col-xs-4">
               		<p className="form-label text-right">Bio</p>
