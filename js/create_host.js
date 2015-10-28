@@ -19,7 +19,7 @@
         		        		console.log('Address: ' + address);
 
         	}
-	          this.setState({value: e.target.result});
+	          this.setState({value: e.target.value});
         },
         render: function() {
           return (<div className="row">
@@ -41,8 +41,8 @@
         	return {Bio: this.props.data.Bio};
         },
         bioChanged: function(e){
-          bio = e.target.result;
-          this.setState({Bio: e.target.result}); 
+          bio = e.target.value;
+          this.setState({Bio: e.target.value}); 
         },
         attemptSendHostData: function() {
 			console.log("attempting to send host data");
