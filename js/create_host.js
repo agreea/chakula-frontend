@@ -143,10 +143,10 @@ function sendHostData() {
 	console.log(api_resp);
 	if (api_resp.Success) {
 		var $host_data = $('.host-data');
-	  	$host_data.find('button').prop('disabled', true);
-	    $host_data.find('button').html("<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Saved");
-	    $host_data.find('button').css("background-color", "#19a347");
-	    $host_data.find('button').css("color", "#fff");
+	  	$host_data.find('.brand-btn').prop('disabled', true);
+	    $host_data.find('.brand-btn').html("<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Saved");
+	    $host_data.find('.brand-btn').css("background-color", "#19a347");
+	    $host_data.find('.brand-btn').css("color", "#fff");
 	    $('#error-field').hide();
 		// show the saved button as green, add check mark, disable
 	}
