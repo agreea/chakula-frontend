@@ -94,7 +94,7 @@
               <div className="row">
               	<div className="col-sm-2 col-xs-4">
               		<p className="form-label">Bio</p>
-              	<div>
+              	</div>
               	<div className="col-xs-8 col-sm-6">
               		<textarea className="text-field" id="bio" rows="6"
                     	placeholder="Tell us about yourself. Do you like candle-lit dinners, long walks on the beach?..."
