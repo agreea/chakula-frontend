@@ -4,7 +4,7 @@
       var bio = "";
       var FormTextRow = React.createClass({
         getInitialState: function() {
-    	      return ({value: this.props.default_val});
+    	      return ({value: this.props.default_value});
         },
         formChanged: function(e) {
         	if (this.props.id === "phone") {
@@ -160,6 +160,7 @@ var api_resp = api_call('host', {method: 'getHost', session: Cookies.get('sessio
 if (api_resp.Success) {
 	email = api_resp.Return.Email;
 	phone = api_resp.Return.Phone;
+	address = api_resp.Return.Address;
 	create_host_render(api_resp.Return);
 }
 create_host_render(api_resp.Return);
