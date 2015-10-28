@@ -93,7 +93,7 @@
                 id="address"/>
               <textarea className="text-field" id="bio" rows="6"
                     placeholder="Tell us about yourself. Do you like candle-lit dinners, long walks on the beach?..."
-                    defaultValue={this.props.state.Bio} onChange={this.bioChanged}></textarea>
+                    defaultValue={this.state.Bio} onChange={this.bioChanged}></textarea>
                 <div className="row">
                 	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
                 		<button type="button" className="brand-btn btn-info btn-lg btn" 
