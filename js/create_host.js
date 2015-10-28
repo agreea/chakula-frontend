@@ -43,14 +43,6 @@
           email = e.target.result;
           this.setState({Email: e.target.result}); 
         },
-        addressChanged: function(e) {
-          address = e.target.result;
-          this.setState({Address: e.target.result}); 
-        },
-        phoneChanged: function(e) {
-          phone = e.target.result;
-          this.setState({Phone: e.target.result}); 
-        },
         attemptSendHostData: function() {
 			console.log("attempting to send host data");
 			var submittable = true;
@@ -98,6 +90,9 @@
               <FormTextRow form_name="Address" 
                 place_holder="3700 O St NW" 
                 id="address"/>
+              <textarea className="text-field" id="bio" rows="6"
+                    placeholder="Tell us about yourself. Do you like candle-lit dinners, long walks on the beach?..."
+                    defaultValue={this.props.data.Bio}>
                 <div className="row">
                 	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
                 		<button type="button" className="brand-btn btn-info btn-lg btn" 
@@ -151,7 +146,7 @@ if (!Cookies.get('session')) {
   window.location.replace("http://yaychakula.com");
 }
 
-var api_resp = api_call('kitchenuser', {method: 'get', session: Cookies.get('session')});
+var api_resp = api_call('kitchenuser', {method: 'getHost', session: Cookies.get('session')});
 if (api_resp.Success) {
 	email = api_resp.Return.Email;
 	phone = api_resp.Return.Phone;
