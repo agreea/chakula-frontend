@@ -38,7 +38,7 @@
       
       var ProfileForm = React.createClass({
         getInitialState: function() {
-        	return {Email: this.props.email, Address: this.props.Address, Phone: this.props.Phone, Bio: this.props.Bio};
+        	return {Bio: this.props.data.Bio};
         },
         bioChanged: function(e){
           bio = e.target.result;
@@ -91,15 +91,17 @@
               <FormTextRow form_name="Address" 
                 place_holder="3700 O St NW" 
                 id="address"/>
-              <textarea className="text-field" id="bio" rows="6"
+              <div className="row">
+              	<textarea className="text-field" id="bio" rows="6"
                     placeholder="Tell us about yourself. Do you like candle-lit dinners, long walks on the beach?..."
                     defaultValue={this.state.Bio} onChange={this.bioChanged}></textarea>
-                <div className="row">
-                	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
-                		<button type="button" className="brand-btn btn-info btn-lg btn" 
-                		onClick={this.attemptSendHostData}>Save</button>
-                	</div>
-                </div>
+              </div>
+              <div className="row">
+               	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
+               		<button type="button" className="brand-btn btn-info btn-lg btn" 
+               		onClick={this.attemptSendHostData}>Save</button>
+               	</div>
+              </div>
               <div className="row">
                 <div className="col-xs-4 col-sm-2">
                   <p className="text-right form-label">Payment</p>
