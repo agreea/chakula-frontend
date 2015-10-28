@@ -144,7 +144,7 @@ function sendHostData() {
 	console.log("Sent host data");
 	console.log(api_resp);
 	if (api_resp.Success) {
-		var $host_data = $('.host-data');
+		var $host_data = $('#host-data');
 	  	$host_data.find('.brand-btn').prop('disabled', true);
 	    $host_data.find('.brand-btn').html("<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Saved");
 	    $host_data.find('.brand-btn').css("background-color", "#19a347");
