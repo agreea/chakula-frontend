@@ -118,7 +118,7 @@
 
 function create_host_render(host) {
     React.render(
-    	<ProfileForm data={guest}/>,
+    	<ProfileForm data={host}/>,
         document.getElementById('host-data'));
 }
 
@@ -148,7 +148,7 @@ if (!Cookies.get('session')) {
   window.location.replace("http://yaychakula.com");
 }
 
-var api_resp = api_call('kitchenuser', {method: 'getHost', session: Cookies.get('session')});
+var api_resp = api_call('host', {method: 'getHost', session: Cookies.get('session')});
 if (api_resp.Success) {
 	email = api_resp.Return.Email;
 	phone = api_resp.Return.Phone;
