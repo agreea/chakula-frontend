@@ -1,6 +1,7 @@
       var phone = "";
       var address = "";
       var email = "";
+      var bio = "";
       var FormTextRow = React.createClass({
         getInitialState: function() {
     	      return ({value: this.props.default_val});
@@ -37,11 +38,11 @@
       
       var ProfileForm = React.createClass({
         getInitialState: function() {
-        	return {Email: this.props.email, Address: this.props.Address, Phone: this.props.Phone};
+        	return {Email: this.props.email, Address: this.props.Address, Phone: this.props.Phone, Bio: this.props.Bio};
         },
-        emailChanged: function(e){
-          email = e.target.result;
-          this.setState({Email: e.target.result}); 
+        bioChanged: function(e){
+          bio = e.target.result;
+          this.setState({Bio: e.target.result}); 
         },
         attemptSendHostData: function() {
 			console.log("attempting to send host data");
@@ -92,7 +93,7 @@
                 id="address"/>
               <textarea className="text-field" id="bio" rows="6"
                     placeholder="Tell us about yourself. Do you like candle-lit dinners, long walks on the beach?..."
-                    defaultValue={this.props.data.Bio}>
+                    defaultValue={this.props.state.Bio} onChange={this.bioChanged}></textarea>
                 <div className="row">
                 	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
                 		<button type="button" className="brand-btn btn-info btn-lg btn" 
@@ -115,24 +116,25 @@
         }
       });
 
-function create_host_render(guest) {
+function create_host_render(host) {
     React.render(
     	<ProfileForm data={guest}/>,
         document.getElementById('host-data'));
 }
 
 function sendHostData() {
-	var $host_data = $('.host-data');
 	var api_resp = api_call('host', {
 						method: 'updateHost',
 						session: Cookies.get('session'),
 						email: email,
 						phone: phone,
-						address: address
+						address: address,
+						bio: bio
 						});
 	console.log("Sent host data");
 	console.log(api_resp);
 	if (api_resp.Success) {
+		var $host_data = $('.host-data');
 	  	$host_data.find('button').prop('disabled', true);
 	    $host_data.find('button').html("<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Saved");
 	    $host_data.find('button').css("background-color", "#19a347");
