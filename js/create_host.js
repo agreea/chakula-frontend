@@ -91,8 +91,10 @@
                   	target="_blank">Connect With Stripe</a>);
         	}
           return (<div className="row">
-          	<div className="col-xs-offset-4 col-sm-offset-2">
-          	    <h3>Your Host Profile</h3>
+          	<div className="row">
+          	    <div className="col-xs-offset-4 col-sm-offset-2">
+          	    	<h3>Your Host Profile</h3>
+          		</div>
           	</div>
               <FormTextRow form_name="Email" 
                 place_holder="One you actually check" 
