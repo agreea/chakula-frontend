@@ -53,7 +53,7 @@
 if (!Cookies.get('session')) {
   window.location.replace("http://yaychakula.com");
 }
-var api_resp = api_call('host', {session:Cookies.get('session')});
+var api_resp = api_call('host', {method:'getHost', session:Cookies.get('session')});
 if (!api_resp.Success || !api_resp.Return.Stripe_user_id) {
   window.location.replace("http://yaychakula.com/create_host.html");
 }
