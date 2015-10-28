@@ -60,7 +60,7 @@
 			if (!reg.test(phone)) {
 				submittable = false;
 				errorHtml += "<li>Phone must be digits only</li>"
-			} else if (!phone.length !== 10) {
+			} else if (!phone.length != 10) {
 				submittable = false;
 				errorHtml += "<li>Phone must be 10 digits long</li>"
 			}
