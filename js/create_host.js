@@ -19,7 +19,8 @@
         		        		console.log('Address: ' + address);
 
         	}
-	          this.setState({value: e.target.value});
+	        this.setState({value: e.target.value});
+	        enableSave();
         },
         render: function() {
           return (<div className="row">
@@ -42,6 +43,7 @@
         },
         bioChanged: function(e){
           bio = e.target.value;
+          enableSave();
           this.setState({Bio: e.target.value}); 
         },
         attemptSendHostData: function() {
@@ -106,7 +108,7 @@
               </div>
               <div className="row">
                	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
-               		<button type="button" className="brand-btn btn-info btn-lg btn" 
+               		<button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
                		onClick={this.attemptSendHostData}>Save</button>
                	</div>
               </div>
@@ -145,13 +147,18 @@ function sendHostData() {
 	console.log(api_resp);
 	if (api_resp.Success) {
 		var $host_data = $('#host-data');
-	  	$host_data.find('.brand-btn').prop('disabled', true);
-	    $host_data.find('.brand-btn').html("<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Saved");
-	    $host_data.find('.brand-btn').css("background-color", "#19a347");
-	    $host_data.find('.brand-btn').css("color", "#fff");
+	  	$host_data.find('#save').prop('disabled', true);
+	    $host_data.find('#save').html("<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Saved");
+	    $host_data.find('#save').css("background-color", "#19a347");
+	    $host_data.find('#save').css("color", "#fff");
 	    $('#error-field').hide();
 		// show the saved button as green, add check mark, disable
 	}
+}
+function enableSave(){
+  $('#save').prop("disabled", false);
+  $('#save').css("background-color", '#5bc0de');
+  $('#save').text("Save");
 }
 
 if (!Cookies.get('session')) {
