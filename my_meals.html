@@ -54,7 +54,7 @@ if (!Cookies.get('session')) {
   window.location.replace("http://yaychakula.com");
 }
 var api_resp = api_call('host', {method:'getHost', session:Cookies.get('session')});
-if (!api_resp.Success || !api_resp.Return.Stripe_user_id) {
+if (!api_resp.Success || !api_resp.Return.Stripe_connect) { // forward to create host if they're not stripe-connected
   window.location.replace("http://yaychakula.com/create_host.html");
 }
 var meals;
