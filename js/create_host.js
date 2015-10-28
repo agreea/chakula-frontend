@@ -83,12 +83,15 @@
         },
         render: function() {
         	var stripe_element;
-        	if (this.props.data.Stripe_connect) {
+        	var host = this.props.data;
+        	if (host.Stripe_connect) {
         		stripe_element = (<p><span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Stripe Connected</p>);
-        	} else {
+        	} else if(host.Email && host.Phone && host.Address){
           		stripe_element = (<a className="stripe-btn btn-lg btn" 
-                  	href="https://connect.stripe.com/oauth/authorize?response_type=code&amp;client_id=ca_6n8She3UUNpFgbv1sYtB28b6Db7sTLY6&amp;scope=read_write" 
+                  	href={host.Stripe_url} 
                   	target="_blank">Connect With Stripe</a>);
+        	} else {
+        		stripe_element = (<p>Complete the information above to set up payments</p>);
         	}
           return (<div className="row">
           	<div className="row">
@@ -99,15 +102,15 @@
               <FormTextRow form_name="Email" 
                 place_holder="One you actually check" 
                 id="email"
-                default_value={this.props.data.Email}/>
+                default_value={host.Email}/>
               <FormTextRow form_name="Phone #" 
                 place_holder="01234567890" 
                 id="phone"
-                default_value={this.props.data.Phone}/>
+                default_value={host.Phone}/>
               <FormTextRow form_name="Address" 
                 place_holder="3700 O St NW" 
                 id="address"
-                default_value={this.props.data.Address}/>
+                default_value={host.Address}/>
               <div className="row">
               	<div className="col-sm-2 col-xs-4">
               		<p className="form-label text-right">Bio</p>
@@ -121,7 +124,9 @@
               <div className="row">
                	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
                		<button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
-               		onClick={this.attemptSendHostData}>Save</button>
+               		onClick={this.attemptSendHostData} disabled="true">
+               			<span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Saved
+               		</button>
                	</div>
               </div>
               <div className="row">
@@ -156,11 +161,7 @@ function sendHostData() {
 	console.log("Sent host data");
 	console.log(api_resp);
 	if (api_resp.Success) {
-		var $host_data = $('#host-data');
-	  	$host_data.find('#save').prop('disabled', true);
-	    $host_data.find('#save').html("<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Saved");
-	    $host_data.find('#save').css("background-color", "#19a347");
-	    $host_data.find('#save').css("color", "#fff");
+		render(api_resp.Return);
 	    $('#error-field').hide();
 		// show the saved button as green, add check mark, disable
 	}

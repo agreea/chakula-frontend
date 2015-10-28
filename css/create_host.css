@@ -17,6 +17,9 @@ a {
 .dropdown-menu {
 	z-index: 100;
 }
-.stripe-btn {
+.stripe-row {
 	margin-top: 18px;
+}
+#save {
+	background-color: #19a347;
 }
