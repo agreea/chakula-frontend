@@ -54,10 +54,16 @@ if (!Cookies.get('session')) {
   window.location.replace("http://yaychakula.com");
 }
 var api_resp = api_call('host', {method:'getHost', session:Cookies.get('session')});
-if (!api_resp.Success || !api_resp.Return.Stripe_connect) { // forward to create host if they're not stripe-connected
-  window.location.replace("http://yaychakula.com/create_host.html");
+var warnings = [];
+var alert_create_host_profile;
+if (api_resp.Success) { // forward to create host if they don't have a host identity
+  var host = api_resp.Return;
+  if (!host.Address || !host.Phone || !host.Email || !host.Bio || !host.Stripe_connect) {
+    alert_create_host_profile = "Please complete your host profile to host meals";
+  }
 }
 var meals;
+var stripe_connected = api_resp.Return.Stripe_connect;
 var MealListItem = React.createClass({
 getInitialState: function() {
     return {delete_error: ""};
@@ -171,15 +177,23 @@ var MealList = React.createClass({
         index++;
       return list_item;
     });
+    var first_item;
+    if (alert_create_host_profile) {
+      first_item = (<a href="https://yaychakula.com/create_host.html">
+                      {alert_create_host_profile}
+                    </a>);
+    } else {
+      first_item = <a href="https://yaychakula.com/create_meal.html">
+              <img className="img-responsive img-responsive-center add-meal-icon" src="img/add-icon.svg"/>
+            </a>
+    }
     return (
       <div className="row non-white">
         <div className="col-sm-2">
         </div>
         <div className="col-sm-8 meal-list">
           <div className="text-center">
-            <a href="https://yaychakula.com/create_meal.html">
-              <img className="img-responsive img-responsive-center add-meal-icon" src="img/add-icon.svg"/>
-            </a>
+            {first_item}
           </div>
           {listItems}
         </div>

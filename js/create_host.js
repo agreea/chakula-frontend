@@ -82,6 +82,14 @@
 			}
         },
         render: function() {
+        	var stripe_element;
+        	if (this.props.data.Stripe_connect) {
+        		stripe_element = (<p><span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Stripe Connected</p>);
+        	} else {
+          		stripe_element = (<a className="stripe-btn btn-lg btn" 
+                  	href="https://connect.stripe.com/oauth/authorize?response_type=code&amp;client_id=ca_6n8She3UUNpFgbv1sYtB28b6Db7sTLY6&amp;scope=read_write" 
+                  	target="_blank">Connect With Stripe</a>);
+        	}
           return (<div className="row">
           	<h3 className="text-center">Your Host Profile</h3>
               <FormTextRow form_name="Email" 
@@ -117,9 +125,7 @@
                   <p className="text-right form-label">Payment</p>
                 </div>
                 <div className="col-xs-6 col-sm-4">
-                  <a className="stripe-btn btn-lg btn" 
-                  	href="https://connect.stripe.com/oauth/authorize?response_type=code&amp;client_id=ca_6n8She3UUNpFgbv1sYtB28b6Db7sTLY6&amp;scope=read_write" 
-                  	target="_blank">Connect With Stripe</a>
+                	{stripe_element}
                 </div>
                 <ul className="warning-field" id="stripe-warning">
                 </ul>
