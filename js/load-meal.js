@@ -53,7 +53,7 @@ function setupMeal() {
       request_button.prop('disabled', true);
       request_button.text("Sold out!");
     }
-    $('#meal-address').html('<p><i class="fa fa-map-marker"></i> '+ meal_data.Address + '</p>');
+    $('#meal-address').html('<p><b><i class="fa fa-map-marker"></i> '+ meal_data.Address + '</b></p>');
     start = Date.parse(meal_data.Starts);
     console.log("Start date: " + start);
     console.log("RSVP by: " + meal_data.Rsvp_by);
