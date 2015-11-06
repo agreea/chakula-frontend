@@ -38,9 +38,18 @@ var Review = React.createClass({
             {stars}
           </p>
           {this.props.children}
-          <p>
-            {this.props.date}
-          </p>
+          <div className="row">
+            <div className="col-sm-6">
+              <a href={"https://yaychakula.com/meal.html?Id=" + this.props.meal_id}>
+                {this.props.Meal_title}
+              </a>
+            </div>
+            <div className="col-sm-6">
+              <p>
+                {this.props.date}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -60,12 +69,14 @@ var ReviewList = React.createClass({
       var date_ts = Date.parse(review.Date);
       var date = new Date(date_ts);
       return (
-        <Review first_name= {review.First_name} 
-                date= {getShortMonth(date.getMonth()+1) + ' ' +
+        <Review first_name={review.First_name} 
+                date={getShortMonth(date.getMonth()+1) + ' ' +
                       date.getDate() + ', ' + 
                       date.getFullYear()} 
-                pic_url= {review.Prof_pic_url}
-                rating= {review.Rating}>
+                pic_url={review.Prof_pic_url}
+                rating={review.Rating}
+                title={review.Meal_title}
+                meal_id={review.Meal_id}>
           {review.Comment}
         </Review>
       );
