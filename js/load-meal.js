@@ -37,6 +37,7 @@ function setupMeal() {
       request_button.prop('disabled', true);
     } else {
       request_button.text("Request Meal - $" + Math.round(meal_data.Price*100)/100);
+      $('#meal-address').css('color', '#8c8c8c');
     }
     if (meal_data.Status === "PENDING") {
       request_button.css("background-color", "#8cd3e8");
@@ -46,13 +47,13 @@ function setupMeal() {
       request_button.css("background-color", "#19a347");
       request_button.css("color", "#fff");
     } else if (meal_data.Status === "DECLINED") {
-      request_button.css("background-color", "#71ccdb")
+      request_button.css("background-color", "#71ccdb");
       request_button.css("color", "#233f44");
     } else if (meal_data.Open_spots === 0) {
       request_button.prop('disabled', true);
       request_button.text("Sold out!");
     }
-    $('#meal-address').html('<p><i class="fa fa-map-marker"></i>'+ meal_data.Address + '</p>');
+    $('#meal-address').html('<p><i class="fa fa-map-marker"></i> '+ meal_data.Address + '</p>');
     start = Date.parse(meal_data.Starts);
     console.log("Start date: " + start);
     console.log("RSVP by: " + meal_data.Rsvp_by);
