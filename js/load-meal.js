@@ -9,7 +9,7 @@ if (api_resp.Success) {
 
 var Carousel = React.createClass({
   render: function() {
-    pictures = this.props.data.map(function(pic) {
+    var pictures = this.props.data.map(function(pic) {
       return (<div className="item">
         <img src={"img/" + pic.Name }></img>
         <div className="carousel-caption">{pic.Caption}</div>
