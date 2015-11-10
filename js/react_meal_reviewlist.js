@@ -11,19 +11,11 @@ var ReviewBox = React.createClass({
   }
 });
 
-var Star = React.createClass({
-  render: function() {
-    return (
-      <span className="glyphicon glyphicon-star"/>
-    );
-  }
-});
-
 var Review = React.createClass({
   render: function() {
     var stars = [];
     for (var i = 0; i < this.props.rating; i++) {
-      stars.push(<Star/>);
+      stars.push(<span className="glyphicon glyphicon-star"/>);
     }
     return (
       <div className="review row">
