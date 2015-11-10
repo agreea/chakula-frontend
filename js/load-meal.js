@@ -218,7 +218,7 @@ var Meal = React.createClass({
 
 React.render(
   <Meal data={meal_data}/>,
-  document.getElementById('meal'f)
+  document.getElementById('meal')
 );
 
 // function setupMeal() {
