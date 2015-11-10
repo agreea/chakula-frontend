@@ -9,9 +9,15 @@ if (api_resp.Success) {
 
 var Carousel = React.createClass({
   render: function() {
-    var pictures = this.props.data.map(function(pic) {
+    var pictures = this.props.data.map(function(pic, index) {
+      if (index == 0) {
+        return (<div className="item active">
+          <img src={"img/" + pic.Name}></img>
+          <div className="carousel-caption">{pic.Caption}</div>
+        </div>);
+      }
       return (<div className="item">
-        <img src={"img/" + pic.Name }></img>
+        <img src={"img/" + pic.Name}></img>
         <div className="carousel-caption">{pic.Caption}</div>
       </div>);
     });
@@ -196,22 +202,19 @@ var HostAttendeesInfo = React.createClass({
 
 var Meal = React.createClass({
   render: function() {
-
     return(
       <div className="row">
-      <div className="row">
-        <Carousel data={this.props.data.Pics}></Carousel>
-      </div>
-      <div className="row">
-        <HostAttendeesInfo data={this.props.data}/>
-        <MealInfo data={this.props.data}/>
-        <div className="col-xs-2">
-          <button>{"Order - " + Math.round(this.props.data.Price*100)/100}</button>
+        <div className="row">
+          <Carousel data={this.props.data.Pics}></Carousel>
         </div>
-      </div>
-    </div>
-
-      )
+        <div className="row">
+          <HostAttendeesInfo data={this.props.data}/>
+          <MealInfo data={this.props.data}/>
+          <div className="col-xs-2">
+            <button>{"Order - " + Math.round(this.props.data.Price*100)/100}</button>
+          </div>
+        </div>
+    </div>);
   }
 });
 
