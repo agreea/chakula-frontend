@@ -11,7 +11,7 @@ var Carousel = React.createClass({
   render: function() {
     pictures = this.props.data.map(function(pic) {
       return (<div className="item">
-        <img src={"img/" + pic.Name }>
+        <img src={"img/" + pic.Name }></img>
         <div className="carousel-caption">{pic.Caption}</div>
       </div>);
     });
@@ -218,7 +218,7 @@ var Meal = React.createClass({
 
 React.render(
   <Meal data={meal_data}/>,
-  document.getElementById('meal')
+  document.getElementById('meal'f)
 );
 
 // function setupMeal() {
