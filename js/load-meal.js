@@ -193,7 +193,7 @@ var HostAttendeesInfo = React.createClass({
       avg_stars.push(<i className="fa fa-star-o"></i>);
     }
     return (<div className="col-sm-3 col-xs-12">
-      <img className="img-repsonsive img-responsive-center img-circle" src={data.Host_pic}/>
+      <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
       <p className="text-center">{data.Host_name}</p>
       <p className="text-center">{avg_stars}</p>
     </div>);
@@ -211,7 +211,7 @@ var Meal = React.createClass({
           <HostAttendeesInfo data={this.props.data}/>
           <MealInfo data={this.props.data}/>
           <div className="col-xs-2">
-            <button>{"Order - " + Math.round(this.props.data.Price*100)/100}</button>
+            <button className="brand-btn btn">{"Order - $" + Math.round(this.props.data.Price*100)/100}</button>
           </div>
         </div>
     </div>);
