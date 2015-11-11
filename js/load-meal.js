@@ -89,21 +89,17 @@ var Review = React.createClass({
 
 var ReviewList = React.createClass({
   render: function() {
-    // if (!this.props.data){
-    //   return (
-    //     <div className="reviewList">
-    //       <p>No reviews yet!</p>
-    //     </div>
-    //   );
-    // }
+    if (!this.props.data){
+      return (
+        <div className="reviewList">
+          <p>No reviews yet!</p>
+        </div>
+      );
+    }
     var reviewNodes = this.props.data.map(function (review) {
-      var date_ts = Date.parse(review.Date);
-      var date = new Date(date_ts);
       return (
         <Review first_name={review.First_name} 
-                date={getShortMonth(date.getMonth()+1) + ' ' +
-                      date.getDate() + ', ' + 
-                      date.getFullYear()} 
+                date={moment(review.Date).format("MMM Do YYYY")} 
                 pic_url={review.Prof_pic_url}
                 rating={review.Rating}
                 title={review.Meal_title}
@@ -124,8 +120,6 @@ var ReviewList = React.createClass({
 var MealInfo = React.createClass({
   render: function() {
     // todo: truncate descriptions
-    moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
-
     var data = this.props.data;
     var starts = moment(data.Starts);
     var closes = moment(data.Rsvp_by);
