@@ -127,8 +127,8 @@ var MealInfo = React.createClass({
     moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
 
     var data = this.props.data;
-    var starts = moment(this.props.data.Starts);
-    var closes = moment(this.props.data.Rsvp_by);
+    var starts = moment(data.Starts);
+    var closes = moment(data.Rsvp_by);
     return (
       <div className="col-sm-7">
         <div className="row">
@@ -158,7 +158,7 @@ var MealInfo = React.createClass({
           <img src={data.Maps_url} />
         </div>
         <div className="row">
-          <ReviewBox data={data.Host_Reviews} />
+          <ReviewBox data={data.Host_reviews} />
         </div>
       </div>
     );
