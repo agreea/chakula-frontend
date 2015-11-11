@@ -172,12 +172,12 @@ var HostAttendeesInfo = React.createClass({
     // if takeout, only show host
     // else show attendees too
     var data = this.props.data;
-    var sum_ratings = data.Host_reviews.reduce(function(previousVal, currentVal) {
-      return previousVal + currentVal;
+    var sum_ratings = data.Host_reviews.reduce(function(previous, current) {
+      return previous.Rating + current.Rating;
     });
     var avg_rating = (sum_ratings/data.Host_reviews.length);
     var avg_stars = [];
-    while(avg_rating > 0) {
+    while(avg_rating > 0) { // show the average rating in filled stars
       if (avg_rating < 1) { // for any remainder, round up to the next half-star and exit the loop
         if (avg_rating > .7) {
           avg_stars.push(<i className="fa fa-star"></i>);
@@ -189,13 +189,13 @@ var HostAttendeesInfo = React.createClass({
       avg_stars.push(<i className="fa fa-star"></i>);
       avg_rating--;
     }
-    while(avg_stars.length < 5) {
+    while(avg_stars.length < 5) { // for the remaining stars until five, show empty stars.
       avg_stars.push(<i className="fa fa-star-o"></i>);
     }
     return (<div className="col-sm-3 col-xs-12">
-      <img className="img-repsonsive img-responsive-centered img-circle" src={data.Host_pic}/>
-      <p>{data.Host_name}</p>
-      <p>{avg_stars}</p>
+      <img className="img-repsonsive img-responsive-center img-circle" src={data.Host_pic}/>
+      <p className="text-center">{data.Host_name}</p>
+      <p className="text-center">{avg_stars}</p>
     </div>);
   }
 });
