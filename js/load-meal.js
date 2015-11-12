@@ -153,7 +153,7 @@ var MealInfo = React.createClass({
           <p>{data.Description}</p>
         </div>
         <div className="row">
-          <p><i className="fa fa-map-marker"></i>{data.Address}</p>
+          <p><i className="fa fa-map-marker"></i>{" " + data.Address}</p>
         </div>
         <div className="row map-row" style={{backgroundImage: 'url("' + data.Maps_url + '")'}}>
           {radius}
