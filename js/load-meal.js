@@ -136,7 +136,7 @@ var MealInfo = React.createClass({
       map_row = 
         <div className="row map-row">
           <a href={'https://www.google.com/maps/place/' + data.Address + ' Washington, DC'} target="_blank">
-            <img src={data.Maps_url} />
+            <img className="map-img" src={data.Maps_url} />
           </a>
         </div>;
     }

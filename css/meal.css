@@ -78,6 +78,10 @@
     background-repeat: no-repeat;
     background-size: 600px 300px;
 }
+.map-img {
+    max-width: 600px;
+    max-height: 300px;
+}
 .map-radius {
     position: absolute;
     top: 50%;
