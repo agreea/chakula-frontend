@@ -124,6 +124,12 @@ var MealInfo = React.createClass({
     var data = this.props.data;
     var starts = moment(data.Starts);
     var closes = moment(data.Rsvp_by);
+    var radius;
+    if (data.Status != "ATTENDING") {
+      radius = <svg className="map-radius" height="100" width="100">
+            <circle cx="50" cy="50" r="40" stroke="#3C8BA6" stroke-width="2" fill="#6DCDED" opacity=".8" />
+          </svg>;
+    }
     return (
       <div className="col-sm-7">
         <div className="row">
@@ -147,12 +153,10 @@ var MealInfo = React.createClass({
           <p>{data.Description}</p>
         </div>
         <div className="row">
-          <p>{data.Address}</p>
+          <p><i className="fa fa-map-marker"></i>{data.Address}</p>
         </div>
         <div className="row map-row" style={{backgroundImage: 'url("' + data.Maps_url + '")'}}>
-          <svg className="map-radius" height="100" width="100">
-            <circle cx="50" cy="50" r="40" stroke="#3C8BA6" stroke-width="2" fill="#6DCDED" opacity=".8" />
-          </svg> 
+          {radius}
         </div>
         <div className="row">
           <ReviewBox data={data.Host_reviews} />
