@@ -75,6 +75,7 @@
     position: relative;
     width: 500px;
     height: 320px;
+    background-repeat: none;
 }
 .map-radius {
     position: absolute;
