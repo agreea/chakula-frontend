@@ -1,5 +1,4 @@
 var api_resp = getMeal();
-var guest = api_call('kitchenuser', {method:'Get', session:Cookies.get('session')}).Return;
 var meal_data;
 if (api_resp.Success) {
   meal_data = api_resp.Return;
@@ -120,6 +119,8 @@ var ReviewList = React.createClass({
 var MealInfo = React.createClass({
   render: function() {
     // todo: truncate descriptions
+    moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
+
     var data = this.props.data;
     var starts = moment(data.Starts);
     var closes = moment(data.Rsvp_by);
