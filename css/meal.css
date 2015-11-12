@@ -71,6 +71,15 @@
     color:#fad850;
     font-size: 32px;
 }
+.map-row {
+    position: relative;
+}
+.map-radius {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .grey-star {
     color:#828282;
 }

@@ -149,11 +149,10 @@ var MealInfo = React.createClass({
         <div className="row">
           <p>{data.Address}</p>
         </div>
-        <div className="row" style={{background: 'url(' + data.Maps_url + ')'}}>
-          <svg className="text-center" height="100" width="100">
+        <div className="row map-row" style={{background: 'url(' + data.Maps_url + ')'}}>
+          <svg className="map-radius" height="100" width="100">
             <circle cx="50" cy="50" r="40" stroke="#3C8BA6" stroke-width="2" fill="#6DCDED" opacity=".8" />
           </svg> 
-
           <img src={data.Maps_url} />
         </div>
         <div className="row">
