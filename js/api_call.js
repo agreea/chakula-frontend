@@ -6,7 +6,7 @@ api_call = function(api_fragment, data) {
                       dataType: 'json',
                       async: false,
                       }).responseText;
-  var api_method = data.method;
+  console.log(response);
   return JSON.parse(response);
 }
 
