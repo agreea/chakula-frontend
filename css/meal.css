@@ -73,6 +73,8 @@
 }
 .map-row {
     position: relative;
+    width: 460px;
+    height: 300px;
 }
 .map-radius {
     position: absolute;
