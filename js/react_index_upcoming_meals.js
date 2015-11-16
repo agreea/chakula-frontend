@@ -43,20 +43,19 @@ if (api_resp.Success) {
             Starts={meal.Starts} />
         );
       });
-      if (mealNodes) {
-        return (
-          <div className="row">
-            <h2 className="text-center header">Meals This Week</h2>
-            <div className="Meals">
-              {mealNodes}
-            </div>
-          </div>
-        );
-      } else {
+      if (mealNodes.length === 0) {
         return (<div className="row">
-            <h2 className="text-center header">More meals coming soon!</h2>
-          </div>)
+          <h2 className="text-center header">More meals coming soon!</h2>
+        </div>);
       }
+      return (
+        <div className="row">
+          <h2 className="text-center header">Meals This Week</h2>
+          <div className="Meals">
+            {mealNodes}
+          </div>
+        </div>
+        );
     }
   });
   React.render(
