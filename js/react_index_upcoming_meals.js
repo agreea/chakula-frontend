@@ -43,15 +43,24 @@ if (api_resp.Success) {
             Starts={meal.Starts} />
         );
       });
-      return (
-        <div className="Meals">
-          {mealNodes}
-        </div>
-      );
+      if (mealNodes) {
+        return (
+          <div className="row">
+            <h2 className="text-center header">Meals This Week</h2>
+            <div className="Meals">
+              {mealNodes}
+            </div>
+          </div>
+        );
+      } else {
+        return (<div className="row">
+            <h2 className="text-center header">More meals coming soon!</h2>
+          </div>)
+      }
     }
   });
   React.render(
     <Meals data={api_resp.Return}/>,
-      document.getElementById('meals')
+      document.getElementById('upcoming')
     );
 }
