@@ -60,6 +60,6 @@ if (api_resp.Success) {
   });
   React.render(
     <Meals data={api_resp.Return}/>,
-      document.getElementById('upcoming')
+      document.getElementById("upcoming")
     );
 }
