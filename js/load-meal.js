@@ -128,7 +128,7 @@ var MealInfo = React.createClass({
     var time_left_text;
     var time_left_subtext;
     if (moment(data.Rsvp_by) < moment()) {
-      time_left_text = <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>;
+      time_left_text = <span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>;
       time_left_subtext = "Requests are closed";
     } else {
       time_left_text = closes.toNow();
