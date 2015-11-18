@@ -231,6 +231,13 @@ React.render(
   <Meal data={meal_data}/>,
   document.getElementById('meal')
 );
+if (moment(meal_data.Rsvp_by < moment())) {
+    $('#time-left-subtext').text('Requests are now closed.')
+    $('#time-left-subtext').css("color", "#aaa") // set text to grey
+    $('#time-left').html('<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>'); 
+    request_button = $('#request-meal-btn').prop('disabled', true);
+    request_button.text('Meal closed');
+}
 
 // function setupMeal() {
 //     $('#meal-title').text(meal_data.Title);
