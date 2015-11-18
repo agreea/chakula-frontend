@@ -33,7 +33,7 @@ var Review = React.createClass({
           <div className="row">
             <div className="col-sm-6">
               <a href={"https://yaychakula.com/meal.html?Id=" + this.props.meal_id}>
-                {this.props.title}
+                {this.props.meal_title}
               </a>
             </div>
             <div className="col-sm-6">
@@ -68,7 +68,7 @@ var ReviewList = React.createClass({
                       date.getFullYear()} 
                 pic_url={review.Prof_pic_url}
                 rating={review.Rating}
-                title={review.Meal_title}
+                meal_title={review.Meal_title}
                 meal_id={review.Meal_id}>
           {review.Comment}
         </Review>
