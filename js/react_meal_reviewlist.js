@@ -61,6 +61,7 @@ var ReviewList = React.createClass({
       var date_ts = Date.parse(review.Date);
       var date = new Date(date_ts);
       console.log(review);
+      console.log(review.Meal_title);
       return (
         <Review first_name={review.First_name} 
                 date={getShortMonth(date.getMonth()+1) + ' ' +
