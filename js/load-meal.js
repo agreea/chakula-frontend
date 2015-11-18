@@ -71,7 +71,7 @@ var Review = React.createClass({
           <div className="row">
             <div className="col-sm-6">
               <a href={"https://yaychakula.com/meal.html?Id=" + this.props.meal_id}>
-                {this.props.Meal_title}
+                {this.props.title}
               </a>
             </div>
             <div className="col-sm-6">
@@ -120,10 +120,19 @@ var MealInfo = React.createClass({
   render: function() {
     // todo: truncate descriptions
     moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
-
+      $('#time-left-subtext').text('Requests are now closed.')
+      $('#time-left-subtext').css("color", "#aaa") // set text to grey
     var data = this.props.data;
     var starts = moment(data.Starts);
     var closes = moment(data.Rsvp_by);
+    var time_left_text;
+    if (moment(data.Rsvp_by) < moment()) {
+      time_left_text = <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>;
+      time_left_subtext = "Requests are closed";
+    } else {
+      time_left_text = closes.toNow();
+      time_left_subtext = "Requests close"
+    }
     var map_row;
     if (data.Status != "ATTENDING") {
         map_row = 
@@ -155,8 +164,8 @@ var MealInfo = React.createClass({
             <p className="text-center">{starts.format("ddd, MMM Do")}</p>
           </div>
           <div className="col-xs-4">
-            <h4 className="text-center">{closes.toNow()}</h4>
-            <p className="text-center">Requests close</p>
+            <h4 className="text-center">{time_left_text}</h4>
+            <p className="text-center">{time_left_subtext}</p>
           </div>
         </div>
         <div className="row">
@@ -211,6 +220,13 @@ var HostAttendeesInfo = React.createClass({
 
 var Meal = React.createClass({
   render: function() {
+    var req_btn_disabled = (moment(meal_data.Rsvp_by < moment()) || this.props.data.Status == "ATTENDING" || this.props.data.Status == "DECLINED" || this.props.data.Status == "PENDING");
+    var req_btn_text;
+    if (moment(meal_data.Rsvp_by < moment())) {
+      req_btn_text = 'Meal closed';
+    } else {
+      req_btn_text = "Order - $" + Math.round(this.props.data.Price*100)/100;
+    }
     return(
       <div className="row">
         <div className="row">
@@ -220,7 +236,7 @@ var Meal = React.createClass({
           <HostAttendeesInfo data={this.props.data}/>
           <MealInfo data={this.props.data}/>
           <div className="col-xs-2">
-            <button className="brand-btn btn" id="request-meal-btn">{"Order - $" + Math.round(this.props.data.Price*100)/100}</button>
+            <button className="brand-btn btn" id="request-meal-btn" disabled={req_btn_disabled}>{req_btn_text}</button>
           </div>
         </div>
     </div>);
@@ -231,13 +247,6 @@ React.render(
   <Meal data={meal_data}/>,
   document.getElementById('meal')
 );
-if (moment(meal_data.Rsvp_by < moment())) {
-    $('#time-left-subtext').text('Requests are now closed.')
-    $('#time-left-subtext').css("color", "#aaa") // set text to grey
-    $('#time-left').html('<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>'); 
-    request_button = $('#request-meal-btn').prop('disabled', true);
-    request_button.text('Meal closed');
-}
 
 // function setupMeal() {
 //     $('#meal-title').text(meal_data.Title);
