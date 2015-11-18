@@ -220,7 +220,7 @@ var Meal = React.createClass({
           <HostAttendeesInfo data={this.props.data}/>
           <MealInfo data={this.props.data}/>
           <div className="col-xs-2">
-            <button className="brand-btn btn">{"Order - $" + Math.round(this.props.data.Price*100)/100}</button>
+            <button className="brand-btn btn" id="request-meal-btn">{"Order - $" + Math.round(this.props.data.Price*100)/100}</button>
           </div>
         </div>
     </div>);
