@@ -33,7 +33,7 @@ var Review = React.createClass({
           <div className="row">
             <div className="col-sm-6">
               <a href={"https://yaychakula.com/meal.html?Id=" + this.props.meal_id}>
-                {this.props.Meal_title}
+                {this.props.title}
               </a>
             </div>
             <div className="col-sm-6">
