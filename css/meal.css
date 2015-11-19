@@ -67,10 +67,6 @@
     margin-top: 20px;
     max-height: 120px;
 }
-.star-rating {
-    color:#fad850;
-    font-size: 32px;
-}
 .map-row {
     position: relative;
     max-width: 600px;
@@ -87,9 +83,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-.grey-star {
-    color:#828282;
 }
 .carousel-control.left,
 .carousel-control.right

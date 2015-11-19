@@ -80,7 +80,7 @@ var Review = React.createClass({
               </p>
             </div>
           </div>
-          <hr/>
+          <hr className="hr-review"/>
         </div>
       </div>
     );
@@ -222,7 +222,7 @@ var HostAttendeesInfo = React.createClass({
     return (<div className="col-sm-3 col-xs-12 host-attendees-col">
       <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
       <p className="text-center">{data.Host_name}</p>
-      <p className="text-center">{avg_stars}</p>
+      <p className="text-center star-rating">{avg_stars}</p>
     </div>);
   }
 });
