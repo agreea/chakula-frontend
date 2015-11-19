@@ -198,6 +198,7 @@ var HostAttendeesInfo = React.createClass({
       console.log(current.Rating);
       console.log("Reduce previous rating: ");
       console.log(previous.Rating);
+      console.log("Sum of current and previous: " + (previous.Rating + current.Rating));
       return previous.Rating + current.Rating;
     });
     console.log("Sum ratings: " + sum_ratings);
