@@ -81,6 +81,7 @@ var Review = React.createClass({
             </div>
           </div>
         </div>
+        <hr/>
       </div>
     );
   }
