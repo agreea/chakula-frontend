@@ -193,7 +193,7 @@ var HostAttendeesInfo = React.createClass({
     var data = this.props.data;
     console.log("HostAttendeesInfo data: ");
     console.log(data);
-    var ratings = data.Host_reviews.reduce(function(review){
+    var ratings = data.Host_reviews.map(function(review) {
       return review.Rating;
     })
     var sum_ratings = ratings.reduce(function(previous, current) {
