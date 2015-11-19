@@ -223,6 +223,7 @@ var HostAttendeesInfo = React.createClass({
       <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
       <p className="text-center">{data.Host_name}</p>
       <p className="text-center star-rating">{avg_stars}</p>
+      <p>{data.Host_bio}</p>
     </div>);
   }
 });
