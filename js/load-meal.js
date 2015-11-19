@@ -42,7 +42,7 @@ var ReviewBox = React.createClass({
   render: function() {
     return (
       <div className="reviewBox">
-        <h3 className="text-center">Reviews</h3>
+        <h3 className="text-left">Reviews</h3>
         <ReviewList data={this.props.data} />
       </div>
     );
