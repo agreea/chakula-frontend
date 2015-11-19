@@ -191,8 +191,11 @@ var HostAttendeesInfo = React.createClass({
     // if takeout, only show host
     // else show attendees too
     var data = this.props.data;
+    console.log("HostAttendeesInfo data: ");
+    console.log(data);
     var sum_ratings = data.Host_reviews.reduce(function(previous, current) {
-      console.log("Reduce current review: " + current);
+      console.log("Reduce current review: ");
+      console.log(current);
       return previous.Rating + current.Rating;
     });
     var avg_rating = (sum_ratings/data.Host_reviews.length);
