@@ -154,6 +154,9 @@ var MealInfo = React.createClass({
     return (
       <div className="col-sm-7">
         <div className="row">
+          <Carousel data={this.props.data.Pics}></Carousel>
+        </div>
+        <div className="row">
           <h3>{data.Title}</h3>
         </div>
         <div className="row">
@@ -238,9 +241,6 @@ var Meal = React.createClass({
     }
     return(
       <div className="row">
-        <div className="row">
-          <Carousel data={this.props.data.Pics}></Carousel>
-        </div>
         <div className="row">
           <HostAttendeesInfo data={this.props.data}/>
           <MealInfo data={this.props.data}/>
