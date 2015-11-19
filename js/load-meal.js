@@ -80,8 +80,8 @@ var Review = React.createClass({
               </p>
             </div>
           </div>
+          <hr/>
         </div>
-        <hr/>
       </div>
     );
   }
