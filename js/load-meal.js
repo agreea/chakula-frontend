@@ -193,13 +193,11 @@ var HostAttendeesInfo = React.createClass({
     var data = this.props.data;
     console.log("HostAttendeesInfo data: ");
     console.log(data);
-    var sum_ratings = data.Host_reviews.reduce(function(previous, current) {
-      console.log("Reduce current rating: ");
-      console.log(current.Rating);
-      console.log("Reduce previous rating: ");
-      console.log(previous.Rating);
-      console.log("Sum of current and previous: " + (previous.Rating + current.Rating));
-      return previous.Rating + current.Rating;
+    var ratings = data.Host_reviews.reduce(function(review){
+      return review.Rating;
+    })
+    var sum_ratings = ratings.reduce(function(previous, current) {
+      return previous + current.Rating;
     });
     console.log("Sum ratings: " + sum_ratings);
     var avg_rating = (sum_ratings/data.Host_reviews.length);
