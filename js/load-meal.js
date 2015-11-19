@@ -198,6 +198,7 @@ var HostAttendeesInfo = React.createClass({
       console.log(current.Rating);
       return previous.Rating + current.Rating;
     });
+    console.log("Sum ratings: " + sum_ratings);
     var avg_rating = (sum_ratings/data.Host_reviews.length);
     console.log("Average rating: " + avg_rating);
     var avg_stars = [];
