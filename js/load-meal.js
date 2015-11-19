@@ -70,9 +70,9 @@ var Review = React.createClass({
           {this.props.children}
           <div className="row">
             <div className="col-sm-8 review-meal-title">
-              <a href={"https://yaychakula.com/meal.html?Id=" + this.props.meal_id}>
+              <p><a href={"https://yaychakula.com/meal.html?Id=" + this.props.meal_id}>
                 {this.props.title}
-              </a>
+              </a></p>
             </div>
             <div className="col-sm-4">
               <p>
