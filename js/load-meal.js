@@ -238,8 +238,8 @@ var Meal = React.createClass({
     }
     return(
       <div className="row">
-        <div className="row">
-          <div className="col-sm-7">
+        <div className="row text-center">
+          <div className="col-sm-7 col-sm-offset-3">
             <Carousel data={this.props.data.Pics}></Carousel>
           </div>
         </div>
