@@ -211,7 +211,7 @@ var HostAttendeesInfo = React.createClass({
     while(avg_stars.length < 5) { // for the remaining stars until five, show empty stars.
       avg_stars.push(<i className="fa fa-star-o"></i>);
     }
-    return (<div className="col-sm-3 col-xs-12">
+    return (<div className="col-sm-3 col-xs-12 host-attendees-col">
       <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
       <p className="text-center">{data.Host_name}</p>
       <p className="text-center">{avg_stars}</p>
