@@ -195,6 +195,7 @@ var HostAttendeesInfo = React.createClass({
       return previous.Rating + current.Rating;
     });
     var avg_rating = (sum_ratings/data.Host_reviews.length);
+    console.log("Average rating: " + avg_rating);
     var avg_stars = [];
     while(avg_rating > 0) { // show the average rating in filled stars
       if (avg_rating < 1) { // for any remainder, round up to the next half-star and exit the loop
