@@ -213,3 +213,11 @@ input[type=text]:focus, textarea:focus {
 .form-label {
     color: #aaa;
 }
+
+/*
+Rules on multiple pages
+*/
+
+.review-meal-title {
+    padding-left: 0;
+}

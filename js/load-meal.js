@@ -69,12 +69,12 @@ var Review = React.createClass({
           </p>
           {this.props.children}
           <div className="row">
-            <div className="col-sm-6">
+            <div className="col-sm-8 review-meal-title">
               <a href={"https://yaychakula.com/meal.html?Id=" + this.props.meal_id}>
                 {this.props.title}
               </a>
             </div>
-            <div className="col-sm-6">
+            <div className="col-sm-4">
               <p>
                 {this.props.date}
               </p>
@@ -158,7 +158,7 @@ var MealInfo = React.createClass({
         <div className="row">
           <div className="col-xs-4">
             <h4 className="text-center">{data.Open_spots}</h4>
-            <p className="text-center">available</p>
+            <p className="text-center">spots open</p>
           </div>
           <div className="col-xs-4">
             <h4 className="text-center">{starts.format("h:mm a")}</h4>
