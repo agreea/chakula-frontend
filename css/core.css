@@ -213,7 +213,25 @@ input[type=text]:focus, textarea:focus {
 .form-label {
     color: #aaa;
 }
-
+/*
+Foot rules
+*/
+footer {
+    background: #232323;
+    padding: 32px;
+    margin-top: 16px;
+}
+footer a {
+    color: #ddd;
+    font-size: 14px;
+}
+footer p {
+    color: #ccc;
+    font-size: 14px;
+}
+footer a:hover{
+    color: #f9f9f9;
+}
 /*
 Rules on multiple pages
 */
