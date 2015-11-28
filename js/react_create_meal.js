@@ -30,6 +30,7 @@ var TitleDescription = React.createClass({
   descriptionChanged: function(event) {
     this.setState({description: this.props.description});
     description = event.target.value;
+    console.log(description);
     enableSave();
   },
   render: function() {
