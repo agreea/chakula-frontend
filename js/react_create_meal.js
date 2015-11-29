@@ -437,7 +437,8 @@ var attemptPublish = function() {
     error_html += '<li>' + "Description cannot be empty." + '</li>'
   }
   if (error_html !== "") {
-    $('#error-field').html(error_html)
+    $('#error-field').html(error_html);
+    $('#error-field').show();
     return;
   }
   // make sure everything is well-formed and then try to save

@@ -194,30 +194,32 @@ var HostAttendeesInfo = React.createClass({
     var data = this.props.data;
     console.log("HostAttendeesInfo data: ");
     console.log(data);
-    var ratings = data.Host_reviews.map(function(review) {
-      return review.Rating;
-    })
-    var sum_ratings = ratings.reduce(function(previous, current) {
-      return previous + current;
-    });
-    console.log("Sum ratings: " + sum_ratings);
-    var avg_rating = (sum_ratings/data.Host_reviews.length);
-    console.log("Average rating: " + avg_rating);
-    var avg_stars = [];
-    while(avg_rating > 0) { // show the average rating in filled stars
-      if (avg_rating < 1) { // for any remainder, round up to the next half-star and exit the loop
-        if (avg_rating > .7) {
-          avg_stars.push(<i className="fa fa-star"></i>);
-        } else if (avg_rating > .3) {
-          avg_stars.push(<i className="fa fa-star-half-o"></i>);
+    if (data.Host_reviews) { // process avg rating
+      var ratings = data.Host_reviews.map(function(review) {
+        return review.Rating;
+      })
+      var sum_ratings = ratings.reduce(function(previous, current) {
+        return previous + current;
+      });
+      console.log("Sum ratings: " + sum_ratings);
+      var avg_rating = (sum_ratings/data.Host_reviews.length);
+      console.log("Average rating: " + avg_rating);
+      var avg_stars = [];
+      while(avg_rating > 0) { // show the average rating in filled stars
+        if (avg_rating < 1) { // for any remainder, round up to the next half-star and exit the loop
+          if (avg_rating > .7) {
+            avg_stars.push(<i className="fa fa-star"></i>);
+          } else if (avg_rating > .3) {
+            avg_stars.push(<i className="fa fa-star-half-o"></i>);
+          }
+          break;
         }
-        break;
+        avg_stars.push(<i className="fa fa-star"></i>);
+        avg_rating--;
       }
-      avg_stars.push(<i className="fa fa-star"></i>);
-      avg_rating--;
-    }
-    while(avg_stars.length < 5) { // for the remaining stars until five, show empty stars.
-      avg_stars.push(<i className="fa fa-star-o"></i>);
+      while(avg_stars.length < 5) { // for the remaining stars until five, show empty stars.
+        avg_stars.push(<i className="fa fa-star-o"></i>);
+      }
     }
     return (<div className="col-sm-3 col-xs-12 host-attendees-col">
       <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
