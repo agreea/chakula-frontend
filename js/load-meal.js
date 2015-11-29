@@ -151,6 +151,11 @@ var MealInfo = React.createClass({
           </a>
         </div>;
     }
+    
+    var desc_lines = data.Description.split(/[\n\r]/g);
+    var description = desc_lines.map(function(desc_line) {
+      return <p>{desc_line}</p>;
+    });
     return (
       <div className="col-sm-7">
         <div className="row">
@@ -171,7 +176,7 @@ var MealInfo = React.createClass({
           </div>
         </div>
         <div className="row">
-          <p>{data.Description}</p>
+          {description}
         </div>
         <div className="row">
           <p><i className="fa fa-map-marker"></i>{" " + data.Address}</p>
