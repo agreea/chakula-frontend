@@ -194,7 +194,7 @@ var HostAttendeesInfo = React.createClass({
     var data = this.props.data;
     console.log("HostAttendeesInfo data: ");
     console.log(data);
-    if (data.Host_reviews) { // process avg rating
+    if (data.Host_reviews != null) { // process avg rating
       var ratings = data.Host_reviews.map(function(review) {
         return review.Rating;
       })
