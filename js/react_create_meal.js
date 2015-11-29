@@ -30,7 +30,8 @@ var TitleDescription = React.createClass({
   descriptionChanged: function(event) {
     this.setState({description: this.props.description});
     description = event.target.value;
-    console.log(description);
+    var description_lines = description.split(/[\n\r]/g);
+    console.log(description_lines);
     enableSave();
   },
   render: function() {
