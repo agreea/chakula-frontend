@@ -116,81 +116,6 @@ var ReviewList = React.createClass({
   }
 });
 
-// 
-var MealInfo = React.createClass({
-  render: function() {
-    // todo: truncate descriptions
-    moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
-      $('#time-left-subtext').text('Requests are now closed.')
-      $('#time-left-subtext').css("color", "#aaa") // set text to grey
-    var data = this.props.data;
-    var starts = moment(data.Starts);
-    var closes = moment(data.Rsvp_by);
-    var time_left_text;
-    var time_left_subtext;
-    if (moment(data.Rsvp_by) < moment()) {
-      time_left_text = <span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>;
-      time_left_subtext = "Requests are closed";
-    } else {
-      time_left_text = closes.toNow();
-      time_left_subtext = "Requests close"
-    }
-    var map_row;
-    if (data.Status != "ATTENDING") {
-        map_row = 
-          <div className="row map-row" style={{backgroundImage: 'url("' + data.Maps_url + '")'}}>
-            <svg className="map-radius" height="100" width="100">
-              <circle cx="50" cy="50" r="40" stroke="#3C8BA6" stroke-width="2" fill="#6DCDED" opacity=".8" />
-            </svg>   
-          </div>;
-    } else {
-      map_row = 
-        <div className="row map-row">
-          <a href={'https://www.google.com/maps/place/' + data.Address + ' Washington, DC'} target="_blank">
-            <img className="map-img" src={data.Maps_url} />
-          </a>
-        </div>;
-    }
-    
-    var desc_lines = data.Description.split(/[\n\r]/g);
-    var description = desc_lines.map(function(desc_line) {
-      return <p>{desc_line}</p>;
-    });
-    return (
-      <div className="col-sm-7">
-        <div className="row">
-          <h3>{data.Title}</h3>
-        </div>
-        <div className="row">
-          <div className="col-xs-4">
-            <h4 className="text-center">{data.Open_spots}</h4>
-            <p className="text-center">spots open</p>
-          </div>
-          <div className="col-xs-4">
-            <h4 className="text-center">{starts.format("h:mm a")}</h4>
-            <p className="text-center">{starts.format("ddd, MMM Do")}</p>
-          </div>
-          <div className="col-xs-4">
-            <h4 className="text-center">{time_left_text}</h4>
-            <p className="text-center">{time_left_subtext}</p>
-          </div>
-        </div>
-        <div className="row">
-          {description}
-        </div>
-        <div className="row">
-          <p><i className="fa fa-map-marker"></i>{" " + data.Address}</p>
-        </div>
-        {map_row}
-        <div className="row">
-          <ReviewBox data={data.Host_reviews} />
-        </div>
-      </div>
-    );
-  }
-});
-
-
 var HostAttendeesInfo = React.createClass({
   render: function() {
     // check meal type
@@ -226,12 +151,91 @@ var HostAttendeesInfo = React.createClass({
         avg_stars.push(<i className="fa fa-star-o"></i>);
       }
     }
-    return (<div className="col-sm-3 col-xs-12 host-attendees-col">
-      <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
-      <p className="text-center">{data.Host_name}</p>
-      <p className="text-center star-rating">{avg_stars}</p>
-      <p>{data.Host_bio}</p>
+    return (<div className="row host-attendees-col">
+      <div className="col-xs-12 col-sm-3">
+        <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
+      </div>
+      <div className="col-xs-12 col-sm-9">
+        <p className="text-center">{data.Host_name}</p>
+        <p className="text-center star-rating">{avg_stars}</p>
+        <p>{data.Host_bio}</p>
+      </div>
     </div>);
+  }
+});
+
+// 
+var MealInfo = React.createClass({
+  render: function() {
+    // todo: truncate descriptions
+    moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
+      $('#time-left-subtext').text('Requests are now closed.')
+      $('#time-left-subtext').css("color", "#aaa") // set text to grey
+    var data = this.props.data;
+    var starts = moment(data.Starts);
+    var closes = moment(data.Rsvp_by);
+    var time_left_text;
+    var time_left_subtext;
+    if (moment(data.Rsvp_by) < moment()) {
+      time_left_text = <span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>;
+      time_left_subtext = "Requests are closed";
+    } else {
+      time_left_text = closes.toNow();
+      time_left_subtext = "Requests close"
+    }
+    var map_row;
+    if (data.Status != "ATTENDING") {
+        map_row = 
+          <div className="row map-row" style={{backgroundImage: 'url("' + data.Maps_url + '")'}}>
+            <svg className="map-radius" height="100" width="100">
+              <circle cx="50" cy="50" r="40" stroke="#3C8BA6" stroke-width="2" fill="#6DCDED" opacity=".8" />
+            </svg>   
+          </div>;
+    } else {
+      map_row = 
+        <div className="row map-row">
+          <a href={'https://www.google.com/maps/place/' + data.Address + ' Washington, DC'} target="_blank">
+            <img className="map-img" src={data.Maps_url} />
+          </a>
+        </div>;
+    }
+
+    var desc_lines = data.Description.split(/[\n\r]/g);
+    var description = desc_lines.map(function(desc_line) {
+      return <p>{desc_line}</p>;
+    });
+    return (
+      <div className="col-sm-7">
+          <div className="row">
+            <h3>{data.Title}</h3>
+          </div>
+          <div className="row">
+            <div className="col-xs-4">
+              <h4 className="text-center">{data.Open_spots}</h4>
+              <p className="text-center">spots open</p>
+            </div>
+            <div className="col-xs-4">
+              <h4 className="text-center">{starts.format("h:mm a")}</h4>
+              <p className="text-center">{starts.format("ddd, MMM Do")}</p>
+            </div>
+            <div className="col-xs-4">
+              <h4 className="text-center">{time_left_text}</h4>
+              <p className="text-center">{time_left_subtext}</p>
+            </div>
+          </div>
+          <div className="row">
+            {description}
+          </div>
+          <HostAttendeesInfo data={this.props.data}/>
+          <div className="row">
+            <p><i className="fa fa-map-marker"></i>{" " + data.Address}</p>
+          </div>
+          {map_row}
+          <div className="row">
+            <ReviewBox data={data.Host_reviews} />
+          </div>
+      </div>
+    );
   }
 });
 
@@ -252,7 +256,6 @@ var Meal = React.createClass({
           </div>
         </div>
         <div className="row">
-          <HostAttendeesInfo data={this.props.data}/>
           <MealInfo data={this.props.data}/>
           <div className="col-xs-2">
             <button className="brand-btn btn" id="request-meal-btn" disabled={req_btn_disabled}>{req_btn_text}</button>
