@@ -220,10 +220,8 @@ var MealInfo = React.createClass({
             {description}
           </div>
           <div className="row">
-            <h4><i className="fa fa-clock-o"></i>{data.Open_spots + " open spots"}</h4>
-            <h4 className="text-center">{starts.format("h:mm a ddd, MMM Do")}</h4>
-          </div>
-          <div className="row">
+            <p><i className="fa fa-user"></i>{" " + data.Open_spots + " open spots"}</p>
+            <p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>
           </div>
           <HostAttendeesInfo data={this.props.data}/>
           <div className="row">
