@@ -152,12 +152,12 @@ var HostAttendeesInfo = React.createClass({
       }
     }
     return (<div className="row host-attendees-col">
-      <div className="col-xs-12 col-sm-3">
+      <div className="col-xs-12 col-sm-4">
         <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
       </div>
-      <div className="col-xs-12 col-sm-9">
-        <p className="text-center">{data.Host_name}</p>
-        <p className="text-center star-rating">{avg_stars}</p>
+      <div className="col-xs-12 col-sm-8">
+        <p>{data.Host_name}</p>
+        <p className="star-rating">{avg_stars}</p>
         <p>{data.Host_bio}</p>
       </div>
     </div>);
@@ -207,7 +207,7 @@ var MealInfo = React.createClass({
     return (
       <div className="col-sm-7">
           <div className="row">
-            <h3>{data.Title}</h3>
+            <h2>{data.Title}</h2>
           </div>
           <div className="row">
             <div className="col-xs-4">
