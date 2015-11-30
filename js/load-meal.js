@@ -156,7 +156,7 @@ var HostAttendeesInfo = React.createClass({
         <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
       </div>
       <div className="col-xs-12 col-sm-8">
-        <p>{data.Host_name}</p>
+        <p>{"About " + data.Host_name}</p>
         <p className="star-rating">{avg_stars}</p>
         <p>{data.Host_bio}</p>
       </div>
@@ -204,6 +204,7 @@ var MealInfo = React.createClass({
     var description = desc_lines.map(function(desc_line) {
       return <p>{desc_line}</p>;
     });
+
     return (
       <div className="col-sm-7">
           <div className="row">
@@ -211,20 +212,19 @@ var MealInfo = React.createClass({
           </div>
           <div className="row">
             <div className="col-xs-4">
-              <h4 className="text-center">{data.Open_spots}</h4>
-              <p className="text-center">spots open</p>
-            </div>
-            <div className="col-xs-4">
-              <h4 className="text-center">{starts.format("h:mm a")}</h4>
-              <p className="text-center">{starts.format("ddd, MMM Do")}</p>
-            </div>
-            <div className="col-xs-4">
               <h4 className="text-center">{time_left_text}</h4>
               <p className="text-center">{time_left_subtext}</p>
             </div>
           </div>
           <div className="row">
             {description}
+          </div>
+          <div className="row">
+            <h4><i className="fa fa-clock-o"></i>{data.Open_spots + " open spots"}</h4>
+            <h4 className="text-center">{starts.format("h:mm a ddd, MMM Do")}</h4>
+          </div>
+          </div>
+          <div className="row">
           </div>
           <HostAttendeesInfo data={this.props.data}/>
           <div className="row">
