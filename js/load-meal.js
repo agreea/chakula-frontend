@@ -5,7 +5,6 @@ if (api_resp.Success) {
 } else {
   window.location.replace("https://yaychakula.com");
 }
-var meal_data = JSON.parse(json_str).Return;
 var Carousel = React.createClass({
   render: function() {
     var pictures = this.props.data.map(function(pic, index) {
