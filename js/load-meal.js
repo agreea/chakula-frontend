@@ -5,7 +5,7 @@ if (api_resp.Success) {
 } else {
   window.location.replace("https://yaychakula.com");
 }
-var meal_data = JSON.parse(text).Return;
+var meal_data = JSON.parse(json_str).Return;
 var Carousel = React.createClass({
   render: function() {
     var pictures = this.props.data.map(function(pic, index) {
@@ -67,7 +67,7 @@ var Review = React.createClass({
           <p className="star-rating">
             {stars}
           </p>
-          {this.props.children}
+          <p>{this.props.children}</p>
           <div className="row">
             <div className="col-sm-8 review-meal-title">
               <p><a href={"https://yaychakula.com/meal.html?Id=" + this.props.meal_id}>
@@ -124,65 +124,63 @@ var HostAttendeesInfo = React.createClass({
     var data = this.props.data;
     console.log("HostAttendeesInfo data: ");
     console.log(data);
-    if (data.Host_reviews !== null) { // process avg rating
-      var ratings = data.Host_reviews.map(function(review) {
-        return review.Rating;
-      })
-      var sum_ratings = ratings.reduce(function(previous, current) {
-        return previous + current;
-      });
-      console.log("Sum ratings: " + sum_ratings);
-      var avg_rating = (sum_ratings/data.Host_reviews.length);
-      console.log("Average rating: " + avg_rating);
-      var avg_stars = [];
-      while(avg_rating > 0) { // show the average rating in filled stars
-        if (avg_rating < 1) { // for any remainder, round up to the next half-star and exit the loop
-          if (avg_rating > .7) {
-            avg_stars.push(<i className="fa fa-star"></i>);
-          } else if (avg_rating > .3) {
-            avg_stars.push(<i className="fa fa-star-half-o"></i>);
-          }
-          break;
-        }
-        avg_stars.push(<i className="fa fa-star"></i>);
-        avg_rating--;
-      }
-      while(avg_stars.length < 5) { // for the remaining stars until five, show empty stars.
-        avg_stars.push(<i className="fa fa-star-o"></i>);
-      }
-    }
     return (<div className="row host-attendees-col">
-      <div className="col-xs-12 col-sm-4">
+      <div className="col-xs-12 col-sm-3">
         <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
       </div>
-      <div className="col-xs-12 col-sm-8">
-        <h4>{"About " + data.Host_name}</h4>
-        <p className="star-rating">{avg_stars}</p>
+      <div className="col-xs-12 col-sm-9">
+        <h3>{"About " + data.Host_name}</h3>
         <p>{data.Host_bio}</p>
       </div>
     </div>);
   }
 });
 
-// 
+var BookMeal = React.createClass({
+  render: function() {
+    var data = this.props.data;
+    var req_btn_disabled = 
+      (moment(data.Rsvp_by) < moment()) || 
+      data.Status == "ATTENDING" || 
+      data.Status == "DECLINED" || 
+      data.Status == "PENDING";
+    var starts = moment(data.Starts);
+    var req_btn_text;
+    if (moment(meal_data.Rsvp_by < moment())) {
+      req_btn_text = 'Meal closed';
+    } else {
+      req_btn_text = "Book";
+    }
+    var order_btn = 
+      <button className="brand-btn btn" id="request-meal-btn" 
+        disabled={req_btn_disabled}>{req_btn_text}</button>;
+    var time_left_text;
+    var booking_info = 
+      [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>,
+        <p><span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Event is closed</p>];
+    if (moment(data.Rsvp_by) > moment()) {
+      booking_info.push(<p>{closes.toNow() + " left to book"}</p>);
+    }
+    return(
+      <div className="col-xs-12 col-sm-3">
+        <div className="book-meal">
+          <div className="price-row"><h2>{"$" + Math.round(this.props.data.Price*100)/100}</h2><p>/person</p></div>
+          {order_btn}
+          {booking_info}
+        </div>
+      </div>
+    );
+  }
+});
+
 var MealInfo = React.createClass({
   render: function() {
     // todo: truncate descriptions
     moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
-      $('#time-left-subtext').text('Requests are now closed.')
-      $('#time-left-subtext').css("color", "#aaa") // set text to grey
+    // $('#time-left-subtext').text('Requests are now closed.');
+    // $('#time-left-subtext').css("color", "#aaa"); // set text to grey
     var data = this.props.data;
-    var starts = moment(data.Starts);
     var closes = moment(data.Rsvp_by);
-    var time_left_text;
-    var time_left_subtext;
-    if (moment(data.Rsvp_by) < moment()) {
-      time_left_text = <span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>;
-      time_left_subtext = "Requests are closed";
-    } else {
-      time_left_text = closes.toNow();
-      time_left_subtext = "Requests close"
-    }
     var map_row;
     if (data.Status != "ATTENDING") {
         map_row = 
@@ -199,40 +197,48 @@ var MealInfo = React.createClass({
           </a>
         </div>;
     }
+    var avg_stars = [];
+    if (data.Host_reviews !== null) { // process avg rating
+      var ratings = data.Host_reviews.map(function(review) {
+        return review.Rating;
+      })
+      var sum_ratings = ratings.reduce(function(previous, current) {
+        return previous + current;
+      });
+      console.log("Sum ratings: " + sum_ratings);
+      var avg_rating = (sum_ratings/data.Host_reviews.length);
+      console.log("Average rating: " + avg_rating);
+      while(avg_rating > 0) { // show the average rating in filled stars
+        if (avg_rating < 1) { // for any remainder, round up to the next half-star and exit the loop
+          if (avg_rating > .7) {
+            avg_stars.push(<i className="fa fa-star"></i>);
+          } else if (avg_rating > .3) {
+            avg_stars.push(<i className="fa fa-star-half-o"></i>);
+          }
+          break;
+        }
+        avg_stars.push(<i className="fa fa-star"></i>);
+        avg_rating--;
+      }
+      while(avg_stars.length < 5) { // for the remaining stars until five, show empty stars.
+        avg_stars.push(<i className="fa fa-star-o"></i>);
+      }
+    }
 
+    // handle newlines in the meal description
     var desc_lines = data.Description.split(/[\n\r]/g);
     var description = desc_lines.map(function(desc_line) {
       return <p>{desc_line}</p>;
     });
-    var req_btn_disabled = (moment(meal_data.Rsvp_by < moment()) || this.props.data.Status == "ATTENDING" || this.props.data.Status == "DECLINED" || this.props.data.Status == "PENDING");
-    var req_btn_text;
-    if (moment(meal_data.Rsvp_by < moment())) {
-      req_btn_text = 'Meal closed';
-    } else {
-      req_btn_text = "Book";
-    }
-    var order_btn = 
-      <button className="brand-btn btn" 
-        id="request-meal-btn" 
-        disabled={req_btn_disabled}>{req_btn_text}</button>
 
     return (
-      <div className="col-xs-10 col-xs-offset-1 col-sm-9">
+      <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-0">
           <div className="row">
-            <h2 className="col-sm-10">{data.Title}</h2>
-          </div>
-          <div className="row">
-            <div className="col-xs-4">
-              <h4 className="text-center">{time_left_text}</h4>
-              <p className="text-center">{time_left_subtext}</p>
-            </div>
+            <h2>{data.Title}</h2>
+            <p className="star-rating">{avg_stars}</p>
           </div>
           <div className="row">
             {description}
-          </div>
-          <div className="row">
-            <p><i className="fa fa-user"></i>{" " + data.Open_spots + " open spots"}</p>
-            <p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>
           </div>
           <HostAttendeesInfo data={this.props.data}/>
           <div className="row">
@@ -252,13 +258,13 @@ var Meal = React.createClass({
     return(
       <div className="row">
         <div className="row text-center">
-          <div className="col-xs-10 col-xs-offset-1 col-sm-9 col-sm-offset-2">
+          <div className="col-xs-12 col-sm-9 col-sm-offset-2">
             <Carousel data={this.props.data.Pics}></Carousel>
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-2">{order_btn}</div>
-          <MealInfo data={this.props.data}/>
+          <BookMeal data={this.props.data}></BookMeal>
+          <MealInfo data={this.props.data}></MealInfo>
         </div>
     </div>);
   }
@@ -268,7 +274,7 @@ React.render(
   <Meal data={meal_data}/>,
   document.getElementById('meal')
 );
-
+console.log("React render just got passed");
 function getMeal(){
   urlVars = getUrlVars();
   api_resp = api_call("meal", {
