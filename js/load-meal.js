@@ -5,7 +5,7 @@ if (api_resp.Success) {
 } else {
   window.location.replace("https://yaychakula.com");
 }
-
+var meal_data = JSON.parse(text).Return;
 var Carousel = React.createClass({
   render: function() {
     var pictures = this.props.data.map(function(pic, index) {
@@ -156,7 +156,7 @@ var HostAttendeesInfo = React.createClass({
         <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
       </div>
       <div className="col-xs-12 col-sm-8">
-        <p>{"About " + data.Host_name}</p>
+        <h4>{"About " + data.Host_name}</h4>
         <p className="star-rating">{avg_stars}</p>
         <p>{data.Host_bio}</p>
       </div>
@@ -204,11 +204,22 @@ var MealInfo = React.createClass({
     var description = desc_lines.map(function(desc_line) {
       return <p>{desc_line}</p>;
     });
+    var req_btn_disabled = (moment(meal_data.Rsvp_by < moment()) || this.props.data.Status == "ATTENDING" || this.props.data.Status == "DECLINED" || this.props.data.Status == "PENDING");
+    var req_btn_text;
+    if (moment(meal_data.Rsvp_by < moment())) {
+      req_btn_text = 'Meal closed';
+    } else {
+      req_btn_text = "Book";
+    }
+    var order_btn = 
+      <button className="brand-btn btn" 
+        id="request-meal-btn" 
+        disabled={req_btn_disabled}>{req_btn_text}</button>
 
     return (
-      <div className="col-xs-10 col-xs-offset-1 col-sm-9 col-sm-offset-2">
+      <div className="col-xs-10 col-xs-offset-1 col-sm-9">
           <div className="row">
-            <h2>{data.Title}</h2>
+            <h2 className="col-sm-10">{data.Title}</h2>
           </div>
           <div className="row">
             <div className="col-xs-4">
@@ -238,13 +249,6 @@ var MealInfo = React.createClass({
 
 var Meal = React.createClass({
   render: function() {
-    var req_btn_disabled = (moment(meal_data.Rsvp_by < moment()) || this.props.data.Status == "ATTENDING" || this.props.data.Status == "DECLINED" || this.props.data.Status == "PENDING");
-    var req_btn_text;
-    if (moment(meal_data.Rsvp_by < moment())) {
-      req_btn_text = 'Meal closed';
-    } else {
-      req_btn_text = "Order - $" + Math.round(this.props.data.Price*100)/100;
-    }
     return(
       <div className="row">
         <div className="row text-center">
@@ -253,10 +257,8 @@ var Meal = React.createClass({
           </div>
         </div>
         <div className="row">
+          <div className="col-sm-2">{order_btn}</div>
           <MealInfo data={this.props.data}/>
-          <div className="col-xs-2">
-            <button className="brand-btn btn" id="request-meal-btn" disabled={req_btn_disabled}>{req_btn_text}</button>
-          </div>
         </div>
     </div>);
   }
@@ -266,61 +268,6 @@ React.render(
   <Meal data={meal_data}/>,
   document.getElementById('meal')
 );
-
-// function setupMeal() {
-//     $('#meal-title').text(meal_data.Title);
-//     $('#meal-description').text(meal_data.Description);
-//     $('#host-name').text(meal_data.Host_name);
-//     $('#host-pic').attr("src", meal_data.Host_pic);
-//     $('#open-spots').text(meal_data.Open_spots);
-//     if (meal_data.Open_spots === 1) {
-//       $('#open-spots-subtext').text('seat available')
-//     }
-//     $('#host-bio').text(meal_data.Host_bio);
-//     // attendees = meal_data.Attendees;
-//     // for (i in attendees) {
-//     //   console.log(attendees[i])
-//     //   $('#attendees').append('<div class="col-xs-6 col-sm-4 col-md-3"> <img class="img-responsive img-circle" src="'+ 
-//     //     attendees[i].Prof_pic_url + '"><p>' + attendees[i].First_name + '</p></div>')
-//     // }
-//     // if (attendees.length === 0) {
-//     //   $('#attendees').append('<div class="col-xs-6 col-sm-4 col-md-3"><p>' 
-//     //     + 'Be the first!'+ '</p></div>');
-//     // }
-//     pics = meal_data.Pics;
-//     console.log(pics);
-//     console.log(pics[0]);
-//     setupCarousel(pics);
-//     request_button = $('#request-meal-btn');
-//     // Set the button text, text color, and background color according to meal status
-//     if (meal_data.Status != "NONE") {
-//       request_button.text(meal_data.Status);
-//       request_button.prop('disabled', true);
-//     } else {
-//       request_button.text("Request Meal - $" + Math.round(meal_data.Price*100)/100);
-//       $('#meal-address').css('color', '#8c8c8c');
-//     }
-//     if (meal_data.Status === "PENDING") {
-//       request_button.css("background-color", "#8cd3e8");
-//       request_button.css("color", "#2e464c");
-//     } else if (meal_data.Status === "ATTENDING") {
-//       request_button.html("<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Attending");
-//       request_button.css("background-color", "#19a347");
-//       request_button.css("color", "#fff");
-//     } else if (meal_data.Status === "DECLINED") {
-//       request_button.css("background-color", "#71ccdb");
-//       request_button.css("color", "#233f44");
-//     } else if (meal_data.Open_spots === 0) {
-//       request_button.prop('disabled', true);
-//       request_button.text("Sold out!");
-//     }
-//     $('#meal-address').html('<p><b><i class="fa fa-map-marker"></i> '+ meal_data.Address + '</b></p>');
-//     start = Date.parse(meal_data.Starts);
-//     console.log("Start date: " + start);
-//     console.log("RSVP by: " + meal_data.Rsvp_by);
-//     rsvp_by = Date.parse(meal_data.Rsvp_by);
-//     processDates(start, rsvp_by);
-// }
 
 function getMeal(){
   urlVars = getUrlVars();
@@ -332,133 +279,6 @@ function getMeal(){
   console.log(api_resp);
   return api_resp;
 }
-
-// Takes dates as iso8601 formatted string, assigns start time as 8:30 PM Sun, October 15
-// assigns rsvp_by in days, hours, or minutes left
-// function processDates(start_time, rsvp_by) {
-//   // start time:
-//   // get the time in hours & minutes. Set that to the main #
-//   // get the time in days, month, and time. Set that to the subtext
-//   date = new Date(start_time);
-//   month = getShortMonth(date.getMonth()+1);
-//   console.log("Month: " + date.getMonth());
-//   console.log("Date: " + date.getDate());
-//   console.log("Day: " + date.getDay());
-//   date_day = date.getDate();
-//   week_day = getDayOfWeek(date.getDay());
-//   time_text = getHumanTime(date.getHours(), date.getMinutes());
-//   time_subtext = "on " + week_day + ", " + month + " " + date_day;
-//   $('#meal-time').text(time_text);
-//   $('#meal-time-subtext').text(time_subtext);
-//   // RSVP time:
-//   // get the current time, run a diff
-//   second = 1000;
-//   minute = second * 60;
-//   hour = minute * 60;
-//   day = hour * 24;
-//   time_left = rsvp_by - Date.now()
-//   if (time_left > day) {
-//     $('#time-left').text(Math.round(time_left/day));
-//     $('#time-left-subtext').text('days til requests close.');
-//   } else if (time_left > hour) {
-//     $('#time-left').text(Math.round(time_left/hour));
-//     $('#time-left-subtext').text('hours til requests close.');
-//     $('#time-left-subtext').css("color", "##FFCC00") // set text to yellow
-//   } else if (time_left > minute) {
-//     $('#time-left').text(Math.round(time_left/hour));
-//     $('#time-left-subtext').text('minutes til requests close.');
-//     $('#time-left-subtext').css("color", "#ff0000"); // set text to red
-//   } else if (time_left < 0) {
-//     $('#time-left').html('<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>'); 
-//     $('#time-left').css("color", "#aaa") // set text to grey
-//     $('#time-left-subtext').text('Requests are now closed.')
-//     $('#time-left-subtext').css("color", "#aaa") // set text to grey
-//     request_button = $('#request-meal-btn').prop('disabled', true);
-//     request_button.text('Meal closed');
-
-//   }
-//   // if rsvp_by - now > 24 hours ==> "# days left"
-//   // else if rsvp_by - now > 1 hour ==> "# hours left" (text is yellow)
-//   // else if rsvp_by - now > 1 minute ==> "# minutes left" (text is red)
-//   // else ==> "Closed" (text is grey)
-// }
-
-// function getShortMonth(month) {
-//   switch (month) {
-//     case 1:
-//       return "Jan";
-//     case 2:
-//       return "Feb";
-//     case 3: 
-//       return "Mar";
-//     case 4:
-//       return "Apr";
-//     case 5:
-//       return "May";
-//     case 6:
-//       return "Jun";
-//     case 7:
-//       return "Jul";
-//     case 8:
-//       return "Aug";
-//     case 9:
-//       return "Sep";
-//     case 10:
-//       return "Oct";
-//     case 11:
-//       return "Nov";
-//     case 12:
-//       return "Dec";
-//     default:
-//       return "";
-//   }
-// }
-
-// function getDayOfWeek(day) {
-//   switch (day) {
-//     case 0:
-//       return "Sun";
-//     case 1:
-//       return "Mon";
-//     case 2:
-//       return "Tues";
-//     case 3:
-//       return "Wed";
-//     case 4:
-//       return "Thurs";
-//     case 5:
-//       return "Friday";
-//     case 6:
-//       return "Saturday";
-//     default:
-//       return "";
-//   }
-// }
-
-// function getHumanTime(hour, minutes) {
-//   if (minutes === 0) {
-//     minutes = "00";
-//   }
-//   if (hour < 12) {
-//     time = hour + ":" + minutes + " AM";
-//   } else {
-//     if (hour > 12) {
-//       hour -= 12;
-//     }
-//     time = hour + ":" + minutes + " PM";
-//   }
-//   return time;
-// }
-
-// function setupCarousel(pics) {
-//   picsHTML = "";
-//   for (pic in pics) {
-//     $('<div class="item"><img src="img/'+pics[pic].Name +'"><div class="carousel-caption">'+ pics[pic].Caption +'</div>   </div>').appendTo('.carousel-inner');
-//   }
-//   $('.item').first().addClass('active');
-//   $('#carousel-example-generic').carousel();
-//   console.log(picsHTML);
-// }
 
 function getCards() {
   api_resp = api_call("kitchenuser", {

@@ -1,5 +1,9 @@
+p {
+    color: #434343;
+}
 .carousel-inner > .item > img {
     margin: 0 auto;
+    max-height: 500px;
 }
 .disclaimer-text {
     font-size: 10px;
@@ -14,14 +18,6 @@
     margin-top: 20px;
     padding: 0;
 }
-.chef-pic-name {
-    margin-top: 15px;
-}
-
-.chef-name {
-    margin-bottom: 10px;
-    margin-top: 0;
-}
 
 .host-pic {
     max-height: 250px;
@@ -30,12 +26,24 @@
     margin-right: auto;
     margin-bottom: 15px;
 }
-.vital-info-row {
-    margin: 0 8px;
+.affix {
+    top: 0;
 }
 
-.content-section {
-    padding-top: 100px;
+.book-meal > .brand-btn {
+    width: auto;
+    padding: 8px 16px;
+}
+
+.book-meal {
+    background-color: #f1f1f1;
+    padding: 15px;
+}
+.price-row {
+    padding: 15px 0;
+}
+.price-row *{
+    display: inline;
 }
 
 .btn-payment {
