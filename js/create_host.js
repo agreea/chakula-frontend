@@ -120,9 +120,7 @@ var ProfileForm = React.createClass({
               <div className="row">
                	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
                		<button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
-               		   onClick={this.attemptSendHostData}>
-               			<span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Saved
-               		</button>
+               		 onClick={this.attemptSendHostData}>Saved</button>
                	</div>
               </div>
               <div className="row">
@@ -159,6 +157,9 @@ function sendHostData() {
 	if (api_resp.Success) {
 	   create_host_render(api_resp.Return);
 	   $('#error-field').hide();
+     // disable save
+     $('#save').css('background-color', '#19a347');
+     $('#save').text('Saved');
 		// show the saved button as green, add check mark, disable
 	}
 }
