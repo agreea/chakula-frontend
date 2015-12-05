@@ -86,6 +86,7 @@ a:focus {
 
 .intro .intro-body .intro-text {
     font-size: 18px;
+    color: #fff;
 }
 
 @media(min-width:768px) {
@@ -250,6 +251,7 @@ form {
     color: #000;
     background-color: #fff
 }
+
 ul.banner-social-buttons {
     margin-top: 0;
 }
