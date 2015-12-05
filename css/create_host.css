@@ -2,7 +2,7 @@
 	color: #ff0000;
 }
 span {
-	vertical-align: none;
+	vertical-align: baseline;
 }
 .btn {
 	width: 60%;
