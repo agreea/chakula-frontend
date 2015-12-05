@@ -20,8 +20,6 @@ var FormTextRow = React.createClass({
       console.log('Address: ' + address);
     } else if (this.props.id === "city") {
       city = e.target.value;
-    } else if (this.props.id === "state") {
-      state = e.target.value;
     }
     this.setState({value: e.target.value});
     enableSave();
@@ -79,6 +77,14 @@ var ProfileForm = React.createClass({
 			submittable = false;
 			errorHtml += "<li>Address is mandatory</li>"
 		}
+    if (!state) {
+      submittable = false;
+      errorHtml += "<li>State is mandatory</li>"      
+    }
+    if (!city) {
+      submittable = false;
+      errorHtml += "<li>City is mandatory</li>"      
+    }
 		if (!Cookies.get('session')) {
 			// show fb login
 			submittable = false;
@@ -207,6 +213,9 @@ if (api_resp.Success) {
 	email = api_resp.Return.Email;
 	phone = api_resp.Return.Phone;
 	address = api_resp.Return.Address;
+  city = api_resp.Return.City;
+  state = api_resp.Return.State;
+  bio = api_resp.Return.Bio;
 	create_host_render(api_resp.Return);
 }
 create_host_render(api_resp.Return);
