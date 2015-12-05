@@ -130,7 +130,7 @@ var ProfileForm = React.createClass({
                 <div className="col-xs-4 col-sm-2">
                   <p className="text-right form-label">State</p>
                 </div>
-                <div className="col-xs-8 col-xs-offset-4 col-sm-6 col-sm-offset-4">
+                <div className="col-xs-8 col-sm-6">
                   <select value={host.State} onChange={this.handleStateChange}>
                     {states_select_options}
                   </select>
