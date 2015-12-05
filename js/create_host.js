@@ -122,7 +122,15 @@ var ProfileForm = React.createClass({
                 place_holder="3700 O St NW" 
                 id="address"
                 default_value={host.Address}/>
+              <FormTextRow form_name="City" 
+                place_holder="Washington" 
+                id="city"
+                default_value={host.City}/>
               <div className="row">
+                <div className="col-xs-4 col-sm-2">
+                  <p className="text-right form-label">State</p>
+                </div>
+                <div className="col-xs-8 col-xs-offset-4 col-sm-6 col-sm-offset-4"
                 <select value={host.State} onChange={this.handleStateChange}>
                   {states_select_options}
                 </select>
