@@ -39,4 +39,9 @@ a {
 	border-width: 2px;
 	border-style: solid;
 	border-color: #555;
+	border-radius: 0;
+	color: #434343;
+}
+.stripe-btn > * {
+	
 }
