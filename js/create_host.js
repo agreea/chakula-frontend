@@ -117,7 +117,7 @@ var ProfileForm = React.createClass({
     	 <div className="row">
     	    <div className="col-xs-offset-4 col-sm-offset-2">
     	    	<h3>Your Host Profile</h3>
-            <span className="disclaimer-text">By setting up an account you agree to <a href="https://yaychakula.com/tos.html">the Chakula terms of service</a></span>
+            <span className="disclaimer-text">By setting up an account you agree to <b><a href="https://yaychakula.com/tos.html">the Chakula terms of service</a></b></span>
     		  </div>
     	 </div>
       <FormTextRow form_name="Email" place_holder="One you actually check" id="email" default_value={host.Email}/>
