@@ -2,6 +2,8 @@ var phone = "";
 var address = "";
 var email = "";
 var bio = "";
+var state = "";
+var city = "";
 var FormTextRow = React.createClass({
   getInitialState: function() {
       return ({value: this.props.default_value});
@@ -16,9 +18,13 @@ var FormTextRow = React.createClass({
     } else if (this.props.id === "address") {
       address = e.target.value;
       console.log('Address: ' + address);
+    } else if (this.props.id === "city") {
+      city = e.target.value;
+    } else if (this.props.id === "state") {
+      state = e.target.value;
     }
-    	this.setState({value: e.target.value});
-    	enableSave();
+    this.setState({value: e.target.value});
+    enableSave();
   },
   render: function() {
     return (<div className="row">
@@ -37,13 +43,18 @@ var FormTextRow = React.createClass({
       
 var ProfileForm = React.createClass({
   getInitialState: function() {
-  	return {Bio: this.props.data.Bio};
+  	return {Bio: this.props.data.Bio, State: this.props.data.State};
   },
   bioChanged: function(e){
     bio = e.target.value;
     enableSave();
     this.setState({Bio: e.target.value}); 
   },
+  handleStateChange: function(e) {
+    state = e.target.value;
+    enableSave();
+    this.setState({State: e.target.value});
+  }
   attemptSendHostData: function() {
 		console.log("attempting to send host data");
 		var submittable = true;
@@ -91,6 +102,10 @@ var ProfileForm = React.createClass({
   	} else {
   		stripe_element = (<p>Complete the information above to set up payments</p>);
   	}
+    var states = ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"];
+    var states_select_options = states.map(function(state) {
+      return <option value={state}>{state}</option>;
+    });
     return (
       <div className="row">
     	 <div className="row">
@@ -107,6 +122,11 @@ var ProfileForm = React.createClass({
                 place_holder="3700 O St NW" 
                 id="address"
                 default_value={host.Address}/>
+              <div className="row">
+                <select value={host.State} onChange={this.handleStateChange}>
+                  {states_select_options}
+                </select>
+              </div>
               <div className="row">
               	<div className="col-sm-2 col-xs-4">
               		<p className="form-label text-right">Bio</p>
@@ -150,7 +170,9 @@ function sendHostData() {
 						email: email,
 						phone: phone,
 						address: address,
-						bio: bio
+						bio: bio,
+            state: state,
+            city: city
 						});
 	console.log("Sent host data");
 	console.log(api_resp);
