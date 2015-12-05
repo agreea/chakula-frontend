@@ -54,7 +54,7 @@ var ProfileForm = React.createClass({
     state = e.target.value;
     enableSave();
     this.setState({State: e.target.value});
-  }
+  },
   attemptSendHostData: function() {
 		console.log("attempting to send host data");
 		var submittable = true;
