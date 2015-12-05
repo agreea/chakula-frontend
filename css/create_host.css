@@ -1,7 +1,9 @@
 .error-field {
 	color: #ff0000;
 }
-
+span {
+	vertical-align: none;
+}
 .btn {
 	width: 60%;
 }
