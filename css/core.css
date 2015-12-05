@@ -74,6 +74,7 @@ span {
 
 .brand-btn {
     border-radius: 0;
+    border-width: 0;
     text-transform: uppercase;
     font-family: Muli,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
@@ -82,13 +83,16 @@ span {
     width: 100%;
     background-color: #5bc0de;
     color: #fff;
-    padding-right: 0;
+    padding: 12px 0;
     margin-left: 0;
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
+.brand-btn:disabled {
+    background-color: #abdceb;
 
+}
 .brand-btn:hover {
     color: #fff;
 }

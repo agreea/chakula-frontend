@@ -26,6 +26,9 @@ p {
     margin-right: auto;
     margin-bottom: 15px;
 }
+/*
+Payment UI Styling
+*/
 .affix {
     top: 0;
 }
@@ -39,6 +42,7 @@ p {
     background-color: #f1f1f1;
     padding: 15px;
 }
+
 .price-row {
     padding: 15px 0;
 }
@@ -46,8 +50,14 @@ p {
     display: inline;
 }
 
-.btn-payment {
-    width: 60%;
+.payment-button {
+    background: rgba(0,0,0,0);
+    border-color: #555;
+    border-width: 2px;
+    border-style: solid;
+}
+#payment-form {
+    padding-bottom: 16px;
 }
 .fb-login {
     max-height: 50px;

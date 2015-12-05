@@ -1,41 +1,39 @@
-      var phone = "";
-      var address = "";
-      var email = "";
-      var bio = "";
-      var FormTextRow = React.createClass({
-        getInitialState: function() {
-    	      return ({value: this.props.default_value});
-        },
-        formChanged: function(e) {
-        	if (this.props.id === "phone") {
-        		phone = e.target.value;
-        		console.log('Phone: ' + phone);
-        	} else if (this.props.id === "email") {
-        		email = e.target.value;
-        	        		console.log('Email: ' + email);
-
-        	} else if (this.props.id === "address") {
-        		address = e.target.value;
-        		        		console.log('Address: ' + address);
-
-        	}
-	        this.setState({value: e.target.value});
-	        enableSave();
-        },
-        render: function() {
-          return (<div className="row">
-              <div className="col-xs-4 col-sm-2 form-label">
-                <p className="text-right">{this.props.form_name}</p>
-              </div>
-              <div className="col-sm-4 col-xs-8">
-              <input className="text-field" id={this.props.id} type="text" 
-                defaultValue={this.props.default_value} 
-                onChange={this.formChanged}
-                placeholder={this.props.placeholder}/>
-              </div>
-            </div>);
-        }
-      });
+var phone = "";
+var address = "";
+var email = "";
+var bio = "";
+var FormTextRow = React.createClass({
+  getInitialState: function() {
+      return ({value: this.props.default_value});
+  },
+  formChanged: function(e) {
+    if (this.props.id === "phone") {
+      phone = e.target.value;
+      console.log('Phone: ' + phone);
+    } else if (this.props.id === "email") {
+      email = e.target.value;
+      console.log('Email: ' + email);
+    } else if (this.props.id === "address") {
+      address = e.target.value;
+      console.log('Address: ' + address);
+    }
+    	this.setState({value: e.target.value});
+    	enableSave();
+  },
+  render: function() {
+    return (<div className="row">
+        <div className="col-xs-4 col-sm-2 form-label">
+          <p className="text-right">{this.props.form_name}</p>
+        </div>
+        <div className="col-sm-4 col-xs-8">
+        <input className="text-field" id={this.props.id} type="text" 
+          defaultValue={this.props.default_value} 
+          onChange={this.formChanged}
+          placeholder={this.props.placeholder}/>
+        </div>
+      </div>);
+  }
+});
       
       var ProfileForm = React.createClass({
         getInitialState: function() {
@@ -161,8 +159,8 @@ function sendHostData() {
 	console.log("Sent host data");
 	console.log(api_resp);
 	if (api_resp.Success) {
-		render(api_resp.Return);
-	    $('#error-field').hide();
+	   create_host_render(api_resp.Return);
+	   $('#error-field').hide();
 		// show the saved button as green, add check mark, disable
 	}
 }
