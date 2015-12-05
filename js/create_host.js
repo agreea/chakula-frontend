@@ -100,9 +100,11 @@ var ProfileForm = React.createClass({
   	var stripe_element;
   	var host = this.props.data;
   	if (host.Stripe_connect) {
-  		stripe_element = (<p><span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Stripe Connected</p>);
+  		stripe_element = 
+        (<p><span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Stripe Connected</p>);
   	} else if(host.Email && host.Phone && host.Address){
-    		stripe_element = (<a className="stripe-btn btn-lg btn" 
+    		stripe_element = 
+          (<a className="stripe-btn btn-lg btn" 
             	href={host.Stripe_url} 
             	target="_blank">Connect With Stripe</a>);
   	} else {
@@ -115,6 +117,7 @@ var ProfileForm = React.createClass({
     	 <div className="row">
     	    <div className="col-xs-offset-4 col-sm-offset-2">
     	    	<h3>Your Host Profile</h3>
+            <p className="disclaimer-text">By setting up an account you agree to <a href="https://yaychakula.com/tos.html">the Chakula terms of service</a></p>
     		  </div>
     	 </div>
       <FormTextRow form_name="Email" place_holder="One you actually check" id="email" default_value={host.Email}/>
