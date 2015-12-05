@@ -35,72 +35,70 @@ var FormTextRow = React.createClass({
   }
 });
       
-      var ProfileForm = React.createClass({
-        getInitialState: function() {
-        	return {Bio: this.props.data.Bio};
-        },
-        bioChanged: function(e){
-          bio = e.target.value;
-          enableSave();
-          this.setState({Bio: e.target.value}); 
-        },
-        attemptSendHostData: function() {
-			console.log("attempting to send host data");
-			var submittable = true;
-			var errorHtml = ""
-			if (!email) {
-				submittable = false;
-				errorHtml += "<li>Email is mandatory</li>"
-			}
-			if (!phone) {
-				submittable = false;
-				errorHtml += "<li>Phone is mandatory</li>"
-			}
-			var reg = /^\d+$/;
-			if (!reg.test(phone)) {
-				submittable = false;
-				errorHtml += "<li>Phone must be digits only</li>"
-			} else if (phone.length != 10) {
-				submittable = false;
-				errorHtml += "<li>Phone must be 10 digits long</li>"
-			}
-			if (!address) {
-				submittable = false;
-				errorHtml += "<li>Address is mandatory</li>"
-			}
-			if (!Cookies.get('session')) {
-				// show fb login
-				submittable = false;
-			}
-			if (submittable) {
-				console.log("Submitting");
-				sendHostData();
-			} else {
-				$('#error-field').html(errorHtml);
-			}
-        },
-        render: function() {
-        	var stripe_element;
-        	var host = this.props.data;
-        	if (host.Stripe_connect) {
-        		stripe_element = (<p><span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Stripe Connected</p>);
-        	} else if(host.Email && host.Phone && host.Address){
-          		stripe_element = (<a className="stripe-btn btn-lg btn" 
-                  	href={host.Stripe_url} 
-                  	target="_blank">Connect With Stripe</a>);
-        	} else {
-        		stripe_element = (<p>Complete the information above to set up payments</p>);
-        	}
-          return (<div className="row">
-          	<div className="row">
-          	    <div className="col-xs-offset-4 col-sm-offset-2">
-          	    	<h3>Your Host Profile</h3>
-          		</div>
-          	</div>
-              <FormTextRow form_name="Email" 
-                place_holder="One you actually check" 
-                id="email"
-                default_value={host.Email}/>
+var ProfileForm = React.createClass({
+  getInitialState: function() {
+  	return {Bio: this.props.data.Bio};
+  },
+  bioChanged: function(e){
+    bio = e.target.value;
+    enableSave();
+    this.setState({Bio: e.target.value}); 
+  },
+  attemptSendHostData: function() {
+		console.log("attempting to send host data");
+		var submittable = true;
+		var errorHtml = ""
+		if (!email) {
+			submittable = false;
+			errorHtml += "<li>Email is mandatory</li>"
+		}
+		if (!phone) {
+			submittable = false;
+			errorHtml += "<li>Phone is mandatory</li>"
+		}
+		var reg = /^\d+$/;
+		if (!reg.test(phone)) {
+			submittable = false;
+			errorHtml += "<li>Phone must be digits only</li>"
+		} else if (phone.length != 10) {
+			submittable = false;
+			errorHtml += "<li>Phone must be 10 digits long</li>"
+		}
+		if (!address) {
+			submittable = false;
+			errorHtml += "<li>Address is mandatory</li>"
+		}
+		if (!Cookies.get('session')) {
+			// show fb login
+			submittable = false;
+		}
+		if (submittable) {
+			console.log("Submitting");
+			sendHostData();
+		} else {
+			$('#error-field').html(errorHtml);
+		}
+  },
+  render: function() {
+  	var stripe_element;
+  	var host = this.props.data;
+  	if (host.Stripe_connect) {
+  		stripe_element = (<p><span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Stripe Connected</p>);
+  	} else if(host.Email && host.Phone && host.Address){
+    		stripe_element = (<a className="stripe-btn btn-lg btn" 
+            	href={host.Stripe_url} 
+            	target="_blank">Connect With Stripe</a>);
+  	} else {
+  		stripe_element = (<p>Complete the information above to set up payments</p>);
+  	}
+    return (
+      <div className="row">
+    	 <div className="row">
+    	    <div className="col-xs-offset-4 col-sm-offset-2">
+    	    	<h3>Your Host Profile</h3>
+    		  </div>
+    	 </div>
+      <FormTextRow form_name="Email" place_holder="One you actually check" id="email" default_value={host.Email}/>
               <FormTextRow form_name="Phone #" 
                 place_holder="01234567890" 
                 id="phone"
@@ -122,7 +120,7 @@ var FormTextRow = React.createClass({
               <div className="row">
                	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
                		<button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
-               		onClick={this.attemptSendHostData} disabled="true">
+               		onClick={this.attemptSendHostData} disabled="false">
                			<span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Saved
                		</button>
                	</div>
