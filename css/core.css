@@ -54,8 +54,12 @@ form {
 
 }
 .disclaimer-text {
-    font-size: 10px;
-    color: #555;
+    font-size: 11px;
+    color: #666;
+}
+.disclaimer-text > a {
+    font-size: 11px;
+    color: #666;
 }
 
 .content-section {

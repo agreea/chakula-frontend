@@ -26,8 +26,8 @@ var FormTextRow = React.createClass({
   },
   render: function() {
     return (<div className="row">
-        <div className="col-xs-4 col-sm-2 form-label">
-          <p className="text-right">{this.props.form_name}</p>
+        <div className="col-xs-4 col-sm-2">
+          <p className="text-right form-label">{this.props.form_name}</p>
         </div>
         <div className="col-sm-4 col-xs-8">
         <input className="text-field" id={this.props.id} type="text" 
