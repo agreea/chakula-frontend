@@ -103,9 +103,7 @@ var ProfileForm = React.createClass({
   		stripe_element = (<p>Complete the information above to set up payments</p>);
   	}
     var states = ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"];
-    var states_select_options = states.map(function(state) {
-      return <option value={state}>{state}</option>;
-    });
+    var states_select_options = states.map(function(state) { return <option value={state}>{state}</option>;});
     return (
       <div className="row">
     	 <div className="row">
@@ -114,55 +112,55 @@ var ProfileForm = React.createClass({
     		  </div>
     	 </div>
       <FormTextRow form_name="Email" place_holder="One you actually check" id="email" default_value={host.Email}/>
-              <FormTextRow form_name="Phone #" 
-                place_holder="01234567890" 
-                id="phone"
-                default_value={host.Phone}/>
-              <FormTextRow form_name="Address" 
-                place_holder="3700 O St NW" 
-                id="address"
-                default_value={host.Address}/>
-              <FormTextRow form_name="City" 
-                place_holder="Washington" 
-                id="city"
-                default_value={host.City}/>
-              <div className="row">
-                <div className="col-xs-4 col-sm-2">
-                  <p className="text-right form-label">State</p>
-                </div>
-                <div className="col-xs-8 col-sm-6">
-                  <select value={host.State} onChange={this.handleStateChange}>
-                    {states_select_options}
-                  </select>
-                </div>
-              </div>
-              <div className="row">
-              	<div className="col-sm-2 col-xs-4">
-              		<p className="form-label text-right">Bio</p>
-              	</div>
-              	<div className="col-xs-8 col-sm-6">
-              		<textarea className="text-field" id="bio" rows="6"
-                    	placeholder="Tell us about yourself. Do you like candle-lit dinners, long walks on the beach?..."
-                    	defaultValue={this.state.Bio} onChange={this.bioChanged}></textarea>
-                </div>
-              </div>
-              <div className="row">
-               	<div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
-               		<button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
-               		 onClick={this.attemptSendHostData}>Saved</button>
-               	</div>
-              </div>
-              <div className="row">
-                <div className="col-xs-4 col-sm-2">
-                  <p className="text-right form-label">Payment</p>
-                </div>
-                <div className="col-xs-6 col-sm-4">
-                	{stripe_element}
-                </div>
-                <ul className="warning-field" id="stripe-warning">
-                </ul>
-              </div>
-            </div>);
+      <FormTextRow form_name="Phone #" 
+        place_holder="01234567890" 
+        id="phone"
+        default_value={host.Phone}/>
+      <FormTextRow form_name="Address" 
+        place_holder="3700 O St NW" 
+        id="address"
+        default_value={host.Address}/>
+      <FormTextRow form_name="City" 
+        place_holder="Washington" 
+        id="city"
+        default_value={host.City}/>
+      <div className="row">
+      <div className="col-xs-4 col-sm-2">
+        <p className="text-right form-label">State</p>
+      </div>
+      <div className="col-xs-8 col-sm-6">
+        <select className="state-select" value={host.State} onChange={this.handleStateChange}>
+          {states_select_options}
+        </select>
+      </div>
+      </div>
+      <div className="row">
+        <div className="col-sm-2 col-xs-4">
+        	<p className="form-label text-right">Bio</p>
+        </div>
+      <div className="col-xs-8 col-sm-6">
+        <textarea className="text-field" id="bio" rows="6"
+          placeholder="Tell us about yourself. Do you like candle-lit dinners, long walks on the beach?..."
+          defaultValue={this.state.Bio} onChange={this.bioChanged}></textarea>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
+          <button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
+            onClick={this.attemptSendHostData}>Saved</button>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-xs-4 col-sm-2">
+          <p className="text-right form-label">Payment</p>
+        </div>
+        <div className="col-xs-6 col-sm-4">
+          {stripe_element}
+        </div>
+        <ul className="warning-field" id="stripe-warning">
+        </ul>
+      </div>
+    </div>);
         }
       });
 

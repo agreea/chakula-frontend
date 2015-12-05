@@ -8,22 +8,28 @@ a {
 	font-size: 18px;
 	padding: 10px;
 }
+
 .error-field {
 	color: #ff0000;
 }
+
 .btn {
 	width: 60%;
 }
+
 .dropdown-menu {
 	z-index: 100;
 }
+
 .stripe-row {
 	margin-top: 18px;
 }
+
 #save {
 	background-color: #19a347;
 }
-select {
+
+.state-select {
 	margin: 10px 0 5px;
 	font-size: 16px;
 }
