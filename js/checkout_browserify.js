@@ -1,163 +1,163 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
-// var LoginSignupModal = React.createClass({
-//     mixins: [LinkedStateMixin],
-//     handleCreateAccountLink: function() {
-//         // change button text to Create account
-//         // remove 'forgot password?'
-//         // add a lil back button
-//         // maybe remove login with facebook?
-//         // set state to createAccount: true; (on back pressed, set state: create account = false)
-//         // add a confirm password field. TBH can't hurt.
-//     },
-//     handleCreateAccount: function() {
+var LoginSignupModal = React.createClass({
+    mixins: [LinkedStateMixin],
+    handleCreateAccountLink: function() {
+        // change button text to Create account
+        // remove 'forgot password?'
+        // add a lil back button
+        // maybe remove login with facebook?
+        // set state to createAccount: true; (on back pressed, set state: create account = false)
+        // add a confirm password field. TBH can't hurt.
+    },
+    handleCreateAccount: function() {
 
-//     },
-//     handleFbLogin: function() {
-//         FB.login(
-//             function(response) {
-//                 if (response.authResponse) {
-//                     access_token = response.authResponse.accessToken; //get access token
-//                     user_id = response.authResponse.userID; //get FB UID
-//                     // get session from server by calling Login
-//                         // if that's successful, then load whatever this was supposed to load
-//                 } else {
-//                 }
-//             }, 
-//             { scope: 'publish_stream,email'});
-//     },
-//     handleSignin: function() {
-//         var email = $('#signin-email').val();
-//         // check email against regex;
+    },
+    handleFbLogin: function() {
+        FB.login(
+            function(response) {
+                if (response.authResponse) {
+                    access_token = response.authResponse.accessToken; //get access token
+                    user_id = response.authResponse.userID; //get FB UID
+                    // get session from server by calling Login
+                        // if that's successful, then load whatever this was supposed to load
+                } else {
+                }
+            }, 
+            { scope: 'publish_stream,email'});
+    },
+    handleSignin: function() {
+        var email = $('#signin-email').val();
+        // check email against regex;
 
-//         var password = $('#signin-password').val();
-//         if (password.length < 8) {
-//             this.setState({errors: this.state.errors.push('password must be at least 8 characters')});
-//             return;
-//         }
-//         // send email and pass to server
-//         // server sends back session if valid
-//         // if api resp is successful, load modal with the gosh dang checkout interface?
-//         // if not, show an error
-//     },
-//     getInitialState: function() {
-//         return({createAccount: false, errors: [], email: '', password: '', passwordConf: ''});
-//     },
-//     render: function() {
-//         // if it's sigin mode: show fb, email, password, button is signin
-//         // if it's create account mode: show fb, email, password, confirm password, button is 'Create account'
-//         // how can the same... it can't
-//         var error_messages = this.state.errors.map(function(error) {
-//             return(<p className="error-field">error</p>);
-//         });
-//         var text_fields = 
-//             [<input type="text" 
-//                 placeholder="steve@apple.com" 
-//                 id="signin-email"
-//                 valueLink={this.linkState('email')}></input>,
-//             <input 
-//                 type="password" 
-//                 id="signin-password"
-//                 valueLink={this.linkState('password')}></input>];
-//         if (this.state.createAccount) {
-//             text_fields.push(
-//                 <input 
-//                     type="password"
-//                     id="confirm-password"
-//                     valueLink={this.linkState('passwordConf')}></input>);
-//             var first_last = 
-//             [<input type="text" 
-//                 placeholder="First name" 
-//                 id="first-name"
-//                 valueLink={this.linkState('lastName')}></input>,
-//             <input 
-//                 type="text" 
-//                 placeholder="Last name"
-//                 id="first-name"
-//                 valueLink={this.linkState('firstName')}></input>];
-//         }
-//         return(
-//             <div className="row">
-//                 <div className="row">
-//                     <a href="#" onClick={this.handleFbLogin}>
-//                         <img src="img/fb_login.svg"></img>
-//                     </a>
-//                 </div>
-//                 <div className="row">
-//                     {text_fields}
-//                 </div>
-//                 <div className="row">
-//                     <button onClick={this.handleSignin}>Sign In</button>
-//                 </div>
-//                 <div className="row">
-//                     <div className="col-xs-12 col-sm-6">
-//                         <a href="#" onClick={this.handleCreateAccount}>Create Account</a>
-//                     </div>
-//                     <div className="col-xs-12 col-sm-6">
-//                     </div>
-//                     <a><p className="disclaimer-text">Forgot your password?</p></a>
-//                 </div>
-//             </div>
-//         );
-//     }
-// });
-// React.render(<LoginSignupModal></LoginSignupModal>, document.getElementById('login'));
+        var password = $('#signin-password').val();
+        if (password.length < 8) {
+            this.setState({errors: this.state.errors.push('password must be at least 8 characters')});
+            return;
+        }
+        // send email and pass to server
+        // server sends back session if valid
+        // if api resp is successful, load modal with the gosh dang checkout interface?
+        // if not, show an error
+    },
+    getInitialState: function() {
+        return({createAccount: false, errors: [], email: '', password: '', passwordConf: ''});
+    },
+    render: function() {
+        // if it's sigin mode: show fb, email, password, button is signin
+        // if it's create account mode: show fb, email, password, confirm password, button is 'Create account'
+        // how can the same... it can't
+        var error_messages = this.state.errors.map(function(error) {
+            return(<p className="error-field">error</p>);
+        });
+        var text_fields = 
+            [<input type="text" 
+                placeholder="steve@apple.com" 
+                id="signin-email"
+                valueLink={this.linkState('email')}></input>,
+            <input 
+                type="password" 
+                id="signin-password"
+                valueLink={this.linkState('password')}></input>];
+        if (this.state.createAccount) {
+            text_fields.push(
+                <input 
+                    type="password"
+                    id="confirm-password"
+                    valueLink={this.linkState('passwordConf')}></input>);
+            var first_last = 
+            [<input type="text" 
+                placeholder="First name" 
+                id="first-name"
+                valueLink={this.linkState('lastName')}></input>,
+            <input 
+                type="text" 
+                placeholder="Last name"
+                id="first-name"
+                valueLink={this.linkState('firstName')}></input>];
+        }
+        return(
+            <div className="row">
+                <div className="row">
+                    <a href="#" onClick={this.handleFbLogin}>
+                        <img src="img/fb_login.svg"></img>
+                    </a>
+                </div>
+                <div className="row">
+                    {text_fields}
+                </div>
+                <div className="row">
+                    <button onClick={this.handleSignin}>Sign In</button>
+                </div>
+                <div className="row">
+                    <div className="col-xs-12 col-sm-6">
+                        <a href="#" onClick={this.handleCreateAccount}>Create Account</a>
+                    </div>
+                    <div className="col-xs-12 col-sm-6">
+                    </div>
+                    <a><p className="disclaimer-text">Forgot your password?</p></a>
+                </div>
+            </div>
+        );
+    }
+});
+React.render(<LoginSignupModal></LoginSignupModal>, document.getElementById('login'));
 
 
-// // if there's no session, require FB login. Show nothing else
-// // if there IS a session, try to fetch the meal data... and it go a little something like this (cue Luda):
+// if there's no session, require FB login. Show nothing else
+// if there IS a session, try to fetch the meal data... and it go a little something like this (cue Luda):
 
-// var TextField = React.createClass({
-// 	editClicked: function() {
-// 		this.setState({input_stored: false});
-// 	},
-// 	getInitialState: function() {
-//     	return {input_stored: this.props.input_stored};
-// 	},
-// 	handleChange: function(event) {
-// 		this.setState({value: event.target.value});
-// 	},
-// 	render: function() {
-// 		var input;
-// 		if(this.props.input_stored) {
-// 			input = <p>{this.props.val}<a onclick={this.editClicked}><i className="fa fa-pencil"></i></p>;
-// 		} else {
-// 			<input type="text" 
-// 				id={this.props.id} 
-// 				placeholder={this.props.placeholder} defaultValue={this.props.val} onChange={handleChange}></input>;
-// 		}
-// 		return (
-// 			<div>
-// 				<div className="col-xs-4 col-sm-2">
-// 					<p className="label-text">{this.props.label}</p>
-// 				</div>
-// 				<div className="col-xs-8 col-sm-10">{input}</div>
-// 			</div>);
-// 	}
-// });
+var TextField = React.createClass({
+	editClicked: function() {
+		this.setState({input_stored: false});
+	},
+	getInitialState: function() {
+    	return {input_stored: this.props.input_stored};
+	},
+	handleChange: function(event) {
+		this.setState({value: event.target.value});
+	},
+	render: function() {
+		var input;
+		if(this.props.input_stored) {
+			input = <p>{this.props.val}<a onclick={this.editClicked}><i className="fa fa-pencil"></i></p>;
+		} else {
+			<input type="text" 
+				id={this.props.id} 
+				placeholder={this.props.placeholder} defaultValue={this.props.val} onChange={handleChange}></input>;
+		}
+		return (
+			<div>
+				<div className="col-xs-4 col-sm-2">
+					<p className="label-text">{this.props.label}</p>
+				</div>
+				<div className="col-xs-8 col-sm-10">{input}</div>
+			</div>);
+	}
+});
 
-// var Checkout_form = React.createClass({
-// 	render: function() {
-// 		return(
-// 			{<TextField 
-// 				val={this.props.email}
-// 				input_stored={true} 
-// 				placeholder={email} 
-// 				label={'Email'}>
-// 			</TextField>});
-// 	}
-// });
-// // email field 
+var Checkout_form = React.createClass({
+	render: function() {
+		return(
+			{<TextField 
+				val={this.props.email}
+				input_stored={true} 
+				placeholder={email} 
+				label={'Email'}>
+			</TextField>});
+	}
+});
+// email field 
 
-// // phone field
+// phone field
 
-// // Payment field
+// Payment field
 
-// // Quantity dropdown
+// Quantity dropdown
 
-// // Subtotal field
+// Subtotal field
 
-// // submit button
+// submit button
 
 // // Email, phone field are the same react subcomponent with the following props:
 // 	- a regex to check the field against
