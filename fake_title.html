@@ -16,14 +16,141 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,400italic' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,300,700" rel="stylesheet" type="text/css">
+    <script src="https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-xat1/t39.3284-6/12056998_1697020110531721_1758939694_n.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="js/checkout_browserify.js"></script>
+<!-- 
     <script src="js/jquery.js"></script>
     <script src="js/js-cookie.js"></script>
     <script src="js/api_call.js"></script>
     <script src="js/moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-    <!-- <script type="text/babel" src="js/nav_bar.js"></script> -->
+    <script type="text/babel" src="js/nav_bar.js"></script> 
+-->
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/babel">
+// show signin w fb
+// show email + password fields
+// show button that lets person view their password
+// show signup button
+// signup button disabled until email and password have content
+// TODO: handle account creation with password and email on server
+// TOOD: handle forgot password logistics
+// TODO: figure out UX for creating a new account vs. signing into an existing one
+var LinkedStateMixin = require('react-addons-linked-state-mixin');
+var LoginSignupModal = React.createClass({
+    mixins: [LinkedStateMixin],
+    handleCreateAccountLink: function() {
+        // change button text to Create account
+        // remove 'forgot password?'
+        // add a lil back button
+        // maybe remove login with facebook?
+        // set state to createAccount: true; (on back pressed, set state: create account = false)
+        // add a confirm password field. TBH can't hurt.
+    },
+    handleCreateAccount: function() {
+
+    },
+    handleFbLogin: function() {
+        FB.login(
+            function(response) {
+                if (response.authResponse) {
+                    access_token = response.authResponse.accessToken; //get access token
+                    user_id = response.authResponse.userID; //get FB UID
+                    // get session from server by calling Login
+                        // if that's successful, then load whatever this was supposed to load
+                } else {
+                }
+            }, 
+            { scope: 'publish_stream,email'});
+    },
+    handleSignin: function() {
+        var email = $('#signin-email').val();
+        // check email against regex;
+
+        var password = $('#signin-password').val();
+        if (password.length < 8) {
+            this.setState({errors: this.state.errors.push('password must be at least 8 characters')});
+            return;
+        }
+        // send email and pass to server
+        // server sends back session if valid
+        // if api resp is successful, load modal with the gosh dang checkout interface?
+        // if not, show an error
+    },
+    getInitialState: function() {
+        return({createAccount: false, errors: [], email: '', password: '', passwordConf: ''});
+    },
+    render: function() {
+        // if it's sigin mode: show fb, email, password, button is signin
+        // if it's create account mode: show fb, email, password, confirm password, button is 'Create account'
+        // how can the same... it can't
+        var error_messages = this.state.errors.map(function(error) {
+            return(<p className="error-field">error</p>);
+        });
+        var text_fields = 
+            [<input type="text" 
+                placeholder="steve@apple.com" 
+                id="signin-email"
+                valueLink={this.linkState('email')}></input>,
+            <input 
+                type="password" 
+                id="signin-password"
+                valueLink={this.linkState('password')}></input>];
+        if (this.state.createAccount) {
+            text_fields.push(
+                <input 
+                    type="password"
+                    id="confirm-password"
+                    valueLink={this.linkState('passwordConf')}></input>);
+            var first_last = 
+            [<input type="text" 
+                placeholder="First name" 
+                id="first-name"
+                valueLink={this.linkState('lastName')}></input>,
+            <input 
+                type="text" 
+                placeholder="Last name"
+                id="first-name"
+                valueLink={this.linkState('firstName')}></input>];
+        }
+        return(
+            <div className="row">
+                <div className="row">
+                    <a href="#" onClick={this.handleFbLogin}>
+                        <img src="img/fb_login.svg"></img>
+                    </a>
+                </div>
+                <div className="row">
+                    {text_fields}
+                </div>
+                <div className="row">
+                    <button onClick={this.handleSignin}>Sign In</button>
+                </div>
+                <div className="row">
+                    <div className="col-xs-12 col-sm-6">
+                        <a href="#" onClick={this.handleCreateAccount}>Create Account</a>
+                    </div>
+                    <div className="col-xs-12 col-sm-6">
+                    </div>
+                    <a><p className="disclaimer-text">Forgot your password?</p></a>
+                </div>
+            </div>
+        );
+    }
+});
+React.render(<LoginSignupModal></LoginSignupModal>, document.getElementById('login'))
+</script>
+
+    <!-- <script type="text/babel" src="js/nav_bar.js"></script> -->
+    <!-- <script type="text/babel" src="js/nav_bar.js"></script> -->
+    <!-- <script type="text/babel" src="js/nav_bar.js"></script> -->
+    <!-- <script type="text/babel" src="js/nav_bar.js"></script> -->
+    <!-- <script type="text/babel" src="js/nav_bar.js"></script> -->
+    <!-- <script type="text/babel" src="js/nav_bar.js"></script> -->
+    <!-- <script type="text/babel" src="js/nav_bar.js"></script> -->
+    <!-- <script type="text/babel" src="js/nav_bar.js"></script> -->
+    <!-- <script type="text/babel" src="js/nav_bar.js"></script> -->
+
     <script type="text/babel">
 var TextField = React.createClass({
     editClicked: function() {
@@ -239,6 +366,7 @@ function render(){
     var session = Cookies.get('session');
     if(!session) {
         // show facebook login
+
         return;
     }
     var api_resp = api_call('meal', {method: 'checkout', session: session});
@@ -247,7 +375,6 @@ function render(){
         return;
     }
     React.render(<CheckoutForm cards={[1234,2345,3456,4567]}/>, document.getElementById('checkout'));
-
 }
     </script>
     <script src="js/fb_login.js"></script>
@@ -269,6 +396,8 @@ function render(){
 <body>
 <div class="container">
 	<div id="checkout">
+    </div>
+    <div id="login">
     </div>
 </body>
 </html>                                		
