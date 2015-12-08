@@ -14,8 +14,40 @@ var LoginSignupModal = React.createClass({
       this.setState({createAccount: !this.state.createAccount});
     },
     handleCreateAccountButton: function() {
-      // get:
-      // first name
+      var errors = [];
+      var firstName = this.state.firstName;
+      if (firstName.length < 2) {
+        errors.push('Use your full first name');
+      }
+      console.log(firstName);
+      var lastName = this.state.lastName;
+      if (lastName.length < 2) {
+        errors.push('Use your full last name');
+      }
+      console.log(lastName);
+      var email = this.state.email;
+      console.log(email);
+      // TODO: test email regex
+      var email_regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+      if (!email_regex.test(email)) {
+        errors.push('Email format is invalid. Use: steve@apple.com');
+      }
+      var password = this.state.password;
+      if (password.length < 6) {
+        errors.push('Use a password at least 6 characters long');
+      }
+      console.log(password);
+      var passwordConf = this.state.passwordConf;
+      if (passwordConf != password) {
+        errors.push('Password confirmation does not match');
+      }
+      console.log(passwordConf);
+      console.log(errors);
+      if (errors.length > 0) {
+        // create the account
+        this.setState({errors: errors});
+        return;
+      } 
       // last name
       // password
       // password conf
@@ -24,6 +56,7 @@ var LoginSignupModal = React.createClass({
       // run regex on password?
       // make sure First and Last names aren't empty
       // create the gosh danged account
+
     },
     handleFbLogin: function() {
         FB.login(
@@ -60,22 +93,21 @@ var LoginSignupModal = React.createClass({
         // if it's create account mode: show fb, email, password, confirm password, button is 'Create account'
         // how can the same... it can't
         var error_messages = this.state.errors.map(function(error) {
-            return(<p className="error-field">error</p>);
+            return(<p className="error-field">{error}</p>);
         });
         var forgot_pass_text =                   
             <div className="col-xs-12 col-sm-6 text-right">
                 <a>Forgot your password?</a>
             </div>;
-;
         var text_fields = 
             [<input type="text" 
                 placeholder="email" 
-                id="signin-email"
+                id="email"
                 valueLink={this.linkState('email')}></input>,
             <input 
                 type="password" 
                 placeholder="password"
-                id="signin-password"
+                id="password"
                 valueLink={this.linkState('password')}></input>];
         var create_account_link = "Create Account";
         var cta_button = <button className="brand-btn" onClick={this.handleSignin}>Sign In</button>;
@@ -96,12 +128,12 @@ var LoginSignupModal = React.createClass({
               [<input type="text" 
                   placeholder="first name" 
                   id="first-name"
-                  valueLink={this.linkState('lastName')}></input>,
+                  valueLink={this.linkState('firstName')}></input>,
               <input 
                   type="text" 
                   placeholder="last name"
-                  id="first-name"
-                  valueLink={this.linkState('firstName')}></input>];
+                  id="last-name"
+                  valueLink={this.linkState('lastName')}></input>];
               text_fields = first_last.concat(text_fields);
         }
         return(
@@ -111,6 +143,7 @@ var LoginSignupModal = React.createClass({
                         <img src="./img/fb-login.svg"></img>
                     </a>
                 </div>
+                {error_messages}
                 <div className="row">
                     {text_fields}
                 </div>
