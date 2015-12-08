@@ -119,7 +119,7 @@ React.render(<LoginSignupModal></LoginSignupModal>, document.getElementById('log
 // 	render: function() {
 // 		var input;
 // 		if(this.props.input_stored) {
-// 			input = <p>{this.props.val}<a onclick={this.editClicked}><i className="fa fa-pencil"></i></p>;
+// 			input = <p>{this.props.val}<a onclick={this.editClicked}><i className="fa fa-pencil"></i></a></p>;
 // 		} else {
 // 			<input type="text" 
 // 				id={this.props.id} 

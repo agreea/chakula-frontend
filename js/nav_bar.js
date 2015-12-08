@@ -60,7 +60,12 @@
         console.log(guest);
         var right_nav;
         if (guest) {
-          var pic_src = "https://graph.facebook.com/" + guest.Facebook_id + "/picture?width=100&height=100";
+          var pic_src;
+          if (guest.Prof_pic) {
+            pic_src = guest.Prof_pic;
+          } else if (guest.Facebook_id) {
+            pic_src = "https://graph.facebook.com/" + guest.Facebook_id + "/picture?width=100&height=100";
+          }
           var user_tab = (<li id="user">
             <button className="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               <span className="nav-text">{guest.First_name}</span>

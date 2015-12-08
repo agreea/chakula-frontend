@@ -11,7 +11,19 @@ var LoginSignupModal = React.createClass({
         // add a confirm password field. TBH can't hurt.
     },
     handleCreateAccount: function() {
-
+      this.setState({createAccount: !this.state.createAccount});
+    },
+    handleCreateAccountButton: function() {
+      // get:
+      // first name
+      // last name
+      // password
+      // password conf
+      // email
+      // run regex on email
+      // run regex on password?
+      // make sure First and Last names aren't empty
+      // create the gosh danged account
     },
     handleFbLogin: function() {
         FB.login(
@@ -50,52 +62,66 @@ var LoginSignupModal = React.createClass({
         var error_messages = this.state.errors.map(function(error) {
             return(<p className="error-field">error</p>);
         });
+        var forgot_pass_text =                   
+            <div className="col-xs-12 col-sm-6 text-right">
+                <a>Forgot your password?</a>
+            </div>;
+;
         var text_fields = 
             [<input type="text" 
-                placeholder="steve@apple.com" 
+                placeholder="email" 
                 id="signin-email"
                 valueLink={this.linkState('email')}></input>,
             <input 
                 type="password" 
+                placeholder="password"
                 id="signin-password"
                 valueLink={this.linkState('password')}></input>];
+        var create_account_link = "Create Account";
+        var cta_button = <button className="brand-btn" onClick={this.handleSignin}>Sign In</button>;
         if (this.state.createAccount) {
+          forgot_pass_text = '';
+          create_account_link = 
+            <p>
+              <i className="fa fa-arrow-left"></i> Back
+            </p>;
+          cta_button = <button className="brand-btn" onClick={this.handleCreateAccountButton}>Create Account</button>
             text_fields.push(
-                <input 
-                    type="password"
-                    id="confirm-password"
-                    valueLink={this.linkState('passwordConf')}></input>);
+              <input 
+                type="password"
+                placeholder="confirm password"
+                id="confirm-password"
+                valueLink={this.linkState('passwordConf')}></input>);
             var first_last = 
-            [<input type="text" 
-                placeholder="First name" 
-                id="first-name"
-                valueLink={this.linkState('lastName')}></input>,
-            <input 
-                type="text" 
-                placeholder="Last name"
-                id="first-name"
-                valueLink={this.linkState('firstName')}></input>];
+              [<input type="text" 
+                  placeholder="first name" 
+                  id="first-name"
+                  valueLink={this.linkState('lastName')}></input>,
+              <input 
+                  type="text" 
+                  placeholder="last name"
+                  id="first-name"
+                  valueLink={this.linkState('firstName')}></input>];
+              text_fields = first_last.concat(text_fields);
         }
         return(
             <div className="row">
                 <div className="row">
                     <a href="#" onClick={this.handleFbLogin}>
-                        <img src="img/fb_login.svg"></img>
+                        <img src="./img/fb-login.svg"></img>
                     </a>
                 </div>
                 <div className="row">
                     {text_fields}
                 </div>
                 <div className="row">
-                    <button onClick={this.handleSignin}>Sign In</button>
+                  {cta_button}
                 </div>
                 <div className="row">
                     <div className="col-xs-12 col-sm-6">
-                        <a href="#" onClick={this.handleCreateAccount}>Create Account</a>
+                        <a href="#" onClick={this.handleCreateAccount}>{create_account_link}</a>
                     </div>
-                    <div className="col-xs-12 col-sm-6">
-                    </div>
-                    <a><p className="disclaimer-text">Forgot your password?</p></a>
+                    {forgot_pass_text}
                 </div>
             </div>
         );
@@ -120,7 +146,7 @@ var TextField = React.createClass({
 	render: function() {
 		var input;
 		if(this.props.input_stored) {
-			input = <p>{this.props.val}<a onclick={this.editClicked}><i className="fa fa-pencil"></i></p>;
+			input = <p>{this.props.val}<a onclick={this.editClicked}><i className="fa fa-pencil"></i></a></p>;
 		} else {
 			<input type="text" 
 				id={this.props.id} 
@@ -139,12 +165,12 @@ var TextField = React.createClass({
 var Checkout_form = React.createClass({
 	render: function() {
 		return(
-			{<TextField 
+			<TextField 
 				val={this.props.email}
 				input_stored={true} 
 				placeholder={email} 
 				label={'Email'}>
-			</TextField>});
+			</TextField>);
 	}
 });
 // email field 

@@ -202,14 +202,17 @@ Form styling
     font-family: 'Helvetica-Neue', Arial;
 }
 
-input[type=text], 
+input[type=text],
+input[type=password], 
 textarea, 
 .input-group-addon,
 .dropdown-toggle {
 /*  background: rgba(0,0,0,0);
 */}
 
-input[type=text], textarea {
+input[type=text], 
+input[type=password],
+textarea {
     transition: border-color 0.4s ease;
     border-color: #ddd;
     border-width: 0 0 2px 0;
@@ -217,7 +220,9 @@ input[type=text], textarea {
     width: 100%;
 }
 
-input[type=text]:focus, textarea:focus {
+input[type=text]:focus, 
+input[type=password]:focus, 
+textarea:focus {
     transition: border-color 0.4s ease;
     outline: none;
     border-color: #5bc0de;
