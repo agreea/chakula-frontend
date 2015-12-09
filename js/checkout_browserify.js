@@ -70,10 +70,10 @@ var LoginSignupModal = React.createClass({
             { scope: 'publish_stream,email'});
     },
     handleSignin: function() {
-        var email = $('#signin-email').val();
+        var email = this.state.email;
         // check email against regex;
         var email_regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
-        if(!email_regex.test(email)) {
+        if(!email_regex.test(this.)) {
           this.setState({errors: ['Invalid email format.']});
           return;
         }
