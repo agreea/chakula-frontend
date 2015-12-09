@@ -49,6 +49,7 @@ var LoginSignupModal = React.createClass({
         password: password});
       if (api_resp.Success) {
         Cookies.set('session', api_resp.Return.Session_token);
+        this.setState({errors: []});
       }
       // api call
       // if api call is successful, get the token
@@ -78,7 +79,7 @@ var LoginSignupModal = React.createClass({
           this.setState({errors: ['Invalid email format.']});
           return;
         }
-        var password = $('#signin-password').val();
+        var password = this.state.password;
         var api_resp = api_call('kitchenuser', 
           {method: 'LoginEmail',
           email: email,
