@@ -86,6 +86,7 @@ var LoginSignupModal = React.createClass({
         if (api_resp.Success) {
           Cookies.set('session', api_resp.Return.Session_token);
         } else {
+          this.setState({errors:{api_resp.Error}});
           // something something show error
         }
         // send email and pass to server
