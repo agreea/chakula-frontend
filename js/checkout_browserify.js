@@ -93,7 +93,12 @@ var LoginSignupModal = React.createClass({
         // if not, show an error
     },
     getInitialState: function() {
-        return({createAccount: false, errors: [], email: '', password: '', passwordConf: ''});
+        return({
+          createAccount: false, 
+          errors: [], 
+          email: '', 
+          password: '', 
+          passwordConf: ''});
     },
     render: function() {
         // if it's sigin mode: show fb, email, password, button is signin
@@ -101,7 +106,7 @@ var LoginSignupModal = React.createClass({
         // how can the same... it can't
 
         var error_messages;
-        if (this.state.errors) 
+        if (this.state.errors.length > 0) 
           error_messages = this.state.errors.map(function(error) {
             return(<p className="error-field">{error}</p>)});
         var forgot_pass_text =                   
