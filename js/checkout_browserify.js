@@ -65,6 +65,7 @@ var LoginSignupModal = React.createClass({
                     var api_resp = api_call('kitchenuser', {method: 'LoginFb', });
                         // if that's successful, then load whatever this was supposed to load
                 } else {
+                  this.setState({errors:["Facebook login failed."]});
                 }
             }, 
             { scope: 'publish_stream,email'});
