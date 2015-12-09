@@ -63,7 +63,12 @@ var LoginSignupModal = React.createClass({
                     // get session from server by calling Login
                     // FACEBOOK LOGIN :O :O :O
                     // NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE
-                    var api_resp = api_call('kitchenuser', {method: 'LoginFb', });
+                    var api_resp = api_call('kitchenuser', 
+                      {method: 'LoginFb', 
+                      fbToken: access_token});
+                    if (api_resp.Success) {
+                      this.props.handleLoginSuccess();
+                    }
                         // if that's successful, then load whatever this was supposed to load
                 } else {
                   this.setState({errors:["Facebook login failed."]});
@@ -86,7 +91,7 @@ var LoginSignupModal = React.createClass({
           password: password});
         if (api_resp.Success) {
           Cookies.set('session', api_resp.Return.Session_token);
-          this.props.loginSuccess();
+          this.props.handleLoginSuccess();
         } else {
           this.setState({errors:[api_resp.Error]});
           // something something show error
