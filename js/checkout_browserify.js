@@ -99,9 +99,11 @@ var LoginSignupModal = React.createClass({
         // if it's sigin mode: show fb, email, password, button is signin
         // if it's create account mode: show fb, email, password, confirm password, button is 'Create account'
         // how can the same... it can't
-        var error_messages = this.state.errors.map(function(error) {
-            return(<p className="error-field">{error}</p>);
-        });
+
+        var error_messages;
+        if (this.state.errors) 
+          error_messages = this.state.errors.map(function(error) {
+            return(<p className="error-field">{error}</p>)});
         var forgot_pass_text =                   
             <div className="col-xs-12 col-sm-6 text-right">
                 <a>Forgot your password?</a>
