@@ -15,7 +15,7 @@
       var cookie = Cookies.get("session")
       if (cookie === undefined || cookie === "") {
           resp = api_call('kitchenuser', {
-                method: "Login",
+                method: "LoginFb",
                 fbToken: response.authResponse.accessToken,
                 subscribe: checkbox.prop('checked'),
                 });

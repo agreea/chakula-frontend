@@ -69,7 +69,7 @@ var LoginSignupModal = React.createClass({
                   this.setState({errors:["Facebook login failed."]});
                 }
             }, 
-            { scope: 'publish_stream,email'});
+            { scope: 'public_profile, email'});
     },
     handleSignin: function() {
         var email = this.state.email;
@@ -86,6 +86,7 @@ var LoginSignupModal = React.createClass({
           password: password});
         if (api_resp.Success) {
           Cookies.set('session', api_resp.Return.Session_token);
+          this.props.loginSuccess();
         } else {
           this.setState({errors:[api_resp.Error]});
           // something something show error
