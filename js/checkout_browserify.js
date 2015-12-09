@@ -74,7 +74,7 @@ var LoginSignupModal = React.createClass({
         // check email against regex;
         var email_regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
         if(!email_regex.test(email)) {
-          this.setState({errors: 'Invalid email format.'});
+          this.setState({errors: ['Invalid email format.']});
           return;
         }
         var password = $('#signin-password').val();
