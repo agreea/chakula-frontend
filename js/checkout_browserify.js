@@ -19,15 +19,11 @@ var LoginSignupModal = React.createClass({
       if (firstName.length < 2) {
         errors.push('Use your full first name');
       }
-      console.log(firstName);
       var lastName = this.state.lastName;
       if (lastName.length < 2) {
         errors.push('Use your full last name');
       }
-      console.log(lastName);
       var email = this.state.email;
-      console.log(email);
-      // TODO: test email regex
       var email_regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
       if (!email_regex.test(email)) {
         errors.push('Email format is invalid. Use: steve@apple.com');
@@ -36,35 +32,37 @@ var LoginSignupModal = React.createClass({
       if (password.length < 6) {
         errors.push('Use a password at least 6 characters long');
       }
-      console.log(password);
       var passwordConf = this.state.passwordConf;
       if (passwordConf != password) {
         errors.push('Password confirmation does not match');
       }
-      console.log(passwordConf);
-      console.log(errors);
       if (errors.length > 0) {
         // create the account
         this.setState({errors: errors});
         return;
-      } 
-      // last name
-      // password
-      // password conf
-      // email
-      // run regex on email
-      // run regex on password?
-      // make sure First and Last names aren't empty
-      // create the gosh danged account
-
+      }
+      var api_resp = api_call('kitchenuser', 
+        {method:'createAccount', 
+        firstName: firstName, 
+        lastName: lastName,
+        email: email,
+        password: password});
+      if (api_resp.Success) {
+        Cookies.set('session', api_resp.Return.Session_token);
+      }
+      // api call
+      // if api call is successful, get the token
     },
     handleFbLogin: function() {
         FB.login(
             function(response) {
                 if (response.authResponse) {
-                    access_token = response.authResponse.accessToken; //get access token
-                    user_id = response.authResponse.userID; //get FB UID
+                    var access_token = response.authResponse.accessToken; //get access token
+                    var user_id = response.authResponse.userID; //get FB UID
                     // get session from server by calling Login
+                    // FACEBOOK LOGIN :O :O :O
+                    // NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE
+                    var api_resp = api_call('kitchenuser', {method: 'LoginFb', });
                         // if that's successful, then load whatever this was supposed to load
                 } else {
                 }
@@ -74,11 +72,20 @@ var LoginSignupModal = React.createClass({
     handleSignin: function() {
         var email = $('#signin-email').val();
         // check email against regex;
-
+        var email_regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+        if(!email_regex.test(email)) {
+          this.setState({errors: 'Invalid email format.'});
+          return;
+        }
         var password = $('#signin-password').val();
-        if (password.length < 8) {
-            this.setState({errors: this.state.errors.push('password must be at least 8 characters')});
-            return;
+        var api_resp = api_call('kitchenuser', 
+          {method: 'Login',
+          email: email,
+          password: password});
+        if (api_resp.Success) {
+          Cookies.set('session', api_resp.Return.Session_token);
+        } else {
+          // something something show error
         }
         // send email and pass to server
         // server sends back session if valid

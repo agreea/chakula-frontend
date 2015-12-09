@@ -17,7 +17,6 @@
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
-
     var fb_handler = function(response) {
         if (response.authResponse) {
             console.log('Welcome!  Fetching your information.... ');
@@ -27,7 +26,7 @@
             var cookie = Cookies.get("session");
             if (cookie === undefined || cookie === "") {
                 var resp = api_call('kitchenuser', {
-                      method: "Login",
+                      method: "LoginFb",
                       fbToken: response.authResponse.accessToken
                       });
                 if (resp.Success) {
@@ -62,7 +61,7 @@
         if (guest) {
           var pic_src;
           if (guest.Prof_pic) {
-            pic_src = guest.Prof_pic;
+            pic_src = "img/" + guest.Prof_pic;
           } else if (guest.Facebook_id) {
             pic_src = "https://graph.facebook.com/" + guest.Facebook_id + "/picture?width=100&height=100";
           }
