@@ -42,7 +42,7 @@ var LoginSignupModal = React.createClass({
         return;
       }
       var api_resp = api_call('kitchenuser', 
-        {method:'createAccount', 
+        {method:'createAccountEmail', 
         firstName: firstName, 
         lastName: lastName,
         email: email,
