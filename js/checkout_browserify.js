@@ -79,7 +79,7 @@ var LoginSignupModal = React.createClass({
         }
         var password = $('#signin-password').val();
         var api_resp = api_call('kitchenuser', 
-          {method: 'Login',
+          {method: 'LoginEmail',
           email: email,
           password: password});
         if (api_resp.Success) {
