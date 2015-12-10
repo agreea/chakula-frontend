@@ -24,6 +24,9 @@ module.exports = React.createClass({displayName: "exports",
         }
         this.handleAddCardSuccess(stripe_resp.last4);
     },
+    getInitialState: function() {
+    	return ({disableAddCard: false});
+    },
 	render: function() {
 		return (
             React.createElement("div", {className: "row"}, 

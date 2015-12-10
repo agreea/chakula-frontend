@@ -23,6 +23,9 @@ module.exports = React.createClass({
         }
         this.handleAddCardSuccess(stripe_resp.last4);
     },
+    getInitialState: function() {
+    	return ({disableAddCard: false});
+    },
 	render: function() {
 		return (
             <div className="row">
