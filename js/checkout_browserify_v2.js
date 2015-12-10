@@ -242,7 +242,7 @@ function render(){
         React.render(React.createElement(LoginSignUpModal, {handleLoginSuccess: handleLoginSuccess}), document.getElementById('login'));
         return;
     }
-    var api_resp = api_call('meal', {method: 'checkout', session: session});
+    // var api_resp = api_call('meal', {method: 'checkout', session: session});
     if (!api_resp.Success){
         // show error... ??? What causes this?
         return;
