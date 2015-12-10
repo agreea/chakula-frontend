@@ -53,7 +53,7 @@ module.exports = React.createClass({
                           </label>
                     </div>
                   <div className="text-center">
-                      <button className="brand-btn btn btn-payment" id="add-card-btn" onclick={this.handleAddCard} disabled={this.state.disableAddCard}>Add Card</button>
+                      <button className="brand-btn btn btn-payment" id="add-card-btn" onClick={this.handleAddCard} disabled={this.state.disableAddCard}>Add Card</button>
                   </div>
                 </form>
             </div>);

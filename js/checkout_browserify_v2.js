@@ -54,7 +54,7 @@ module.exports = React.createClass({displayName: "exports",
                           )
                     ), 
                   React.createElement("div", {className: "text-center"}, 
-                      React.createElement("button", {className: "brand-btn btn btn-payment", id: "add-card-btn", onclick: this.handleAddCard, disabled: this.state.disableAddCard}, "Add Card")
+                      React.createElement("button", {className: "brand-btn btn btn-payment", id: "add-card-btn", onClick: this.handleAddCard, disabled: this.state.disableAddCard}, "Add Card")
                   )
                 )
             ));
