@@ -2,6 +2,7 @@ module.exports = React.createClass({
 	handleAddCard: function() {
         this.setState({disableAddCard: true});
     	Stripe.setPublishableKey('pk_live_N4yRGKt9KwKwi9WfpAtnPdMs');
+    	console.log($('#cc-form'));
         Stripe.card.createToken($('#cc-form'), this.handleStripeResponse);
     },
     handleStripeResponse: function(status, stripe_resp) {
