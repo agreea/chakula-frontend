@@ -25,7 +25,7 @@ module.exports = React.createClass({displayName: "exports",
             this.setState({addCardError: api_resp.Error, disableAddCard: false});
             return;
         }
-        this.handleAddCardSuccess(stripe_resp.last4);
+        this.props.handleAddCardSuccess(stripe_resp.last4);
     },
     getInitialState: function() {
     	return ({disableAddCard: false});
