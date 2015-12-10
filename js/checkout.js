@@ -81,7 +81,7 @@ var PaymentField = React.createClass({
                     <input type="radio" 
                         name="card" 
                         onChange={radioChanged} 
-                        id="add-card">Add Card</input>
+                        id="add-card"> Add Card</input>
                 </p>;
         }
         cards.push(add_card);
