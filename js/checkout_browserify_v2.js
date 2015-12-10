@@ -242,11 +242,11 @@ function render(){
         React.render(React.createElement(LoginSignUpModal, {handleLoginSuccess: handleLoginSuccess}), document.getElementById('login'));
         return;
     }
-    var api_resp = api_call('meal', {method: 'checkout', session: session});
-    if (!api_resp.Success){
-        // show error... ??? What causes this?
-        return;
-    }
+    // var api_resp = api_call('meal', {method: 'checkout', session: session});
+    // if (!api_resp.Success){
+    //     // show error... ??? What causes this?
+    //     return;
+    // }
     React.render(React.createElement(CheckoutForm, {cards: [1234,2345,3456,4567]}), document.getElementById('checkout'));
 }
 render();
