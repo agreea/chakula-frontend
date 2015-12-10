@@ -190,3 +190,4 @@ function render(){
     }
     React.render(<CheckoutForm cards={[1234,2345,3456,4567]}/>, document.getElementById('checkout'));
 }
+render();
