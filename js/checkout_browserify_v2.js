@@ -236,9 +236,10 @@ var handleLoginSuccess = function() {
 }
 function render(){
     var session = Cookies.get('session');
+    console.log("In render()");
     if(!session) {
         // show facebook login
-        React.render(React.createElement(LoginSignUpModal, {handleLoginSuccess: handleLoginSuccess}), document.getElementById('checkout'));
+        React.render(React.createElement(LoginSignUpModal, {handleLoginSuccess: handleLoginSuccess}), document.getElementById('login'));
         return;
     }
     var api_resp = api_call('meal', {method: 'checkout', session: session});
@@ -248,6 +249,7 @@ function render(){
     }
     React.render(React.createElement(CheckoutForm, {cards: [1234,2345,3456,4567]}), document.getElementById('checkout'));
 }
+render();
 
 },{"./add_card.js":1,"./login.js":3}],3:[function(require,module,exports){
 module.exports = React.createClass({displayName: "exports",

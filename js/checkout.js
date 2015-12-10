@@ -178,9 +178,10 @@ var handleLoginSuccess = function() {
 }
 function render(){
     var session = Cookies.get('session');
+    console.log("In render()");
     if(!session) {
         // show facebook login
-        React.render(<LoginSignUpModal handleLoginSuccess={handleLoginSuccess}/>, document.getElementById('checkout'));
+        React.render(<LoginSignUpModal handleLoginSuccess={handleLoginSuccess}/>, document.getElementById('login'));
         return;
     }
     var api_resp = api_call('meal', {method: 'checkout', session: session});
