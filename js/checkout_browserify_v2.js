@@ -48,7 +48,7 @@ module.exports = React.createClass({displayName: "exports",
                           )
                     ), 
                   React.createElement("div", {className: "text-center"}, 
-                      React.createElement("button", {className: "brand-btn btn btn-payment", id: "add-card-btn", onclick: this.handleAddCard, disabled: this.state.addCardDisabled}, "Add Card")
+                      React.createElement("button", {className: "brand-btn btn btn-payment", id: "add-card-btn", onclick: this.handleAddCard, disabled: this.state.disableAddCard}, "Add Card")
                   )
                 )
             ));
@@ -139,7 +139,7 @@ var PaymentField = React.createClass({displayName: "PaymentField",
                     React.createElement("input", {type: "radio", 
                         name: "card", 
                         onChange: radioChanged, 
-                        id: "add-card"}, "Add Card")
+                        id: "add-card"}, " Add Card")
                 );
         }
         cards.push(add_card);
@@ -242,11 +242,11 @@ function render(){
         React.render(React.createElement(LoginSignUpModal, {handleLoginSuccess: handleLoginSuccess}), document.getElementById('login'));
         return;
     }
-    // var api_resp = api_call('meal', {method: 'checkout', session: session});
-    // if (!api_resp.Success){
-    //     // show error... ??? What causes this?
-    //     return;
-    // }
+    var api_resp = api_call('meal', {method: 'checkout', session: session});
+    if (!api_resp.Success){
+        // show error... ??? What causes this?
+        return;
+    }
     React.render(React.createElement(CheckoutForm, {cards: [1234,2345,3456,4567]}), document.getElementById('checkout'));
 }
 render();
