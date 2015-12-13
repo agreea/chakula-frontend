@@ -247,7 +247,7 @@ var MealInfo = React.createClass({
 });
 
 module.exports = React.createClass({
-  componentWillMount: function() {
+  componentDidMount: function() {
     console.log("Testing testing testing");
     var api_resp = api_call("meal", {
                       method: "getMeal",
@@ -255,25 +255,60 @@ module.exports = React.createClass({
                       mealId: this.props.params.id,
                     });
     if (api_resp.Success) {
-      this.props.data = api_resp.Return;
-      console.log(api_resp.Return);
-      console.log(this.props.params.id);
+      var data = api_resp.Return;
+      this.setState({
+        Title: data.Title,
+        Description: data.Description,
+        Rsvp_by: data.Rsvp_by,
+        Starts: data.Starts,
+        Host_name: data.Host_name,
+        Host_pic: data.Host_pic,
+        Host_bio: data.Host_bio,
+        Host_reviews: data.Host_reviews,
+        Maps_url: data.Maps_url,
+        Address: data.Address,
+        Open_spots: data.Open_spots,
+        Attendees: data.Attendees,
+        Pics: data.Pics,
+        Price: data.Price,
+        Status: data.Status,
+        Has_email: data.Has_email
+      })
     } else {
       window.location.replace("https://yaychakula.com");
     }
   },
+  getInitialState: function() {
+    return({
+      Title: '', 
+      Description: '', 
+      Rsvp_by: '', 
+      Host_reviews: [],
+      Address: '',
+      Host_name: '',
+      Host_pic: '',
+      Host_bio: '',
+      Has_email: false,
+      Maps_url: '',
+      Attendees: [],
+      Open_spots: 0,
+      Starts: '',
+      Status: '',
+      Price: 0,
+      Pics: []
+    });
+  },
   render: function() {
-    console.log(this.props.data);
     return(
       <div className="row">
         <div className="row text-center">
           <div className="col-xs-12 col-sm-9 col-sm-offset-2">
-            <Carousel data={this.props.data.Pics}></Carousel>
+            <Carousel data={this.state.Pics}></Carousel>
           </div>
         </div>
         <div className="row">
-          <BookMeal data={this.props.data}></BookMeal>
-          <MealInfo data={this.props.data}></MealInfo>
+          <BookMeal data={this.state}></BookMeal>
+          <MealInfo data={this.state}></MealInfo>
         </div>
     </div>);
   }
