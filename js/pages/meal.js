@@ -247,7 +247,8 @@ var MealInfo = React.createClass({
 });
 
 module.exports = React.createClass({
-  componentDidMount: function() {
+  componentWillMount: function() {
+    console.log("Testing testing testing");
     var api_resp = api_call("meal", {
                       method: "getMeal",
                       session: Cookies.get("session"),
