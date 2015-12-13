@@ -191,7 +191,7 @@ var MealInfo = React.createClass({
         </div>;
     }
     var avg_stars = [];
-    if (data.Host_reviews !== null) { // process avg rating
+    if (data.Host_reviews.length > 0) { // process avg rating
       var ratings = data.Host_reviews.map(function(review) {
         return review.Rating;
       })
