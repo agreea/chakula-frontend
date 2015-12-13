@@ -24000,6 +24000,7 @@ module.exports = React.createClass({displayName: "exports",
     }
   },
   render: function() {
+    console.log(this.props.data);
     return(
       React.createElement("div", {className: "row"}, 
         React.createElement("div", {className: "row text-center"}, 
