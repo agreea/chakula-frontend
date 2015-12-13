@@ -1,0 +1,25 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
+var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
+var Route = ReactRouter.Route;
+var App = require('./pages/app.js'),
+    // Home = require('./pages/home.js'),
+    // Meal = require('./pages/meal.js'),
+    // CreateMeal = require('./pages/create_meal.js'),
+    // MyMeals = require('./pages/my_meals.js'),
+    // EditChef = require('./pages/edit_chef.js'),
+    // ToS = require('./pages/tos.js'),
+    Home = require('./pages/home.js')
+    WhyChakula = require('./pages/why_chakula.js'), // done
+    About = require('./pages/about.js'),
+    Meal = require('./pages/meal.js'); // done
+ReactDOM.render(
+	<Router>
+		<Route component={App}>
+			<Route name="Home" path="/" component={Home}/>
+	        <Route name="About" path="about" component={About}/>
+	        <Route name="Why Chakula" path="why_chakula" component={WhyChakula}/>
+	        <Route name="Meal" path="meal/:id" component={Meal}/>
+	    </Route>
+	</Router>, document.getElementById('app'));
