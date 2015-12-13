@@ -139,7 +139,7 @@ var BookMeal = React.createClass({
       data.Status == "PENDING";
     var starts = moment(data.Starts);
     var req_btn_text;
-    if (moment(meal_data.Rsvp_by < moment())) {
+    if (moment(data.Rsvp_by < moment())) {
       req_btn_text = 'Meal closed';
     } else {
       req_btn_text = "Book";
