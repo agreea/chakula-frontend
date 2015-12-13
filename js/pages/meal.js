@@ -256,6 +256,7 @@ module.exports = React.createClass({
     if (api_resp.Success) {
       this.props.data = api_resp.Return;
       console.log(api_resp.Return);
+      console.log(this.props.params.id);
     } else {
       window.location.replace("https://yaychakula.com");
     }
