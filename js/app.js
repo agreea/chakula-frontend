@@ -13,11 +13,13 @@ var App = require('./pages/app.js'),
     Home = require('./pages/home.js')
     WhyChakula = require('./pages/why_chakula.js'), // done
     About = require('./pages/about.js'),
+    EditHost = require('./pages/edit_host_info.js'),
     Meal = require('./pages/meal.js'); // done
 ReactDOM.render(
-	<Router>
+	<Router className="container-fluid">
 		<Route component={App}>
 			<Route name="Home" path="/" component={Home}/>
+			<Route name="Edit Host Info" path="/edit_host_info" component={EditHost}/>
 	        <Route name="About" path="about" component={About}/>
 	        <Route name="Why Chakula" path="why_chakula" component={WhyChakula}/>
 	        <Route name="Meal" path="meal/:id" component={Meal}/>

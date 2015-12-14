@@ -136,13 +136,9 @@ function load(){
 module.exports = React.createClass({
     render: function() {
         return(
-            <div>
+            <div className="container-fluid">
                 <div>
-                    <NavBar />
-                    <ul>
-                      <li><Link to="/about">About</Link></li>
-                      <li><Link to="/why_chakula">Inbox</Link></li>
-                    </ul>
+                    <NavBar/>
                 </div>
                 {this.props.children}
             </div>

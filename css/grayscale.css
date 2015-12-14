@@ -3,64 +3,7 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-
-body {
-    width: 100%;
-    height: 100%;
-    font-family: Muli,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: #000;
-    background-color: #fff;
-}
-
-html {
-    width: 100%;
-    height: 100%;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin: 0 0 30px;
-    font-family: Muli,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-p {
-    margin: 0 0 25px;
-    font-size: 18px;
-    line-height: 1.5;
-}
-
-@media(min-width:768px) {
-    p {
-        margin: 0 0 35px;
-        font-size: 20px;
-        line-height: 1.6;
-    }
-}
-
-a {
-    color: #5bc0de;
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-}
-
-a:hover,
-a:focus {
-    text-decoration: none;
-    color: #1d9b6c;
-}
-
-.light {
-    font-weight: 400;
-}
-
-.intro {
+.home-intro {
     display: table;
     width: 100%;
     height: auto;
@@ -274,31 +217,13 @@ ul.banner-social-buttons {
     }
 }
 
-footer {
-    padding: 50px 0;
-}
-
-footer p {
-    margin: 0;
-}
-
-::-moz-selection {
+::-moz-selection, ::selection {
     text-shadow: none;
     background: #fcfcfc;
     background: rgba(255,255,255,.2);
 }
 
-::selection {
-    text-shadow: none;
-    background: #fcfcfc;
-    background: rgba(255,255,255,.2);
-}
-
-img::selection {
-    background: 0 0;
-}
-
-img::-moz-selection {
+img::selection, img::moz-selection {
     background: 0 0;
 }
 

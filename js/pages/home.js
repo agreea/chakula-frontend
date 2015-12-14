@@ -32,7 +32,7 @@ module.exports = React.createClass({
         }
         return(
             <div>
-            <header className="intro">
+            <header className="home-intro">
                 <div className="intro-body">
                     <div className="container">
                         <div className="row">

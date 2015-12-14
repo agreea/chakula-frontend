@@ -3,7 +3,7 @@ var React = require('react');
 module.exports = React.createClass({
 	render: function() {
 		return(
-		<div className="container-fluid">
+		<div id="why-chakula">
 			<header>
 		      <div className="row text-center" id="header">
 		        <h1 >Why Chakula?</h1>

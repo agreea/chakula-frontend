@@ -41,7 +41,10 @@ var FormTextRow = React.createClass({
       
 var ProfileForm = React.createClass({
   getInitialState: function() {
-  	return {Bio: this.props.data.Bio, State: this.props.data.State};
+  	return 
+      {Bio: this.props.data.Bio, 
+      State: this.props.data.State,
+      SaveDisabled: true};
   },
   bioChanged: function(e){
     bio = e.target.value;
@@ -53,10 +56,13 @@ var ProfileForm = React.createClass({
     enableSave();
     this.setState({State: e.target.value});
   },
+  enableSave: function() {
+    this.setState({SaveDisabled: false});
+  },
   attemptSendHostData: function() {
 		console.log("attempting to send host data");
 		var submittable = true;
-		var errorHtml = ""
+		var errorHtml = "";
 		if (!email) {
 			submittable = false;
 			errorHtml += "<li>Email is mandatory</li>"
@@ -117,7 +123,7 @@ var ProfileForm = React.createClass({
     	 <div className="row">
     	    <div className="col-xs-offset-4 col-sm-offset-2">
     	    	<h3>Your Host Profile</h3>
-            <span className="disclaimer-text">By setting up an account you agree to <b><a href="https://yaychakula.com/tos.html">the Chakula terms of service</a></b></span>
+            <span className="disclaimer-text">By setting up an account you agree to <b><a target="_blank" href="https://yaychakula.com/tos.html">the Chakula terms of service</a></b></span>
     		  </div>
     	 </div>
       <FormTextRow form_name="Email" place_holder="One you actually check" id="email" default_value={host.Email}/>
@@ -156,7 +162,7 @@ var ProfileForm = React.createClass({
       <div className="row">
         <div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
           <button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
-            onClick={this.attemptSendHostData}>Saved</button>
+            onClick={this.attemptSendHostData} disabled={this.state.SaveDisabled}>Saved</button>
         </div>
       </div>
       <div className="row">

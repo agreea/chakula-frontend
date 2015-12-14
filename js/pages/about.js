@@ -3,19 +3,17 @@ var React = require('react');
 module.exports = React.createClass({
     render: function() {
         return(
-            <div>
-                <header className="intro">
+            <div id="about">
+                <header className="about-intro">
                     <div className="intro-body">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-10 col-md-offset-1">
-                                    <h1>Amazing Homecooked Meals in DC.</h1>
-                                </div>
+                        <div className="row">
+                            <div className="col-md-10 col-md-offset-1">
+                                <h1>Amazing Homecooked Meals in DC.</h1>
                             </div>
-                            <div className="row">
-                                <div className="col-md-8 col-md-offset-2">
-                                    <p className="intro-text">We are on a mission to build community over dinner tables.</p>
-                                </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-8 col-md-offset-2">
+                                <p className="intro-text">We are on a mission to build community over dinner tables.</p>
                             </div>
                         </div>
                     </div>
