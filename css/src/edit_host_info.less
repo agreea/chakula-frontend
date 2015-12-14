@@ -1,11 +1,9 @@
+@import 'core.less';
+
 #edit-host-info{
 	span {
 		vertical-align: baseline;
 	}
-	.btn {
-		width: 60%;
-	}
-
 	.dropdown-menu {
 		z-index: 100;
 	}
@@ -24,11 +22,19 @@
 	}
 
 	.stripe-btn {
+		width: 60%;
+		background: rgba(0,0,0,0);
 		margin: 8px 0;
 		border-width: 2px;
 		border-style: solid;
 		border-color: #555;
 		border-radius: 0;
 		color: #434343;
+	}
+	#save {
+		background-color: @chakula-blue;
+		&:disabled {
+			background-color: #19a347;
+		}
 	}
 }

@@ -390,9 +390,6 @@ body {
 #edit-host-info span {
   vertical-align: baseline;
 }
-#edit-host-info .btn {
-  width: 60%;
-}
 #edit-host-info .dropdown-menu {
   z-index: 100;
 }
@@ -407,12 +404,20 @@ body {
   font-size: 16px;
 }
 #edit-host-info .stripe-btn {
+  width: 60%;
+  background: rgba(0, 0, 0, 0);
   margin: 8px 0;
   border-width: 2px;
   border-style: solid;
   border-color: #555;
   border-radius: 0;
   color: #434343;
+}
+#edit-host-info #save {
+  background-color: #5bc0de;
+}
+#edit-host-info #save:disabled {
+  background-color: #19a347;
 }
 /*#chefs-apply-1 {
 	background: url(../img/chefs-apply-bg1.jpg) no-repeat bottom center scroll;
