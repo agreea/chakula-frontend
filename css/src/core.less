@@ -1,0 +1,258 @@
+/*!
+ * Start Bootstrap - Grayscale Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+/*
+Colors
+*/
+@chakula-blue: #5bc0de;
+@chakula-blue-light: #abdceb;
+@dark-gray: #666;
+@medium-gray: #ddd;
+#app, .container-fluid {
+    height: 100%;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family: Muli, "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #000;
+    background-color: #fff;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+p {
+    margin: 10px 0 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #434343;
+}
+
+form {
+    text-align: left;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+
+}
+.disclaimer-text {
+    font-size: 11px;
+    color: @dark-gray;
+    a {
+        font-size: 11px;
+        color: @dark-gray;        
+    }
+}
+
+.content-section {
+    padding-top: 60px;
+}
+
+.glyphicon {
+    line-height: 1.5;
+    top: 0;
+}
+.img-responsive-center {
+    margin: 0 auto;
+}
+span {
+    vertical-align: middle;
+}
+
+.brand-btn {
+    border-radius: 0;
+    border-width: 0;
+    text-transform: uppercase;
+    font-family: Muli,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    background-color: @chakula-blue;
+    color: #fff;
+    padding: 12px 0;
+    margin-left: 0;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    &:disabled {
+        background-color: @chakula-blue-light;
+    }
+    &:hover {
+        color: #fff;
+    }
+}
+
+.fb-login {
+    max-height: 50px;
+    cursor: pointer; 
+    margin: 0 auto;
+}
+
+.dropdown-menu {
+    z-index: 50000;
+}
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    line-height: 2;
+}
+
+.navbar img {
+    margin: 4px 12px;
+    max-height: 50px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.navbar * {
+    background: transparent;
+    color: #333;
+}
+
+.nav-item-content {
+    margin: auto 0px;
+}
+
+.nav > li, .navbar-header {
+    display: inline-flex;
+    cursor: pointer;
+    height: 100%;
+    margin: auto 0px;
+    padding: 8px;
+}
+
+.nav > li {
+    border-left: 1px solid;
+    border-color: #ccc;
+    * {
+        margin: auto 0;
+        -webkit-transition: all 0s ease-in-out;
+        -moz-transition: all 0s ease-in-out;
+        transition: all 0s ease-in-out;
+        &:hover {
+            background: #fff;
+        };
+    }
+    img {
+        margin: 4px 12px;        
+    }
+}
+
+.nav > li > a, .nav > li > button {
+    padding: 0 15px;
+    border: none;
+}
+.nav > .container-fluid {
+    padding-right: 0;
+}
+.navbar-brand {
+    margin: auto 0;
+    display: inline-block;
+    padding: 0;
+    height: auto;
+}
+.nav-item-content {
+    padding: 0;
+    border: none;
+}
+
+/*
+Form styling
+*/
+.form-control {
+    font-family: 'Helvetica-Neue', Arial;
+}
+
+input[type=text], 
+input[type=password],
+textarea {
+    transition: border-color 0.4s ease;
+    border-color: @medium-gray;
+    border-width: 0 0 2px 0;
+    padding: 8px 0;
+    width: 100%;
+    &:focus{
+        transition: border-color 0.4s ease;
+        outline: none;
+        border-color: @chakula-blue;
+    };
+}
+
+.form-row {
+    padding: 4px 0;
+}
+
+.form-label {
+    color: #aaa;
+}
+/*
+Foot rules
+*/
+footer {
+    background: #232323;
+    padding: 32px;
+    margin-top: 16px;
+    font-size: 14px;
+    a {
+        color: @medium-gray;
+        font-size: 14px;
+        &:hover {
+            color: #f9f9f9;
+        }
+    }
+    p {
+        color: #ccc;
+        font-size: 14px;
+    }
+}
+/*
+Rules on multiple pages
+*/
+
+.review-meal-title {
+    padding-left: 0;
+}
+.hr-review {
+    margin-top: 24px;
+    margin-bottom: 0px;
+}
+.star-rating {
+    color:#fad850;
+    font-size: 32px;
+    * {
+        margin: 0 2px;
+    }
+}
+.grey-star {
+    color:#828282;
+}
