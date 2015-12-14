@@ -23760,7 +23760,9 @@ module.exports = React.createClass({displayName: "exports",
         city: d.City,
         state: d.State,
         bio: d.Bio,
+        stripe_connect: d.stripe_connect,
         saveDisabled: true,
+        stripe_url: d.stripe_url,
         errors: []
       });
     } else {
@@ -23769,17 +23771,17 @@ module.exports = React.createClass({displayName: "exports",
   },
   render: function() {
   	var stripe_element;
-  	var host = this.props.data;
+  	var host = this.state;
   	if (host.Stripe_connect) {
   		stripe_element = 
         (React.createElement("p", null, React.createElement("span", {className: "glyphicon glyphicon-ok", "aria-hidden": "true"}), " Stripe Connected"));
-  	} else if(host.Email && host.Phone && host.Address){
+  	} else if(host.email && host.phone && host.address){
     		stripe_element = 
           (React.createElement("a", {className: "stripe-btn btn-lg btn", 
-            	href: host.Stripe_url, 
+            	href: host.stripe_url, 
             	target: "_blank"}, "Connect With Stripe"));
   	} else {
-  		stripe_element = (React.createElement("p", null, "Complete the information above to set up payments"));
+  		stripe_element = (React.createElement("p", null, "Complete and save the information above to set up payments"));
   	}
     var states = ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"];
     var states_select_options = states.map(function(state) { return React.createElement("option", {value: state}, state);});
@@ -23795,28 +23797,28 @@ module.exports = React.createClass({displayName: "exports",
         place_holder: "One you actually check", 
         id: "email", 
         handleInputChanged: this.handleInputChanged, 
-        default_value: host.Email}), 
+        default_value: host.email}), 
       React.createElement(FormTextRow, {form_name: "Phone #", 
         place_holder: "01234567890", 
         id: "phone", 
-        default_value: host.Phone, 
+        default_value: host.phone, 
         handleInputChanged: this.handleInputChanged}), 
       React.createElement(FormTextRow, {form_name: "Address", 
         place_holder: "3700 O St NW", 
         id: "address", 
-        default_value: host.Address, 
+        default_value: host.address, 
         handleInputChanged: this.handleInputChanged}), 
       React.createElement(FormTextRow, {form_name: "City", 
         place_holder: "Washington", 
         id: "city", 
-        default_value: host.City, 
+        default_value: host.city, 
         handleInputChanged: this.handleInputChanged}), 
       React.createElement("div", {className: "row"}, 
       React.createElement("div", {className: "col-xs-4 col-sm-2"}, 
         React.createElement("p", {className: "text-right form-label"}, "State")
       ), 
       React.createElement("div", {className: "col-xs-8 col-sm-6"}, 
-        React.createElement("select", {className: "state-select", value: this.state.State, onChange: this.handleStateChange}, 
+        React.createElement("select", {className: "state-select", value: host.State, onChange: this.handleStateChange}, 
           states_select_options
         )
       )
@@ -23828,13 +23830,13 @@ module.exports = React.createClass({displayName: "exports",
       React.createElement("div", {className: "col-xs-8 col-sm-6"}, 
         React.createElement("textarea", {className: "text-field", id: "bio", rows: "6", 
           placeholder: "Tell us about yourself. Do you like candle-lit dinners, long walks on the beach?...", 
-          defaultValue: this.state.Bio, onChange: this.bioChanged})
+          defaultValue: host.bio, onChange: this.bioChanged})
         )
       ), 
       React.createElement("div", {className: "row"}, 
         React.createElement("div", {className: "col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4"}, 
           React.createElement("button", {type: "button", className: "brand-btn btn-info btn-lg btn", id: "save", 
-            onClick: this.attemptSendHostData, disabled: this.state.SaveDisabled}, (this.state.SaveDisabled) ? "Saved" : "Save")
+            onClick: this.attemptSendHostData, disabled: host.saveDisabled}, (host.saveDisabled) ? "Saved" : "Save")
         )
       ), 
       React.createElement("div", {className: "row"}, 
