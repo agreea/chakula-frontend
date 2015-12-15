@@ -158,7 +158,7 @@ var BookMeal = React.createClass({
     var booking_info = 
       [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>,
         <p><span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Event is closed</p>];
-    if (closes > moment()) {
+    if (meal_closes > moment()) {
       booking_info.push(<p>{"Meal closes " + moment().to(closes)}</p>);
     }
     return(
