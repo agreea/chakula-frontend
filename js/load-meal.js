@@ -159,7 +159,7 @@ var BookMeal = React.createClass({
       [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>,
         <p><span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Event is closed</p>];
     if (meal_closes > moment()) {
-      booking_info.push(<p>{"Meal closes " + moment().to(closes)}</p>);
+      booking_info.push(<p>{"Meal closes " + moment().to(meal_closes)}</p>);
     }
     return(
       <div className="col-xs-12 col-sm-3">
@@ -180,7 +180,6 @@ var MealInfo = React.createClass({
     // $('#time-left-subtext').text('Requests are now closed.');
     // $('#time-left-subtext').css("color", "#aaa"); // set text to grey
     var data = this.props.data;
-    var closes = moment(data.Rsvp_by);
     var map_row;
     if (data.Status != "ATTENDING") {
         map_row = 
