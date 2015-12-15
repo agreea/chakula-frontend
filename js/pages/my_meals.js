@@ -146,7 +146,7 @@ module.exports = React.createClass({
     //         </a>
     // }
     return (
-      <div className="row non-white">
+      <div className="row non-white" id="host_meal">
         <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 meal-list">
           <h2>My Meals</h2>
           <div className="text-center">
