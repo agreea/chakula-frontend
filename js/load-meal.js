@@ -146,7 +146,7 @@ var BookMeal = React.createClass({
       data.Status == "PENDING";
     var starts = moment(data.Starts);
     var req_btn_text;
-    if (meal_closes < moment())) {
+    if (meal_closes < moment()) {
       req_btn_text = 'Meal closed';
     } else {
       req_btn_text = "Book";
