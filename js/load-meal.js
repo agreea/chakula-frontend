@@ -138,15 +138,15 @@ var HostAttendeesInfo = React.createClass({
 var BookMeal = React.createClass({
   render: function() {
     var data = this.props.data;
+    var meal_closes = moment(data.Rsvp_by);
     var req_btn_disabled = 
-      (moment(data.Rsvp_by) < moment()) || 
+      (meal_closes < moment()) || 
       data.Status == "ATTENDING" || 
       data.Status == "DECLINED" || 
       data.Status == "PENDING";
     var starts = moment(data.Starts);
-    var closes = moment(data.Rsvp_by);
     var req_btn_text;
-    if (moment(meal_data.Rsvp_by < moment())) {
+    if (meal_closes < moment())) {
       req_btn_text = 'Meal closed';
     } else {
       req_btn_text = "Book";
@@ -159,7 +159,7 @@ var BookMeal = React.createClass({
       [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>,
         <p><span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Event is closed</p>];
     if (closes > moment()) {
-      booking_info.push(<p>{closes.toNow() + " left to book"}</p>);
+      booking_info.push(<p>{"Meal closes " + moment().to(closes)}</p>);
     }
     return(
       <div className="col-xs-12 col-sm-3">
