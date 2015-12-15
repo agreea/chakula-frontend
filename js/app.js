@@ -20,7 +20,7 @@ ReactDOM.render(
 	<Router className="container-fluid">
 		<Route component={App}>
 			<Route name="Home" path="/" component={Home}/>
-			<Route name="Edit Host Info" path="/edit_host_info" component={EditHost}/>
+			<Route name="Edit Host Info" path="edit_host_info" component={EditHost}/>
 	        <Route name="About" path="about" component={About}/>
 	        <Route name="Why Chakula" path="why_chakula" component={WhyChakula}/>
 	        <Route name="Meal" path="meal/:id" component={Meal}/>

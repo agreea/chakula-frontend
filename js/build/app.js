@@ -21,7 +21,7 @@ ReactDOM.render(
 	React.createElement(Router, {className: "container-fluid"}, 
 		React.createElement(Route, {component: App}, 
 			React.createElement(Route, {name: "Home", path: "/", component: Home}), 
-			React.createElement(Route, {name: "Edit Host Info", path: "/edit_host_info", component: EditHost}), 
+			React.createElement(Route, {name: "Edit Host Info", path: "edit_host_info", component: EditHost}), 
 	        React.createElement(Route, {name: "About", path: "about", component: About}), 
 	        React.createElement(Route, {name: "Why Chakula", path: "why_chakula", component: WhyChakula}), 
 	        React.createElement(Route, {name: "Meal", path: "meal/:id", component: Meal}), 
@@ -24259,90 +24259,91 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 },{"react":209}],215:[function(require,module,exports){
+var React = require('react');
 var MealListItem = React.createClass({displayName: "MealListItem",
-getInitialState: function() {
-    return {delete_error: ""};
-},
-deleteMeal: function() {
-  var api_resp = api_call('meal', {
-    method: 'deleteMeal', 
-    session: Cookies.get('session'), 
-    mealId: meal_id
-  });
-  if (!api_resp.Success){
-    this.setState({delete_error: resp.Error});
-    return;
-  }
-  this.props.handleMealDelete(this.props.k);
-  $('#myModal' + this.props.k).modal('hide');
-  // launch the modal
-  // upon confirm, delete the meal
-},
-render: function() {
-  var pic_src = (this.props.pic)? 
-    "https://yaychakula.com/img/" + this.props.pic :
-    "https://yaychakula.com/img/camera.svg";  
-  var edit_link = "https://yaychakula.com/create_meal.html?Id=" + this.props.id;
-  var title_s = this.props.title;
-  var title;
-  var starts_s = moment(this.props.starts).format("h:mm a dddd, MMMM Do YYYY");
-  if (!title_s) {
-    title = React.createElement("p", null, "Untitled");
-  } else if (moment(this.props.starts) < moment()) { // show the meal is past
-    title = React.createElement("p", null, this.props.title + " [PAST]");
-  } else if (this.props.published) {
-    title = React.createElement("p", null, React.createElement("i", {className: "fa fa-circle live"}), this.props.title);
-  } else {
-    title = React.createElement("p", null, this.props.title)
-  }
-  return (
-    React.createElement("div", {className: "meal-list-item"}, 
-      React.createElement("div", {className: "row"}, 
-          React.createElement("button", {className: "btn-delete-meal text-center", 
-            "data-toggle": "modal", 
-            "data-target": "#myModal" + this.props.k}, 
-            React.createElement("span", {className: " glyphicon glyphicon-trash delete-icon", "aria-hidden": "true"})
-          ), 
-        React.createElement("div", {className: "col-sm-3 text-center"}, 
-          React.createElement("a", {href: edit_link}, 
-            React.createElement("img", {className: "img-responsive meal-thumb", src: pic_src})
-          )
-        ), 
-        React.createElement("div", {className: "col-sm-8"}, 
-          React.createElement("h4", {className: "meal-list-title"}, 
+  getInitialState: function() {
+      return {delete_error: ""};
+  },
+  deleteMeal: function() {
+    var api_resp = api_call('meal', {
+      method: 'deleteMeal', 
+      session: Cookies.get('session'), 
+      mealId: meal_id
+    });
+    if (!api_resp.Success){
+      this.setState({delete_error: resp.Error});
+      return;
+    }
+    this.props.handleMealDelete(this.props.k);
+    $('#myModal' + this.props.k).modal('hide');
+    // launch the modal
+    // upon confirm, delete the meal
+  },
+  render: function() {
+    var pic_src = (this.props.pic)? 
+      "https://yaychakula.com/img/" + this.props.pic :
+      "https://yaychakula.com/img/camera.svg";  
+    var edit_link = "https://yaychakula.com/create_meal.html?Id=" + this.props.id;
+    var title_s = this.props.title;
+    var title;
+    var starts_s = moment(this.props.starts).format("h:mm a dddd, MMMM Do YYYY");
+    if (!title_s) {
+      title = React.createElement("p", null, "Untitled");
+    } else if (moment(this.props.starts) < moment()) { // show the meal is past
+      title = React.createElement("p", null, this.props.title + " [PAST]");
+    } else if (this.props.published) {
+      title = React.createElement("p", null, React.createElement("i", {className: "fa fa-circle live"}), this.props.title);
+    } else {
+      title = React.createElement("p", null, this.props.title)
+    }
+    return (
+      React.createElement("div", {className: "meal-list-item"}, 
+        React.createElement("div", {className: "row"}, 
+            React.createElement("button", {className: "btn-delete-meal text-center", 
+              "data-toggle": "modal", 
+              "data-target": "#myModal" + this.props.k}, 
+              React.createElement("span", {className: " glyphicon glyphicon-trash delete-icon", "aria-hidden": "true"})
+            ), 
+          React.createElement("div", {className: "col-sm-3 text-center"}, 
             React.createElement("a", {href: edit_link}, 
-              title
+              React.createElement("img", {className: "img-responsive meal-thumb", src: pic_src})
             )
           ), 
-          React.createElement("p", null, React.createElement("i", {className: "fa fa-clock-o"}), " " + starts_s), 
-          React.createElement("div", {className: "row"}, 
-            React.createElement("p", {className: "col-sm-3 cost"}, React.createElement("span", {className: "glyphicon glyphicon-usd"}), " " + this.props.price), 
-            React.createElement("p", {className: "col-sm-8"}, " ", React.createElement("i", {className: "fa fa-users"}),  " " + this.props.seats + " seats")
+          React.createElement("div", {className: "col-sm-8"}, 
+            React.createElement("h4", {className: "meal-list-title"}, 
+              React.createElement("a", {href: edit_link}, 
+                title
+              )
+            ), 
+            React.createElement("p", null, React.createElement("i", {className: "fa fa-clock-o"}), " " + starts_s), 
+            React.createElement("div", {className: "row"}, 
+              React.createElement("p", {className: "col-sm-3 cost"}, React.createElement("span", {className: "glyphicon glyphicon-usd"}), " " + this.props.price), 
+              React.createElement("p", {className: "col-sm-8"}, " ", React.createElement("i", {className: "fa fa-users"}),  " " + this.props.seats + " seats")
+            )
           )
-        )
-      ), 
-      React.createElement("hr", {className: "list-hr"}), 
-    React.createElement("div", {className: "modal fade", id: "myModal" + this.props.k, tabindex: "-1", role: "dialog"}, 
-    React.createElement("div", {className: "modal-dialog", role: "document"}, 
-      React.createElement("div", {className: "modal-content"}, 
-        React.createElement("div", {className: "modal-header"}, 
-          React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal", "aria-label": "Close"}, React.createElement("span", {"aria-hidden": "true"}, "×")), 
-          React.createElement("h4", {className: "modal-title text-center", id: "myModalLabel"}, "Delete Meal?")
         ), 
-        React.createElement("div", {className: "error-field"}, 
-          this.state.delete_error
-        ), 
-        React.createElement("div", {className: "modal-body text-center"}, 
-          React.createElement("p", null, "Are you sure you want to delete " + this.props.title + "? This is forever-ever."), 
-          React.createElement("button", {type: "button", className: "btn btn-default", "data-dismiss": "modal"}, "Cancel"), 
-          React.createElement("button", {type: "button", className: "btn-primary", onClick: this.deleteMeal}, "Delete Meal")
+        React.createElement("hr", {className: "list-hr"}), 
+      React.createElement("div", {className: "modal fade", id: "myModal" + this.props.k, tabindex: "-1", role: "dialog"}, 
+      React.createElement("div", {className: "modal-dialog", role: "document"}, 
+        React.createElement("div", {className: "modal-content"}, 
+          React.createElement("div", {className: "modal-header"}, 
+            React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal", "aria-label": "Close"}, React.createElement("span", {"aria-hidden": "true"}, "×")), 
+            React.createElement("h4", {className: "modal-title text-center", id: "myModalLabel"}, "Delete Meal?")
+          ), 
+          React.createElement("div", {className: "error-field"}, 
+            this.state.delete_error
+          ), 
+          React.createElement("div", {className: "modal-body text-center"}, 
+            React.createElement("p", null, "Are you sure you want to delete " + this.props.title + "? This is forever-ever."), 
+            React.createElement("button", {type: "button", className: "btn btn-default", "data-dismiss": "modal"}, "Cancel"), 
+            React.createElement("button", {type: "button", className: "btn-primary", onClick: this.deleteMeal}, "Delete Meal")
+          )
         )
       )
     )
   )
-)
-  );
-}
+    );
+  }
 });
 
 module.exports = React.createClass({displayName: "exports",
@@ -24418,7 +24419,7 @@ module.exports = React.createClass({displayName: "exports",
   }
 });
 
-},{}],216:[function(require,module,exports){
+},{"react":209}],216:[function(require,module,exports){
 var React = require('react');
 
 module.exports = React.createClass({displayName: "exports",
