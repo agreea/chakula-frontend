@@ -144,6 +144,7 @@ var BookMeal = React.createClass({
       data.Status == "DECLINED" || 
       data.Status == "PENDING";
     var starts = moment(data.Starts);
+    var closes = moment(data.Rsvp_by);
     var req_btn_text;
     if (moment(meal_data.Rsvp_by < moment())) {
       req_btn_text = 'Meal closed';
@@ -157,7 +158,7 @@ var BookMeal = React.createClass({
     var booking_info = 
       [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>,
         <p><span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Event is closed</p>];
-    if (moment(data.Rsvp_by) > moment()) {
+    if (closes > moment()) {
       booking_info.push(<p>{closes.toNow() + " left to book"}</p>);
     }
     return(
