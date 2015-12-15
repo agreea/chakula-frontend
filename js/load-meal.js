@@ -198,7 +198,7 @@ var MealInfo = React.createClass({
         </div>;
     }
     var avg_stars = [];
-    if (data.Host_reviews !== null) { // process avg rating
+    if (data.Host_reviews.length > 0) { // process avg rating
       var ratings = data.Host_reviews.map(function(review) {
         return review.Rating;
       })
@@ -224,7 +224,6 @@ var MealInfo = React.createClass({
         avg_stars.push(<i className="fa fa-star-o"></i>);
       }
     }
-
     // handle newlines in the meal description
     var desc_lines = data.Description.split(/[\n\r]/g);
     var description = desc_lines.map(function(desc_line) {
