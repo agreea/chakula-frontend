@@ -49,7 +49,7 @@ var PaymentField = React.createClass({
     },
     handleAddCardSuccess: function(last4) {
         this.props.cards.push(last4);
-        this.props.handleSelectedCardChange(e.currentTarget.id);
+        this.props.handleSelectedCardChange(last4);
         this.setState({showAddCardForm: false, selected: last4});
     },
     cardsList: function () {
