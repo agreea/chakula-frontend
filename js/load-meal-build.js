@@ -190,7 +190,7 @@ var SeatsSelect = React.createClass({displayName: "SeatsSelect",
     },
     render: function(){
         var options = [];
-        for(var i = 1; i < this.props.Open_spots + 1; i++) {
+        for(var i = 1; i < this.props.open_spots + 1; i++) {
             options.push(React.createElement("option", {value: i}, "i"));
         }
         return (React.createElement("div", {className: "row"}, 
@@ -235,7 +235,7 @@ module.exports = React.createClass({displayName: "exports",
         console.log(this.state);
         return(
             React.createElement("div", {className: "text-left row"}, 
-                React.createElement(SeatsSelect, {handleSeatChange: this.handleSeatChange, seats: this.state.seats}), 
+                React.createElement(SeatsSelect, {handleSeatChange: this.handleSeatChange, seats: this.state.seats, open_spots: this.props.Open_spots}), 
                 React.createElement(PaymentField, {cards: this.props.cards, handleSelectedCardChange: this.handleSelectedCardChange}), 
                 React.createElement("div", {className: "row error-field"}, 
                     React.createElement("div", {className: "col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2"}, 

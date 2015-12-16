@@ -126,7 +126,7 @@ var SeatsSelect = React.createClass({
     },
     render: function(){
         var options = [];
-        for(var i = 1; i < this.props.Open_spots + 1; i++) {
+        for(var i = 1; i < this.props.open_spots + 1; i++) {
             options.push(<option value={i}>i</option>);
         }
         return (<div className="row">
@@ -171,7 +171,7 @@ module.exports = React.createClass({
         console.log(this.state);
         return(
             <div className="text-left row">
-                <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} />
+                <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} open_spots={this.props.Open_spots}/>
                 <PaymentField cards={this.props.cards} handleSelectedCardChange={this.handleSelectedCardChange}></PaymentField>
                 <div className="row error-field">
                     <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">
