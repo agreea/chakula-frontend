@@ -194,8 +194,13 @@ var SeatsSelect = React.createClass({displayName: "SeatsSelect",
             options.push(React.createElement("option", {value: i}, i));
         }
         return (React.createElement("div", {className: "row"}, 
-            React.createElement("select", {onChange: this.handleSelectChange, value: this.state.seats}, 
-                options
+            React.createElement("div", {className: "col-xs-3 col-sm-2 label-text text-right"}, 
+                React.createElement("p", {className: "label-text"}, "Seats")
+            ), 
+            React.createElement("div", {className: "col-xs-8 col-sm-6 col-md-5"}, 
+                React.createElement("select", {onChange: this.handleSelectChange, value: this.state.seats}, 
+                    options
+                )
             )
         ))
     }
@@ -215,8 +220,8 @@ module.exports = React.createClass({displayName: "exports",
             console.log('Card was invalid: ' + selectedCard);
             return;
         }
-        api_resp = api_call('meal', {
-            method: 'requestMeal', 
+        api_resp = api_call('mealrequest', {
+            method: 'sendRequest', 
             session: Cookies.get('session'), 
             last4: selectedCard,
             seats: this.state.seats

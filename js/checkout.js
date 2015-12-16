@@ -130,9 +130,14 @@ var SeatsSelect = React.createClass({
             options.push(<option value={i}>{i}</option>);
         }
         return (<div className="row">
-            <select onChange={this.handleSelectChange} value={this.state.seats}>
-                {options}
-            </select>
+            <div className="col-xs-3 col-sm-2 label-text text-right">
+                <p className="label-text">Seats</p>
+            </div>
+            <div className="col-xs-8 col-sm-6 col-md-5">
+                <select onChange={this.handleSelectChange} value={this.state.seats}>
+                    {options}
+                </select>
+            </div>
         </div>)
     }
 });
@@ -151,8 +156,8 @@ module.exports = React.createClass({
             console.log('Card was invalid: ' + selectedCard);
             return;
         }
-        api_resp = api_call('meal', {
-            method: 'requestMeal', 
+        api_resp = api_call('mealrequest', {
+            method: 'sendRequest', 
             session: Cookies.get('session'), 
             last4: selectedCard,
             seats: this.state.seats
