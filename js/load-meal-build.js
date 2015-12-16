@@ -245,7 +245,9 @@ module.exports = React.createClass({displayName: "exports",
     },
     render: function() {
         console.log(this.state);
-        if (!this.state.selectedCard && this.props.cards.length > 0) {
+        if (!this.state.selectedCard && 
+            this.props.cards !== null &&
+            this.props.cards.length > 0) {
             this.setState({selectedCard: this.props.cards[0]});
         }
         if (this.state.booked_success) {
