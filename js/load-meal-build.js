@@ -241,7 +241,8 @@ module.exports = React.createClass({displayName: "exports",
         this.setState({signin: true});
     },
     getInitialState: function() {
-        return({error: '', selectedCard: this.props.cards[0], seats: 1});
+        var selectedCard = (this.props.cards)? this.props.cards[0] : '';
+        return({error: '', selectedCard: selectedCard, seats: 1});
     },
     render: function() {
         console.log(this.state);
