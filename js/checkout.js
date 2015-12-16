@@ -116,11 +116,33 @@ var PaymentField = React.createClass({
             </div>);
     }
 });
-
+var SeatsSelect = React.createClass({
+    handleSelectChange: function(e){
+        this.props.seatSelectChanged(e.target.value);
+        this.setState({seats: e.target.value});
+    },
+    getInitialState: function(){
+        return({seats: this.props.seats});
+    },
+    render: function(){
+        var options = [];
+        for(var i = 1; i < this.props.Open_spots + 1; i++) {
+            options.push(<option value={i}>i</option>);
+        }
+        return (<div className="row">
+            <select onChange={this.handleSelectChange} value={this.state.seats}>
+                {options}
+            </select>
+        </div>)
+    }
+});
 module.exports = React.createClass({
     // used by child PaymentField to update parent about which card to use for booking.
     handleSelectedCardChange: function(selectedCard) {
         this.setState({selectedCard: selectedCard});
+    },
+    handleSeatChange: function(new_seats) {
+        this.setState({seats: new_seats});
     },
     handleBookPressed: function() {
         var selectedCard = this.state.selectedCard;
@@ -129,7 +151,12 @@ module.exports = React.createClass({
             console.log('Card was invalid: ' + selectedCard);
             return;
         }
-        api_resp = api_call('meal', {method: 'checkout', session: Cookies.get('session'), last4: selectedCard});
+        api_resp = api_call('meal', {
+            method: 'requestMeal', 
+            session: Cookies.get('session'), 
+            last4: selectedCard,
+            seats: this.state.seats
+        });
         if (api_resp.Success) {
             // idk close the modal? Show a success screen?
         } else {
@@ -138,12 +165,13 @@ module.exports = React.createClass({
         }
     },
     getInitialState: function() {
-        return({error: '', selectedCard: this.props.cards[0]});
+        return({error: '', selectedCard: this.props.cards[0], seats: 1});
     },
     render: function() {
         console.log(this.state);
         return(
             <div className="text-left row">
+                <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} />
                 <PaymentField cards={this.props.cards} handleSelectedCardChange={this.handleSelectedCardChange}></PaymentField>
                 <div className="row error-field">
                     <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">
@@ -152,7 +180,7 @@ module.exports = React.createClass({
                 </div>
                 <div className="row">
                     <div className="col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2">
-                        <button className="brand-btn " 
+                        <button className="brand-btn" 
                             disabled={this.props.cards.length === 0} 
                             onClick={this.handleBookPressed}>Book</button>
                     </div>
