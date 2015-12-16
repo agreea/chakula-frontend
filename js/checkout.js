@@ -127,7 +127,7 @@ var SeatsSelect = React.createClass({
     render: function(){
         var options = [];
         for(var i = 1; i < this.props.open_spots + 1; i++) {
-            options.push(<option value={i}>i</option>);
+            options.push(<option value={i}>{i}</option>);
         }
         return (<div className="row">
             <select onChange={this.handleSelectChange} value={this.state.seats}>
