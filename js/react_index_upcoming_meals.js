@@ -17,11 +17,15 @@ if (api_resp.Success) {
                   </span>
               </div>
               <div className="card-action">
+                <div className="row">
                   <a href={"http://yaychakula.com/meal.html?Id=" + 
                     this.props.Id} target="new_blank">{moment(this.props.Starts).format("h:mm a dddd, MMMM Do YYYY")}</a>
+                </div>
+                <div className="row">
                   <a href={"http://yaychakula.com/meal.html?Id=" + 
                     this.props.Id} target="new_blank">{this.props.Open_spots + 
                     ' Seats Available'}</a>
+                </div>
               </div>
               </a>
           </div>
