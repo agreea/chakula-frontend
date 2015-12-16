@@ -97,7 +97,7 @@ var PaymentField = React.createClass({
         var paymentField;
         if (!this.state.paymentPressed && this.props.cards.length > 0) {
             paymentField = 
-                <div className="col-xs-5 col-sm-4 col-md-3">
+                <div className="col-xs-8 col-sm-6 col-md-5">
                     <p>
                         <button className="payment-button"
                             onClick={this.handlePaymentPress}>
@@ -149,7 +149,7 @@ module.exports = React.createClass({
                     <p>{this.state.error}</p>
                 </div>
                 <div className="row">
-                    <div className="col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2 col-md-5 col-lg-4">
+                    <div className="col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2">
                         <button className="brand-btn " 
                             disabled={this.props.cards.length === 0} 
                             onClick={this.handleBookPressed}>Book</button>

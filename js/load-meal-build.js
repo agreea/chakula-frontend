@@ -161,7 +161,7 @@ var PaymentField = React.createClass({displayName: "PaymentField",
         var paymentField;
         if (!this.state.paymentPressed && this.props.cards.length > 0) {
             paymentField = 
-                React.createElement("div", {className: "col-xs-5 col-sm-4 col-md-3"}, 
+                React.createElement("div", {className: "col-xs-8 col-sm-6 col-md-5"}, 
                     React.createElement("p", null, 
                         React.createElement("button", {className: "payment-button", 
                             onClick: this.handlePaymentPress}, 
@@ -213,7 +213,7 @@ module.exports = React.createClass({displayName: "exports",
                     React.createElement("p", null, this.state.error)
                 ), 
                 React.createElement("div", {className: "row"}, 
-                    React.createElement("div", {className: "col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2 col-md-5 col-lg-4"}, 
+                    React.createElement("div", {className: "col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2"}, 
                         React.createElement("button", {className: "brand-btn ", 
                             disabled: this.props.cards.length === 0, 
                             onClick: this.handleBookPressed}, "Book")
