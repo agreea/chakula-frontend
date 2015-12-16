@@ -18,7 +18,7 @@ if (api_resp.Success) {
               </div>
               <div className="card-action">
                   <a href={"http://yaychakula.com/meal.html?Id=" + 
-                    this.props.Id} target="new_blank">{moment(this.props.starts).format("h:mm a dddd, MMMM Do YYYY")}</a>
+                    this.props.Id} target="new_blank">{moment(this.props.Starts).format("h:mm a dddd, MMMM Do YYYY")}</a>
                   <a href={"http://yaychakula.com/meal.html?Id=" + 
                     this.props.Id} target="new_blank">{this.props.Open_spots + 
                     ' Seats Available'}</a>
