@@ -1,3 +1,12 @@
+select {
+    border-style: solid;
+    border-color: #434343;
+    font-size: 14px;
+    border-width: 2px;
+    -webkit-appearance: none;
+    padding: 4px 12px;
+    -webkit-border-radius: 0px;
+}
 p {
     color: #434343;
 }
