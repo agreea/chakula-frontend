@@ -176,7 +176,7 @@ module.exports = React.createClass({
         console.log(api_resp);
         if (api_resp.Success) {
             this.props.cards = api_resp.Return;
-            this.setState({selectCard: api_resp.Return[0]});
+            this.setState({selectedCard: api_resp.Return[0]});
         }
         this.props.handleLoginSuccess() 
     },
