@@ -32,7 +32,7 @@ module.exports = React.createClass({
 	render: function() {
 		return (
             <div className="row">
-                <form id="cc-form" className="col-sm-8">
+                <form id="cc-form">
                     <span className="error-field" id="payment-errors"></span>
                     <div className="form-row">
                       <label>

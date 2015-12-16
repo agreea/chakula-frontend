@@ -33,7 +33,7 @@ module.exports = React.createClass({displayName: "exports",
 	render: function() {
 		return (
             React.createElement("div", {className: "row"}, 
-                React.createElement("form", {id: "cc-form", className: "col-sm-8"}, 
+                React.createElement("form", {id: "cc-form"}, 
                     React.createElement("span", {className: "error-field", id: "payment-errors"}), 
                     React.createElement("div", {className: "form-row"}, 
                       React.createElement("label", null, 
@@ -133,7 +133,7 @@ var PaymentField = React.createClass({displayName: "PaymentField",
                     React.createElement("p", null, 
                         React.createElement("input", {className: "row", 
                             type: "radio", 
-                            onChange: radioChanged, 
+                            onClick: radioChanged, 
                             id: "add-card", 
                             checked: true}, " Add Card")
                     ), 

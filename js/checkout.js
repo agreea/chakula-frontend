@@ -69,7 +69,7 @@ var PaymentField = React.createClass({
                     <p>
                         <input className="row" 
                             type="radio" 
-                            onChange={radioChanged} 
+                            onClick={radioChanged} 
                             id="add-card"
                             checked={true}> Add Card</input>
                     </p>
