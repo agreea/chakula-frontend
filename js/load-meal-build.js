@@ -243,14 +243,6 @@ module.exports = React.createClass({displayName: "exports",
         }
         this.props.handleLoginSuccess() 
     },
-    componentWillUpdate: function() {
-        console.log("Now? " + this.props.cards[0]);
-        if (!this.state.selectedCard && 
-            this.props.cards !== null &&
-            this.props.cards.length > 0) {
-            this.setState({selectedCard: this.props.cards[0]});
-        }
-    },
     getInitialState: function() {
         return({
             error: '', 
