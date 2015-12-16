@@ -229,16 +229,34 @@ module.exports = React.createClass({displayName: "exports",
         });
         if (api_resp.Success) {
             // idk close the modal? Show a success screen?
+            this.setState({booked_success: true});
         } else {
             // show errors?
             this.setState({error: api_resp.Error});
         }
+    },
+    handleLoginSuccess: function(){
+        // TODO: find a more elegant way to trigger a rerender;
+        console.log("Handling login success");
+        this.setState({signin: true});
     },
     getInitialState: function() {
         return({error: '', selectedCard: this.props.cards[0], seats: 1});
     },
     render: function() {
         console.log(this.state);
+        if (this.state.booked_success) {
+            return (
+                React.createElement("div", {className: "text-center"}, 
+                    React.createElement("h2", {className: "text-center"}, "Meal successfully booked!")
+                )
+                );
+        }
+        if (!Cookies.get('session')) {
+            return (
+                React.createElement(LoginSignUpModal, {handleLoginSuccess: this.handleLoginSuccess})
+                );
+        }
         return(
             React.createElement("div", {className: "text-left row"}, 
                 React.createElement(SeatsSelect, {handleSeatChange: this.handleSeatChange, seats: this.state.seats, open_spots: this.props.open_spots}), 
@@ -631,6 +649,7 @@ module.exports = React.createClass({displayName: "exports",
       // if api call is successful, get the token
     },
     handleFbLogin: function() {
+        var handleLoginSuccess = this.props.handleLoginSuccess;
         FB.login(
             function(response) {
                 if (response.authResponse) {
@@ -643,9 +662,9 @@ module.exports = React.createClass({displayName: "exports",
                       {method: 'LoginFb', 
                       fbToken: access_token});
                     if (api_resp.Success) {
-                      this.props.handleLoginSuccess();
+                      Cookies.set('session', api_resp.Return.Session_token);
+                      handleLoginSuccess();
                     }
-                        // if that's successful, then load whatever this was supposed to load
                 } else {
                   this.setState({errors:["Facebook login failed."]});
                 }

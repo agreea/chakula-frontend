@@ -165,16 +165,34 @@ module.exports = React.createClass({
         });
         if (api_resp.Success) {
             // idk close the modal? Show a success screen?
+            this.setState({booked_success: true});
         } else {
             // show errors?
             this.setState({error: api_resp.Error});
         }
+    },
+    handleLoginSuccess: function(){
+        // TODO: find a more elegant way to trigger a rerender;
+        console.log("Handling login success");
+        this.setState({signin: true});
     },
     getInitialState: function() {
         return({error: '', selectedCard: this.props.cards[0], seats: 1});
     },
     render: function() {
         console.log(this.state);
+        if (this.state.booked_success) {
+            return (
+                <div className="text-center">
+                    <h2 className="text-center">Meal successfully booked!</h2>
+                </div>
+                );
+        }
+        if (!Cookies.get('session')) {
+            return (
+                <LoginSignUpModal handleLoginSuccess={this.handleLoginSuccess}/>
+                );
+        }
         return(
             <div className="text-left row">
                 <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} open_spots={this.props.open_spots}/>

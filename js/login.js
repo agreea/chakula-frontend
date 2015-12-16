@@ -45,6 +45,7 @@ module.exports = React.createClass({
       // if api call is successful, get the token
     },
     handleFbLogin: function() {
+        var handleLoginSuccess = this.props.handleLoginSuccess;
         FB.login(
             function(response) {
                 if (response.authResponse) {
@@ -57,9 +58,9 @@ module.exports = React.createClass({
                       {method: 'LoginFb', 
                       fbToken: access_token});
                     if (api_resp.Success) {
-                      this.props.handleLoginSuccess();
+                      Cookies.set('session', api_resp.Return.Session_token);
+                      handleLoginSuccess();
                     }
-                        // if that's successful, then load whatever this was supposed to load
                 } else {
                   this.setState({errors:["Facebook login failed."]});
                 }
