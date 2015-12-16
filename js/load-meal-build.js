@@ -173,7 +173,7 @@ var PaymentField = React.createClass({displayName: "PaymentField",
         }
         return(  
             React.createElement("div", {className: "row"}, 
-                React.createElement("div", {className: "col-xs-3 col-sm-2 col-lg-1 label-text text-right"}, 
+                React.createElement("div", {className: "col-xs-3 col-sm-2 label-text text-right"}, 
                     React.createElement("p", null, "Payment")
                 ), 
                 paymentField
