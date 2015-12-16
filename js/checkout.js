@@ -156,7 +156,7 @@ module.exports = React.createClass({
             console.log('Card was invalid: ' + selectedCard);
             return;
         }
-        api_resp = api_call('mealrequest', {
+        var api_resp = api_call('mealrequest', {
             method: 'sendRequest', 
             mealId: getUrlVars()['Id'],
             session: Cookies.get('session'), 
@@ -181,6 +181,9 @@ module.exports = React.createClass({
     },
     render: function() {
         console.log(this.state);
+        if (!this.state.selectedCard && this.props.cards.length > 0) {
+            this.setState({selectedCard: this.props.cards[0]});
+        }
         if (this.state.booked_success) {
             return (
                 <div className="text-center">

@@ -148,7 +148,7 @@ module.exports = React.createClass({
         }
         return(
             <div className="row">
-              <div className="col-xs-9 col-sm-6">
+              <div className="col-xs-9">
                 <div className="row">
                   <img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>
                 </div>

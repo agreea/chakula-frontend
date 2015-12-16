@@ -220,7 +220,7 @@ module.exports = React.createClass({displayName: "exports",
             console.log('Card was invalid: ' + selectedCard);
             return;
         }
-        api_resp = api_call('mealrequest', {
+        var api_resp = api_call('mealrequest', {
             method: 'sendRequest', 
             mealId: getUrlVars()['Id'],
             session: Cookies.get('session'), 
@@ -245,6 +245,9 @@ module.exports = React.createClass({displayName: "exports",
     },
     render: function() {
         console.log(this.state);
+        if (!this.state.selectedCard && this.props.cards.length > 0) {
+            this.setState({selectedCard: this.props.cards[0]});
+        }
         if (this.state.booked_success) {
             return (
                 React.createElement("div", {className: "text-center"}, 
@@ -766,7 +769,7 @@ module.exports = React.createClass({displayName: "exports",
         }
         return(
             React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "col-xs-9 col-sm-6"}, 
+              React.createElement("div", {className: "col-xs-9"}, 
                 React.createElement("div", {className: "row"}, 
                   React.createElement("img", {onClick: this.handleFbLogin, src: "./img/fb-login.svg", id: "fb"})
                 ), 
