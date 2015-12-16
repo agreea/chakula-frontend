@@ -33,7 +33,7 @@
     <script type="text/babel" src="js/checkout.js"></script>
     <!-- <script type="text/babel" src="js/nav_bar.js"></script> -->
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script type="text/babel" src="js/load-meal.js"></script>
+    <script type="text/babel" src="js/load-meal-build.js"></script>
     <script src="js/fb_login.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,36 +41,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-      urlVars = getUrlVars();
-      // on page load, check if you have a cookie for the request
-      // if you do, check with the server if you are attending or not attending this meal
-           $(document).ready(function(){
-                id = urlVars["Id"];
-                if(Cookies.get("session") === undefined) {
-                  console.log("No session");
-                  $('#signin-dropdown').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in</a>');
-                } else if(!meal_data.Has_email) {
-                  $('#modal-body').load('include/add_email.html');
-                } else if(Cookies.getJSON("cards") === undefined || 
-                          Cookies.getJSON("cards").length === 0 || 
-                          Cookies.getJSON("cards")[0] === null) {
-                  getCards();
-                  if(Cookies.getJSON("cards") === undefined ||
-                      Cookies.getJSON("cards").length === 0 || 
-                      Cookies.getJSON("cards")[0] === null) {
-                    console.log("No card");
-                    $('#modal-body').load('include/stripe_form.html');
-                  }
-                } else if(Cookies.getJSON("requests") === undefined || Cookies.getJSON("requests")[id] === undefined) {
-                  $('#modal-body').load('include/request_invoice.html');
-                }
-                if(Cookies.get("session") != undefined) {
-                  console.log("there was a session");
-                  // todo: show name and signout in navbar
-                }
-           });
-    </script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -85,34 +55,6 @@
 <div id="nav-bar">
 </div>
 <div class="container-fluid" id="meal">
-</div>
-<!-- Modal -->
-<div id="request-modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" id="request-meal-btn">&times;</button>
-        <h4 class="modal-title text-center">Request Meal</h4>
-      </div>
-      <div class="modal-body row" id="modal-body">
-        <div class="row">
-          <h3 class="text-center">First, Login With Facebook</h3>
-          <div class="row text-center">
-              <fb:login-button class="fb-login" scope="public_profile,email" onlogin="checkLoginState();">
-                </fb:login-button>
-          </div>
-<!--           <img class="fb-login img-responsive" src="img/fb-login.svg" onclick="FB.login()">
- -->      <div class="col-sm-8 col-sm-offset-2">
-            <div class="checkbox">
-                <label><input type="checkbox" id="subscribe-check" checked>I want to receive weekly emails of upcoming meals on campus.</label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 <script>
   function fixDiv() {

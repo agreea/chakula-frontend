@@ -1,3 +1,4 @@
+var Checkout = require('./checkout.js');
 var api_resp = getMeal();
 var meal_data;
 if (api_resp.Success) {
@@ -265,6 +266,21 @@ var Meal = React.createClass({
           <BookMeal data={this.props.data}></BookMeal>
           <MealInfo data={this.props.data}></MealInfo>
         </div>
+      <div id="request-modal" className="modal fade" role="dialog">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="close" data-dismiss="modal" id="request-meal-btn">&times;</button>
+              <h4 className="modal-title text-center">Request Meal</h4>
+            </div>
+            <div className="modal-body row" id="modal-body">
+              <div className="row">
+                <Checkout cards={this.props.data.cards}/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>);
   }
 });
@@ -283,14 +299,4 @@ function getMeal(){
                     });
   console.log(api_resp);
   return api_resp;
-}
-
-function getCards() {
-  api_resp = api_call("kitchenuser", {
-                      method: "getLast4s",
-                      session: Cookies.get("session")
-                    });
-  if (api_resp.Success) {
-    Cookies.set('cards', api_resp.Return)
-  }
 }
