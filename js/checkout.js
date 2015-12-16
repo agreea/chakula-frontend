@@ -171,7 +171,7 @@ module.exports = React.createClass({
         console.log(this.state);
         return(
             <div className="text-left row">
-                <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} open_spots={this.props.Open_spots}/>
+                <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} open_spots={this.props.open_spots}/>
                 <PaymentField cards={this.props.cards} handleSelectedCardChange={this.handleSelectedCardChange}></PaymentField>
                 <div className="row error-field">
                     <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">

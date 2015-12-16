@@ -275,7 +275,7 @@ var Meal = React.createClass({
             </div>
             <div className="modal-body row" id="modal-body">
               <div className="row">
-                <Checkout cards={this.props.data.Cards}/>
+                <Checkout cards={this.props.data.Cards} open_spots={this.props.data.Open_spots}/>
               </div>
             </div>
           </div>

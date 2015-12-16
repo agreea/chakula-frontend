@@ -235,7 +235,7 @@ module.exports = React.createClass({displayName: "exports",
         console.log(this.state);
         return(
             React.createElement("div", {className: "text-left row"}, 
-                React.createElement(SeatsSelect, {handleSeatChange: this.handleSeatChange, seats: this.state.seats, open_spots: this.props.Open_spots}), 
+                React.createElement(SeatsSelect, {handleSeatChange: this.handleSeatChange, seats: this.state.seats, open_spots: this.props.open_spots}), 
                 React.createElement(PaymentField, {cards: this.props.cards, handleSelectedCardChange: this.handleSelectedCardChange}), 
                 React.createElement("div", {className: "row error-field"}, 
                     React.createElement("div", {className: "col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2"}, 
@@ -551,7 +551,7 @@ var Meal = React.createClass({displayName: "Meal",
             ), 
             React.createElement("div", {className: "modal-body row", id: "modal-body"}, 
               React.createElement("div", {className: "row"}, 
-                React.createElement(Checkout, {cards: this.props.data.Cards})
+                React.createElement(Checkout, {cards: this.props.data.Cards, open_spots: this.props.data.Open_spots})
               )
             )
           )
