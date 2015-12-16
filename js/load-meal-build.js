@@ -210,7 +210,9 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement("div", {className: "text-left row"}, 
                 React.createElement(PaymentField, {cards: this.props.cards, handleSelectedCardChange: this.handleSelectedCardChange}), 
                 React.createElement("div", {className: "row error-field"}, 
-                    React.createElement("p", null, this.state.error)
+                    React.createElement("div", {className: "col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2"}, 
+                        React.createElement("p", null, this.state.error)
+                    )
                 ), 
                 React.createElement("div", {className: "row"}, 
                     React.createElement("div", {className: "col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2"}, 
