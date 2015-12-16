@@ -141,7 +141,7 @@ module.exports = React.createClass({
         return({error: ''});
     },
     render: function() {
-        console.log(this.props.cards.length);
+        console.log(this.props);
         return(
             <div className="text-left row">
                 <PaymentField cards={this.props.cards} handleSelectedCardChange={this.handleSelectedCardChange}></PaymentField>
