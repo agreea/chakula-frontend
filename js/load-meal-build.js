@@ -239,6 +239,7 @@ module.exports = React.createClass({displayName: "exports",
         var api_resp = api_call('kitchenuser', {method: 'getLast4s', session: Cookies.get('session')});
         console.log(api_resp);
         if (api_resp.Success) {
+            this.props.cards = api_resp.Return;
             this.setState({selectCard: api_resp.Return[0]});
         }
         this.props.handleLoginSuccess() 
