@@ -156,11 +156,12 @@ var BookMeal = React.createClass({
         disabled={req_btn_disabled}>{req_btn_text}</button>;
     var time_left_text;
     var booking_info = 
-      [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>,
-        <p><span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Event is closed</p>];
-    if (meal_closes > moment()) {
-      booking_info.push(<p>{"Meal closes " + moment().to(meal_closes)}</p>);
-    }
+      [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>];
+    var booking_subinfo = 
+      (meal_closes > moment())? 
+        <p>{"Meal closes " + moment().to(meal_closes)}</p> :
+        <p><span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Event is closed</p>
+    booking_info.push(booking_subinfo);
     return(
       <div className="col-xs-12 col-sm-3">
         <div className="book-meal">
