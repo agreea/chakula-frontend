@@ -536,14 +536,14 @@ React.render(
 );
 console.log("React render just got passed");
 function getMeal(){
-  urlVars = getUrlVars();
-  api_resp = api_call("meal", {
+  var urlVars = getUrlVars();
+  var resp = api_call("meal", {
                       method: "getMeal",
                       session: Cookies.get("session"),
                       mealId: urlVars["Id"],
                     });
   console.log(api_resp);
-  return api_resp;
+  return resp;
 }
 
 },{"./checkout.js":2}],4:[function(require,module,exports){
