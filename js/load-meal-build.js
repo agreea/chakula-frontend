@@ -205,6 +205,7 @@ module.exports = React.createClass({displayName: "exports",
         return({error: ''});
     },
     render: function() {
+        console.log(this.props.cards.length);
         return(
             React.createElement("div", {className: "text-left row"}, 
                 React.createElement(PaymentField, {cards: this.props.cards, handleSelectedCardChange: this.handleSelectedCardChange}), 
