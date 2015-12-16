@@ -261,7 +261,7 @@ var Meal = React.createClass({
         session: Cookies.get("session"),
         mealId: urlVars["Id"]});
     if (resp.Success) {
-      this.setState(data: api_resp.Return);
+      this.setState({data: resp.Return});
     }
   },
   getInitialState: function() {

@@ -235,14 +235,13 @@ module.exports = React.createClass({displayName: "exports",
             this.setState({error: api_resp.Error});
         }
     },
-    handleLoginSuccess: function(){
-        // TODO: find a more elegant way to trigger a rerender;
-        console.log("Handling login success");
-        this.setState({signin: true});
-    },
+    handleLoginSuccess: function(){ this.props.handleLoginSuccess() },
     getInitialState: function() {
-        var selectedCard = (this.props.cards)? this.props.cards[0] : '';
-        return({error: '', selectedCard: selectedCard, seats: 1});
+        return({
+            error: '', 
+            selectedCard: ((this.props.cards)? this.props.cards[0] : ''), 
+            seats: 1
+        });
     },
     render: function() {
         console.log(this.state);
@@ -251,12 +250,12 @@ module.exports = React.createClass({displayName: "exports",
                 React.createElement("div", {className: "text-center"}, 
                     React.createElement("h2", {className: "text-center"}, "Meal successfully booked!")
                 )
-                );
+            );
         }
         if (!Cookies.get('session')) {
             return (
                 React.createElement(LoginSignUpModal, {handleLoginSuccess: this.handleLoginSuccess})
-                );
+            );
         }
         return(
             React.createElement("div", {className: "text-left row"}, 
@@ -555,17 +554,31 @@ var MealInfo = React.createClass({displayName: "MealInfo",
 });
 
 var Meal = React.createClass({displayName: "Meal",
+  handleLoginSuccess: function() {
+    var resp = 
+      api_call("meal", {
+        method: "getMeal",
+        session: Cookies.get("session"),
+        mealId: urlVars["Id"]});
+    if (resp.Success) {
+      this.setState({data: resp.Return});
+    }
+  },
+  getInitialState: function() {
+    return({data: this.props.data});
+  },
   render: function() {
+    var data = this.state.data;
     return(
       React.createElement("div", {className: "row"}, 
         React.createElement("div", {className: "row text-center"}, 
           React.createElement("div", {className: "col-xs-12 col-sm-9 col-sm-offset-2"}, 
-            React.createElement(Carousel, {data: this.props.data.Pics})
+            React.createElement(Carousel, {data: data.Pics})
           )
         ), 
         React.createElement("div", {className: "row"}, 
-          React.createElement(BookMeal, {data: this.props.data}), 
-          React.createElement(MealInfo, {data: this.props.data})
+          React.createElement(BookMeal, {data: data}), 
+          React.createElement(MealInfo, {data: data})
         ), 
       React.createElement("div", {id: "request-modal", className: "modal fade", role: "dialog"}, 
         React.createElement("div", {className: "modal-dialog"}, 
@@ -576,7 +589,7 @@ var Meal = React.createClass({displayName: "Meal",
             ), 
             React.createElement("div", {className: "modal-body row", id: "modal-body"}, 
               React.createElement("div", {className: "row"}, 
-                React.createElement(Checkout, {cards: this.props.data.Cards, open_spots: this.props.data.Open_spots})
+                React.createElement(Checkout, {cards: data.Cards, open_spots: data.Open_spots, handleLoginSuccess: this.handleLoginSuccess})
               )
             )
           )
@@ -692,10 +705,6 @@ module.exports = React.createClass({displayName: "exports",
           this.setState({errors:[api_resp.Error]});
           // something something show error
         }
-        // send email and pass to server
-        // server sends back session if valid
-        // if api resp is successful, load modal with the gosh dang checkout interface?
-        // if not, show an error
     },
     getInitialState: function() {
         return({
@@ -757,6 +766,7 @@ module.exports = React.createClass({displayName: "exports",
         }
         return(
             React.createElement("div", {className: "row"}, 
+              React.createElement("div", {className: "col-xs-9 col-sm-6"}, 
                 React.createElement("div", {className: "row"}, 
                     React.createElement("a", {href: "#", onClick: this.handleFbLogin}, 
                         React.createElement("img", {src: "./img/fb-login.svg"})
@@ -775,6 +785,7 @@ module.exports = React.createClass({displayName: "exports",
                     ), 
                     forgot_pass_text
                 )
+              )
             )
         );
     }
