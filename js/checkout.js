@@ -117,7 +117,7 @@ var PaymentField = React.createClass({
     }
 });
 
-var CheckoutForm = React.createClass({
+module.exports = React.createClass({
     // used by child PaymentField to update parent about which card to use for booking.
     handleSelectedCardChange: function(selectedCard) {
         this.setState({selectedCard: selectedCard});
@@ -161,34 +161,19 @@ var CheckoutForm = React.createClass({
 // get checkout for meal id: {following, credit_cards, hasEmail, hasPhone}
 /*
 */
-var handleLoginSuccess = function() {
-    // TODO: define a checkout function
-    /*
-        var api_resp = api_call('meal', {method:'checkout', mealId: mealId, session: Cookies.get('session')});
-        if (api_resp.Success) {
-            React.render(<CheckoutForm 
-                cards={[api_resp.Return.Cards] 
-                following={api_resp.Return.Following}}/>, 
-            document.getElementById('checkout'));
-        } else {
-            // show error field that you couldn't load checkout.
-        }
-    */
-    React.render(<CheckoutForm cards={[1234,2345,3456,4567]}/>, document.getElementById('checkout'));
-}
-function render(){
-    var session = Cookies.get('session');
-    console.log("In render()");
-    if(!session) {
-        // show facebook login
-        React.render(<LoginSignUpModal handleLoginSuccess={handleLoginSuccess}/>, document.getElementById('login'));
-        return;
-    }
-    // var api_resp = api_call('meal', {method: 'checkout', session: session});
-    // if (!api_resp.Success){
-    //     // show error... ??? What causes this?
-    //     return;
-    // }
-    React.render(<CheckoutForm cards={[1234,2345,3456,4567]}/>, document.getElementById('checkout'));
-}
-render();
+// var handleLoginSuccess = function() {
+//     // TODO: define a checkout function
+    
+//         var api_resp = api_call('meal', {method:'checkout', mealId: mealId, session: Cookies.get('session')});
+//         if (api_resp.Success) {
+//             React.render(<CheckoutForm 
+//                 cards={[api_resp.Return.Cards] 
+//                 following={api_resp.Return.Following}}/>, 
+//             document.getElementById('checkout'));
+//         } else {
+//             // show error field that you couldn't load checkout.
+//         }
+    
+//     React.render(<CheckoutForm cards={[1234,2345,3456,4567]}/>, document.getElementById('checkout'));
+// }
+// render();
