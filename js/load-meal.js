@@ -154,7 +154,7 @@ var BookMeal = React.createClass({
     }
     var order_btn = 
       <button className="brand-btn btn" id="request-meal-btn" 
-        disabled={req_btn_disabled}>{req_btn_text}</button>;
+        disabled={req_btn_disabled} data-toggle="modal" data-target="#request-modal">{req_btn_text}</button>;
     var time_left_text;
     var booking_info = 
       [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>];
@@ -275,7 +275,7 @@ var Meal = React.createClass({
             </div>
             <div className="modal-body row" id="modal-body">
               <div className="row">
-                <Checkout cards={this.props.data.cards}/>
+                <Checkout cards={this.props.data.Cards}/>
               </div>
             </div>
           </div>

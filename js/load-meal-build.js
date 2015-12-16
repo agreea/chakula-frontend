@@ -400,7 +400,7 @@ var BookMeal = React.createClass({displayName: "BookMeal",
     }
     var order_btn = 
       React.createElement("button", {className: "brand-btn btn", id: "request-meal-btn", 
-        disabled: req_btn_disabled}, req_btn_text);
+        disabled: req_btn_disabled, "data-toggle": "modal", "data-target": "#request-modal"}, req_btn_text);
     var time_left_text;
     var booking_info = 
       [React.createElement("p", null, React.createElement("i", {className: "fa fa-clock-o"}), " " + starts.format("h:mm a ddd, MMM Do"))];
@@ -521,7 +521,7 @@ var Meal = React.createClass({displayName: "Meal",
             ), 
             React.createElement("div", {className: "modal-body row", id: "modal-body"}, 
               React.createElement("div", {className: "row"}, 
-                React.createElement(Checkout, {cards: this.props.data.cards})
+                React.createElement(Checkout, {cards: this.props.data.Cards})
               )
             )
           )
