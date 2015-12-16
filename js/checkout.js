@@ -171,7 +171,14 @@ module.exports = React.createClass({
             this.setState({error: api_resp.Error});
         }
     },
-    handleLoginSuccess: function(){ this.props.handleLoginSuccess() },
+    handleLoginSuccess: function(){ 
+        var api_resp = api_call('kitchenuser', {method: 'getLast4s', session: Cookies.get('session')});
+        console.log(api_resp);
+        if (api_resp.Success) {
+            this.setState({selectCard: api_resp.Return[0]});
+        }
+        this.props.handleLoginSuccess() 
+    },
     componentWillUpdate: function() {
         console.log("Now? " + this.props.cards[0]);
         if (!this.state.selectedCard && 
