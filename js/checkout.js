@@ -118,7 +118,7 @@ var PaymentField = React.createClass({
 });
 var SeatsSelect = React.createClass({
     handleSelectChange: function(e){
-        this.props.seatSelectChanged(e.target.value);
+        this.props.handleSeatChange(e.target.value);
         this.setState({seats: e.target.value});
     },
     getInitialState: function(){
@@ -158,6 +158,7 @@ module.exports = React.createClass({
         }
         api_resp = api_call('mealrequest', {
             method: 'sendRequest', 
+            mealId: getUrlVars()['Id'],
             session: Cookies.get('session'), 
             last4: selectedCard,
             seats: this.state.seats
