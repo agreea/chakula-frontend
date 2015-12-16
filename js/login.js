@@ -87,10 +87,6 @@ module.exports = React.createClass({
           this.setState({errors:[api_resp.Error]});
           // something something show error
         }
-        // send email and pass to server
-        // server sends back session if valid
-        // if api resp is successful, load modal with the gosh dang checkout interface?
-        // if not, show an error
     },
     getInitialState: function() {
         return({
@@ -152,6 +148,7 @@ module.exports = React.createClass({
         }
         return(
             <div className="row">
+              <div className="col-xs-9 col-sm-6">
                 <div className="row">
                     <a href="#" onClick={this.handleFbLogin}>
                         <img src="./img/fb-login.svg"></img>
@@ -170,6 +167,7 @@ module.exports = React.createClass({
                     </div>
                     {forgot_pass_text}
                 </div>
+              </div>
             </div>
         );
     }

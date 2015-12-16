@@ -254,17 +254,31 @@ var MealInfo = React.createClass({
 });
 
 var Meal = React.createClass({
+  handleLoginSuccess: function() {
+    var resp = 
+      api_call("meal", {
+        method: "getMeal",
+        session: Cookies.get("session"),
+        mealId: urlVars["Id"]});
+    if (resp.Success) {
+      this.setState(data: api_resp.Return);
+    }
+  },
+  getInitialState: function() {
+    return({data: this.props.data});
+  },
   render: function() {
+    var data = this.state.data;
     return(
       <div className="row">
         <div className="row text-center">
           <div className="col-xs-12 col-sm-9 col-sm-offset-2">
-            <Carousel data={this.props.data.Pics}></Carousel>
+            <Carousel data={data.Pics}></Carousel>
           </div>
         </div>
         <div className="row">
-          <BookMeal data={this.props.data}></BookMeal>
-          <MealInfo data={this.props.data}></MealInfo>
+          <BookMeal data={data}></BookMeal>
+          <MealInfo data={data}></MealInfo>
         </div>
       <div id="request-modal" className="modal fade" role="dialog">
         <div className="modal-dialog">
@@ -275,7 +289,7 @@ var Meal = React.createClass({
             </div>
             <div className="modal-body row" id="modal-body">
               <div className="row">
-                <Checkout cards={this.props.data.Cards} open_spots={this.props.data.Open_spots}/>
+                <Checkout cards={data.Cards} open_spots={data.Open_spots} handleLoginSuccess={this.handleLoginSuccess}/>
               </div>
             </div>
           </div>

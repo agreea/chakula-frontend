@@ -171,14 +171,13 @@ module.exports = React.createClass({
             this.setState({error: api_resp.Error});
         }
     },
-    handleLoginSuccess: function(){
-        // TODO: find a more elegant way to trigger a rerender;
-        console.log("Handling login success");
-        this.setState({signin: true});
-    },
+    handleLoginSuccess: function(){ this.props.handleLoginSuccess() },
     getInitialState: function() {
-        var selectedCard = (this.props.cards)? this.props.cards[0] : '';
-        return({error: '', selectedCard: selectedCard, seats: 1});
+        return({
+            error: '', 
+            selectedCard: ((this.props.cards)? this.props.cards[0] : ''), 
+            seats: 1
+        });
     },
     render: function() {
         console.log(this.state);
@@ -187,12 +186,12 @@ module.exports = React.createClass({
                 <div className="text-center">
                     <h2 className="text-center">Meal successfully booked!</h2>
                 </div>
-                );
+            );
         }
         if (!Cookies.get('session')) {
             return (
                 <LoginSignUpModal handleLoginSuccess={this.handleLoginSuccess}/>
-                );
+            );
         }
         return(
             <div className="text-left row">
