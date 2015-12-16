@@ -768,9 +768,7 @@ module.exports = React.createClass({displayName: "exports",
             React.createElement("div", {className: "row"}, 
               React.createElement("div", {className: "col-xs-9 col-sm-6"}, 
                 React.createElement("div", {className: "row"}, 
-                    React.createElement("a", {href: "#", onClick: this.handleFbLogin}, 
-                        React.createElement("img", {src: "./img/fb-login.svg"})
-                    )
+                  React.createElement("img", {onClick: this.handleFbLogin, src: "./img/fb-login.svg", id: "fb"})
                 ), 
                 error_messages, 
                 React.createElement("div", {className: "row"}, 
