@@ -92,7 +92,7 @@ var TextField = React.createClass({displayName: "TextField",
         }
         return (
             React.createElement("div", {className: "row"}, 
-                React.createElement("div", {className: "col-xs-3 col-sm-2 col-lg-1 label-text text-right"}, 
+                React.createElement("div", {className: "col-xs-3 col-sm-2 label-text text-right"}, 
                     React.createElement("p", null, this.props.label)
                 ), 
                 React.createElement("div", {className: "col-xs-8 col-sm-4"}, input)
@@ -213,7 +213,7 @@ module.exports = React.createClass({displayName: "exports",
                     React.createElement("p", null, this.state.error)
                 ), 
                 React.createElement("div", {className: "row"}, 
-                    React.createElement("div", {className: "col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2 col-md-5 col-lg-4 col-lg-offset-1"}, 
+                    React.createElement("div", {className: "col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2 col-md-5 col-lg-4"}, 
                         React.createElement("button", {className: "brand-btn ", 
                             disabled: this.props.cards.length === 0, 
                             onClick: this.handleBookPressed}, "Book")

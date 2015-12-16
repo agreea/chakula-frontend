@@ -28,7 +28,7 @@ var TextField = React.createClass({
         }
         return (
             <div className="row">
-                <div className="col-xs-3 col-sm-2 col-lg-1 label-text text-right">
+                <div className="col-xs-3 col-sm-2 label-text text-right">
                     <p>{this.props.label}</p>
                 </div>
                 <div className="col-xs-8 col-sm-4">{input}</div>
@@ -149,7 +149,7 @@ module.exports = React.createClass({
                     <p>{this.state.error}</p>
                 </div>
                 <div className="row">
-                    <div className="col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2 col-md-5 col-lg-4 col-lg-offset-1">
+                    <div className="col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2 col-md-5 col-lg-4">
                         <button className="brand-btn " 
                             disabled={this.props.cards.length === 0} 
                             onClick={this.handleBookPressed}>Book</button>
