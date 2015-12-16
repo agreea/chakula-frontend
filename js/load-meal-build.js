@@ -137,7 +137,7 @@ var PaymentField = React.createClass({displayName: "PaymentField",
                             id: "add-card", 
                             checked: true}, " Add Card")
                     ), 
-                    React.createElement(AddCardForm, {handleAddCardSuccess: this.handleAddCardSucess})
+                    React.createElement(AddCardForm, {handleAddCardSuccess: this.handleAddCardSuccess})
                 );
         } else {
             add_card = 
