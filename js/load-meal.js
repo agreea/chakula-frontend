@@ -259,7 +259,7 @@ var Meal = React.createClass({
       api_call("meal", {
         method: "getMeal",
         session: Cookies.get("session"),
-        mealId: urlVars["Id"]});
+        mealId: getUrlVars()["Id"]});
     if (resp.Success) {
       this.setState({data: resp.Return});
     }
