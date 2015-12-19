@@ -23867,7 +23867,7 @@ var PicList = React.createClass({displayName: "PicList",
       canvas.height = height;
       canvas.getContext('2d').drawImage(img, 0, 0, width, height);
       pics.push({Name: canvas.toDataURL("image/jpeg"), Caption: ""});
-      this.updatePics(pics);
+      updatePics(pics);
     };
     img.src = e.target.result;
   },
