@@ -24050,6 +24050,10 @@ module.exports = React.createClass({displayName: "exports",
   },
   render: function() {
     var s = this.state;
+    var errors = [];
+    if (s.errors) {
+      errors = s.errors.map(function(error){ return(React.createElement("li", null, error)) })
+    }
     return(
       React.createElement("div", null, 
         React.createElement(TitleDescription, {
@@ -24067,7 +24071,7 @@ module.exports = React.createClass({displayName: "exports",
         React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
           React.createElement("div", null, 
             React.createElement("ul", {className: "error-field", id: "error-field"}, 
-              s.errors.map(function(error){ return(React.createElement("li", null, error)) })
+              errors
             ), 
             React.createElement("button", {
               className: "brand-btn btn-info btn-lg btn", 
