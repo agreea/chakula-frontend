@@ -24711,6 +24711,7 @@ module.exports = React.createClass({displayName: "exports",
 
 },{"react":209}],216:[function(require,module,exports){
 var React = require('react');
+var Link = require('react-router').Link;
 var MealListItem = React.createClass({displayName: "MealListItem",
   getInitialState: function() {
       return {delete_error: ""};
@@ -24870,7 +24871,7 @@ module.exports = React.createClass({displayName: "exports",
   }
 });
 
-},{"react":209}],217:[function(require,module,exports){
+},{"react":209,"react-router":47}],217:[function(require,module,exports){
 var React = require('react');
 
 module.exports = React.createClass({displayName: "exports",
