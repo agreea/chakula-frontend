@@ -23878,7 +23878,7 @@ var PicList = React.createClass({displayName: "PicList",
     return ({pics: this.props.pics});
   },
   render: function() {
-    var picNodes = this.props.data.map(function (pic, index) {
+    var picNodes = this.state.pics.map(function (pic, index) {
       return React.createElement(Pic, {pic: pic, k: index, delete: this.delete});
     });
     var picRows = [], // two dimensional array. Each row contains 3 pic items
