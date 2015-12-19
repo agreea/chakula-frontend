@@ -26,6 +26,6 @@ ReactDOM.render(
 	        <Route name="Why Chakula" path="why_chakula" component={WhyChakula}/>
 	        <Route name="Meal" path="meal/:id" component={Meal}/>
             <Route name="My Meals" path="my_meals" component={MyMeals}/>
-            <Route name="Create a Meal" path="create_meal" component={CreateMeal}/>
+            <Route name="Create a Meal" path="create_meal/:id" component={CreateMeal}/>
 	    </Route>
 	</Router>, document.getElementById('app'));

@@ -27,7 +27,7 @@ ReactDOM.render(
 	        React.createElement(Route, {name: "Why Chakula", path: "why_chakula", component: WhyChakula}), 
 	        React.createElement(Route, {name: "Meal", path: "meal/:id", component: Meal}), 
             React.createElement(Route, {name: "My Meals", path: "my_meals", component: MyMeals}), 
-            React.createElement(Route, {name: "Create a Meal", path: "create_meal", component: CreateMeal})
+            React.createElement(Route, {name: "Create a Meal", path: "create_meal/:id", component: CreateMeal})
 	    )
 	), document.getElementById('app'));
 
