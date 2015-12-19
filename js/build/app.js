@@ -23842,13 +23842,14 @@ var PicList = React.createClass({displayName: "PicList",
         continue;
       }
       var reader = new FileReader();
-      reader.onload = this.resize;
+      reader.onload = this.onload;
       reader.readAsDataURL(file);
     }
   },
-  resize: function(e){
+  onload: function(e){
     var img = document.createElement("img");
     var pics = this.state.pics;
+    var updatePics = this.updatePics;
     img.onload = function(event) {
       var canvas = document.createElement("canvas");
       var MAX_WIDTH = 1000;
@@ -23866,10 +23867,13 @@ var PicList = React.createClass({displayName: "PicList",
       canvas.height = height;
       canvas.getContext('2d').drawImage(img, 0, 0, width, height);
       pics.push({Name: canvas.toDataURL("image/jpeg"), Caption: ""});
-      this.setState({pics: pics});
-      this.props.handlePicsChange(this.state.pics);
+      this.updatePics(pics);
     };
     img.src = e.target.result;
+  },
+  updatePics: function(pics) {
+    this.setState({pics: pics});
+    this.props.handlePicsChange(this.state.pics);
   },
   delete: function(index) {
     var pics = this.state.pics;
