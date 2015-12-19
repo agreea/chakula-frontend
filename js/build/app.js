@@ -23976,7 +23976,7 @@ module.exports = React.createClass({displayName: "exports",
   initDatepicker: function(picker_id, default_string) {
     var defaultDate = (default_string == "")? moment() : moment(default_string);
     $(picker_id).datetimepicker({sideBySide: true, defaultDate: defaultDate})
-      .on('dp.change', this.setState({saveEnabled: true}));
+      .on('dp.change', this.setState({saveDisabled: false}));
   },
   attemptSave: function() {
     var error_html = [],
@@ -24067,7 +24067,7 @@ module.exports = React.createClass({displayName: "exports",
           current_seats: s.current_seats, 
           potential_seats: [2,3,4,5,6,7,8,9,10,11,12], 
           published: s.published}), 
-        React.createElement(DatesRow, {starts: s.starts, rsvp_by: s.rsvp_by, published: s.published}), 
+        React.createElement(DatesRow, {starts: s.starts, rsvp_by: s.rsvpBy, published: s.published}), 
         React.createElement(PicList, {data: s.pics}), 
         React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
           React.createElement("div", null, 
