@@ -23581,7 +23581,7 @@ var Link = require('react-router').Link;
             ), 
             React.createElement("ul", {className: "dropdown-menu", "aria-labelledby": "dropdownMenu1"}, 
               React.createElement("li", null, React.createElement("a", {href: "#"})), 
-              React.createElement("li", null, React.createElement(Link, {href: "/edit_profile"}, "My Profile")), 
+              React.createElement("li", null, React.createElement(Link, {to: "/edit_profile"}, "My Profile")), 
               React.createElement("li", null, React.createElement("a", {onClick: this.signout}, "Signout"))
             )
           ));
@@ -24734,7 +24734,7 @@ var MealListItem = React.createClass({displayName: "MealListItem",
     var pic_src = (this.props.pic)? 
       "https://yaychakula.com/img/" + this.props.pic :
       "https://yaychakula.com/img/camera.svg";  
-    var edit_link = "https://yaychakula.com/create_meal.html?Id=" + this.props.id;
+    var edit_link = "/create_meal/" + this.props.id;
     var title_s = this.props.title;
     var title;
     var starts_s = moment(this.props.starts).format("h:mm a dddd, MMMM Do YYYY");
@@ -24756,13 +24756,13 @@ var MealListItem = React.createClass({displayName: "MealListItem",
               React.createElement("span", {className: " glyphicon glyphicon-trash delete-icon", "aria-hidden": "true"})
             ), 
           React.createElement("div", {className: "col-sm-3 text-center"}, 
-            React.createElement("a", {href: edit_link}, 
+            React.createElement(Link, {to: edit_link}, 
               React.createElement("img", {className: "img-responsive meal-thumb", src: pic_src})
             )
           ), 
           React.createElement("div", {className: "col-sm-8"}, 
             React.createElement("h4", {className: "meal-list-title"}, 
-              React.createElement("a", {href: edit_link}, 
+              React.createElement(Link, {to: edit_link}, 
                 title
               )
             ), 

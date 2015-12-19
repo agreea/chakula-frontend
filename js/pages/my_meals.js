@@ -22,7 +22,7 @@ var MealListItem = React.createClass({
     var pic_src = (this.props.pic)? 
       "https://yaychakula.com/img/" + this.props.pic :
       "https://yaychakula.com/img/camera.svg";  
-    var edit_link = "https://yaychakula.com/create_meal.html?Id=" + this.props.id;
+    var edit_link = "/create_meal/" + this.props.id;
     var title_s = this.props.title;
     var title;
     var starts_s = moment(this.props.starts).format("h:mm a dddd, MMMM Do YYYY");
@@ -44,15 +44,15 @@ var MealListItem = React.createClass({
               <span className=" glyphicon glyphicon-trash delete-icon" aria-hidden="true"></span>
             </button>
           <div className="col-sm-3 text-center">
-            <a href={edit_link}>
+            <Link to={edit_link}>
               <img className="img-responsive meal-thumb" src={pic_src}/>
-            </a>
+            </Link>
           </div>
           <div className="col-sm-8">
             <h4 className="meal-list-title">
-              <a href={edit_link}>
+              <Link to={edit_link}>
                 {title}
-              </a>
+              </Link>
             </h4>
             <p><i className="fa fa-clock-o"></i>{" " + starts_s}</p>
             <div className="row">
