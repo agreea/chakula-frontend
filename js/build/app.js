@@ -23805,21 +23805,6 @@ var DatesRow = React.createClass({displayName: "DatesRow",
   }
 });
 
-var Caption = React.createClass({displayName: "Caption",
-  handleChange: function(event) {
-    this.setState({value: event.target.value});
-    var index = this.props.k;
-    pics[index].caption = event.target.value;
-    enableSave();
-  },
-  render: function() {
-    return (
-      React.createElement("input", {className: "caption-field", id: "caption-field", type: "text", placeholder: "Caption?", onChange: this.handleChange, 
-        k: this.props.k, defaultValue: this.props.caption})
-    );
-  }
-});
-
 var Pic = React.createClass({displayName: "Pic",
   deletePic: function() {
     this.props.delete(this.props.k);
@@ -23838,8 +23823,7 @@ var Pic = React.createClass({displayName: "Pic",
           React.createElement("a", {className: "btn-delete-photo", onClick: this.deletePic}, 
             React.createElement("span", {className: " glyphicon glyphicon-trash delete-icon", "aria-hidden": "true"})
           ), 
-          React.createElement("img", {className: "img-responsive pic", src: pic_src}), 
-          React.createElement(Caption, {k: this.props.k, caption: pic.Caption})
+          React.createElement("img", {className: "img-responsive pic", src: pic_src})
         )
       )
     );
@@ -23847,9 +23831,8 @@ var Pic = React.createClass({displayName: "Pic",
 });
 
 var PicList = React.createClass({displayName: "PicList",
-  photoUpload: function(input){
-    var files = input.files;
-    enableSave();
+  photoUpload: function(e){
+    var files = e.target.files;
     for (var i in files) {
       var file = files[i]
       if (!file.type.match('image.*')) {
