@@ -24077,12 +24077,12 @@ module.exports = React.createClass({displayName: "exports",
               className: "brand-btn btn-info btn-lg btn", 
               id: "save", 
               type: "button", 
-              disabled: s.saveDisabled, onClick: attemptSave}, s.saveText), 
+              disabled: s.saveDisabled, onClick: this.attemptSave}, s.saveText), 
             React.createElement("button", {
               className: "brand-btn btn-info btn-lg btn", 
               id: "publish", 
               type: "button", 
-              disabled: s.publishDisabled, onClick: attemptPublish}, "Publish")
+              disabled: s.publishDisabled, onClick: this.attemptPublish}, "Publish")
           )
         )
       )
