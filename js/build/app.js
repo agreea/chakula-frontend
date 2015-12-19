@@ -23766,7 +23766,7 @@ var PriceSeatsRow = React.createClass({displayName: "PriceSeatsRow",
 });
 var DatesRow = React.createClass({displayName: "DatesRow",
   getInitialState: function() {
-    return {starts: this.props.starts, rsvp_by: this.props.rsvp_by};
+    return {starts: this.props.starts, rsvpBy: this.props.rsvp_by};
   },
   handleChange: function(e) {
     var key = e.target.id,
