@@ -23782,7 +23782,7 @@ var DatesRow = React.createClass({displayName: "DatesRow",
             React.createElement("p", {className: "text-right"}, "Meal Time")
           ), 
           React.createElement("div", {className: "col-xs-6 col-sm-3"}, 
-            React.createElement("input", {className: "text-field", id: "starts-time", type: "text", size: "20", id: "starts", 
+            React.createElement("input", {className: "text-field", type: "text", size: "20", id: "starts", 
               placeholder: "When do you break bread?", 
               value: this.state.starts, 
               onChange: this.handleChange, 
@@ -23794,7 +23794,7 @@ var DatesRow = React.createClass({displayName: "DatesRow",
             React.createElement("p", {className: "text-right"}, "RSVP By")
           ), 
           React.createElement("div", {className: "col-xs-6 col-sm-3"}, 
-            React.createElement("input", {className: "text-field", id: "rsvp-by-time", type: "text", size: "40", id: "rsvpBy", 
+            React.createElement("input", {className: "text-field", type: "text", size: "40", id: "rsvpBy", 
               placeholder: "Rsvp by?", 
               value: this.state.rsvpBy, 
               onChange: this.handleChange})
@@ -24055,7 +24055,7 @@ module.exports = React.createClass({displayName: "exports",
       errors = s.errors.map(function(error){ return(React.createElement("li", null, error)) })
     }
     return(
-      React.createElement("div", null, 
+      React.createElement("div", {id: "create-meal"}, 
         React.createElement(TitleDescription, {
           title: s.title, 
           description: s.description, 
