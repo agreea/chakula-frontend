@@ -23832,6 +23832,7 @@ var Pic = React.createClass({displayName: "Pic",
 
 var PicList = React.createClass({displayName: "PicList",
   photoUpload: function(e){
+    console.log(e);
     var files = e.target.files;
     for (var i in files) {
       var file = files[i]
@@ -23845,6 +23846,7 @@ var PicList = React.createClass({displayName: "PicList",
   },
   resize: function(e){
     var img = document.createElement("img");
+    var pics = this.state.pics;
     img.onload = function(event) {
       var canvas = document.createElement("canvas");
       var MAX_WIDTH = 1000;
@@ -23861,7 +23863,6 @@ var PicList = React.createClass({displayName: "PicList",
       canvas.width = width;
       canvas.height = height;
       canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-      var pics = this.state.pics;
       pics.push({Name: canvas.toDataURL("image/jpeg"), Caption: ""});
       this.setState({pics: pics});
       this.props.handlePicsChange(this.state.pics);
