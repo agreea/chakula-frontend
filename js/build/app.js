@@ -23874,6 +23874,9 @@ var PicList = React.createClass({displayName: "PicList",
     this.setState({pics: pics});
     this.props.handlePicsChange(this.state.pics);
   },
+  getInitialState: function() {
+    this.setState({pics: this.props.pics});
+  },
   render: function() {
     var picNodes = this.props.data.map(function (pic, index) {
       return React.createElement(Pic, {pic: pic, k: index, delete: this.delete});
@@ -24051,7 +24054,7 @@ module.exports = React.createClass({displayName: "exports",
           potential_seats: [2,3,4,5,6,7,8,9,10,11,12], 
           published: s.published}), 
         React.createElement(DatesRow, {starts: s.start, rsvp_by: s.rsvpB, published: s.published}), 
-        React.createElement(PicList, {data: s.pics}), 
+        React.createElement(PicList, {pics: s.pics}), 
         React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
           React.createElement("div", null, 
             React.createElement("ul", {className: "error-field", id: "error-field"}, 
