@@ -23875,7 +23875,7 @@ var PicList = React.createClass({displayName: "PicList",
     this.setState({pics: pics});
     this.props.handlePicsChange(this.state.pics);
   },
-  delete: function(index) {
+  deletePic: function(index) {
     var pics = this.state.pics;
     pics.splice(this.props.k, 1);
     this.setState({pics: pics});
@@ -23885,8 +23885,9 @@ var PicList = React.createClass({displayName: "PicList",
     return ({pics: this.props.pics});
   },
   render: function() {
+    var deletePic = this.deletePic;
     var picNodes = this.state.pics.map(function (pic, index) {
-      return React.createElement(Pic, {pic: pic, k: index, deletePic: this.delete});
+      return React.createElement(Pic, {pic: pic, k: index, deletePic: deletePic});
     });
     var picRows = [], // two dimensional array. Each row contains 3 pic items
         thisRow = []; // second dimension of the array. Once a row stores 3 pics, you add it to the pic rows
