@@ -23875,7 +23875,7 @@ var PicList = React.createClass({displayName: "PicList",
     this.props.handlePicsChange(this.state.pics);
   },
   getInitialState: function() {
-    this.setState({pics: this.props.pics});
+    return ({pics: this.props.pics});
   },
   render: function() {
     var picNodes = this.props.data.map(function (pic, index) {
