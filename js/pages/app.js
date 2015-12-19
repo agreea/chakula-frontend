@@ -50,6 +50,11 @@ var Link = require('react-router').Link;
         }
     }
     var NavBar = React.createClass({
+      componentWillMount: function() {
+        var api_resp = api_call('kitchenuser', {method: 'Get', session: session});
+        if (api_resp.Success)
+          this.setState({guest: api_resp.Return});
+      },
       login: function() {
         FB.login(fb_handler);
       },
@@ -58,6 +63,7 @@ var Link = require('react-router').Link;
         location.reload();
       },
       render: function() {
+        var guest = this.state.guest;
         console.log(guest);
         var right_nav;
         if (guest) {
