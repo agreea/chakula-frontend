@@ -23772,7 +23772,7 @@ var DatesRow = React.createClass({displayName: "DatesRow",
     var key = e.target.id,
         val = e.target.value;
     this.setState({key: val});
-    this.props.handleChange(e);
+    this.props.handleChange({key: val});
   },
   render: function() {
     return (
@@ -23929,10 +23929,8 @@ var PicList = React.createClass({displayName: "PicList",
 });
 
 module.exports = React.createClass({displayName: "exports",
-  handleInputChange: function(e) {
-    var key = e.target.id;
-    var val = e.target.value;
-    this.setState({key: val});
+  handleInputChange: function(key_val) {
+    this.setState(key_val);
   },
   handlePicsChange: function(pics) {
     this.setState({pics: pics});
