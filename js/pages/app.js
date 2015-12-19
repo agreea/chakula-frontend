@@ -48,7 +48,7 @@ var Link = require('react-router').Link;
             //user hit cancel button
             console.log('User cancelled login or did not fully authorize.');
         }
-    }
+    };
     var NavBar = React.createClass({
       componentWillMount: function() {
         var api_resp = api_call('kitchenuser', {method: 'Get', session: session});
