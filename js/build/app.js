@@ -23745,7 +23745,7 @@ var PriceSeatsRow = React.createClass({displayName: "PriceSeatsRow",
             React.createElement("p", {className: "text-right"}, "Guest Seats")
           ), 
           React.createElement("select", {value: s.seats, className: "col-xs-2 col-sm-1", id: "seats", onChange: this.handleChange}, 
-                this.props.possible_seats.map(function(seat_count, i) {
+                this.props.possibleSeats.map(function(seat_count, i) {
                     return (
                       React.createElement("option", {value: seat_count}, seat_count)
                     );
