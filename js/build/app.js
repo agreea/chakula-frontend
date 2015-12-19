@@ -23654,6 +23654,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 },{"react":209,"react-router":47}],212:[function(require,module,exports){
+var React = require('react');
 var TitleDescription = React.createClass({displayName: "TitleDescription",
   getInitialState: function() {
     return {title: this.props.title, description: this.props.description};
@@ -24095,7 +24096,7 @@ function isInteger(n) {
     return n === +n && n === (n|0);
 }
 
-},{}],213:[function(require,module,exports){
+},{"react":209}],213:[function(require,module,exports){
 var React = require('react');
 var FormTextRow = React.createClass({displayName: "FormTextRow",
   getInitialState: function() {
