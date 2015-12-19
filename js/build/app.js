@@ -23838,7 +23838,7 @@ var PicList = React.createClass({displayName: "PicList",
       console.log("i:" + i);
       console.log(files[i]);
       var file = files[i]
-      if (!file.type.match('image.*')) {
+      if (!/image.*/.test(file.type)) {
         continue;
       }
       var reader = new FileReader();
