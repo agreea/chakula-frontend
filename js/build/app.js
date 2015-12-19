@@ -23552,7 +23552,7 @@ var Link = require('react-router').Link;
     };
     var NavBar = React.createClass({displayName: "NavBar",
       componentWillMount: function() {
-        var api_resp = api_call('kitchenuser', {method: 'Get', session: session});
+        var api_resp = api_call('kitchenuser', {method: 'Get', session: Cookies.get("session")});
         if (api_resp.Success)
           this.setState({guest: api_resp.Return});
       },
