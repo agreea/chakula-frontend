@@ -23835,6 +23835,8 @@ var PicList = React.createClass({displayName: "PicList",
     console.log(e);
     var files = e.target.files;
     for (var i in files) {
+      console.log("i:" + i);
+      console.log(files[i]);
       var file = files[i]
       if (!file.type.match('image.*')) {
         continue;
@@ -23842,7 +23844,7 @@ var PicList = React.createClass({displayName: "PicList",
       var reader = new FileReader();
       reader.onload = this.resize;
       reader.readAsDataURL(file);
-    }    
+    }
   },
   resize: function(e){
     var img = document.createElement("img");
