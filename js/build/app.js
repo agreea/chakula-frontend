@@ -23761,7 +23761,7 @@ var PriceSeatsRow = React.createClass({displayName: "PriceSeatsRow",
             React.createElement("p", {className: "text-right"}, "Max pay")
           ), 
           React.createElement("div", {className: "col-xs-8 col-sm-5"}, 
-            React.createElement("p", {id: "payout-val"}, "$" + s.seats * this.getPriceWithCommission(s.price))
+            React.createElement("p", {id: "payout-val"}, "$" + s.seats * s.price)
           )
         )
       )
@@ -24059,7 +24059,7 @@ module.exports = React.createClass({displayName: "exports",
           description: s.description, 
           handleChange: this.handleInputChange}), 
         React.createElement(PriceSeatsRow, {
-          possibleSeats: s.possibleSeats, 
+          seats: s.seats, 
           handleChange: this.handleInputChange, 
           price: s.price, 
           current_seats: s.current_seats, 
