@@ -6,7 +6,7 @@ var TitleDescription = React.createClass({
   handleChange: function(e) {
     var obj = {},
         key = e.target.id,
-        val = e.target.val;
+        val = e.target.value;
     obj[key] = val;
     this.setState(obj);
     this.props.handleChange(obj);
