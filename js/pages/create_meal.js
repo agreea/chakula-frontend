@@ -300,7 +300,7 @@ module.exports = React.createClass({
       title: d.Title,
       description: d.Description,
       price: d.Price,
-      current_seats: d.Capacity,
+      seats: d.Capacity,
       pics: d.Pics,
       rsvpBy: d.Rsvp_by,
       starts: d.Starts,
