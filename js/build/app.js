@@ -23702,6 +23702,7 @@ var PriceSeatsRow = React.createClass({displayName: "PriceSeatsRow",
   handleChange: function(e) {
     var key = e.target.id,
         val = e.target.val;
+    console.log({key: val});
     this.setState({key: val});
     this.props.handleChange({key: val});
   },
@@ -23726,7 +23727,7 @@ var PriceSeatsRow = React.createClass({displayName: "PriceSeatsRow",
             React.createElement("div", {className: "input-group text-field"}, 
               React.createElement("span", {className: "input-group-addon"}, "$"), 
               React.createElement("input", {className: "text-field", id: "price", type: "text", 
-                defaultValue: s.price, 
+                value: s.price, 
                 onChange: this.handleChange, 
                 disabled: this.props.published})
             )
