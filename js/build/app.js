@@ -24734,7 +24734,7 @@ var MealListItem = React.createClass({displayName: "MealListItem",
     var api_resp = api_call('meal', {
       method: 'deleteMeal', 
       session: Cookies.get('session'), 
-      mealId: meal_id
+      mealId: this.props.id
     });
     if (!api_resp.Success){
       this.setState({delete_error: resp.Error});

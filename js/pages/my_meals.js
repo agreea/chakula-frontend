@@ -8,7 +8,7 @@ var MealListItem = React.createClass({
     var api_resp = api_call('meal', {
       method: 'deleteMeal', 
       session: Cookies.get('session'), 
-      mealId: meal_id
+      mealId: this.props.id
     });
     if (!api_resp.Success){
       this.setState({delete_error: resp.Error});
@@ -63,7 +63,7 @@ var MealListItem = React.createClass({
           </div>
         </div>
         <hr className="list-hr"/>
-      <div className="modal fade" id={"myModal" + this.props.k} tabindex="-1" role="dialog">
+      <div className="modal fade" id={"myModal" + this.props.k} tabIndex="-1" role="dialog">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
