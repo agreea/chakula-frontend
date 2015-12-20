@@ -24052,7 +24052,7 @@ module.exports = React.createClass({displayName: "exports",
     if (s.errors) {
       errors = s.errors.map(function(error){ return(React.createElement("li", null, error)) })
     }
-    console.log("SaveDisabled? " + saveDisabled);
+    console.log("SaveDisabled? " + s.saveDisabled);
     return(
       React.createElement("div", {id: "create-meal"}, 
         React.createElement(TitleDescription, {
