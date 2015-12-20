@@ -321,7 +321,7 @@ module.exports = React.createClass({
       .on('dp.change', this.setState({saveDisabled: false}));
   },
   attemptSave: function() {
-    var error_html = [],
+    var errors = [],
         s = this.state,
         starts = $('#starts').data("DateTimePicker").date(),
         rsvpBy = $('#rsvpBy').data("DateTimePicker").date();
