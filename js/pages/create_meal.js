@@ -406,8 +406,7 @@ module.exports = React.createClass({
           seats={s.seats}
           handleChange={this.handleInputChange}
           price={s.price} 
-          current_seats={s.current_seats}
-          potential_seats={[2,3,4,5,6,7,8,9,10,11,12]}
+          possibleSeats={s.possibleSeats}
           published={s.published} />
         <DatesRow starts={s.start} rsvp_by={s.rsvpB} published={s.published} />
         <PicList pics={s.pics} handlePicsChange={this.handlePicsChange}/>
