@@ -24873,7 +24873,7 @@ module.exports = React.createClass({displayName: "exports",
     //         </a>
     // }
     return (
-      React.createElement("div", {className: "row non-white", id: "create_meal"}, 
+      React.createElement("div", {className: "row non-white", id: "create-meal"}, 
         React.createElement("div", {className: "col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 meal-list"}, 
           React.createElement("h2", null, "My Meals"), 
           React.createElement("div", {className: "text-center"}, 
