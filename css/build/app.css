@@ -887,7 +887,7 @@ Photo Upload Interface
   z-index: 100;
 }
 #create-meal #save:disabled {
-  background-color: #19a347;
+  background: #19a347;
 }
 #create-meal .add-meal-icon {
   max-height: 90px;
