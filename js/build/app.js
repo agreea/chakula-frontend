@@ -23660,10 +23660,12 @@ var TitleDescription = React.createClass({displayName: "TitleDescription",
     return {title: this.props.title, description: this.props.description};
   },
   handleChange: function(e) {
-    var key = e.target.id,
+    var obj = {},
+        key = e.target.id,
         val = e.target.val;
-    this.setState({key: val});
-    this.props.handleChange({key: val});
+    obj[key] = val;
+    this.setState(obj);
+    this.props.handleChange(obj);
   },
   render: function() {
     return(
