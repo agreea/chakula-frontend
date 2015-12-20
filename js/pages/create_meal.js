@@ -105,7 +105,7 @@ var PriceSeatsRow = React.createClass({
             <p className="text-right">Max pay</p>
           </div>
           <div className="col-xs-8 col-sm-5">
-            <p id="payout-val">{"$" + s.seats * this.getPriceWithCommission(s.price)}</p>
+            <p id="payout-val">{"$" + s.seats * s.price}</p>
           </div>
         </div>
       </div>
@@ -403,7 +403,7 @@ module.exports = React.createClass({
           description={s.description} 
           handleChange={this.handleInputChange} />
         <PriceSeatsRow 
-          possibleSeats={s.possibleSeats}
+          seats={s.seats}
           handleChange={this.handleInputChange}
           price={s.price} 
           current_seats={s.current_seats}
