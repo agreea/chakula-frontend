@@ -323,8 +323,8 @@ module.exports = React.createClass({
   attemptSave: function() {
     var error_html = [],
         s = this.state,
-        starts = $('#starts-time').data("DateTimePicker").date(),
-        rsvpBy = $('#rsvp-by-time').data("DateTimePicker").date();
+        starts = $('#starts').data("DateTimePicker").date(),
+        rsvpBy = $('#rsvpBy').data("DateTimePicker").date();
     if (!isFloat(s.price) && !isInteger(s.price)) errors.push("Price must be a valid dollar value.");
     if (rsvpBy > starts) errors.push("Rsvp by time cannot be after meal starts.");
     if (rsvpBy < moment()) errors.push("Rsvp by time cannot be in the past.");
@@ -367,8 +367,8 @@ module.exports = React.createClass({
     return api_resp;
   },
   attemptPublish: function() {
-    var starts = $('#starts-time').data("DateTimePicker").date(),
-        rsvpBy = $('#rsvp-by-time').data("DateTimePicker").date();
+    var starts = $('#starts').data("DateTimePicker").date(),
+        rsvpBy = $('#rsvpBy').data("DateTimePicker").date();
     var errors = [];
     if (!isFloat(price) && !isInteger(price)) errors.push("Price must be a valid dollar value.");
     if (rsvpBy.unix() > starts.unix()) errors.push("Rsvp-by time cannot be after when the meal starts.");
