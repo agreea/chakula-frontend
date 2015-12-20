@@ -23701,7 +23701,7 @@ var PriceSeatsRow = React.createClass({displayName: "PriceSeatsRow",
   },
   handleChange: function(e) {
     var key = e.target.id,
-        val = e.target.val;
+        val = e.target.value;
     var obj = {};
     obj[key] = val;
     console.log(obj);
