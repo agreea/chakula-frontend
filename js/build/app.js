@@ -24052,6 +24052,7 @@ module.exports = React.createClass({displayName: "exports",
     if (s.errors) {
       errors = s.errors.map(function(error){ return(React.createElement("li", null, error)) })
     }
+    console.log("SaveDisabled? " + saveDisabled);
     return(
       React.createElement("div", {id: "create-meal"}, 
         React.createElement(TitleDescription, {
@@ -24075,7 +24076,7 @@ module.exports = React.createClass({displayName: "exports",
               className: "brand-btn btn-info btn-lg btn", 
               id: "save", 
               type: "button", 
-              disabled: s.saveDisabled, onClick: this.attemptSave}, s.saveText), 
+              disabled: s.saveDisabled, onClick: this.attemptSave}, (s.saveDisabled)? "Saved" : "Save"), 
             React.createElement("button", {
               className: "brand-btn btn-info btn-lg btn", 
               id: "publish", 

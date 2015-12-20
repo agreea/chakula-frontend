@@ -396,6 +396,7 @@ module.exports = React.createClass({
     if (s.errors) {
       errors = s.errors.map(function(error){ return(<li>{error}</li>) })
     }
+    console.log("SaveDisabled? " + saveDisabled);
     return(
       <div id="create-meal">
         <TitleDescription 
