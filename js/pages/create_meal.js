@@ -284,6 +284,7 @@ module.exports = React.createClass({
   handleInputChange: function(key_val) {
     key_val["saveDisabled"] = false;
     this.setState(key_val);
+    console.log(key_val);
   },
   handlePicsChange: function(pics) {
     this.setState({
@@ -382,14 +383,14 @@ module.exports = React.createClass({
     if (rsvpBy.unix() > starts.unix()) errors.push("Rsvp-by time cannot be after when the meal starts.");
     if (starts < moment()) errors.push("Start time cannot be in the past.");
     if (rsvpBy < moment()) errors.push("Rsvp-by time cannot be in the past.");
-    if (title === "") errors.push("Title cannot be empty.")
-    if (description === "") errors.push("Description cannot be empty.");
+    if (this.state.title === "") errors.push("Title cannot be empty.")
+    if (this.state.description === "") errors.push("Description cannot be empty.");
     if (errors.length > 0) {
       this.setState({errors: errors});
       return;
     }
     // make sure everything is well-formed and then try to save
-    var save_result = attemptSave();
+    var save_result = this.attemptSave();
     if (!save_result.Success)
       return;
     var api_resp = api_call('meal', {
