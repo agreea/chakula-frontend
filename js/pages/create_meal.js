@@ -280,10 +280,14 @@ var PicList = React.createClass({
 
 module.exports = React.createClass({
   handleInputChange: function(key_val) {
+    key_val["saveDisabled"] = false;
     this.setState(key_val);
   },
   handlePicsChange: function(pics) {
-    this.setState({pics: pics});
+    this.setState({
+      pics: pics,
+      saveDisabled: false
+    });
   },
   componentWillMount: function() {
     if (!this.props.params.id) 
