@@ -23702,9 +23702,11 @@ var PriceSeatsRow = React.createClass({displayName: "PriceSeatsRow",
   handleChange: function(e) {
     var key = e.target.id,
         val = e.target.val;
-    console.log({key: val});
-    this.setState({key: val});
-    this.props.handleChange({key: val});
+    var obj = {};
+    obj[key] = val;
+    console.log(obj);
+    this.setState(obj);
+    this.props.handleChange(obj);
   },
   getPriceWithCommission: function(price) {
     if(price <= 15) {
@@ -23772,8 +23774,10 @@ var DatesRow = React.createClass({displayName: "DatesRow",
   handleChange: function(e) {
     var key = e.target.id,
         val = e.target.value;
-    this.setState({key: val});
-    this.props.handleChange({key: val});
+    var obj = {};
+    obj[key] = val;
+    this.setState(obj);
+    this.props.handleChange(obj);
   },
   render: function() {
     return (
