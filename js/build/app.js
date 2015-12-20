@@ -23984,9 +23984,11 @@ module.exports = React.createClass({displayName: "exports",
     if (!isFloat(s.price) && !isInteger(s.price)) errors.push("Price must be a valid dollar value.");
     if (rsvpBy > starts) errors.push("Rsvp by time cannot be after meal starts.");
     if (rsvpBy < moment()) errors.push("Rsvp by time cannot be in the past.");
+    if (starts < moment()) errors.push("Start time cannot be in the past.");
     this.setState({errors: errors})
     if(errors.length > 0)
       return;
+    var mealId = (this.props.params.id)? this.props.params.id : "";
     var api_resp = api_call('meal', {
           method: 'saveMealDraft',
           title: s.title,
@@ -23997,7 +23999,7 @@ module.exports = React.createClass({displayName: "exports",
           seats: s.seats,
           pics: JSON.stringify(s.pics),
           session: Cookies.get('session'),
-          mealId: urlVars['Id']
+          mealId: mealId
     });
     this.setState({saveDisabled: true});
     if (!api_resp.Success) {
@@ -24028,6 +24030,8 @@ module.exports = React.createClass({displayName: "exports",
     var errors = [];
     if (!isFloat(price) && !isInteger(price)) errors.push("Price must be a valid dollar value.");
     if (rsvpBy.unix() > starts.unix()) errors.push("Rsvp-by time cannot be after when the meal starts.");
+    if (starts < moment()) errors.push("Start time cannot be in the past.");
+    if (rsvpBy < moment()) errors.push("Rsvp-by time cannot be in the past.");
     if (title === "") errors.push("Title cannot be empty.")
     if (description === "") errors.push("Description cannot be empty.");
     if (errors.length > 0) {
@@ -24041,7 +24045,7 @@ module.exports = React.createClass({displayName: "exports",
     var api_resp = api_call('meal', {
         method: 'publishMeal',
         session: Cookies.get('session'),
-        mealId: urlVars['Id']
+        mealId: this.props.params.id
       });
     if (api_resp.Success)
         window.location.replace("https://yaychakula.com/#/meal/" + api_resp.Return);
