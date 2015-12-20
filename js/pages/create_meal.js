@@ -419,7 +419,7 @@ module.exports = React.createClass({
               className="brand-btn btn-info btn-lg btn" 
               id="save" 
               type="button"
-              disabled={s.saveDisabled} onClick={this.attemptSave}>{s.saveText}</button>
+              disabled={s.saveDisabled} onClick={this.attemptSave}>{(s.saveDisabled)? "Saved" : "Save"}</button>
             <button 
               className="brand-btn btn-info btn-lg btn" 
               id="publish" 
