@@ -23709,13 +23709,14 @@ var PriceSeatsRow = React.createClass({displayName: "PriceSeatsRow",
     this.props.handleChange(obj);
   },
   getPriceWithCommission: function(price) {
-    if(price <= 15) {
-      return price * 1.28
-    } else if (price < 100) {
+    if(price <= 15)
+      price *= 1.28
+    else if (price < 100) {
       var commission_percent = (-0.152941 * price + 30.2941)/100
-      return price * (1 + commission_percent)
-    }
-    return price * 1.15
+      price *= (1 + commission_percent)
+    } else 
+      price *= 1.15
+    return Math.round(price * 100)/100;
   },
   render: function() {
     var s = this.state;
@@ -23760,7 +23761,7 @@ var PriceSeatsRow = React.createClass({displayName: "PriceSeatsRow",
             React.createElement("p", {className: "text-right"}, "Max pay")
           ), 
           React.createElement("div", {className: "col-xs-8 col-sm-5"}, 
-            React.createElement("p", {id: "payout-val"}, "$" + s.current_seats * this.getPriceWithCommission(s.price))
+            React.createElement("p", {id: "payout-val"}, "$" + s.seats * this.getPriceWithCommission(s.price))
           )
         )
       )
