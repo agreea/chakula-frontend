@@ -15,9 +15,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/grayscale.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <!-- Custom CSS -->
-    <link href="css/core.css" rel="stylesheet">
+    <link href="css/build/app.css" rel="stylesheet">
     <link href="css/card.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -28,10 +29,14 @@
     <script src="js/api_call.js"></script>
     <script src="js/js-cookie.js"></script>
     <script src="js/moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script>
+
+    <!--
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script type="text/babel" src="js/react_index_upcoming_meals.js"></script>
-    <script type="text/babel" src="js/nav_bar.js"></script>
+    <script type="text/babel" src="js/nav_bar.js"></script> 
+    -->
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,101 +49,14 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
       ga('create', 'UA-66943306-1', 'auto');
       ga('send', 'pageview');
     </script>
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-    <!-- Navigation -->
-  <div id="nav-bar">
-  </div>
-    <!-- Intro Header -->
-    <header class="intro">
-        <div class="intro-body">
-            <div class="container">
-                <div class="row">
-                    <div class = "col-md-10 col-md-offset-1">
-                        <h1>Come for the Food</h1>
-                        <h1>Stay for the People</h1>                    
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 text-center">
-                        <p class="intro-text">Get invites to unforgettable popup meals hosted by DC's best chefs, sent right to your inbox.</p>
-                        <form class="text-center" id="signup" role="form">
-                            <div class="input-group">
-                                <input class="email-field btn-lg" name="email" id="email" type="email" placeholder="Your email" required>
-                                <button class="submit-btn btn-info btn-lg" type="button" onClick="validate(); return false;">Signup</button>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" id="host-check">I can cook and wanna get paid to host!</label>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- About Section -->
-    <section id="about" class="how container content-section text-center">
-        <div class="how-section row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h2>How it Works</h2>
-                <ol>
-                </ol>
-                <p>Chakula connects the best cooks in DC with guests who are hungry for a new way to dine. Hosts make money doing what they love and guests get an unforgetable meal.</p>
-                <p>1. <b> Discover upcoming meals </b> prepared by our incredible hosts in our weekly email.</p> 
-                <p>2. <b> See something you like? </b> Request a spot at the table. We'll get your payment info but will only charge you after the meal.</p>
-                <p>3. Once the host welcomes you to their meal, we'll send you their address. <b> Bon appetit!</b> </p>
-            </div>
-        </div>
-    </section>
-    <section class="row">
-        <div class="col-sm-10 col-sm-offset-1" id="upcoming">
-        </div>
-    </section>
-    <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <p>Copyright &copy; Chakula 2015</p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <script>
-        function validateEmail(email) { 
-  // http://stackoverflow.com/a/46181/11236
-            var re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
-            return re.test(email);
-        }
-
-        function validate(){
-          $("#result").text("");
-          var userEmail = $("#email").val().toLowerCase();
-          if (validateEmail(userEmail)) {
-            var form = document.getElementById("signup");
-            var successMsg = document.createElement("p");
-            checkedStatus = document.getElementById("host-check").checked
-            successMsg.innerHTML = "Welcome to Chakula! We'll be in touch soon";
-            form.parentNode.replaceChild(successMsg, form);
-            console.log("Valid email")
-            resp = api_call('kitchen', {
-                method: "Register",
-                email: userEmail,
-                host: checkedStatus
-            });
-            console.log(checkedStatus)
-            console.log(resp)
-          } else {
-            console.log("invalid email")
-          }
-          return false;
-        }
-    </script>
+<body>
+    <div id="app"></div>
+    <script src="js/build/app.js"></script>
 </body>
 
 </html>

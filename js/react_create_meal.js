@@ -1,38 +1,12 @@
-var price = 10;
-var seats = 2;
-var title = '';
-var description = '';
-var starts_s = "";
-var rsvpBy_s = "";
-var published = false;
-
-// Documentation for the datepicker: http://eonasdan.github.io/bootstrap-datetimepicker/
-var urlVars = getUrlVars();
-var pics = [];
-
-Date.parseDate = function(input, format){
-  return moment(input,format).toDate();
-};
-
-Date.prototype.dateFormat = function(format){
-  return moment(this).format(format);
-};
-
 var TitleDescription = React.createClass({
   getInitialState: function() {
     return {title: this.props.title, description: this.props.description};
   },
-  titleChanged: function(event) {
-    this.setState({title: this.props.title});
-    title = event.target.value;
-    enableSave();
-  },
-  descriptionChanged: function(event) {
-    this.setState({description: this.props.description});
-    description = event.target.value;
-    var description_lines = description.split(/[\n\r]/g);
-    console.log(description_lines);
-    enableSave();
+  handleChange: function(e) {
+    var key = e.target.id,
+        val = e.target.val;
+    this.setState({key: val});
+    this.props.handleChange({key: val});
   },
   render: function() {
     return(
@@ -41,8 +15,8 @@ var TitleDescription = React.createClass({
           <div className="col-sm-8 col-sm-offset-2">
             <input className="title-field" id="title" type="text" 
               placeholder="Give your meal a snazzy title." 
-              defaultValue={this.state.title} 
-              onChange={this.titleChanged}/>
+              value={this.state.title} 
+              onChange={this.handleChange}/>
           </div>
         </div>
         <div className="row form-row">
@@ -52,8 +26,8 @@ var TitleDescription = React.createClass({
           <div className="col-xs-8">
             <textarea className="text-field" id="description" type="text" rows="8" 
               placeholder="What's in your meal? What inspired you to make it?" 
-              defaultValue={this.state.description} 
-              onChange={this.descriptionChanged}></textarea>
+              value={this.state.description} 
+              onChange={this.handleChange}></textarea>
           </div>
         </div>
       </div>
@@ -63,20 +37,33 @@ var TitleDescription = React.createClass({
 
 var PriceSeatsRow = React.createClass({
   getInitialState: function() {
-    var total_payout = this.props.price * this.props.current_seats;
-    return {price: this.props.price, current_seats: this.props.current_seats, total_payout: total_payout};
+    return {
+      price: this.props.price, 
+      seats: this.props.seats,
+    };
   },
-  priceChanged: function(event) {
-    price = event.target.value;
-    this.setState({price: price, total_payout: this.state.current_seats * price});
-    enableSave();
+  handleChange: function(e) {
+    var key = e.target.id,
+        val = e.target.val;
+    this.setState({key: val});
+    this.props.handleChange({key: val});
+  }
+  getPriceWithCommission: function(price) {
+    if(price <= 15) {
+      return price * 1.28
+    } else if (price < 100) {
+      var commission_percent = (-0.152941 * price + 30.2941)/100
+      return price * (1 + commission_percent)
+    }
+    return price * 1.15
   },
-  seatsChanged: function(seat_count) {
-    seats = seat_count;
-    this.setState({current_seats: seats, total_payout: this.state.price * seats});
-    enableSave();
+  handleChange: function(e) {
+    var key = e.target.id,
+        val = e.target.value;
+    this.setState({key: val});
   },
   render: function() {
+    var s = this.state;
     return (
       <div>
         <div className="row form-row">
@@ -87,8 +74,8 @@ var PriceSeatsRow = React.createClass({
             <div className="input-group text-field">
               <span className="input-group-addon">$</span>
               <input className="text-field" id="price" type="text" 
-                defaultValue={this.state.price} 
-                onChange={this.priceChanged} 
+                defaultValue={s.price} 
+                onChange={this.handleChange} 
                 disabled={this.props.published}/>
             </div>
           </div>
@@ -98,27 +85,19 @@ var PriceSeatsRow = React.createClass({
             <p className="text-right" id="guests-pay">Guests pay</p>
           </div>
           <div className="col-xs-5 col-sm-4">
-            <p>{"$" + this.state.price * 1.28}</p>
+            <p>{"$" + this.getPriceWithCommission(s.price)}</p>
           </div>
         </div>
         <div className="row form-row">
           <div className="col-xs-4 col-sm-2 form-label">
             <p className="text-right">Guest Seats</p>
           </div>
-          <div className="col-xs-2 col-sm-1">
-            <div className="dropdown">
-              <button className="text-field dropdown-toggle" id="seats" 
-                type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                {this.state.current_seats + "  "}
-                <span className="caret"></span>
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                { this.props.possible_seats.map(function(seat_count, i) {
+          <select value={s.seats} className="col-xs-2 col-sm-1" id="seats">
+                {s.possible_seats.map(function(seat_count, i) {
                     return (
-                      <li><a className='seat' onClick={this.seatsChanged.bind(this, seat_count)} key={i}>{seat_count}</a></li>
+                      <option value={seat_count}>{seat_count}</option>
                     );
-                  }, this)}
-              </ul>
+                  })}
             </div>
           </div>
         </div>
@@ -127,7 +106,7 @@ var PriceSeatsRow = React.createClass({
             <p className="text-right">Max pay</p>
           </div>
           <div className="col-xs-8 col-sm-5">
-            <p id="payout-val">{"$" + this.state.total_payout}</p>
+            <p id="payout-val">{"$" + s.current_seats * this.getPriceWithCommission(s.price)}</p>
           </div>
         </div>
       </div>
@@ -138,17 +117,13 @@ var DatesRow = React.createClass({
   getInitialState: function() {
     return {starts: this.props.starts, rsvp_by: this.props.rsvp_by};
   },
-  startsChanged: function(event) {
-    this.setState({starts: event.target.value});
-    enableSave();
-  },
-  rsvpChanged: function(event) {
-    this.setState({rsvp_by: event.target.value});
-    enableSave();  
+  handleChange: function(e) {
+    var key = e.target.id,
+        val = e.target.value;
+    this.setState({key: val});
+    this.props.handleChange(e);
   },
   render: function() {
-    console.log("rendering dates row again");
-    console.log(this.state.starts);
     return (
       <div>
         <div className="row form-row">
@@ -156,10 +131,10 @@ var DatesRow = React.createClass({
             <p className="text-right">Meal Time</p>
           </div>
           <div className="col-xs-6 col-sm-3">
-            <input className="text-field" id="starts-time" type="text" size="20" id="starts-time"
+            <input className="text-field" id="starts-time" type="text" size="20" id="starts"
               placeholder="When do you break bread?" 
-              defaultValue={this.state.starts} 
-              onChange={this.startsChanged}
+              value={this.state.starts} 
+              onChange={this.handleChange}
               disabled={this.props.published}/>
           </div>
         </div>
@@ -168,10 +143,10 @@ var DatesRow = React.createClass({
             <p className="text-right">RSVP By</p>
           </div>
           <div className="col-xs-6 col-sm-3">
-            <input className="text-field" id="rsvp-by-time" type="text" size="40" id="rsvp-by-time"
+            <input className="text-field" id="rsvp-by-time" type="text" size="40" id="rsvpBy"
               placeholder="Rsvp by?" 
-              defaultValue={this.state.rsvp_by} 
-              onChange={this.rvspChanged}/>
+              value={this.state.rsvpBy} 
+              onChange={this.handleChange}/>
           </div>
         </div>
       </div>
@@ -196,9 +171,7 @@ var Caption = React.createClass({
 
 var Pic = React.createClass({
   deletePic: function() {
-    pics.splice(this.props.k, 1);
-    enableSave();
-    render();
+    this.props.delete(this.props.k);
   },
   render: function() {
     var pic = this.props.pic
@@ -224,21 +197,57 @@ var Pic = React.createClass({
 
 var PicList = React.createClass({
   photoUpload: function(input){
-    readURL(input);
-    console.log("You called on change for photo upload");
+    var files = input.files;
+    enableSave();
+    for (var i in files) {
+      var file = files[i]
+      if (!file.type.match('image.*')) {
+        continue;
+      }
+      var reader = new FileReader();
+      reader.onload = this.resize;
+      reader.readAsDataURL(file);
+    }    
+  },
+  resize: function(e){
+    var img = document.createElement("img");
+    img.onload = function(event) {
+      var canvas = document.createElement("canvas");
+      var MAX_WIDTH = 1000;
+      var MAX_HEIGHT = 750;
+      var width = img.width;
+      var height = img.height;
+      if (width > height && width > MAX_WIDTH) { // if landscape, resize by landscape
+        height *= MAX_WIDTH / width;
+        width = MAX_WIDTH;
+      } else if (height > MAX_HEIGHT) { // if portrait, resize by portrait
+          width *= MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+      }
+      canvas.width = width;
+      canvas.height = height;
+      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+      var pics = this.state.pics;
+      pics.push({Name: canvas.toDataURL("image/jpeg"), Caption: ""});
+      this.setState({pics: pics});
+      this.props.handlePicsChange(this.state.pics);
+    };
+    img.src = e.target.result;
+  },
+  delete: function(index) {
+    var pics = this.state.pics;
+    pics.splice(this.props.k, 1);
+    this.setState({pics: pics});
+    this.props.handlePicsChange(this.state.pics);
   },
   render: function() {
-    var index = 0;
-    var picNodes = this.props.data.map(function (pic) {
-      var picNode = <Pic pic={pic} k={index} />;
-      index++;
-      return (picNode);
+    var picNodes = this.props.data.map(function (pic, index) {
+      return <Pic pic={pic} k={index} delete={this.delete}/>;
     });
-    var picRows = []; // two dimensional array. Each row contains 3 pic items
-    var thisRow = []; // second dimension of the array. Once a row stores 3 pics, you add it to the pic rows
+    var picRows = [], // two dimensional array. Each row contains 3 pic items
+        thisRow = []; // second dimension of the array. Once a row stores 3 pics, you add it to the pic rows
     console.log("Pic node length: " + picNodes.length);
     for (var i in picNodes) {
-      console.log("Index at: " + i);
       // add this row to pic rows if it's full
       if (thisRow.length === 3) {
         var fullRow = thisRow;
@@ -246,13 +255,10 @@ var PicList = React.createClass({
           {fullRow}
         </div>);
         thisRow = []; // empty the array
-        console.log("This row filled up!");
       }
       thisRow.push(picNodes[i]);
-      console.log("This row's length:" + thisRow.length);
       if (i == (picNodes.length - 1)) { // if this is the last pic, add the current row once you've added the pic
         picRows.push(<div className="row">{thisRow}</div>);
-        console.log("Hit the end of the array:" + i);
       }
     }
     return (
@@ -278,14 +284,152 @@ var PicList = React.createClass({
 });
 
 var DraftForm = React.createClass({
+  handleInputChange: function(e) {
+    var key = e.target.id;
+    var val = e.target.value;
+    this.setState({key: val});
+  },
+  handlePicsChange: function(pics) {
+    this.setState({pics: pics});
+  },
+  componentWillMount: function() {
+    if (!this.props.params.id) 
+      return;
+    var api_resp = api_call('meal',{
+        method: 'getMealDraft',
+        mealId: this.props.params.id, 
+        session: Cookies.get('session')
+      });
+    if (!api_resp.Success)
+      return;
+    var d = api_resp.Return;
+    this.setState({
+      title: d.Title,
+      description: d.Description,
+      price: d.Price,
+      current_seats: d.Capacity,
+      pics: d.Pics,
+      rsvpBy: d.Rsvp_by,
+      starts: d.Starts,
+      published: d.Published,
+      saveDisabled: true,
+      publishDisabled: false,
+      saveText: "Saved"
+    });
+  },
+  componentDidMount: function(){
+    this.initDatepicker('#starts', this.state.starts);
+    this.initDatepicker('#rsvpBy', this.state.rsvpBy);
+  },
+  initDatepicker: function(picker_id, default_string) {
+    var defaultDate = (default_string == "")? moment() : moment(default_string);
+    $(picker_id).datetimepicker({sideBySide: true, defaultDate: defaultDate})
+      .on('dp.change', this.setState({saveEnabled: true}));
+  },
+attemptSave: function() {
+  var error_html = [],
+      s = this.state,
+      starts = $('#starts-time').data("DateTimePicker").date(),
+      rsvpBy = $('#rsvp-by-time').data("DateTimePicker").date();
+  if (!isFloat(s.price) && !isInteger(s.price)) errors.push("Price must be a valid dollar value.");
+  if (rsvpBy > starts) errors.push("Rsvp by time cannot be after meal starts.");
+  if (rsvpBy < moment()) errors.push("Rsvp by time cannot be in the past.");
+  this.setState({errors: errors})
+  if(errors.length > 0)
+    return;
+  var api_resp = api_call('meal', {
+        method: 'saveMealDraft',
+        title: s.title,
+        description: s.description,
+        starts: starts.unix(),
+        rsvpBy: rsvpBy.unix(),
+        price: s.price,
+        seats: s.seats,
+        pics: JSON.stringify(s.pics),
+        session: Cookies.get('session'),
+        mealId: urlVars['Id']
+  });
+  this.setState({saveDisabled: true});
+  if (!api_resp.Success) {
+    this.setState({
+      errors: [api_resp.Error],
+      saveDisabled: false
+    });
+    return;
+    // TODO: get this into the less for create_meal
+    // $(this).css('background-color', '#19a347');
+    // $(this).text("Saved");
+    // $(this).prop("disabled", true);
+    // $(this).html('Saved');
+  }
+  this.setState({
+    errors: [], 
+    publishDisabled: false,
+    saveDisabled: true,
+    saveText: "Saved"
+  });
+  if (!this.props.params.id)// reload the page if you haven't done so already
+      window.location.replace("https://yaychakula.com/#/create_meal/" + api_resp.Return);
+  return api_resp;
+}
+
+attemptPublish: function() {
+  var starts = $('#starts-time').data("DateTimePicker").date(),
+      rsvpBy = $('#rsvp-by-time').data("DateTimePicker").date();
+  var errors = [];
+  if (!isFloat(price) && !isInteger(price)) errors.push("Price must be a valid dollar value.");
+  if (rsvpBy.unix() > starts.unix()) errors.push("Rsvp-by time cannot be after when the meal starts.");
+  if (title === "") errors.push("Title cannot be empty.")
+  if (description === "") errors.push("Description cannot be empty.");
+  if (errors.length > 0) {
+    this.setState({errors: errors});
+    return;
+  }
+  // make sure everything is well-formed and then try to save
+  var save_result = attemptSave();
+  if (!save_result.Success)
+    return;
+  var api_resp = api_call('meal', {
+      method: 'publishMeal',
+      session: Cookies.get('session'),
+      mealId: urlVars['Id']
+    });
+  if (api_resp.Success)
+      window.location.replace("https://yaychakula.com/#/meal/" + api_resp.Return);
+},
   render: function() {
-    console.log(this.props);
+    var s = this.state;
     return(
       <div>
-        <TitleDescription title={this.props.title} description={this.props.description} />
-        <PriceSeatsRow possible_seats={this.props.possible_seats} price={this.props.price} current_seats={this.props.current_seats} published={this.props.published} />
-        <DatesRow starts={this.props.starts} rsvp_by={this.props.rsvp_by} published={this.props.published} />
-        <PicList data={this.props.pics} />
+        <TitleDescription 
+          title={s.title} 
+          description={s.description} 
+          handleChange={this.handleChange} />
+        <PriceSeatsRow 
+          possible_seats={s.possible_seats}
+          handleChange={this.handleChange}
+          price={s.price} 
+          current_seats={s.current_seats} 
+          published={s.published} />
+        <DatesRow starts={s.starts} rsvp_by={s.rsvp_by} published={s.published} />
+        <PicList data={s.pics} />
+        <div className="col-md-8 col-md-offset-2">
+          <div>
+            <ul className="error-field" id="error-field">
+              {s.errors.map(function(error){ return(<li>{error}</li>) })}
+            </ul>
+            <button 
+              className="brand-btn btn-info btn-lg btn" 
+              id="save" 
+              type="button"
+              disabled={s.saveDisabled} onClick={attemptSave}>{s.saveText}</button>
+            <button 
+              className="brand-btn btn-info btn-lg btn" 
+              id="publish" 
+              type="button"
+              disabled={s.publishDisabled} onClick={attemptPublish}>Publish</button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -309,158 +453,6 @@ function render() {
   });
 }
 
-function readURL(input) {
-  var files = input.files;
-  enableSave();
-  for (var i in files) {
-    var file = files[i]
-    if (!file.type.match('image.*')) {
-      continue;
-    }
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      resize(e);
-      console.log(pics);
-    }
-    reader.readAsDataURL(file);
-  }
-}
-
-function resize(e){
-  var img = document.createElement("img");
-  img.onload = function(event) {
-    var canvas = document.createElement("canvas");
-    var MAX_WIDTH = 1000;
-    var MAX_HEIGHT = 750;
-    var width = img.width;
-    var height = img.height;
-    if (width > height && width > MAX_WIDTH) { // if landscape, resize by landscape
-      console.log("Logged max width event");
-      height *= MAX_WIDTH / width;
-      width = MAX_WIDTH;
-    } else if (height > MAX_HEIGHT) { // if portrait, resize by portrait
-        console.log("Logged max height event");
-        width *= MAX_HEIGHT / height;
-        height = MAX_HEIGHT;
-    }
-    canvas.width = width;
-    canvas.height = height;
-    console.log("Width: " + width  + ". Height: " + height);
-    canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-    var dataurl = canvas.toDataURL("image/jpeg");
-    pics.push({Name: dataurl, Caption: ""});
-    render();
-  };
-  img.src = e.target.result;
-}
-
-var attemptSave = function() {
-  var starts = $('#starts-time').data("DateTimePicker").date();
-  var rsvpBy = $('#rsvp-by-time').data("DateTimePicker").date();
-  var error_html = "";
-  price = parseFloat(price);
-  console.log("Here is the price: " + price);
-  if (!isFloat(price) && !isInteger(price)) { // TODO: render error field in React
-    console.log(price);
-    error_html += '<li>' + "Price must be a valid dollar value." + '</li>'
-  }
-  if (rsvpBy > starts){
-    error_html += '<li>' + "Rsvp by time cannot be after meal starts." + '</li>';
-  }
-  if (rsvpBy < moment()){
-    error_html += '<li>' + "Rsvp by time cannot be in the past." + '</li>';
-  }
-  if (error_html !== "") {
-    $('#error-field').html(error_html)
-    return;
-  }
-  console.log("Price is valid!");
-  // check price is a number
-  // check 
-  // if starts OR rsvp are in the past, also throw error
-  var data = {
-        method: 'saveMealDraft',
-        title: title,
-        description: description,
-        starts: starts.unix(),
-        rsvpBy: rsvpBy.unix(),
-        price: price,
-        seats: seats,
-        pics: JSON.stringify(pics),
-        session: Cookies.get('session'),
-        mealId: urlVars['Id']
-  };
-  console.log(data);
-  $(this).html('<p>Saving </p><span class="spinner"><div class="bounce1">' + 
-              '</div><div class="bounce2"></div>' +
-              '<div class="bounce3"></div></span>');
-  var api_resp = api_call('meal', data);
-  $(this).prop('disabled', true);
-  if (api_resp.Success) {
-    if (!urlVars['Id']) { // reload the page if you haven't done so already
-      window.location.replace("https://yaychakula.com/create_meal.html?Id=" + api_resp.Return);
-    }
-    $(this).css('background-color', '#19a347');
-    $(this).text("Saved");
-    $(this).prop("disabled", true);
-    $(this).html('Saved');
-    $('#error-field').hide();
-    $('#publish').prop('disabled', false);
-  } else {
-    $('#error-field').html('<li>' + api_resp.Error + '</li>');
-    $(this).prop('disabled', false);
-    $(this).html('Save');
-  }
-  return api_resp;
-}
-
-var attemptPublish = function() {
-  var starts = $('#starts-time').data("DateTimePicker").date();
-  var rsvpBy = $('#rsvp-by-time').data("DateTimePicker").date();
-  var error_html = "";
-  console.log("Here is the price: " + price);
-  price = parseFloat(price);
-  // check price is a number
-  if (!isFloat(price) && !isInteger(price)) { // TODO: render error field in React
-    error_html += '<li>' + "Price must be a valid dollar value." + '</li>'
-  }
-  // check rsvp by < starts
-  if (rsvpBy.unix() > starts.unix()){
-    error_html += '<li>' + "Rsvp-by time cannot be after when the meal starts." + '</li>'
-  }
-  // check title isn't empty
-  if (title === "") {
-    error_html += '<li>' + "Title cannot be empty." + '</li>'
-  }
-  // check description isn't empty
-  if (description === "") {
-    error_html += '<li>' + "Description cannot be empty." + '</li>'
-  }
-  if (error_html !== "") {
-    $('#error-field').html(error_html);
-    $('#error-field').show();
-    return;
-  }
-  // make sure everything is well-formed and then try to save
-  var save_result = attemptSave();
-  if (!save_result.Success) {
-    return;
-  }
-  var data = {
-      method: 'publishMeal',
-      session: Cookies.get('session'),
-      mealId: urlVars['Id']
-    };
-  var api_resp = api_call('meal', data);
-  console.log(data);
-  console.log(api_resp);
-  if (api_resp.Success) {
-    window.location.replace("https://yaychakula.com/meal.html?Id=" + urlVars['Id']);
-  } else {
-    $('#error-field').html('<li>' + api_resp.Error + '</li>');
-  }
-}
-
 // Answer ripped shamelessly
 // http://stackoverflow.com/questions/3885817/how-to-check-that-a-number-is-float-or-integer
 function isFloat(n) {
@@ -470,81 +462,3 @@ function isFloat(n) {
 function isInteger(n) {
     return n === +n && n === (n|0);
 }
-
-function setListeners() {
-  console.log("Url vars: " + urlVars['Id']);
-  $('#save').click(attemptSave);
-  $('#publish').click(attemptPublish);
-}
-
-function getMealDraft() {
-  if (!urlVars['Id']) {
-    return;
-  }
-  var api_resp = api_call('meal', 
-    {method: 'getMealDraft',
-    mealId: urlVars['Id'], 
-    session: Cookies.get('session')});
-  if (api_resp.Success) {
-    // TODO: if published, disable: mealtime + price
-    var meal_draft = api_resp.Return;
-    title = meal_draft.Title;
-    description = meal_draft.Description;
-    price = meal_draft.Price;
-    starts_s = meal_draft.Starts;
-    rsvpBy_s = meal_draft.Rsvp_by;
-    pics = meal_draft.Pics;
-    published = meal_draft.Published;
-    seats = meal_draft.Capacity;
-    console.log(pics);
-    $('#save').css('background-color', '#19a347');
-    $('#save').text("Saved");
-    $('#save').prop("disabled", true);
-    $('#publish').prop('disabled', false);
-  } else { // redirect home if you can't get the meal
-    window.location.replace("https://yaychakula.com/");
-    // TODO: show error message....
-    // maybe redirect home? or to meal drafts
-  }
-  console.log(api_resp);
-}
-
-var dateChanged = function (e) { 
-  enableSave();
-  console.log("Date changed called");
-}
-
-function initDatepicker(picker_id, default_string) {
-  var defaultDate;
-  if (default_string == "") {
-    defaultDate = moment();
-  } else {
-    defaultDate = moment(default_string);
-  }
-  $(picker_id).datetimepicker({sideBySide: true, 
-    defaultDate: defaultDate}).on('dp.change', dateChanged);
-}
-
-function enableSave(){
-  $('#save').prop("disabled", false);
-  $('#save').css("background-color", '#5bc0de');
-  $('#save').text("Save");
-}
-
-$(document).ready(function(){
-  $('#nav').load('include/nav_bar.html');
-  // $('#guests-pay').text('Guests will pay: $' + price * 1.28);
-  // $('#payout-val').text('$' + price * seats);
-  if (!urlVars['Id']) {
-    $('#publish').prop('disabled', true);
-  }
-  var session = Cookies.get('session');
-  if (session === undefined || session === "") {
-    $('#meal-data').hide();
-  } else {
-    $('#fb').hide();
-    getMealDraft();
-  }
-  render();
-  setListeners();
-});

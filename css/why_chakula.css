@@ -74,18 +74,20 @@ header {
 /*
 For the requirements section
 */
-ul {
-	list-style: none;
-}
-li {
-	font-size: 18px;
-	margin: 12px auto;
-}
-h1 {
-	font-size: 48px;
-}
+#why-chakula{
+	ul {
+		list-style: none;
+	}
+	li {
+		font-size: 18px;
+		margin: 12px auto;
+	}
+	h1 {
+		font-size: 48px;
+	}
 
-body {
-	background-color: #f1f1f1;
-	color: #434343;
+	body {
+		background-color: #f1f1f1;
+		color: #434343;
+	}
 }
