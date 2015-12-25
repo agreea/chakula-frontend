@@ -3,9 +3,10 @@ var Link = require('react-router').Link;
   var guest;
   var NavBar = React.createClass({
       componentWillMount: function() {
+        console.log("I don't even care I'm gonna get ")
         if (!Cookies.get("session"))
           return;
-        console.log("I don't even care I'm gonna get ")
+        console.log("Made it past cookies check")
         var api_resp = 
           api_call('kitchenuser', {method: 'Get', session: Cookies.get("session")});
         if (api_resp.Success)
@@ -50,6 +51,12 @@ var Link = require('react-router').Link;
                         {host_tab}
                         {user_tab} 
                       </ul>);
+        } else if(Cookies.get('session')) {
+          var api_resp = api_call('kitchenuser', {method:'Get', session: Cookies.get('session')});
+          if(api_resp.Success) {
+            guest = api_resp.Return;
+
+          }
         } else {
           right_nav = 
             <ul className="nav navbar-right">
