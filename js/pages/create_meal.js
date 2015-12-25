@@ -388,7 +388,7 @@ module.exports = React.createClass({
       saveDisabled: true,
     });
     if (!this.props.params.id)// reload the page if you haven't done so already
-        this.history.pushState("create_meal/" + api_resp.Return);
+        this.history.pushState(null, "create_meal/" + api_resp.Return);
     return api_resp;
   },
   attemptPublish: function() {
