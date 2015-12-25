@@ -155,7 +155,7 @@ var BookMeal = React.createClass({
           disabled={req_btn_disabled} 
           data-toggle="modal" 
           data-target="#request-modal">{req_btn_text}</button> :
-        <Link to={"login?fwd=meal/" + this.props.params.id + "?book_meal=true"}>
+        <Link to={"login?fwd=meal/" + this.props.data.Id + "?book_meal=true"}>
           <button className="brand-btn btn">{req_btn_text}</button>
         </Link>
         ;
