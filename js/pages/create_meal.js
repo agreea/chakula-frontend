@@ -281,6 +281,7 @@ var PicList = React.createClass({
 });
 
 module.exports = React.createClass({
+  mixins: [require('react-router').History],
   getInitialState: function() {
     return({
       title: '',
@@ -387,7 +388,7 @@ module.exports = React.createClass({
       saveDisabled: true,
     });
     if (!this.props.params.id)// reload the page if you haven't done so already
-        window.location.replace("https://yaychakula.com/#/create_meal/" + api_resp.Return);
+        this.history.pushState("create_meal/" + api_resp.Return);
     return api_resp;
   },
   attemptPublish: function() {
