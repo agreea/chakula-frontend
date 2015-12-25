@@ -16,7 +16,8 @@ var App = require('./pages/app.js'),
     EditHost = require('./pages/edit_host_info.js'),
     Meal = require('./pages/meal.js'),
     MyMeals = require('./pages/my_meals.js'),
-    CreateMeal = require('./pages/create_meal.js'); // done
+    CreateMeal = require('./pages/create_meal.js'),
+    Login = require('./pages/login.js'); // done
 ReactDOM.render(
 	<Router className="container-fluid">
 		<Route component={App}>
@@ -27,5 +28,6 @@ ReactDOM.render(
 	        <Route name="Meal" path="meal/:id" component={Meal}/>
             <Route name="My Meals" path="my_meals" component={MyMeals}/>
             <Route name="Create a Meal" path="create_meal/:id" component={CreateMeal}/>
+            <Route name="Login/Sign Up" path="login" component={Login}/>
 	    </Route>
 	</Router>, document.getElementById('app'));
