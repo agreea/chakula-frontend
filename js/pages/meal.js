@@ -292,7 +292,7 @@ module.exports = React.createClass({
             </div>
             <div className="modal-body row" id="modal-body">
               <div className="row">
-                <Checkout cards={data.Cards} open_spots={data.Open_spots} />
+                <Checkout cards={(data.Cards)? data.Cards : []} open_spots={data.Open_spots} />
               </div>
             </div>
           </div>
