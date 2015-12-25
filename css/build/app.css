@@ -531,6 +531,15 @@ form {
   text-align: left;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+select {
+  border-color: #434343;
+  border-width: 2px;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0);
+  border-style: solid;
+  -webkit-appearance: none;
+  font-size: 18px;
+}
 .row {
   margin-left: 0;
   margin-right: 0;
@@ -826,6 +835,11 @@ Payment UI Styling
   /* 
 	Photo Upload Interface
 	*/
+  /*!
+ * Datetimepicker for Bootstrap 3
+ * version : 4.17.37
+ * https://github.com/Eonasdan/bootstrap-datetimepicker/
+ */
 }
 #host_meal .btn-delete-photo,
 #create-meal .btn-delete-photo {
@@ -1058,4 +1072,443 @@ Payment UI Styling
 #create-meal #caption-field {
   background: #fff;
   padding-left: 8px;
+}
+#host_meal .bootstrap-datetimepicker-widget,
+#create-meal .bootstrap-datetimepicker-widget {
+  list-style: none;
+}
+#host_meal .bootstrap-datetimepicker-widget.dropdown-menu,
+#create-meal .bootstrap-datetimepicker-widget.dropdown-menu {
+  margin: 2px 0;
+  padding: 4px;
+  width: 19em;
+}
+@media (min-width: 768px) {
+  #host_meal .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs,
+  #create-meal .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 38em;
+  }
+}
+@media (min-width: 992px) {
+  #host_meal .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs,
+  #create-meal .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 38em;
+  }
+}
+@media (min-width: 1200px) {
+  #host_meal .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs,
+  #create-meal .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 38em;
+  }
+}
+#host_meal .bootstrap-datetimepicker-widget.dropdown-menu:before,
+#create-meal .bootstrap-datetimepicker-widget.dropdown-menu:before,
+#host_meal .bootstrap-datetimepicker-widget.dropdown-menu:after,
+#create-meal .bootstrap-datetimepicker-widget.dropdown-menu:after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+}
+#host_meal .bootstrap-datetimepicker-widget.dropdown-menu.bottom:before,
+#create-meal .bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #cccccc;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  top: -7px;
+  left: 7px;
+}
+#host_meal .bootstrap-datetimepicker-widget.dropdown-menu.bottom:after,
+#create-meal .bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid white;
+  top: -6px;
+  left: 8px;
+}
+#host_meal .bootstrap-datetimepicker-widget.dropdown-menu.top:before,
+#create-meal .bootstrap-datetimepicker-widget.dropdown-menu.top:before {
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #cccccc;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  bottom: -7px;
+  left: 6px;
+}
+#host_meal .bootstrap-datetimepicker-widget.dropdown-menu.top:after,
+#create-meal .bootstrap-datetimepicker-widget.dropdown-menu.top:after {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid white;
+  bottom: -6px;
+  left: 7px;
+}
+#host_meal .bootstrap-datetimepicker-widget.dropdown-menu.pull-right:before,
+#create-meal .bootstrap-datetimepicker-widget.dropdown-menu.pull-right:before {
+  left: auto;
+  right: 6px;
+}
+#host_meal .bootstrap-datetimepicker-widget.dropdown-menu.pull-right:after,
+#create-meal .bootstrap-datetimepicker-widget.dropdown-menu.pull-right:after {
+  left: auto;
+  right: 7px;
+}
+#host_meal .bootstrap-datetimepicker-widget .list-unstyled,
+#create-meal .bootstrap-datetimepicker-widget .list-unstyled {
+  margin: 0;
+}
+#host_meal .bootstrap-datetimepicker-widget a[data-action],
+#create-meal .bootstrap-datetimepicker-widget a[data-action] {
+  padding: 6px 0;
+}
+#host_meal .bootstrap-datetimepicker-widget a[data-action]:active,
+#create-meal .bootstrap-datetimepicker-widget a[data-action]:active {
+  box-shadow: none;
+}
+#host_meal .bootstrap-datetimepicker-widget .timepicker-hour,
+#create-meal .bootstrap-datetimepicker-widget .timepicker-hour,
+#host_meal .bootstrap-datetimepicker-widget .timepicker-minute,
+#create-meal .bootstrap-datetimepicker-widget .timepicker-minute,
+#host_meal .bootstrap-datetimepicker-widget .timepicker-second,
+#create-meal .bootstrap-datetimepicker-widget .timepicker-second {
+  width: 54px;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 0;
+}
+#host_meal .bootstrap-datetimepicker-widget button[data-action],
+#create-meal .bootstrap-datetimepicker-widget button[data-action] {
+  padding: 6px;
+}
+#host_meal .bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after,
+#create-meal .bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Increment Hours";
+}
+#host_meal .bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after,
+#create-meal .bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Increment Minutes";
+}
+#host_meal .bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after,
+#create-meal .bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Decrement Hours";
+}
+#host_meal .bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after,
+#create-meal .bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Decrement Minutes";
+}
+#host_meal .bootstrap-datetimepicker-widget .btn[data-action="showHours"]::after,
+#create-meal .bootstrap-datetimepicker-widget .btn[data-action="showHours"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Show Hours";
+}
+#host_meal .bootstrap-datetimepicker-widget .btn[data-action="showMinutes"]::after,
+#create-meal .bootstrap-datetimepicker-widget .btn[data-action="showMinutes"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Show Minutes";
+}
+#host_meal .bootstrap-datetimepicker-widget .btn[data-action="togglePeriod"]::after,
+#create-meal .bootstrap-datetimepicker-widget .btn[data-action="togglePeriod"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Toggle AM/PM";
+}
+#host_meal .bootstrap-datetimepicker-widget .btn[data-action="clear"]::after,
+#create-meal .bootstrap-datetimepicker-widget .btn[data-action="clear"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Clear the picker";
+}
+#host_meal .bootstrap-datetimepicker-widget .btn[data-action="today"]::after,
+#create-meal .bootstrap-datetimepicker-widget .btn[data-action="today"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Set the date to today";
+}
+#host_meal .bootstrap-datetimepicker-widget .picker-switch,
+#create-meal .bootstrap-datetimepicker-widget .picker-switch {
+  text-align: center;
+}
+#host_meal .bootstrap-datetimepicker-widget .picker-switch::after,
+#create-meal .bootstrap-datetimepicker-widget .picker-switch::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Toggle Date and Time Screens";
+}
+#host_meal .bootstrap-datetimepicker-widget .picker-switch td,
+#create-meal .bootstrap-datetimepicker-widget .picker-switch td {
+  padding: 0;
+  margin: 0;
+  height: auto;
+  width: auto;
+  line-height: inherit;
+}
+#host_meal .bootstrap-datetimepicker-widget .picker-switch td span,
+#create-meal .bootstrap-datetimepicker-widget .picker-switch td span {
+  line-height: 2.5;
+  height: 2.5em;
+  width: 100%;
+}
+#host_meal .bootstrap-datetimepicker-widget table,
+#create-meal .bootstrap-datetimepicker-widget table {
+  width: 100%;
+  margin: 0;
+}
+#host_meal .bootstrap-datetimepicker-widget table td,
+#create-meal .bootstrap-datetimepicker-widget table td,
+#host_meal .bootstrap-datetimepicker-widget table th,
+#create-meal .bootstrap-datetimepicker-widget table th {
+  text-align: center;
+  border-radius: 4px;
+}
+#host_meal .bootstrap-datetimepicker-widget table th,
+#create-meal .bootstrap-datetimepicker-widget table th {
+  height: 20px;
+  line-height: 20px;
+  width: 20px;
+}
+#host_meal .bootstrap-datetimepicker-widget table th.picker-switch,
+#create-meal .bootstrap-datetimepicker-widget table th.picker-switch {
+  width: 145px;
+}
+#host_meal .bootstrap-datetimepicker-widget table th.disabled,
+#create-meal .bootstrap-datetimepicker-widget table th.disabled,
+#host_meal .bootstrap-datetimepicker-widget table th.disabled:hover,
+#create-meal .bootstrap-datetimepicker-widget table th.disabled:hover {
+  background: none;
+  color: #777777;
+  cursor: not-allowed;
+}
+#host_meal .bootstrap-datetimepicker-widget table th.prev::after,
+#create-meal .bootstrap-datetimepicker-widget table th.prev::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Previous Month";
+}
+#host_meal .bootstrap-datetimepicker-widget table th.next::after,
+#create-meal .bootstrap-datetimepicker-widget table th.next::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Next Month";
+}
+#host_meal .bootstrap-datetimepicker-widget table thead tr:first-child th,
+#create-meal .bootstrap-datetimepicker-widget table thead tr:first-child th {
+  cursor: pointer;
+}
+#host_meal .bootstrap-datetimepicker-widget table thead tr:first-child th:hover,
+#create-meal .bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
+  background: #eeeeee;
+}
+#host_meal .bootstrap-datetimepicker-widget table td,
+#create-meal .bootstrap-datetimepicker-widget table td {
+  height: 54px;
+  line-height: 54px;
+  width: 54px;
+}
+#host_meal .bootstrap-datetimepicker-widget table td.cw,
+#create-meal .bootstrap-datetimepicker-widget table td.cw {
+  font-size: .8em;
+  height: 20px;
+  line-height: 20px;
+  color: #777777;
+}
+#host_meal .bootstrap-datetimepicker-widget table td.day,
+#create-meal .bootstrap-datetimepicker-widget table td.day {
+  height: 20px;
+  line-height: 20px;
+  width: 20px;
+}
+#host_meal .bootstrap-datetimepicker-widget table td.day:hover,
+#create-meal .bootstrap-datetimepicker-widget table td.day:hover,
+#host_meal .bootstrap-datetimepicker-widget table td.hour:hover,
+#create-meal .bootstrap-datetimepicker-widget table td.hour:hover,
+#host_meal .bootstrap-datetimepicker-widget table td.minute:hover,
+#create-meal .bootstrap-datetimepicker-widget table td.minute:hover,
+#host_meal .bootstrap-datetimepicker-widget table td.second:hover,
+#create-meal .bootstrap-datetimepicker-widget table td.second:hover {
+  background: #eeeeee;
+  cursor: pointer;
+}
+#host_meal .bootstrap-datetimepicker-widget table td.old,
+#create-meal .bootstrap-datetimepicker-widget table td.old,
+#host_meal .bootstrap-datetimepicker-widget table td.new,
+#create-meal .bootstrap-datetimepicker-widget table td.new {
+  color: #777777;
+}
+#host_meal .bootstrap-datetimepicker-widget table td.today,
+#create-meal .bootstrap-datetimepicker-widget table td.today {
+  position: relative;
+}
+#host_meal .bootstrap-datetimepicker-widget table td.today:before,
+#create-meal .bootstrap-datetimepicker-widget table td.today:before {
+  content: '';
+  display: inline-block;
+  border: solid transparent;
+  border-width: 0 0 7px 7px;
+  border-bottom-color: #337ab7;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+}
+#host_meal .bootstrap-datetimepicker-widget table td.active,
+#create-meal .bootstrap-datetimepicker-widget table td.active,
+#host_meal .bootstrap-datetimepicker-widget table td.active:hover,
+#create-meal .bootstrap-datetimepicker-widget table td.active:hover {
+  background-color: #337ab7;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+#host_meal .bootstrap-datetimepicker-widget table td.active.today:before,
+#create-meal .bootstrap-datetimepicker-widget table td.active.today:before {
+  border-bottom-color: #fff;
+}
+#host_meal .bootstrap-datetimepicker-widget table td.disabled,
+#create-meal .bootstrap-datetimepicker-widget table td.disabled,
+#host_meal .bootstrap-datetimepicker-widget table td.disabled:hover,
+#create-meal .bootstrap-datetimepicker-widget table td.disabled:hover {
+  background: none;
+  color: #777777;
+  cursor: not-allowed;
+}
+#host_meal .bootstrap-datetimepicker-widget table td span,
+#create-meal .bootstrap-datetimepicker-widget table td span {
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  line-height: 54px;
+  margin: 2px 1.5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+#host_meal .bootstrap-datetimepicker-widget table td span:hover,
+#create-meal .bootstrap-datetimepicker-widget table td span:hover {
+  background: #eeeeee;
+}
+#host_meal .bootstrap-datetimepicker-widget table td span.active,
+#create-meal .bootstrap-datetimepicker-widget table td span.active {
+  background-color: #337ab7;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+#host_meal .bootstrap-datetimepicker-widget table td span.old,
+#create-meal .bootstrap-datetimepicker-widget table td span.old {
+  color: #777777;
+}
+#host_meal .bootstrap-datetimepicker-widget table td span.disabled,
+#create-meal .bootstrap-datetimepicker-widget table td span.disabled,
+#host_meal .bootstrap-datetimepicker-widget table td span.disabled:hover,
+#create-meal .bootstrap-datetimepicker-widget table td span.disabled:hover {
+  background: none;
+  color: #777777;
+  cursor: not-allowed;
+}
+#host_meal .bootstrap-datetimepicker-widget.usetwentyfour td.hour,
+#create-meal .bootstrap-datetimepicker-widget.usetwentyfour td.hour {
+  height: 27px;
+  line-height: 27px;
+}
+#host_meal .bootstrap-datetimepicker-widget.wider,
+#create-meal .bootstrap-datetimepicker-widget.wider {
+  width: 21em;
+}
+#host_meal .bootstrap-datetimepicker-widget .datepicker-decades .decade,
+#create-meal .bootstrap-datetimepicker-widget .datepicker-decades .decade {
+  line-height: 1.8em !important;
+}
+#host_meal .input-group.date .input-group-addon,
+#create-meal .input-group.date .input-group-addon {
+  cursor: pointer;
+}
+#host_meal .sr-only,
+#create-meal .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
