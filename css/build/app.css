@@ -808,7 +808,8 @@ Payment UI Styling
 .host-attendees-col {
   padding-top: 24px;
 }
-#host_meal {
+#host_meal,
+#create-meal {
   /*
 	Meals list styling
 	*/
@@ -826,74 +827,94 @@ Payment UI Styling
 	Photo Upload Interface
 	*/
 }
-#host_meal .btn-delete-photo {
+#host_meal .btn-delete-photo,
+#create-meal .btn-delete-photo {
   font-size: 18px;
   padding: 10px;
 }
-#host_meal .dropdown-toggle {
+#host_meal .dropdown-toggle,
+#create-meal .dropdown-toggle {
   border: none;
 }
-#host_meal .input-group-addon {
+#host_meal .input-group-addon,
+#create-meal .input-group-addon {
   background: rgba(0, 0, 0, 0);
   border: none;
   font-size: inherit;
   padding: 0;
 }
 #host_meal .title-field,
-#host_meal .title-field:focus {
+#create-meal .title-field,
+#host_meal .title-field:focus,
+#create-meal .title-field:focus {
   font-size: 36px;
   width: 100%;
 }
-#host_meal .text-field {
+#host_meal .text-field,
+#create-meal .text-field {
   font-size: 18px;
   background: #fff;
 }
-#host_meal .seat {
+#host_meal .seat,
+#create-meal .seat {
   cursor: pointer;
   z-index: 1004;
 }
-#host_meal #starts {
+#host_meal #starts,
+#create-meal #starts {
   z-index: 100;
 }
-#host_meal #rsvp-by-time {
+#host_meal #rsvp-by-time,
+#create-meal #rsvp-by-time {
   z-index: 100;
 }
-#host_meal .add-meal-icon {
+#host_meal .add-meal-icon,
+#create-meal .add-meal-icon {
   max-height: 90px;
   padding: 16px;
 }
-#host_meal .meal-list-item {
+#host_meal .meal-list-item,
+#create-meal .meal-list-item {
   padding-top: 24px;
   background-color: #fff;
 }
-#host_meal .meal-list-title {
+#host_meal .meal-list-title,
+#create-meal .meal-list-title {
   margin-top: 0px;
 }
-#host_meal .non-white {
+#host_meal .non-white,
+#create-meal .non-white {
   background-color: #eee;
 }
-#host_meal .live {
+#host_meal .live,
+#create-meal .live {
   color: #19a347;
 }
-#host_meal .meal-list {
+#host_meal .meal-list,
+#create-meal .meal-list {
   padding: 15px 0 15px 0;
 }
-#host_meal .cost {
+#host_meal .cost,
+#create-meal .cost {
   padding-left: 0;
 }
-#host_meal .meal-thumb {
+#host_meal .meal-thumb,
+#create-meal .meal-thumb {
   background-color: #aaa;
 }
-#host_meal .meal-list-item:hover .btn-delete-meal {
+#host_meal .meal-list-item:hover .btn-delete-meal,
+#create-meal .meal-list-item:hover .btn-delete-meal {
   display: inline;
   border: none;
 }
-#host_meal .spinner {
+#host_meal .spinner,
+#create-meal .spinner {
   margin: 8px auto 0;
   width: 70px;
   text-align: center;
 }
-#host_meal .spinner > div {
+#host_meal .spinner > div,
+#create-meal .spinner > div {
   width: 18px;
   height: 18px;
   background-color: #333;
@@ -902,11 +923,13 @@ Payment UI Styling
   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
-#host_meal .spinner .bounce1 {
+#host_meal .spinner .bounce1,
+#create-meal .spinner .bounce1 {
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
-#host_meal .spinner .bounce2 {
+#host_meal .spinner .bounce2,
+#create-meal .spinner .bounce2 {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
@@ -932,17 +955,21 @@ Payment UI Styling
     transform: scale(1);
   }
 }
-#host_meal hr {
+#host_meal hr,
+#create-meal hr {
   height: 2px;
   background-color: #bbb;
 }
-#host_meal .list-hr {
+#host_meal .list-hr,
+#create-meal .list-hr {
   height: 1px;
   background-color: #ddd;
   margin: 20px 0 0 0;
 }
 #host_meal .btn-delete-photo,
-#host_meal .btn-delete-meal {
+#create-meal .btn-delete-photo,
+#host_meal .btn-delete-meal,
+#create-meal .btn-delete-meal {
   float: right;
   position: absolute;
   right: 30px;
@@ -957,51 +984,64 @@ Payment UI Styling
   cursor: pointer;
   display: none;
 }
-#host_meal .btn-delete-photo {
+#host_meal .btn-delete-photo,
+#create-meal .btn-delete-photo {
   top: 10px;
 }
-#host_meal .delete-icon {
+#host_meal .delete-icon,
+#create-meal .delete-icon {
   color: #fff;
 }
-#host_meal .upload-icon {
+#host_meal .upload-icon,
+#create-meal .upload-icon {
   font-size: 70px;
   color: #aaa;
 }
-#host_meal .upload {
+#host_meal .upload,
+#create-meal .upload {
   cursor: pointer;
 }
-#host_meal .upload-in-card {
+#host_meal .upload-in-card,
+#create-meal .upload-in-card {
   width: 100%;
   height: 100%;
   position: absolute;
   z-index: 10;
 }
-#host_meal .upload-card {
+#host_meal .upload-card,
+#create-meal .upload-card {
   width: 100%;
   margin-bottom: 20px;
 }
-#host_meal .upload-card-text {
+#host_meal .upload-card-text,
+#create-meal .upload-card-text {
   color: #5bc0de;
   padding-bottom: 16px;
 }
-#host_meal .btn-upload {
+#host_meal .btn-upload,
+#create-meal .btn-upload {
   margin: 10px;
 }
-#host_meal .pic {
+#host_meal .pic,
+#create-meal .pic {
   margin: 0 auto;
 }
-#host_meal .pic-card {
+#host_meal .pic-card,
+#create-meal .pic-card {
   margin-bottom: 16px;
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.1);
 }
-#host_meal .pic-card:hover .btn-delete-photo {
+#host_meal .pic-card:hover .btn-delete-photo,
+#create-meal .pic-card:hover .btn-delete-photo {
   display: inline;
 }
-#host_meal .fileUpload {
+#host_meal .fileUpload,
+#create-meal .fileUpload {
   position: relative;
   overflow: hidden;
 }
-#host_meal .fileUpload input.upload {
+#host_meal .fileUpload input.upload,
+#create-meal .fileUpload input.upload {
   position: absolute;
   top: 0;
   right: 0;
@@ -1013,7 +1053,9 @@ Payment UI Styling
   filter: alpha(opacity=0);
 }
 #host_meal .caption-field,
-#host_meal #caption-field {
+#create-meal .caption-field,
+#host_meal #caption-field,
+#create-meal #caption-field {
   background: #fff;
   padding-left: 8px;
 }
