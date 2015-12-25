@@ -53,6 +53,7 @@ var Link = require('react-router').Link;
       componentWillMount: function() {
         if (!Cookies.get("session"))
           return;
+        console.log("I don't even care I'm gonna get ")
         var api_resp = 
           api_call('kitchenuser', {method: 'Get', session: Cookies.get("session")});
         if (api_resp.Success)
@@ -64,6 +65,9 @@ var Link = require('react-router').Link;
       signout: function() {
         Cookies.remove('session');
         location.reload();
+      },
+      getInitialState: function() {
+        return ({guest: null});
       },
       render: function() {
         var guest = this.state.guest;
