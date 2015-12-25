@@ -1,6 +1,4 @@
-var LoginSignUpModal = require('./login.js');
 var AddCardForm = require('./add_card.js');
-
 var TextField = React.createClass({
     editClicked: function() {
         this.setState({input_stored: false});
@@ -73,11 +71,7 @@ var PaymentField = React.createClass({
                             id="add-card"
                             checked={true}> Add Card</input>
                     </p>
-<<<<<<< HEAD
-                    <AddCardForm handleAddCardSuccess={this.handleAddCardSuccess}></AddCardForm>
-=======
                     <AddCardForm handleAddCardSuccess={this.props.handleAddCardSucess}></AddCardForm>
->>>>>>> 4851bbe213285c983c0ccb1bc9e265cc36bb32f2
                 </div>;
         } else {
             add_card = 
@@ -198,11 +192,6 @@ module.exports = React.createClass({
                 <div className="text-center">
                     <h2 className="text-center">Meal successfully booked!</h2>
                 </div>
-            );
-        }
-        if (!Cookies.get('session')) {
-            return (
-                <LoginSignUpModal handleLoginSuccess={this.handleLoginSuccess}/>
             );
         }
         return(

@@ -1,15 +1,15 @@
-var React = require('react');
+var Checkout = require('../checkout.js');
 var Carousel = React.createClass({
   render: function() {
     var pictures = this.props.data.map(function(pic, index) {
       if (index == 0) {
         return (<div className="item active">
-          <img src={"https://yaychakula.com/img/" + pic.Name}></img>
+          <img src={"img/" + pic.Name}></img>
           <div className="carousel-caption">{pic.Caption}</div>
         </div>);
       }
       return (<div className="item">
-        <img src={"https://yaychakula.com/img/" + pic.Name}></img>
+        <img src={"img/" + pic.Name}></img>
         <div className="carousel-caption">{pic.Caption}</div>
       </div>);
     });
@@ -132,28 +132,39 @@ var HostAttendeesInfo = React.createClass({
 var BookMeal = React.createClass({
   render: function() {
     var data = this.props.data;
+    var meal_closes = moment(data.Rsvp_by);
     var req_btn_disabled = 
-      (moment(data.Rsvp_by) < moment()) || 
+      (meal_closes < moment()) || 
       data.Status == "ATTENDING" || 
       data.Status == "DECLINED" || 
       data.Status == "PENDING";
     var starts = moment(data.Starts);
     var req_btn_text;
-    if (moment(data.Rsvp_by < moment())) {
+    if (meal_closes < moment()) {
       req_btn_text = 'Meal closed';
     } else {
       req_btn_text = "Book";
     }
     var order_btn = 
-      <button className="brand-btn btn" id="request-meal-btn" 
-        disabled={req_btn_disabled}>{req_btn_text}</button>;
+      (Cookies.get('session'))?
+        <button 
+          className="brand-btn btn" 
+          id="request-meal-btn" 
+          disabled={req_btn_disabled} 
+          data-toggle="modal" 
+          data-target="#request-modal">{req_btn_text}</button> :
+        <Link to={"login?fwd=meal/" + this.params.id + "?book_meal=true"}>
+          <button className="brand-btn btn">{req_btn_text}</button>
+        </Link>
+        ;
     var time_left_text;
     var booking_info = 
-      [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>,
-        <p><span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Event is closed</p>];
-    if (moment(data.Rsvp_by) > moment()) {
-      booking_info.push(<p>{closes.toNow() + " left to book"}</p>);
-    }
+      [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>];
+    var booking_subinfo = 
+      (meal_closes > moment())? 
+        <p>{"Meal closes " + moment().to(meal_closes)}</p> :
+        <p><span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Event is closed</p>
+    booking_info.push(booking_subinfo);
     return(
       <div className="col-xs-12 col-sm-3">
         <div className="book-meal">
@@ -173,7 +184,6 @@ var MealInfo = React.createClass({
     // $('#time-left-subtext').text('Requests are now closed.');
     // $('#time-left-subtext').css("color", "#aaa"); // set text to grey
     var data = this.props.data;
-    var closes = moment(data.Rsvp_by);
     var map_row;
     if (data.Status != "ATTENDING") {
         map_row = 
@@ -191,7 +201,7 @@ var MealInfo = React.createClass({
         </div>;
     }
     var avg_stars = [];
-    if (data.Host_reviews.length > 0) { // process avg rating
+    if (data.Host_reviews !== null && data.Host_reviews.length > 0) { // process avg rating
       var ratings = data.Host_reviews.map(function(review) {
         return review.Rating;
       })
@@ -217,7 +227,6 @@ var MealInfo = React.createClass({
         avg_stars.push(<i className="fa fa-star-o"></i>);
       }
     }
-
     // handle newlines in the meal description
     var desc_lines = data.Description.split(/[\n\r]/g);
     var description = desc_lines.map(function(desc_line) {
@@ -247,69 +256,46 @@ var MealInfo = React.createClass({
 });
 
 module.exports = React.createClass({
-  componentDidMount: function() {
-    console.log("Testing testing testing");
-    var api_resp = api_call("meal", {
-                      method: "getMeal",
-                      session: Cookies.get("session"),
-                      mealId: this.props.params.id,
-                    });
-    if (api_resp.Success) {
-      var data = api_resp.Return;
-      this.setState({
-        Title: data.Title,
-        Description: data.Description,
-        Rsvp_by: data.Rsvp_by,
-        Starts: data.Starts,
-        Host_name: data.Host_name,
-        Host_pic: data.Host_pic,
-        Host_bio: data.Host_bio,
-        Host_reviews: data.Host_reviews,
-        Maps_url: data.Maps_url,
-        Address: data.Address,
-        Open_spots: data.Open_spots,
-        Attendees: data.Attendees,
-        Pics: data.Pics,
-        Price: data.Price,
-        Status: data.Status,
-        Has_email: data.Has_email
-      })
-    } else {
-      window.location.replace("https://yaychakula.com");
-    }
+  componentWillMount: function(){
+    var resp = 
+      api_call("meal", {
+        method: "getMeal",
+        session: Cookies.get("session"),
+        mealId: this.props.params.id});
+    if (resp.Success)
+      this.setState({data: resp.Return});
   },
   getInitialState: function() {
-    return({
-      Title: '', 
-      Description: '', 
-      Rsvp_by: '', 
-      Host_reviews: [],
-      Address: '',
-      Host_name: '',
-      Host_pic: '',
-      Host_bio: '',
-      Has_email: false,
-      Maps_url: '',
-      Attendees: [],
-      Open_spots: 0,
-      Starts: '',
-      Status: '',
-      Price: 0,
-      Pics: []
-    });
+    return({data: this.props.data});
   },
   render: function() {
+    var data = this.state.data;
     return(
       <div className="row">
         <div className="row text-center">
           <div className="col-xs-12 col-sm-9 col-sm-offset-2">
-            <Carousel data={this.state.Pics}></Carousel>
+            <Carousel data={data.Pics}></Carousel>
           </div>
         </div>
         <div className="row">
-          <BookMeal data={this.state}></BookMeal>
-          <MealInfo data={this.state}></MealInfo>
+          <BookMeal data={data}></BookMeal>
+          <MealInfo data={data}></MealInfo>
         </div>
+      <div id="request-modal" className="modal fade" role="dialog">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="close" data-dismiss="modal" id="request-meal-btn">&times;</button>
+              <h4 className="modal-title text-center">Request Meal</h4>
+            </div>
+            <div className="modal-body row" id="modal-body">
+              <div className="row">
+                <Checkout cards={data.Cards} open_spots={data.Open_spots} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>);
   }
 });
