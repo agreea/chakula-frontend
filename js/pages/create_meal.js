@@ -346,6 +346,7 @@ module.exports = React.createClass({
         s = this.state,
         starts = $('#starts').data("DateTimePicker").date(),
         rsvpBy = $('#rsvpBy').data("DateTimePicker").date();
+    console.log(s.price);
     if (!isFloat(s.price) && !isInteger(s.price)) errors.push("Price must be a valid dollar value.");
     if (rsvpBy > starts) errors.push("Rsvp by time cannot be after meal starts.");
     if (rsvpBy < moment()) errors.push("Rsvp by time cannot be in the past.");
