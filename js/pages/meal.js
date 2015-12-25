@@ -147,18 +147,17 @@ var BookMeal = React.createClass({
     } else {
       req_btn_text = "Book";
     }
-    var order_btn = 
-      (Cookies.get('session'))?
-        <button 
+    var order_btn = <button 
           className="brand-btn btn" 
           id="request-meal-btn" 
           disabled={req_btn_disabled} 
           data-toggle="modal" 
-          data-target="#request-modal">{req_btn_text}</button> :
+          data-target="#request-modal">{req_btn_text}</button>;
+    if(!Cookies.get('session') && !req_btn_disabled)
+      order_btn = 
         <Link to={"login?fwd=meal/" + this.props.data.Id + "?book_meal=true"}>
           <button className="brand-btn btn">{req_btn_text}</button>
-        </Link>
-        ;
+        </Link>;
     var time_left_text;
     var booking_info = 
       [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>];
