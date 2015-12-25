@@ -1,3 +1,4 @@
+var React = require('react');
 var Checkout = require('../checkout.js');
 var Carousel = React.createClass({
   render: function() {

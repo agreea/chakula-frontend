@@ -1,3 +1,4 @@
+var React = require('react');
 module.exports = React.createClass({
 	handleAddCard: function() {
         this.setState({disableAddCard: true});

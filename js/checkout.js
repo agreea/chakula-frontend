@@ -1,3 +1,4 @@
+var React = require('react');
 var AddCardForm = require('./add_card.js');
 var TextField = React.createClass({
     editClicked: function() {
