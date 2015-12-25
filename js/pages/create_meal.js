@@ -459,10 +459,10 @@ module.exports = React.createClass({
 
 // Answer ripped shamelessly
 // http://stackoverflow.com/questions/3885817/how-to-check-that-a-number-is-float-or-integer
-function isFloat(n) {
-    return n === +n && n !== (n|0);
+function isInt(n){
+    return Number(n) === n && n % 1 === 0;
 }
 
-function isInteger(n) {
-    return n === +n && n === (n|0);
+function isFloat(n){
+    return n === Number(n) && n % 1 !== 0;
 }
