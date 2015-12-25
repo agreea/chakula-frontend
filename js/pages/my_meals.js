@@ -142,8 +142,8 @@ module.exports = React.createClass({
     });
     var first_item = 
       (this.state.alert_create_host_profile)?
-        <Link to="/edit_host_info">{this.state.alert_create_host_profile}</Link> :
-        <Link to="/create_meal">
+        <Link to="edit_host_info">{this.state.alert_create_host_profile}</Link> :
+        <Link to="create_meal">
           <img className="img-responsive img-responsive-center add-meal-icon" src="img/add-icon.svg"/>
         </Link>
     // if (alert_create_host_profile) {
