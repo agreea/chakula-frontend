@@ -161,7 +161,7 @@ module.exports = React.createClass({
               text_fields = first_last.concat(text_fields);
         }
         return(
-            <div className="row">
+            <div className="row" id="login">
               <div className="col-xs-9">
                 <div className="row">
                   <img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>

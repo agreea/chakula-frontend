@@ -31,7 +31,7 @@ module.exports = React.createClass({
             email_message = "Thanks for signing up! We'll be in touch soon";
         }
         return(
-            <div>
+            <div id="home">
             <header className="home-intro">
                 <div className="intro-body">
                     <div className="container">

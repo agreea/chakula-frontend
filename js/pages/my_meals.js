@@ -75,8 +75,12 @@ var MealListItem = React.createClass({
           </div>
           <div className="modal-body text-center">
             <p>{"Are you sure you want to delete " + this.props.title + "? This is forever-ever."}</p>
-            <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" className="btn-primary" onClick={this.deleteMeal}>Delete Meal</button>
+            <div className="col-xs-5 col-xs-offset-1 col-sm-4 col-sm-offset-2">
+              <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+            <div className="col-xs-5 col-xs-offset-1 col-sm-4 col-sm-offset-2">
+              <button type="button" className="btn-primary" onClick={this.deleteMeal}>Delete Meal</button>
+            </div>
           </div>
         </div>
       </div>
@@ -119,6 +123,7 @@ module.exports = React.createClass({
       this.setState({meals: meals});
   },
   render: function() {
+    var handleMealDelete = this.handleMealDelete;
     var listItems = this.state.meals.map(function(meal, index){
       return <MealListItem 
         title={meal.Title} 
@@ -129,7 +134,7 @@ module.exports = React.createClass({
         pic={(meal.Pics.length != 0)? meal.Pics[0].Name : ''}
         k={index}
         published={meal.Published}
-        handleMealDelete={this.handleMealDelete} />;
+        handleMealDelete={handleMealDelete} />;
     });
     var first_item = 
       (this.state.alert_create_host_profile)?
