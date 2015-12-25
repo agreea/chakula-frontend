@@ -281,6 +281,21 @@ var PicList = React.createClass({
 });
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return({
+      title: '',
+      description: '',
+      price: '',
+      seats: '',
+      pics: [],
+      rsvpBy: '',
+      starts: '',
+      published: '',
+      saveDisabled: false,
+      publishDisabled: false,
+      possibleSeats: [2,3,4,5,6,7,8,9,10,11,12]
+    })
+  },
   handleInputChange: function(key_val) {
     key_val["saveDisabled"] = false;
     this.setState(key_val);
@@ -314,7 +329,6 @@ module.exports = React.createClass({
       published: d.Published,
       saveDisabled: true,
       publishDisabled: false,
-      saveText: "Saved",
       possibleSeats: [2,3,4,5,6,7,8,9,10,11,12]
     });
   },
@@ -369,7 +383,6 @@ module.exports = React.createClass({
       errors: [], 
       publishDisabled: false,
       saveDisabled: true,
-      saveText: "Saved"
     });
     if (!this.props.params.id)// reload the page if you haven't done so already
         window.location.replace("https://yaychakula.com/#/create_meal/" + api_resp.Return);
