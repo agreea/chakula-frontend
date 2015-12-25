@@ -1,3 +1,4 @@
+var React = require('react');
 module.exports = React.createClass({
     mixins: [require('react-addons-linked-state-mixin'), require('react-router').History],
     componentWillMount: function() {
