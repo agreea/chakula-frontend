@@ -72,7 +72,7 @@ var PaymentField = React.createClass({
                             id="add-card"
                             checked={true}> Add Card</input>
                     </p>
-                    <AddCardForm handleAddCardSuccess={this.props.handleAddCardSucess}></AddCardForm>
+                    <AddCardForm handleAddCardSuccess={this.handleAddCardSucess}></AddCardForm>
                 </div>;
         } else {
             add_card = 
