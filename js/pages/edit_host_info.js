@@ -35,46 +35,34 @@ module.exports = React.createClass({
     this.setState({errors: errors});
   },
   sendHostData: function() {
-    var api_resp = api_call('host', {
-              method: 'updateHost',
-              session: Cookies.get('session'),
-              address: this.state.address,
-              state: this.state.state,
-              city: this.state.city
-              });
-    console.log("Sent host data");
-    console.log(api_resp);
-    if (api_resp.Success) {
+    var data = this.state;
+    data["method"] = "updateHost";
+    data["session"] = Cookies.get("session");
+    var api_resp = api_call('host', data);
+    if (api_resp.Success)
       this.setState({saveDisabled: true, errors: []});
       // show the saved button as green, add check mark, disable
-    }
   },
   componentWillMount: function() {
     var api_resp = api_call('host', {method: 'getHost', session: Cookies.get('session')});
     if (api_resp.Success) {
       var d = api_resp.Return;
-      this.setState({
-        address: d.Address,
-        city: d.City,
-        state: d.State,
-        stripe_connect: d.stripe_connect,
-        saveDisabled: true,
-        stripe_url: d.stripe_url,
-        errors: []
-      });
+      d["saveDisabled"] = true;
+      d["errors"] = [];
+      this.setState(d);
     } else
       this.setState({errors: ["Failed to load your host profile."]});
   },
   render: function() {
   	var stripe_element;
   	var host = this.state;
-  	if (host.stripe_connect) {
+  	if (host.Stripe_connect) {
   		stripe_element = 
         (<p><span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Stripe Connected</p>);
-  	} else if(host.email && host.phone && host.address){
+  	} else if(host.address){
     		stripe_element = 
           (<a className="stripe-btn btn-lg btn"
-            	href={host.stripe_url} 
+            	href={host.Stripe_url} 
             	target="_blank">Connect With Stripe</a>);
   	} else {
   		stripe_element = (<p>Complete and save the information above to set up payments</p>);
@@ -92,12 +80,12 @@ module.exports = React.createClass({
       <FormTextRow form_name="Address" 
         place_holder="3700 O St NW" 
         id="address"
-        default_value={host.address}
+        default_value={host.Address}
         handleInputChanged={this.handleInputChanged}/>
       <FormTextRow form_name="City" 
         place_holder="Washington" 
         id="city"
-        default_value={host.city}
+        default_value={host.City}
         handleInputChanged={this.handleInputChanged}/>
       <div className="row">
       <div className="col-xs-4 col-sm-2">
