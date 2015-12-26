@@ -71,9 +71,12 @@ module.exports = React.createClass({
   	var guest = this.state;
     var stripeModalBody;
     if(guest.saveSuccess && this.props.location.query.stripe_redir)
-      stripeModalBody = <a href="this.props.location.query.strip_redir" 
-        className="brand-btn" 
-        target="_blank">Set up Stripe Payments</a>;
+      stripeModalBody = 
+      <div className="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
+        <a href={this.props.location.query.strip_redir}
+          className="brand-btn" 
+          target="_blank">Set up Stripe Payments</a>
+      </div>;
     return (
       <div className="row" id="edit-host-info">
     	 <div className="row">
