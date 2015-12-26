@@ -109,6 +109,13 @@ module.exports = React.createClass({
         </select>
       </div>
       </div>
+      <div className="row error-field">
+        <ul>
+          {this.state.errors.map(function(error) {
+            return <li>{error}</li>;
+          })}
+        </ul>
+      </div>
       <div className="row">
         <div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
           <button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
