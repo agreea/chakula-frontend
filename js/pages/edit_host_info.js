@@ -110,16 +110,6 @@ module.exports = React.createClass({
       </div>
       </div>
       <div className="row">
-        <div className="col-sm-2 col-xs-4">
-        	<p className="form-label text-right">Bio</p>
-        </div>
-      <div className="col-xs-8 col-sm-6">
-        <textarea className="text-field" id="bio" rows="6"
-          placeholder="Tell us about yourself. Where are you from? Where have you been? What do you do? What food do you love?..."
-          defaultValue={host.bio} onChange={this.bioChanged}></textarea>
-        </div>
-      </div>
-      <div className="row">
         <div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
           <button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
             onClick={this.attemptSendHostData} disabled={host.saveDisabled}>{(host.saveDisabled) ? "Saved" : "Save"}</button>
