@@ -266,6 +266,10 @@ module.exports = React.createClass({
     if (resp.Success)
       this.setState({data: resp.Return});
   },
+  componentDidMount: function() {
+    if(this.props.location.query.book_meal)
+      $('#request-modal').modal('show');
+  },
   getInitialState: function() {
     return({data: this.props.data});
   },

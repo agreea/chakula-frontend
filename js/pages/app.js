@@ -45,7 +45,7 @@ var Link = require('react-router').Link;
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
               <li><a href="#"></a></li>
-              <li><Link to="/edit_profile">My Profile</Link></li>
+              <li><Link to="/edit_guest_info">My Profile</Link></li>
               <li><a onClick={this.signout}>Signout</a></li>
             </ul>
           </li>);

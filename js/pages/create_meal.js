@@ -300,7 +300,6 @@ module.exports = React.createClass({
   handleInputChange: function(key_val) {
     key_val["saveDisabled"] = false;
     this.setState(key_val);
-    console.log(key_val);
   },
   handlePicsChange: function(pics) {
     this.setState({

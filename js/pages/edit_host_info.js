@@ -1,44 +1,14 @@
 var React = require('react');
-var FormTextRow = React.createClass({
-  getInitialState: function() {
-      return ({value: this.props.default_value});
-  },
-  formChanged: function(e) {
-    this.setState({value: e.target.value});
-    this.props.handleInputChanged(e);
-  },
-  render: function() {
-    return (<div className="row">
-        <div className="col-xs-4 col-sm-2">
-          <p className="text-right form-label">{this.props.form_name}</p>
-        </div>
-        <div className="col-sm-4 col-md-3 col-xs-8">
-        <input className="text-field" id={this.props.id} type="text" 
-          defaultValue={this.props.default_value} 
-          onChange={this.formChanged}
-          placeholder={this.props.placeholder}/>
-        </div>
-      </div>);
-  }
-});
-  
+var FormTextRow = require('../form-row.js');  
 module.exports = React.createClass({
   getInitialState: function() {
   	return {
       address: '',
-      bio: '', 
       state: '',
       city: '',
-      email: '',
-      phone: '',
       saveDisabled: true};
   },
-  bioChanged: function(e){
-    bio = e.target.value;
-    enableSave();
-    this.setState({bio: e.target.value}); 
-  },
-  handleStateChange: function(e) {
+  handleStateChange: function(e) { // state as in Hawaii...
     state = e.target.value;
     enableSave();
     this.setState({state: e.target.value});
@@ -47,52 +17,28 @@ module.exports = React.createClass({
     this.setState({saveDisabled: false});
   },
   handleInputChanged: function(e) {
-    var key = e.target.id;
-    var val = e.target.value;
-    this.setState({key: val});
-    enableSave();
+    var obj = {},
+        key = e.target.id,
+        val = e.target.value;
+    obj[key] = val;
+    obj["saveDisabled"] = false;
+    this.setState(obj);
   },
   attemptSendHostData: function() {
 		console.log("attempting to send host data");
 		var errors = [];
-		if (!this.state.email) {
-			errors.push("Email is mandatory");
-		}
-		if (!this.state.phone) {
-			errors.push("Phone is mandatory");
-		}
-		var reg = /^\d+$/;
-		if (!reg.test(this.state.phone)) {
-			errors.push("Phone must be digits only");
-		} else if (phone.length != 10) {
-			errors.push("Phone must be 10 digits long");
-		}
-		if (!this.state.address) {
-			errors.push("Address is mandatory");
-		}
-    if (!this.state.state) {
-      errors.push("State is mandatory");      
-    }
-    if (!this.state.city) {
-      errors.push("City is mandatory");      
-    }
-		if (!Cookies.get('session')) {
-			// show fb login
-		}
-		if (errors.length === 0) {
+		if (!this.state.address) errors.push("Address is mandatory");
+    if (!this.state.state) errors.push("State is mandatory");      
+    if (!this.state.city) errors.push("City is mandatory");      
+		if (errors.length === 0)
 			this.sendHostData();
-		} else {
-      this.setState({errors: errors});
-		}
+    this.setState({errors: errors});
   },
   sendHostData: function() {
     var api_resp = api_call('host', {
               method: 'updateHost',
               session: Cookies.get('session'),
-              email: this.state.email,
-              phone: this.state.phone,
               address: this.state.address,
-              bio: this.state.bio,
               state: this.state.state,
               city: this.state.city
               });
@@ -108,20 +54,16 @@ module.exports = React.createClass({
     if (api_resp.Success) {
       var d = api_resp.Return;
       this.setState({
-        email: d.Email,
         address: d.Address,
-        phone: d.Phone,
         city: d.City,
         state: d.State,
-        bio: d.Bio,
         stripe_connect: d.stripe_connect,
         saveDisabled: true,
         stripe_url: d.stripe_url,
         errors: []
       });
-    } else {
+    } else
       this.setState({errors: ["Failed to load your host profile."]});
-    }
   },
   render: function() {
   	var stripe_element;
@@ -147,16 +89,6 @@ module.exports = React.createClass({
             <span className="disclaimer-text">By setting up an account you agree to <b><a target="_blank" href="https://yaychakula.com/tos.html">the Chakula terms of service</a></b></span>
     		  </div>
     	 </div>
-      <FormTextRow form_name="Email" 
-        place_holder="One you actually check" 
-        id="email" 
-        handleInputChanged={this.handleInputChanged}
-        default_value={host.email}/>
-      <FormTextRow form_name="Phone #" 
-        place_holder="01234567890" 
-        id="phone"
-        default_value={host.phone}
-        handleInputChanged={this.handleInputChanged}/>
       <FormTextRow form_name="Address" 
         place_holder="3700 O St NW" 
         id="address"
@@ -183,7 +115,7 @@ module.exports = React.createClass({
         </div>
       <div className="col-xs-8 col-sm-6">
         <textarea className="text-field" id="bio" rows="6"
-          placeholder="Tell us about yourself. Do you like candle-lit dinners, long walks on the beach?..."
+          placeholder="Tell us about yourself. Where are you from? Where have you been? What do you do? What food do you love?..."
           defaultValue={host.bio} onChange={this.bioChanged}></textarea>
         </div>
       </div>

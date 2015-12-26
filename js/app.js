@@ -14,6 +14,7 @@ var App = require('./pages/app.js'),
     WhyChakula = require('./pages/why_chakula.js'), // done
     About = require('./pages/about.js'),
     EditHost = require('./pages/edit_host_info.js'),
+    EditGuest = require('./pages/edit_guest_profile.js'),
     Meal = require('./pages/meal.js'),
     MyMeals = require('./pages/my_meals.js'),
     CreateMeal = require('./pages/create_meal.js'),
@@ -23,6 +24,7 @@ ReactDOM.render(
 		<Route component={App}>
 			<Route name="Home" path="/" component={Home}/>
 			<Route name="Edit Host Info" path="edit_host_info" component={EditHost}/>
+            <Route name="Edit Guest Info" path="edit_guest_info" component={EditHost}/>
 	        <Route name="About" path="about" component={About}/>
 	        <Route name="Why Chakula" path="why_chakula" component={WhyChakula}/>
 	        <Route name="Meal" path="meal/:id" component={Meal}/>
