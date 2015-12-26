@@ -1,5 +1,6 @@
 var React = require('react');
 var FormTextRow = require('../form-row.js');  
+var Modal = require('../modal.js');
 module.exports = React.createClass({
   getInitialState: function() {
   	return {
@@ -42,8 +43,12 @@ module.exports = React.createClass({
     data["session"] = Cookies.get("session");
     var api_resp = api_call('kitchenuser', data);
     console.log(api_resp);
-    if (api_resp.Success)
-      this.setState({saveDisabled: true, errors: []});
+    if (api_resp.Success) {
+      data["saveDisabled"] = true;
+      data["errors"] = [];
+      data["saveSuccess"] = true;
+    } 
+    this.setState(data);
   },
   componentWillMount: function() {
     var api_resp = api_call('kitchenuser', {method: 'get', session: Cookies.get('session')});
@@ -56,9 +61,19 @@ module.exports = React.createClass({
       this.setState({errors: ["Failed to load your guest profile."]});
     }
   },
+  componentDidUpdate: function() { // called after successful saves
+    // if this instance is was a redirect from host setup, show the modal to link them to stripe
+    if(this.props.location.query.stripe_redir && this.state.saveSuccess)
+      $('#stripe-modal').modal('show');
+  },
   render: function() {
   	var stripe_element;
   	var guest = this.state;
+    var stripeModalBody;
+    if(guest.saveSuccess && this.props.location.query.stripe_redir)
+      stripeModalBody = <a href="this.props.location.query.strip_redir" 
+        className="brand-btn" 
+        target="_blank">Set up Stripe Payments</a>;
     return (
       <div className="row" id="edit-host-info">
     	 <div className="row">
@@ -110,5 +125,6 @@ module.exports = React.createClass({
             onClick={this.attemptSendGuestData} disabled={guest.saveDisabled}>{(guest.saveDisabled) ? "Saved" : "Save"}</button>
         </div>
       </div>
+      <Modal id="stripe-modal" body={stripeModalBody} title={"Ready to Connect With Stripe"}></Modal>
     </div>);}
   });

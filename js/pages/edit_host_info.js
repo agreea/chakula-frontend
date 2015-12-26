@@ -44,6 +44,13 @@ module.exports = React.createClass({
       // show the saved button as green, add check mark, disable
   },
   componentWillMount: function() {
+    var get_guest = api_call('kitchenuser', {method: 'get', session: Cookies.get('session')});
+    if (!get_guest.Success || 
+        !get_guest.Return.First_name ||
+        !get_guest.Return.Last_name ||
+        !get_guest.Return.Phone ||
+        !get_guest.Return.Email)
+      this.setState({needsGuestInfo: true});
     var api_resp = api_call('host', {method: 'getHost', session: Cookies.get('session')});
     if (api_resp.Success) {
       var d = api_resp.Return;
@@ -56,16 +63,23 @@ module.exports = React.createClass({
   render: function() {
   	var stripe_element;
   	var host = this.state;
-  	if (host.Stripe_connect) {
+  	if (host.Stripe_connect){ // if the host has already connected w stripe show they're good 2 go
   		stripe_element = 
         (<p><span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Stripe Connected</p>);
-  	} else if(host.address){
-    		stripe_element = 
-          (<a className="stripe-btn btn-lg btn"
-            	href={host.Stripe_url} 
-            	target="_blank">Connect With Stripe</a>);
-  	} else {
-  		stripe_element = (<p>Complete and save the information above to set up payments</p>);
+  	} else if(!host.Address || !host.City || !host.State){ // if they don't have their address set up, let them know
+      stripe_element = (<p>Complete and save the information above to set up payments</p>);
+  	} else if (host.needsGuestInfo){ 
+      // if they don't have all their guest data put in, 
+      // link them and forward them to stripe once completed
+      stripe_element = 
+        (<Link to={"edit_guest_info?stripe_redir=" + encodeURIComponent(host.Stripe_url)}>
+          <p>Click here to complete your guest profile and return to set up payments</p> 
+          </Link>);
+    } else {
+      stripe_element = 
+        (<a className="stripe-btn btn-lg btn"
+            href={host.Stripe_url} 
+            target="_blank">Connect With Stripe</a>);
   	}
     var states = ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"];
     var states_select_options = states.map(function(state) { return <option value={state}>{state}</option>;});
@@ -105,7 +119,7 @@ module.exports = React.createClass({
         </ul>
       </div>
       <div className="row">
-        <div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
+        <div className="col-sm-4 col-sm-offset-2 col-xs-6 col-xs-offset-4">
           <button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
             onClick={this.attemptSendHostData} disabled={host.saveDisabled}>{(host.saveDisabled) ? "Saved" : "Save"}</button>
         </div>
