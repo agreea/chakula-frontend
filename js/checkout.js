@@ -157,7 +157,7 @@ module.exports = React.createClass({
         }
         var api_resp = api_call('mealrequest', {
             method: 'sendRequest', 
-            mealId: getUrlVars()['Id'],
+            mealId: this.props.mealId,
             session: Cookies.get('session'), 
             last4: selectedCard,
             seats: this.state.seats
