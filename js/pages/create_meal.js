@@ -404,7 +404,7 @@ module.exports = React.createClass({
     // make sure everything is well-formed and then try to save
     var save_result = this.attemptSave("publish"); // flag true for "publish"
     var mealid;
-    if (!save_result.Success)
+    if (save_result.Success)
       mealid = save_result.Return;
     var api_resp = api_call('meal', {
         method: 'publishMeal',
