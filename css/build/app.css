@@ -644,8 +644,8 @@ span {
   padding: 8px;
   border: none;
 }
-.nav > li > a:float,
-.nav > li > button:float {
+.nav > li > a:hover,
+.nav > li > button:hover {
   background-color: #fff;
 }
 .nav > .container-fluid {
