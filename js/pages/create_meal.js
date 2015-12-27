@@ -341,7 +341,7 @@ module.exports = React.createClass({
     $(picker_id).datetimepicker({sideBySide: true, defaultDate: defaultDate})
       .on('dp.change', this.setState({saveDisabled: false}));
   },
-  attemptSave: function() {
+  attemptSave: function(flag) { // flag is optional arg used by publish to prevent a forward
     var errors = [],
         s = this.state,
         starts = $('#starts').data("DateTimePicker").date(),
@@ -381,7 +381,7 @@ module.exports = React.createClass({
       publishDisabled: false,
       saveDisabled: true,
     });
-    if (!this.props.params.id)// reload the page if you haven't done so already
+    if (!this.props.params.id && flag !== "publish")// reload the page if you haven't done so already
         this.history.pushState(null, "create_meal/" + api_resp.Return);
     return api_resp;
   },
@@ -402,7 +402,7 @@ module.exports = React.createClass({
       return;
     }
     // make sure everything is well-formed and then try to save
-    var save_result = this.attemptSave();
+    var save_result = this.attemptSave("publish"); // flag true for "publish"
     if (!save_result.Success)
       return;
     var api_resp = api_call('meal', {
