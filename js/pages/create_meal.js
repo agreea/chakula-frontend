@@ -415,7 +415,7 @@ module.exports = React.createClass({
         mealId: this.props.params.id
       });
     if (api_resp.Success)
-        window.location.replace("https://yaychakula.com/#/meal/" + api_resp.Return);
+        this.history.pushState(null, "meal/" + api_resp.Return);
   },
   render: function() {
     var s = this.state;
