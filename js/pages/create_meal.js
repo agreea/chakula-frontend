@@ -381,7 +381,7 @@ module.exports = React.createClass({
       publishDisabled: false,
       saveDisabled: true,
     });
-    if (!this.props.params.id && flag !== "publish")// reload the page if you haven't done so already
+    if (!this.props.params.id && flag !== "publish") // reload the page if you haven't done so already
         this.history.pushState(null, "create_meal/" + api_resp.Return);
     return api_resp;
   },
@@ -403,12 +403,13 @@ module.exports = React.createClass({
     }
     // make sure everything is well-formed and then try to save
     var save_result = this.attemptSave("publish"); // flag true for "publish"
+    var mealid;
     if (!save_result.Success)
-      return;
+      mealid = save_result.Return;
     var api_resp = api_call('meal', {
         method: 'publishMeal',
         session: Cookies.get('session'),
-        mealId: this.props.params.id
+        mealId: mealid
       });
     if (api_resp.Success)
         this.history.pushState(null, "meal/" + api_resp.Return);
