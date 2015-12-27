@@ -552,6 +552,9 @@ select {
   font-size: 11px;
   color: #666;
 }
+.modal-content {
+  border-radius: 0;
+}
 .content-section {
   padding-top: 60px;
 }
@@ -619,7 +622,6 @@ span {
   cursor: pointer;
   height: 100%;
   margin: auto 0px;
-  padding: 8px;
 }
 .nav > li {
   border-left: 1px solid;
@@ -639,8 +641,12 @@ span {
 }
 .nav > li > a,
 .nav > li > button {
-  padding: 0 15px;
+  padding: 8px;
   border: none;
+}
+.nav > li > a:float,
+.nav > li > button:float {
+  background-color: #fff;
 }
 .nav > .container-fluid {
   padding-right: 0;

@@ -159,7 +159,6 @@ span {
     cursor: pointer;
     height: 100%;
     margin: auto 0px;
-    padding: 8px;
 }
 
 .nav > li {
@@ -180,8 +179,11 @@ span {
 }
 
 .nav > li > a, .nav > li > button {
-    padding: 0 15px;
+    padding: 8px;
     border: none;
+    &:float {
+        background-color: #fff;
+    }
 }
 .nav > .container-fluid {
     padding-right: 0;
