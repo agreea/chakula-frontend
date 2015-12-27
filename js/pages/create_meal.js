@@ -392,9 +392,10 @@ module.exports = React.createClass({
   },
   attemptPublish: function() {
     var starts = $('#starts').data("DateTimePicker").date(),
-        rsvpBy = $('#rsvpBy').data("DateTimePicker").date();
+        rsvpBy = $('#rsvpBy').data("DateTimePicker").date(),
+        s = this.state;
     var errors = [];
-    if (!isFloat(price) && !isInteger(price)) errors.push("Price must be a valid dollar value.");
+    if (!isFinite(s.price)) errors.push("Price must be a valid dollar value.");
     if (rsvpBy.unix() > starts.unix()) errors.push("Rsvp-by time cannot be after when the meal starts.");
     if (starts < moment()) errors.push("Start time cannot be in the past.");
     if (rsvpBy < moment()) errors.push("Rsvp-by time cannot be in the past.");
