@@ -287,7 +287,7 @@ module.exports = React.createClass({
       title: '',
       description: '',
       price: '',
-      seats: '',
+      seats: 2,
       pics: [],
       rsvpBy: '',
       starts: '',
@@ -375,11 +375,6 @@ module.exports = React.createClass({
         saveDisabled: false
       });
       return;
-      // TODO: get this into the less for create_meal
-      // $(this).css('background-color', '#19a347');
-      // $(this).text("Saved");
-      // $(this).prop("disabled", true);
-      // $(this).html('Saved');
     }
     this.setState({
       errors: [], 
@@ -401,6 +396,7 @@ module.exports = React.createClass({
     if (rsvpBy < moment()) errors.push("Rsvp-by time cannot be in the past.");
     if (this.state.title === "") errors.push("Title cannot be empty.")
     if (this.state.description === "") errors.push("Description cannot be empty.");
+    if (!this.state.pics || this.state.pics.length < 1) errors.push("Upload a picture before publishing your meal");
     if (errors.length > 0) {
       this.setState({errors: errors});
       return;
