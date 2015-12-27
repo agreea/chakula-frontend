@@ -103,8 +103,8 @@ module.exports = React.createClass({
       return;
     }
     var host = api_resp.Return;
-    if (!host.Address || !host.Phone || !host.Email || !host.Bio || !host.Stripe_connect) {
-      this.setState({alert_create_host_profile: "Please complete your host profile to host meals"});
+    if (!host.Stripe_connect) {
+      this.setState({alert_create_host_profile: "Please complete your host profile and connect to Stripe to host meals"});
       return;
     }
     this.getMeals();
