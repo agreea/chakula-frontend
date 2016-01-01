@@ -6,10 +6,13 @@
 /*
 Colors
 */
+@white: #fff;
 @chakula-blue: #5bc0de;
 @chakula-blue-light: #abdceb;
 @dark-gray: #666;
+@inactive-gray: #999;
 @medium-gray: #ddd;
+@active-green: #06ba3f;
 #app, .container-fluid {
     height: 100%;
     padding: 0;
@@ -20,7 +23,7 @@ body {
     height: 100%;
     font-family: Muli, "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #000;
-    background-color: #fff;
+    background-color: @white;
 }
 
 html {
@@ -38,7 +41,6 @@ h6 {
     font-weight: 700;
     letter-spacing: 1px;
 }
-
 h3 {
     font-size: 20px;
 }
@@ -53,7 +55,9 @@ p {
     line-height: 1.5;
     color: #434343;
 }
-
+ul {
+    list-style: none;
+}
 form {
     text-align: left;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -67,7 +71,12 @@ select {
     -webkit-appearance: none;
     font-size: 18px;
 }
-
+*:focus {
+    outline: none;
+}
+.input-group-btn {
+    font-size: 16px;
+}
 .row {
     margin-left: 0;
     margin-right: 0;
@@ -99,7 +108,15 @@ select {
 span {
     vertical-align: middle;
 }
-
+button {
+    border-radius: 0;
+    border-width: 0;
+    font-family: Muli,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 8px;
+    margin-left: 0;   
+}
 .brand-btn {
     border-radius: 0;
     border-width: 0;
@@ -107,10 +124,9 @@ span {
     font-weight: 400;
     line-height: 1.2;
     display: block;
-    width: 100%;
     background-color: @chakula-blue;
-    color: #fff;
-    padding: 12px 0;
+    color: @white;
+    padding: 12px inherit;
     margin-left: 0;
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
@@ -119,10 +135,12 @@ span {
         background-color: @chakula-blue-light;
     }
     &:hover {
-        color: #fff;
+        color: @white;
+    }
+    .brand-btn-full-width {
+        width: 100%;
     }
 }
-
 .fb-login {
     max-height: 50px;
     cursor: pointer; 
@@ -170,7 +188,7 @@ span {
         -moz-transition: all 0s ease-in-out;
         transition: all 0s ease-in-out;
         &:hover {
-            background: #fff;
+            background: @white;
         };
     }
     img {
@@ -182,7 +200,7 @@ span {
     padding: 8px;
     border: none;
     &:hover {
-        background-color: #fff;
+        background-color: @white;
     }
 }
 .nav > .container-fluid {
@@ -214,6 +232,7 @@ textarea {
     border-width: 0 0 2px 0;
     padding: 8px 0;
     width: 100%;
+    border-radius: 0;
     &:focus{
         transition: border-color 0.4s ease;
         outline: none;
@@ -247,6 +266,31 @@ footer {
         color: #ccc;
         font-size: 14px;
     }
+}
+
+/*
+Colors
+*/
+.active-green {
+    color: @active-green;
+}
+.active-green-bg {
+    background-color: @active-green;
+    color: @white;
+}
+.inactive-gray {
+    color: @inactive-gray;
+}
+.inactive-gray-bg {
+    background-color: @inactive-gray;
+    color: #232323;
+}
+.c-blue {
+    color: @chakula-blue;
+}
+.c-blue-bg {
+    background-color: @chakula-blue;
+    color: @white;
 }
 /*
 Rules on multiple pages

@@ -12,11 +12,13 @@
     <title>Chakula - Better than Restaurants</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <!-- Custom CSS -->
-    <link href="css/grayscale.css" rel="stylesheet">
-
+    <link href="css/build/app.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
@@ -26,145 +28,27 @@
     <script src="js/api_call.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-66943306-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <script type="text/javascript">
-           $(document).ready(function(){
-                $('#modal-body').load('include/add_phone.html');
-                if(Cookies.get("session") === undefined) {
-                  console.log("No session")
-                } 
-           });
+    <script src="js/account_setup.js" type="text/babel">
     </script>   
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 <script src="js/fb_login.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script src="js/stripe_form.js"></script>
-<script>
-  date_time = Date.parse("2015-09-16T18:00:00Z")
-  console.log(date_time)
-  console.log(Date.now())
-  // $('#nav').load('include/nav_bar.html')
-</script>
-<div id="nav">
-  <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Chakula</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">How it Works</a></li>
-        <li><a href="#">Why join?</a></li>
-        <li><a href="#">Become a Host</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Signout</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-</div>
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn-info btn-lg btn" data-toggle="modal" data-target="#myModal">Request Meal</button>
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" id="request-meal-btn">&times;</button>
-      <div class="modal-body row" id="modal-body">
-<script src="js/load-invoice.js"></script>
-<div class="row text-center">
-  <span class="error-field" id="request-errors"></span>
-</div>
-<div class="row invoice-row">
-  <div class="col-sm-6 col-sm-offset-2 invoice-text">
-    <p>Seats</p>
-    <p>Total</p>
-    <p>Payment</p>
+  <div class="container-fluid" id="setup">
   </div>
-  <div class="col-sm-2">
-    <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" id="seats-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        1
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="seats-dropdown-options">
-      </ul>
-    </div>
-    <p id="total"></p>
-    <p id="last-4">...<i>6399</i></p>
-  </div>
-</div>
-<div class="row text-center">
-  <div class="col-sm-6 col-sm-offset-3">
-    <button type="button" class="brand-btn btn-info btn-lg" id="send-request-btn"> Send Request </button>
-  </div>
-</div> </div>
-</div>
-   </div>
-    </div>
-
-  </div>
-</div>
-
-<div id="status">
-</div>
     <!-- Footer -->
     <footer>
         <div class="container text-center">
             <p>Copyright &copy; Chakula 2015</p>
-            <img class="img-circle"src="https://graph.facebook.com/10153547967605406/picture?width=400">
         </div>
     </footer>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Plugin JavaScript -->
-    <script src="js/jquery.easing.min.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="js/grayscale.js"></script>
-
 </body>
 
 </html>

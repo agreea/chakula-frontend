@@ -160,7 +160,8 @@ module.exports = React.createClass({
             mealId: this.props.mealId,
             session: Cookies.get('session'), 
             last4: selectedCard,
-            seats: this.state.seats
+            seats: this.state.seats,
+            follow: this.state.follow_checked
         });
         if (api_resp.Success) {
             // idk close the modal? Show a success screen?
@@ -170,20 +171,24 @@ module.exports = React.createClass({
             this.setState({error: api_resp.Error});
         }
     },
-    handleLoginSuccess: function(){ 
-        var api_resp = api_call('kitchenuser', {method: 'getLast4s', session: Cookies.get('session')});
-        console.log(api_resp);
-        if (api_resp.Success) {
-            this.props.cards = api_resp.Return;
-            this.setState({selectedCard: api_resp.Return[0]});
-        }
-        this.props.handleLoginSuccess() 
+    // handleLoginSuccess: function(){ 
+    //     var api_resp = api_call('kitchenuser', {method: 'getLast4s', session: Cookies.get('session')});
+    //     console.log(api_resp);
+    //     if (api_resp.Success) {
+    //         this.props.cards = api_resp.Return;
+    //         this.setState({selectedCard: api_resp.Return[0]});
+    //     }
+    //     this.props.handleLoginSuccess() 
+    // },
+    handleFollowClicked: function(e) {
+        this.setState({follow_checked: event.target.checked});
     },
     getInitialState: function() {
         return({
             error: '', 
             selectedCard: ((this.props.cards)? this.props.cards[0] : ''), 
-            seats: 1
+            seats: 1,
+            follow_checked: true,
         });
     },
     render: function() {
@@ -195,8 +200,12 @@ module.exports = React.createClass({
                 </div>
             );
         }
+        var follow_box = (this.props.follows_host)? "" : <input type="checkbox" onClick={this.handleFollowClicked} checked={this.state.follow_checked}>Follow this chef to receive email updates when they host future meals</input>
         return(
             <div className="text-left row">
+                <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">
+                    {folow_box}
+                </div>
                 <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} open_spots={this.props.open_spots}/>
                 <PaymentField cards={this.props.cards} handleSelectedCardChange={this.handleSelectedCardChange}></PaymentField>
                 <div className="row error-field">

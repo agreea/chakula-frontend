@@ -527,6 +527,9 @@ p {
   line-height: 1.5;
   color: #434343;
 }
+ul {
+  list-style: none;
+}
 form {
   text-align: left;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -539,6 +542,12 @@ select {
   border-style: solid;
   -webkit-appearance: none;
   font-size: 18px;
+}
+*:focus {
+  outline: none;
+}
+.input-group-btn {
+  font-size: 16px;
 }
 .row {
   margin-left: 0;
@@ -568,6 +577,15 @@ select {
 span {
   vertical-align: middle;
 }
+button {
+  border-radius: 0;
+  border-width: 0;
+  font-family: Muli, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  padding: 8px;
+  margin-left: 0;
+}
 .brand-btn {
   border-radius: 0;
   border-width: 0;
@@ -575,10 +593,9 @@ span {
   font-weight: 400;
   line-height: 1.2;
   display: block;
-  width: 100%;
   background-color: #5bc0de;
   color: #fff;
-  padding: 12px 0;
+  padding: 12px inherit;
   margin-left: 0;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -589,6 +606,9 @@ span {
 }
 .brand-btn:hover {
   color: #fff;
+}
+.brand-btn .brand-btn-full-width {
+  width: 100%;
 }
 .fb-login {
   max-height: 50px;
@@ -675,6 +695,7 @@ textarea {
   border-width: 0 0 2px 0;
   padding: 8px 0;
   width: 100%;
+  border-radius: 0;
 }
 input[type=text]:focus,
 input[type=password]:focus,
@@ -708,6 +729,30 @@ footer a:hover {
 footer p {
   color: #ccc;
   font-size: 14px;
+}
+/*
+Colors
+*/
+.active-green {
+  color: #06ba3f;
+}
+.active-green-bg {
+  background-color: #06ba3f;
+  color: #fff;
+}
+.inactive-gray {
+  color: #999;
+}
+.inactive-gray-bg {
+  background-color: #999;
+  color: #232323;
+}
+.c-blue {
+  color: #5bc0de;
+}
+.c-blue-bg {
+  background-color: #5bc0de;
+  color: #fff;
 }
 /*
 Rules on multiple pages
@@ -1517,4 +1562,16 @@ Payment UI Styling
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+#account-setup button {
+  margin-right: 16px;
+}
+#account-setup .caro-nav {
+  color: #777;
+}
+#account-setup .nav-list {
+  margin-top: 52px;
+}
+#account-setup .nav-list li {
+  padding-bottom: 8px;
 }
