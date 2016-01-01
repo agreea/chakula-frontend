@@ -184,7 +184,7 @@ module.exports = React.createClass({
                   </div>
                   <div className="row">
                       <div className="col-xs-12 col-sm-6">
-                          <a onClick={this.handleCreateAccountLink}>{create_account_link}</a>
+                          <button onClick={this.handleCreateAccountLink}>{create_account_link}</button>
                       </div>
                       {forgot_pass_text}
                   </div>
