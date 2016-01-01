@@ -1,4 +1,5 @@
 var React = require('react');
+var AccountSetup = require('account_setup');
 module.exports = React.createClass({
     mixins: [require('react-addons-linked-state-mixin'), require('react-router').History],
     componentWillMount: function() {
@@ -59,6 +60,7 @@ module.exports = React.createClass({
       if (api_resp.Success) {
         Cookies.set('session', api_resp.Return.Session_token);
         this.setState({errors: []});
+        // start flow for account verification
       }
       // api call
       // if api call is successful, get the token
@@ -75,7 +77,10 @@ module.exports = React.createClass({
             fbToken: access_token});
           if (api_resp.Success) {
             Cookies.set('session', api_resp.Return.Session_token);
-            this.history.pushState(null, this.props.location.query.fwd); // gotta handle the transition
+            if (api_resp.Return.Facebook_long_token === "NEW_GUEST")
+              this.setState({newAccount: true});
+            else 
+              this.history.pushState(null, this.props.location.query.fwd);
           }
       } else {
         this.setState({errors:["Facebook login failed."]});
@@ -108,7 +113,9 @@ module.exports = React.createClass({
           errors: [], 
           email: '', 
           password: '', 
-          passwordConf: ''});
+          passwordConf: '',
+          newAccount: false
+        });
     },
     render: function() {
         // if it's sigin mode: show fb, email, password, button is signin
@@ -162,24 +169,26 @@ module.exports = React.createClass({
         }
         return(
             <div className="row" id="login">
+            {(this.state.newAccount)? 
+              <AccountSetup complete={this.history.pushState(null, this.props.location.query.fwd);}/> :
               <div className="col-xs-9">
-                <div className="row">
-                  <img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>
-                </div>
-                {error_messages}
-                <div className="row">
-                    {text_fields}
-                </div>
-                <div className="row">
-                  {cta_button}
-                </div>
-                <div className="row">
-                    <div className="col-xs-12 col-sm-6">
-                        <a href="#" onClick={this.handleCreateAccountLink}>{create_account_link}</a>
-                    </div>
-                    {forgot_pass_text}
-                </div>
-              </div>
+                  <div className="row">
+                    <img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>
+                  </div>
+                  {error_messages}
+                  <div className="row">
+                      {text_fields}
+                  </div>
+                  <div className="row">
+                    {cta_button}
+                  </div>
+                  <div className="row">
+                      <div className="col-xs-12 col-sm-6">
+                          <a href="#" onClick={this.handleCreateAccountLink}>{create_account_link}</a>
+                      </div>
+                      {forgot_pass_text}
+                  </div>
+                </div>}
             </div>
         );
     }
