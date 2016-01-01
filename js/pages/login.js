@@ -60,8 +60,8 @@ module.exports = React.createClass({
       if (api_resp.Success) {
         Cookies.set('session', api_resp.Return.Session_token);
         this.setState({errors: [], newAccount: true});
-        // start flow for account verification
-      }
+      } else 
+        this.setState({errors: [api_resp.Error]});
       // api call
       // if api call is successful, get the token
     },
