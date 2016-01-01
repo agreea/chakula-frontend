@@ -1,5 +1,5 @@
 var React = require('react');
-var AccountSetup = require('account_setup');
+var AccountSetup = require('../account_setup.js');
 module.exports = React.createClass({
     mixins: [require('react-addons-linked-state-mixin'), require('react-router').History],
     componentWillMount: function() {
@@ -170,7 +170,7 @@ module.exports = React.createClass({
         return(
             <div className="row" id="login">
             {(this.state.newAccount)? 
-              <AccountSetup complete={this.history.pushState(null, this.props.location.query.fwd);}/> :
+              <AccountSetup complete={this.history.pushState(null, this.props.location.query.fwd)}/> :
               <div className="col-xs-9">
                   <div className="row">
                     <img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>
@@ -184,7 +184,7 @@ module.exports = React.createClass({
                   </div>
                   <div className="row">
                       <div className="col-xs-12 col-sm-6">
-                          <button onClick={this.handleCreateAccountLink}>{create_account_link}</button>
+                          <a onClick={this.handleCreateAccountLink}>{create_account_link}</a>
                       </div>
                       {forgot_pass_text}
                   </div>
