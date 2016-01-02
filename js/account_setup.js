@@ -49,6 +49,7 @@ var AddPhone = React.createClass({
 			session: Cookies.get("session"),
 			pin: pin
 		});
+		var errors = [];
 		if (api_resp.Success) 
 			this.props.success("phoneAdded");
 		else
