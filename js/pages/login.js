@@ -108,6 +108,9 @@ module.exports = React.createClass({
           // something something show error
         }
     },
+    processComplete: function() {
+      this.history.pushState(null, this.props.location.query.fwd);
+    },
     getInitialState: function() {
         return({
           createAccount: false, 
@@ -171,7 +174,7 @@ module.exports = React.createClass({
         return(
             <div className="row" id="login">
             {(this.state.newAccount)? 
-              <AccountSetup complete={this.history.pushState(null, this.props.location.query.fwd)}/> :
+              <AccountSetup complete={this.processComplete}/> :
               <div className="col-xs-9">
                   <div className="row">
                     <img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>
