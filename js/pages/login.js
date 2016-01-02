@@ -59,6 +59,7 @@ module.exports = React.createClass({
         password: password});
       if (api_resp.Success) {
         Cookies.set('session', api_resp.Return.Session_token);
+        console.log("does this work??");
         this.setState({errors: [], newAccount: true});
       } else 
         this.setState({errors: [api_resp.Error]});
