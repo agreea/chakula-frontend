@@ -1,5 +1,5 @@
 var React = require('react');
-var AddPhone = require('../add_phone.js');
+var AddPhone = require('./add_phone.js');
 var AddEmail = React.createClass({
 	getInitialState: function(){
 		return {email: ""}
