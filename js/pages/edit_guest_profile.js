@@ -1,5 +1,6 @@
 var React = require('react');
 var FormTextRow = require('../form-row.js');  
+var AddPhone = require('../add_phone.js');
 var Modal = require('../modal.js');
 module.exports = React.createClass({
   getInitialState: function() {
@@ -51,7 +52,7 @@ module.exports = React.createClass({
     this.setState(data);
   },
   componentWillMount: function() {
-    var api_resp = api_call('kitchenuser', {method: 'get', session: Cookies.get('session')});
+    var api_resp = api_call('kitchenuser', {method: 'getForEdit', session: Cookies.get('session')});
     if (api_resp.Success) {
       var d = api_resp.Return;
       d["saveDisabled"] = true;
@@ -100,11 +101,7 @@ module.exports = React.createClass({
         id="Email" 
         handleInputChanged={this.handleInputChanged}
         default_value={guest.Email}/>
-      <FormTextRow form_name="Phone #" 
-        place_holder="01234567890" 
-        id="Phone"
-        default_value={guest.Phone}
-        handleInputChanged={this.handleInputChanged}/>
+      <AddPhone />
       <div className="row">
         <div className="col-sm-2 col-xs-4">
         	<p className="form-label text-right">Bio</p>
