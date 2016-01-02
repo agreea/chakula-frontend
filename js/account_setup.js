@@ -256,23 +256,23 @@ module.exports = React.createClass({
 				<li className="inactive-gray">{inactive_circle} {addBioText}</li>];
 		switch (s.activeScreen) {
 			case "add_phone":
-				items[0] = <li>{active_circle} {addPhoneText}</li>;
+				items[0] = <li>{active_circle} <b>{addPhoneText}</b></li>;
 				prev = "";
 				if (s.phoneAdded)
 					next = cont;
 				break;
 			case "add_email":
-				items[1] = <li>{active_circle} {addEmailText}</li>;
+				items[1] = <li>{active_circle} <b>{addEmailText}</b></li>;
 				if (s.emailAdded)
 					next = cont;
 				break;
 			case "add_fb":
-				items[1] = <li>{active_circle} {addFbText}</li>;
+				items[1] = <li>{active_circle} <b>{addFbText}</b></li>;
 				if (s.fbAdded)
 					next = cont;
 				break;
 			case "add_bio":
-				items[2] = <li>{active_circle} {addBioText}</li>;
+				items[2] = <li>{active_circle} <b>{addBioText}</b></li>;
 				if (s.bioAdded)
 					next = complete_blue;
 				else

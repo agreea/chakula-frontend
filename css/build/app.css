@@ -754,6 +754,10 @@ Colors
   background-color: #5bc0de;
   color: #fff;
 }
+.c-blue-bg:disabled {
+  background-color: #abdceb;
+  color: #fff;
+}
 /*
 Rules on multiple pages
 */
@@ -1569,9 +1573,15 @@ Payment UI Styling
 #account-setup .caro-nav {
   color: #777;
 }
+#account-setup .caro-nav.c-blue-bg {
+  color: #fff;
+}
 #account-setup .nav-list {
   margin-top: 52px;
 }
 #account-setup .nav-list li {
   padding-bottom: 8px;
+}
+#account-setup .nav-list p {
+  display: inline;
 }
