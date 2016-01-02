@@ -258,13 +258,13 @@ module.exports = React.createClass({
 					<div id="carousel" className="carousel" data-ride="carousel" data-interval="false">
 				        <div className="carousel-inner" id="carousel-pages" role="listbox">
 							<div className="item active" id="add_phone">
-			                    <AddPhone success={this.handlePhoneSuccess}/>
+			                    <AddPhone success={this.handleSuccess}/>
 			                </div>		
 			                <div className="item" id="add_email">
-			                	<AddEmail success={this.handleEmailSuccess}/>
+			                	<AddEmail success={this.handleSuccess}/>
 			                </div>
 			                <div className="item" id="add_bio">
-			                	<AddBio success={this.handleBioSuccess}/>
+			                	<AddBio success={this.handleSuccess}/>
 			                </div>
 			            </div>
 			            <div className="row">
