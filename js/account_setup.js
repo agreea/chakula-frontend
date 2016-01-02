@@ -243,8 +243,8 @@ module.exports = React.createClass({
 					<button onClick={this.carouselPressed} className="caro-nav">Skip</button></a>,
 			cont = <a href="#carousel" role="button" data-slide="next" id="next">
 					<button onClick={this.carouselPressed} className="c-blue-bg caro-nav">Continue</button></a>,
-			complete_gray = <button onClick={this.props.processComplete} className="caro-nav">Continue</button>,
-			complete_blue = <button onClick={this.props.processComplete} className="c-blue-bg caro-nav">Continue</button>;
+			complete_gray = <button onClick={this.props.complete} className="caro-nav">Continue</button>,
+			complete_blue = <button onClick={this.props.complete} className="c-blue-bg caro-nav">Continue</button>;
 		var checkmark = <i className="fa fa-check active-green"></i>;
 		var addPhoneText = (s.phoneAdded)? <p>{checkmark} Phone Added</p> : <p>Add Phone</p>,
 			addEmailText = (s.emailAdded)? <p>{checkmark} Email Added</p> : <p>Add Email</p>,

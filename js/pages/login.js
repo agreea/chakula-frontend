@@ -109,6 +109,7 @@ module.exports = React.createClass({
         }
     },
     processComplete: function() {
+      console.log("process complete");
       this.history.pushState(null, this.props.location.query.fwd);
     },
     getInitialState: function() {
