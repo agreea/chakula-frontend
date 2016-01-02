@@ -15,6 +15,8 @@ var AddPhone = React.createClass({
 			key = e.target.id,
 			val = e.target.value;
 		obj[key] = val;
+		if (key === "phone")
+			obj["verified"] = false;
 		this.setState(obj);
 	},
 	handleSendCodeClicked: function(){
@@ -47,13 +49,13 @@ var AddPhone = React.createClass({
 			session: Cookies.get("session"),
 			pin: pin
 		});
-		if (api_resp.Success)
+		if (api_resp.Success) 
 			this.props.success("phoneAdded");
 		else
 			errors.push(api_resp.Error);
 		this.setState({
 			verified: api_resp.Success, 
-			errors: errors
+			errors: errors,
 		});
 	},
 	render: function() {
@@ -147,6 +149,27 @@ var AddEmail = React.createClass({
 		);
 	}
 });
+var AddPhoto = React.createClass({
+	// do something crazy
+	getInitialState: function() {
+		return({src: "", errors: []})
+	},
+	updatePhoto: function(e){
+		var pic;
+		var api_resp = api_call("kitchenuser", {
+			method: "updateProfPic",
+			session: Cookies.get("session"),
+			pic: pic
+		});
+		if (api_resp.Success)
+			this.setState({src: api_resp.Return.Pic});
+		else
+			this.setState({errors: [api_resp.Error]});
+	},
+	render: function(){
+		return <p />
+	}
+});
 var AddBio = React.createClass({
 	getInitialState: function(){
 		return {bio: "", errors: []}
@@ -218,31 +241,41 @@ module.exports = React.createClass({
 			next = <a href="#carousel" role="button" data-slide="next" id="next">
 					<button onClick={this.carouselPressed} className="caro-nav">Skip</button></a>,
 			cont = <a href="#carousel" role="button" data-slide="next" id="next">
-					<button onClick={this.carouselPressed} className="c-blue-bg caro-nav">Continue</button></a>;
+					<button onClick={this.carouselPressed} className="c-blue-bg caro-nav">Continue</button></a>,
+			complete_gray = <button onClick={this.props.processComplete} className="caro-nav">Continue</button>,
+			complete_blue = <button onClick={this.props.processComplete} className="c-blue-bg caro-nav">Continue</button>;
+		var checkmark = <i className="fa fa-check active-green"></i>;
+		var addPhoneText = (s.phoneAdded)? <p>{checkmark} Phone Added</p> : <p>Add Phone</p>,
+			addEmailText = (s.emailAdded)? <p>{checkmark} Email Added</p> : <p>Add Email</p>,
+			addBioText = (s.bioAdded)? <p>{checkmark} Bio Added</p> : <p>Add Bio</p>,
+			addFbText = (s.fbAdded)? <p>{checkmark} Facebook Added</p> : <p>Add Facebook</p>;
 		var items = 
-			[<li className="inactive-gray">{inactive_circle} Phone</li>, 
-				<li className="inactive-gray">{inactive_circle} Email</li>, 
-				<li className="inactive-gray">{inactive_circle} Bio</li>];
+			[<li className="inactive-gray">{inactive_circle} {addPhoneText}</li>, 
+				<li className="inactive-gray">{inactive_circle} {addEmailText}</li>, 
+				<li className="inactive-gray">{inactive_circle} {addBioText}</li>];
 		switch (s.activeScreen) {
 			case "add_phone":
-				items[0] = <li>{active_circle} <b>Phone</b></li>;
+				items[0] = <li>{active_circle} {addPhoneText}</li>;
 				prev = "";
 				if (s.phoneAdded)
 					next = cont;
 				break;
 			case "add_email":
-				items[1] = <li>{active_circle} <b>Email</b></li>;
+				items[1] = <li>{active_circle} {addEmailText}</li>;
 				if (s.emailAdded)
 					next = cont;
 				break;
 			case "add_fb":
-				items[1] = <li>{active_circle} <b>Phone</b></li>;
+				items[1] = <li>{active_circle} {addFbText}</li>;
 				if (s.fbAdded)
 					next = cont;
 				break;
 			case "add_bio":
-				items[2] = <li>{active_circle} <b>Bio</b></li>;
-				next = "";
+				items[2] = <li>{active_circle} {addBioText}</li>;
+				if (s.bioAdded)
+					next = complete_blue;
+				else
+					next = complete_gray;
 				break;
 			default:
 				break;
