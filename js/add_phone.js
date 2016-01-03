@@ -3,7 +3,7 @@ module.exports = React.createClass({
 	getInitialState: function() {
 		return (
 			{
-				phone: "", 
+				phone: (this.props.phone)? this.props.phone : "", 
 				pin: "", 
 				sendCodePressed: false, 
 				verified: false, 
@@ -74,9 +74,7 @@ module.exports = React.createClass({
 				   </span>
 				</div> : "";
 		return (
-			<div className="col-xs-8">
-				<h3>Add Phone</h3>
-				<p>Verifying your phone number will help confirm your identity and allow us to send you real time updates about the meals you attend.</p>
+			<div>
 				<div className="input-group">
 					<input type="text" 
 							placeholder="1234567890" 

@@ -196,7 +196,11 @@ module.exports = React.createClass({
 					<div id="carousel" className="carousel" data-ride="carousel" data-interval="false">
 				        <div className="carousel-inner" id="carousel-pages" role="listbox">
 							<div className="item active" id="add_phone">
-			                    <AddPhone success={this.handleSuccess}/>
+								<div className="col-xs-8">
+									<h3>Add Phone</h3>
+									<p>Verifying your phone number will help confirm your identity and allow us to send you real time updates about the meals you attend.</p>
+				                    <AddPhone success={this.handleSuccess}/>
+				                </div>
 			                </div>		
 			                <div className="item" id="add_email">
 			                	<AddEmail success={this.handleSuccess}/>

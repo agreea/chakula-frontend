@@ -30,9 +30,8 @@ module.exports = React.createClass({
 		console.log("attempting to send guest data");
 		var errors = [];
 		if (!this.state.Email) errors.push("Email is mandatory");
-		if (!this.state.Phone) errors.push("Phone is mandatory");
-		if (!/^\d+$/.test(this.state.Phone)) errors.push("Phone must be digits only");
-		if (this.state.Phone.length !== 10) errors.push("Phone must be 10 digits long");
+    if (!this.state.First_name) errors.push("First name is mandatory");
+    if (!this.state.Last_name) errors.push("Last name is mandatory");
 		if (errors.length > 0)
       this.setState({errors: errors});
     else
@@ -50,6 +49,9 @@ module.exports = React.createClass({
       data["saveSuccess"] = true;
     } 
     this.setState(data);
+  },
+  addPhoneSuccess: function() {
+    // idk MAN IDK FUCKING K
   },
   componentWillMount: function() {
     var api_resp = api_call('kitchenuser', {method: 'getForEdit', session: Cookies.get('session')});
@@ -101,7 +103,14 @@ module.exports = React.createClass({
         id="Email" 
         handleInputChanged={this.handleInputChanged}
         default_value={guest.Email}/>
-      <AddPhone />
+      <div className="row">
+        <div className="col-sm-2 col-xs-4">
+          <p className="form-label text-right">Phone</p>
+        </div>
+        <div className="col-xs-8 col-sm-6">
+          <AddPhone phone={guest.Phone} success={this.addPhoneSuccess}/>
+        </div>
+      </div>
       <div className="row">
         <div className="col-sm-2 col-xs-4">
         	<p className="form-label text-right">Bio</p>
