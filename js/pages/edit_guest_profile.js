@@ -107,7 +107,7 @@ module.exports = React.createClass({
         <div className="col-sm-2 col-xs-4">
           <p className="form-label text-right">Phone</p>
         </div>
-        <div className="col-xs-8 col-sm-6">
+        <div className="col-sm-4 col-md-3 col-xs-8">
           <AddPhone phone={guest.Phone} 
             success={this.addPhoneSuccess}
             verified={guest.Phone_verified} />

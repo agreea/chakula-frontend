@@ -61,6 +61,16 @@ module.exports = React.createClass({
 	},
 	render: function() {
 		var s = this.state;
+		var fontsize = {"fontSize":"24px"};
+		var verifyButton =
+			<button className="c-blue transparent-bg" 
+							onClick={this.handleVerifyClicked} 
+							disabled={s.verified}
+							style={fontsize}>{
+								(s.verified)? 
+								<i className="fa fa-check-circle-o active-green"></i> : 
+								<i className="fa fa-arrow-circle-o-right"></i>
+							}</button>
 		var verifyInput = (s.sendCodePressed)?
 					<div className="input-group">
 						<input type="text" 
@@ -70,9 +80,7 @@ module.exports = React.createClass({
 							className="text-field"
 							onChange={this.handleInputChange}></input>
 				   <span className="input-group-btn">
-						<button className="c-blue-bg" 
-							onClick={this.handleVerifyClicked} 
-							disabled={s.verified}>{(s.verified)? <p><i className="fa fa-check"></i> "Verified"</p> : "Verify"}</button>
+						{verifyButton}
 				   </span>
 				</div> : "";
 		var sendPinText;
