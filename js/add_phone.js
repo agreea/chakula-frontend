@@ -6,7 +6,7 @@ module.exports = React.createClass({
 				phone: (this.props.phone)? this.props.phone : "", 
 				pin: "", 
 				sendCodePressed: false, 
-				verified: false, 
+				verified: this.props.verified, 
 				errors: []
 			});
 	},
@@ -70,9 +70,18 @@ module.exports = React.createClass({
 							className="text-field"
 							onChange={this.handleInputChange}></input>
 				   <span className="input-group-btn">
-						<button className="c-blue-bg" onClick={this.handleVerifyClicked} disabled={s.verified}>{(s.verified)? <p><i className="fa fa-check"></i> "Verified"</p> : "Verify"}</button>
+						<button className="c-blue-bg" 
+							onClick={this.handleVerifyClicked} 
+							disabled={s.verified}>{(s.verified)? <p><i className="fa fa-check"></i> "Verified"</p> : "Verify"}</button>
 				   </span>
 				</div> : "";
+		var sendPinText;
+		if (s.verified)
+			sendPinText = "Verified";
+		else if (s.sendCodePressed)
+			sendPinText = "Resend PIN";
+		else 
+			sendPinText = "Send PIN";
 		return (
 			<div>
 				<div className="input-group">
@@ -83,7 +92,9 @@ module.exports = React.createClass({
 							className="text-field"
 							onChange={this.handleInputChange}></input>
 				   <span className="input-group-btn">
-				        <button className="brand-btn" onClick={this.handleSendCodeClicked}>{(s.sendCodePressed)? "Resend PIN" : "Send PIN"}</button>
+				        <button className="brand-btn" 
+				        	onClick={this.handleSendCodeClicked}
+				        	disabled={s.verified}>{sendPinText}</button>
 				   </span>
 				</div>
 				{verifyInput}

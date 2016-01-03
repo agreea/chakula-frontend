@@ -108,7 +108,9 @@ module.exports = React.createClass({
           <p className="form-label text-right">Phone</p>
         </div>
         <div className="col-xs-8 col-sm-6">
-          <AddPhone phone={guest.Phone} success={this.addPhoneSuccess}/>
+          <AddPhone phone={guest.Phone} 
+            success={this.addPhoneSuccess}
+            verified={guest.Phone_verified} />
         </div>
       </div>
       <div className="row">
