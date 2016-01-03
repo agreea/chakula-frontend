@@ -13,6 +13,7 @@ Colors
 @inactive-gray: #999;
 @medium-gray: #ddd;
 @active-green: #06ba3f;
+@green-light: #73c78e;
 @transparent: rgba(0,0,0,0);
 #app, .container-fluid {
     height: 100%;
@@ -274,10 +275,18 @@ Colors
 */
 .active-green {
     color: @active-green;
+    &:disabled{
+        color: @green-light;
+    }
+
 }
 .active-green-bg {
     background-color: @active-green;
     color: @white;
+    &:disabled{
+        background-color: @green-light;
+    }
+
 }
 .inactive-gray {
     color: @inactive-gray;
@@ -298,7 +307,7 @@ Colors
     }
 }
 .transparent-bg {
-    background-color:;
+    background-color: @transparent;
 }
 /*
 Rules on multiple pages
