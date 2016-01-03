@@ -736,9 +736,15 @@ Colors
 .active-green {
   color: #06ba3f;
 }
+.active-green:disabled {
+  color: #73c78e;
+}
 .active-green-bg {
   background-color: #06ba3f;
   color: #fff;
+}
+.active-green-bg:disabled {
+  background-color: #73c78e;
 }
 .inactive-gray {
   color: #999;
@@ -759,7 +765,7 @@ Colors
   color: #fff;
 }
 .transparent-bg {
-  background-color: ;
+  background-color: rgba(0, 0, 0, 0);
 }
 /*
 Rules on multiple pages
