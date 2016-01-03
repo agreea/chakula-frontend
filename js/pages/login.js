@@ -79,8 +79,8 @@ module.exports = React.createClass({
           if (api_resp.Success) {
             Cookies.set('session', api_resp.Return.Session_token);
             if (api_resp.Return.Facebook_long_token === "NEW_GUEST")
-              this.setState({newAccount: true});
-            else 
+              this.setState({newAccount: true, fbLogin: true});
+            else
               this.history.pushState(null, this.props.location.query.fwd);
           }
       } else {
@@ -119,7 +119,8 @@ module.exports = React.createClass({
           email: '', 
           password: '', 
           passwordConf: '',
-          newAccount: false
+          newAccount: false,
+          fbLogin: false
         });
     },
     render: function() {
@@ -175,7 +176,7 @@ module.exports = React.createClass({
         return(
             <div className="row" id="login">
             {(this.state.newAccount)? 
-              <AccountSetup complete={this.processComplete}/> :
+              <AccountSetup complete={this.processComplete} fbLogin={this.state.fbLogin}/> :
               <div className="col-xs-9">
                   <div className="row">
                     <img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>

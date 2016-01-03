@@ -123,7 +123,48 @@ var AddBio = React.createClass({
 		);
 	}
 });
-
+var AddFb = React.createClass({
+	getInitialState: function() {
+		return {connected: false, errors: []}
+	},
+	handleFbLogin: function() {
+        if (response.authResponse) {
+          var access_token = response.authResponse.accessToken, //get access token
+              user_id = response.authResponse.userID; //get FB UID
+          var api_resp = api_call('kitchenuser', 
+            {
+            	method: 'FbConnect', 
+            	fbToken: access_token,
+            	session: Cookies.get("session")
+        	});
+          if (api_resp.Success) {
+          	this.setState({connected: true});
+          	this.props.success("fbAdded");
+          }
+      } else {
+        this.setState({errors:["Facebook login failed."]});
+      }
+	},
+	render: function() {
+		var s = this.state;
+		return(
+			<div className="col-xs-8">
+				<h3>Connect with Facebook</h3>
+				<p>Connecting your Facebook account helps us set up your identity and allows us to use your profile picture </p>
+				<div>
+				{(s.connected)?
+					<img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img> :
+					<button className="active-green-bg" disabled="true"><i className="fa fa-check"></i> Facebook Connected</button>
+				}
+				</div>
+				<ul className="error-field">
+					{(s.errors)? 
+						s.errors.map(function(error){return <li>{error}</li>}) : ""}
+				</ul>
+			</div>
+		);
+	}
+})
 module.exports = React.createClass({
 	handleSuccess: function(field_key){
 		var obj = {};
@@ -139,6 +180,7 @@ module.exports = React.createClass({
 	render: function(){
 		var style = {"marginTop":"52px"},
 			s = this.state;
+		// navigation components
 		var inactive_circle = <i className="fa fa-circle-o inactive-gray"></i>,
 			active_circle = <i className="fa fa-circle active-green"></i>,
 			prev = <a href="#carousel" role="button" data-slide="prev" id="prev">
@@ -149,7 +191,9 @@ module.exports = React.createClass({
 					<button onClick={this.carouselPressed} className="c-blue-bg caro-nav">Continue</button></a>,
 			complete_gray = <button onClick={this.props.complete} className="caro-nav">Continue</button>,
 			complete_blue = <button onClick={this.props.complete} className="c-blue-bg caro-nav">Continue</button>;
+		
 		var checkmark = <i className="fa fa-check active-green"></i>;
+
 		var addPhoneText = (s.phoneAdded)? <p>{checkmark} Phone Added</p> : <p>Add Phone</p>,
 			addEmailText = (s.emailAdded)? <p>{checkmark} Email Added</p> : <p>Add Email</p>,
 			addBioText = (s.bioAdded)? <p>{checkmark} Bio Added</p> : <p>Add Bio</p>,
@@ -201,10 +245,16 @@ module.exports = React.createClass({
 									<p>Verifying your phone number will help confirm your identity and allow us to send you real time updates about the meals you attend.</p>
 				                    <AddPhone success={this.handleSuccess}/>
 				                </div>
-			                </div>		
-			                <div className="item" id="add_email">
-			                	<AddEmail success={this.handleSuccess}/>
 			                </div>
+			                {
+			                	(this.props.fbLogin)?
+					                <div className="item" id="add_email">
+					                	<AddEmail success={this.handleSuccess}/>
+					                </div> :
+					                <div className="item" id="add_fb">
+					                	<AddFb success={this.handleSuccess}/>
+					                </div>
+			                }	
 			                <div className="item" id="add_bio">
 			                	<AddBio success={this.handleSuccess}/>
 			                </div>
