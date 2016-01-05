@@ -189,24 +189,26 @@ module.exports = React.createClass({
                 fbLogin={this.state.fbLogin}
                 fbEmail={this.state.fbEmail}
                 fbId={this.state.fbId}/> :
-              <div className="col-xs-9">
-                  <div className="row">
-                    <img onClick={this.handleFbLogin} className="fb-login" src="./img/fb-login.svg" id="fb"></img>
+              <div className="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                <h3>{(this.state.createAccount)? "Create Account" : "Login"}</h3>
+                <div className="row text-center">
+                  <img onClick={this.handleFbLogin} className="fb-login" src="./img/fb-login.svg" id="fb"></img>
+                </div>
+                <p> - or - </p> 
+                {error_messages}
+                <div className="row">
+                  {text_fields}
+                </div>
+                <div className="row">
+                  {cta_button}
+                </div>
+                <div className="row">
+                  <div className="col-xs-12 col-sm-6">
+                    <a onClick={this.handleCreateAccountLink}>{create_account_link}</a>
                   </div>
-                  {error_messages}
-                  <div className="row">
-                      {text_fields}
-                  </div>
-                  <div className="row">
-                    {cta_button}
-                  </div>
-                  <div className="row">
-                      <div className="col-xs-12 col-sm-6">
-                          <a onClick={this.handleCreateAccountLink}>{create_account_link}</a>
-                      </div>
-                      {forgot_pass_text}
-                  </div>
-                </div>}
+                  {forgot_pass_text}
+                </div>
+              </div>}
             </div>
         );
     }

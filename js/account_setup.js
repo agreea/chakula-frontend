@@ -99,7 +99,7 @@ var AddPhoto = React.createClass({
 			pic: pic
 		});
 		if (api_resp.Success){
-			this.setState({src: api_resp.Return.Pic});
+			this.setState({src: api_resp.Return});
 			this.props.success("photoAdded");
 		} else
 			this.setState({errors: [api_resp.Error]});
@@ -109,7 +109,7 @@ var AddPhoto = React.createClass({
 			<div>
 				<h3>Add a Photo</h3>
 				<p>{"Adding a photo of yourself helps our hosts get an idea of who they're welcoming into their homes."}</p>
-				<p>"If you've connected Chakula with Facebook, we've included your profile picture below"</p>
+				<p>{"If you've connected Chakula with Facebook, we've included your profile picture below"}</p>
 				<img src={this.state.src} />
 		        <div className="upload-img-form">
 		          <div className="fileUpload btn-upload btn btn-primary">
@@ -220,8 +220,7 @@ module.exports = React.createClass({
 		this.setState(obj);
 	},
 	handleFacebookAdded: function(fbId){
-		this.handleSuccess("fbAdded");
-		this.setState({fbId: fbId});
+		this.setState({fbId: fbId, fbAdded: true});
 	},
 	carouselPressed: function() {
 		this.setState({activeScreen: $(".active").attr('id')});
