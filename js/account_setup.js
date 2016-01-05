@@ -111,7 +111,7 @@ var AddPhoto = React.createClass({
 				<h3>Add a Photo</h3>
 				<p>{"Adding a photo of yourself helps our hosts get an idea of who they're welcoming into their homes."}</p>
 				<p>{"If you've connected Chakula with Facebook, we've included your profile picture below"}</p>
-				<img className="img-responsive img-circle img-responsive-center"
+				<img className="img-responsive img-responsive-center"
 					src={this.state.src}
 					style={style}/>
 				<div className="row text-center">
@@ -226,6 +226,7 @@ module.exports = React.createClass({
 	},
 	handleFacebookAdded: function(fbId){
 		this.setState({fbId: fbId, fbAdded: true});
+		console.log(this.state.fbId);
 	},
 	carouselPressed: function() {
 		this.setState({activeScreen: $(".active").attr('id')});
