@@ -2,7 +2,7 @@ var React = require('react');
 var AddPhone = require('./add_phone.js');
 var AddEmail = React.createClass({
 	getInitialState: function(){
-		return {email: ""}
+		return {email: this.props.email}
 	},
 	handleInputChange: function(e) {
 		var obj = {},
@@ -56,23 +56,68 @@ var AddEmail = React.createClass({
 });
 var AddPhoto = React.createClass({
 	// do something crazy
-	getInitialState: function() {
-		return({src: "", errors: []})
+	handlePhotoUpload: function(e){
+	    console.log(e);
+	    var file = e.target.files[0];
+	    if (!/image.*/.test(file.type)) {
+	        return;
+	    }
+	    var reader = new FileReader();
+	    reader.onload = this.onload;
+	    reader.readAsDataURL(file);
 	},
-	updatePhoto: function(e){
-		var pic;
+	onload: function(e){
+	    var img = document.createElement("img");
+	    var component = this;
+	    img.onload = function(event) {
+	      var canvas = document.createElement("canvas");
+	      var MAX_WIDTH = 500;
+	      var MAX_HEIGHT = 500;
+	      var width = img.width;
+	      var height = img.height;
+	      if (width > height && width > MAX_WIDTH) { // if landscape, resize by landscape
+	        height *= MAX_WIDTH / width;
+	        width = MAX_WIDTH;
+	      } else if (height > MAX_HEIGHT) { // if portrait, resize by portrait
+	          width *= MAX_HEIGHT / height;
+	          height = MAX_HEIGHT;
+	   	  }
+	      canvas.width = width;
+	      canvas.height = height;
+	      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+	      component.uploadPhotoToServer(canvas.toDataURL("image/jpeg"));
+	    };
+		img.src = e.target.result;
+	},
+	getInitialState: function() {
+		return({src: this.props.pic, errors: []})
+	},
+	uploadPhotoToServer: function(pic){
 		var api_resp = api_call("kitchenuser", {
 			method: "updateProfPic",
 			session: Cookies.get("session"),
 			pic: pic
 		});
-		if (api_resp.Success)
+		if (api_resp.Success){
 			this.setState({src: api_resp.Return.Pic});
-		else
+			this.success("photoAdded");
+		} else
 			this.setState({errors: [api_resp.Error]});
 	},
 	render: function(){
-		return <p />
+		return (
+			<div>
+				<h3>Add a Photo</h3>
+				<p>{"Adding a photo of yourself helps our hosts get an idea of who they're welcoming into their homes."}</p>
+				<p>"If you've connected Chakula with Facebook, we've included your profile picture below"</p>
+				<img src={this.state.src} />
+		        <div className="upload-img-form">
+		          <div className="fileUpload btn-upload btn btn-primary">
+		            <span>Upload Picture</span>
+		            <input className="upload" id="img-upload" type="file" multiple onChange={this.handlePhotoUpload}/>
+		          </div>
+		        </div>
+			</div>);
 	}
 });
 var AddBio = React.createClass({
@@ -129,17 +174,17 @@ var AddFb = React.createClass({
 	},
 	handleFbLogin: function() {
         if (response.authResponse) {
-          var access_token = response.authResponse.accessToken, //get access token
-              user_id = response.authResponse.userID; //get FB UID
+          var accessToken = response.authResponse.accessToken, //get access token
+              userId = response.authResponse.userID; //get FB UID
           var api_resp = api_call('kitchenuser', 
             {
             	method: 'FbConnect', 
-            	fbToken: access_token,
+            	fbToken: accessToken,
             	session: Cookies.get("session")
         	});
           if (api_resp.Success) {
           	this.setState({connected: true});
-          	this.props.success("fbAdded");
+          	this.props.success(userId);
           }
       } else {
         this.setState({errors:["Facebook login failed."]});
@@ -171,11 +216,15 @@ module.exports = React.createClass({
 		obj[field_key] = true;
 		this.setState(obj);
 	},
+	handleFacebookAdded: function(fbId){
+		this.handleSuccess("fbAdded");
+		this.setState({fbId: fbId});
+	},
 	carouselPressed: function() {
 		this.setState({activeScreen: $(".active").attr('id')});
 	},
 	getInitialState: function() {
-		return({activeScreen: "add_phone"})
+		return({activeScreen: "add_phone", fbId: this.props.fbId});
 	},
 	render: function(){
 		var style = {"marginTop":"52px"},
@@ -197,30 +246,37 @@ module.exports = React.createClass({
 		var addPhoneText = (s.phoneAdded)? <p>{checkmark} Phone Added</p> : <p>Add Phone</p>,
 			addEmailText = (s.emailAdded)? <p>{checkmark} Email Added</p> : <p>Add Email</p>,
 			addBioText = (s.bioAdded)? <p>{checkmark} Bio Added</p> : <p>Add Bio</p>,
-			addFbText = (s.fbAdded)? <p>{checkmark} Facebook Added</p> : <p>Add Facebook</p>;
+			addFbText = (s.fbAdded)? <p>{checkmark} Facebook Added</p> : <p>Add Facebook</p>,
+			addPhotoText = (s.photoAdded)? <p>{checkmark} Photo Added</p> : <p>Add Photo</p>;
 		var items = 
-			[<li className="inactive-gray">{inactive_circle} {addPhoneText}</li>, 
-				<li className="inactive-gray">{inactive_circle} {addEmailText}</li>, 
+			[<li className="inactive-gray">{inactive_circle} {(this.props.fbLogin)? addEmailText : addFbText}</li>,
+				<li className="inactive-gray">{inactive_circle} {addPhoneText}</li>,
+				<li className="inactive-gray">{inactive_circle} {addPhotoText}</li>, 
 				<li className="inactive-gray">{inactive_circle} {addBioText}</li>];
 		switch (s.activeScreen) {
-			case "add_phone":
-				items[0] = <li>{active_circle} <b>{addPhoneText}</b></li>;
-				prev = "";
-				if (s.phoneAdded)
-					next = cont;
-				break;
 			case "add_email":
-				items[1] = <li>{active_circle} <b>{addEmailText}</b></li>;
+				items[0] = <li>{active_circle} <b>{addEmailText}</b></li>;
 				if (s.emailAdded)
 					next = cont;
 				break;
 			case "add_fb":
-				items[1] = <li>{active_circle} <b>{addFbText}</b></li>;
+				items[0] = <li>{active_circle} <b>{addFbText}</b></li>;
 				if (s.fbAdded)
+					next = cont;
+				break;			
+			case "add_phone":
+				items[1] = <li>{active_circle} <b>{addPhoneText}</b></li>;
+				prev = "";
+				if (s.phoneAdded)
+					next = cont;
+				break;
+			case "add_photo":
+				items[2] = <li>{active_circle} <b>{addPhotoText}</b></li>;
+				if (s.photoAdded)
 					next = cont;
 				break;
 			case "add_bio":
-				items[2] = <li>{active_circle} <b>{addBioText}</b></li>;
+				items[3] = <li>{active_circle} <b>{addBioText}</b></li>;
 				if (s.bioAdded)
 					next = complete_blue;
 				else
@@ -239,22 +295,32 @@ module.exports = React.createClass({
 				<div className="col-xs-8">
 					<div id="carousel" className="carousel" data-ride="carousel" data-interval="false">
 				        <div className="carousel-inner" id="carousel-pages" role="listbox">
-							<div className="item active" id="add_phone">
+							{(this.props.fbLogin)?
+					            <div className="item active" id="add_email">
+					               	<AddEmail 
+					               		success={this.handleSuccess}
+					               		email={this.fbEmail}/>
+					            </div> :
+					            <div className="item active" id="add_fb">
+					               	<AddFb success={this.handleSuccess}/>
+				                </div>
+			                }	
+							<div className="item" id="add_phone">
 								<div className="col-xs-8">
 									<h3>Add Phone</h3>
-									<p>Verifying your phone number will help confirm your identity and allow us to send you real time updates about the meals you attend.</p>
+									<p>Verifying your phone number will help confirm your identity and 
+										allow us to send you real time updates about the meals you attend.</p>
 				                    <AddPhone success={this.handleSuccess}/>
 				                </div>
 			                </div>
-			                {
-			                	(this.props.fbLogin)?
-					                <div className="item" id="add_email">
-					                	<AddEmail success={this.handleSuccess}/>
-					                </div> :
-					                <div className="item" id="add_fb">
-					                	<AddFb success={this.handleSuccess}/>
-					                </div>
-			                }	
+			                <div className="item" id="add_photo">
+			                	<AddPhoto 
+			                		pic={(this.state.fbId)?
+			                			"https://graph.facebook.com/" + this.state.fbId + "/picture?width=500&height=500" :
+			                			"img/user-icon.svg"
+			                		}
+			                		success={this.handleSuccess} />
+			                </div>
 			                <div className="item" id="add_bio">
 			                	<AddBio success={this.handleSuccess}/>
 			                </div>

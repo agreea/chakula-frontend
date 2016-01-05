@@ -60,7 +60,7 @@ module.exports = React.createClass({
       if (api_resp.Success) {
         Cookies.set('session', api_resp.Return.Session_token);
         console.log("does this work??");
-        this.setState({errors: [], newAccount: true});
+        this.setState({errors: [], newAccount: true, fbLogin: false});
       } else 
         this.setState({errors: [api_resp.Error]});
       // api call
@@ -72,15 +72,22 @@ module.exports = React.createClass({
     fbResponseHandler: function(response) {
       console.log(response);
         if (response.authResponse) {
-          var access_token = response.authResponse.accessToken,
-              user_id = response.authResponse.userID; 
+          var accessToken = response.authResponse.accessToken,
+              userId = response.authResponse.userID; 
           var api_resp = api_call('kitchenuser', 
             {method: 'LoginFb', 
-            fbToken: access_token});
+            fbToken: accessToken});
           if (api_resp.Success) {
             Cookies.set('session', api_resp.Return.Session_token);
+            var fbEmail;
+            FB.api('/me', { locale: 'en_US', fields: 'name, email' }, function(r) { fbEmail = r.email});
             if (api_resp.Return.Facebook_long_token === "NEW_GUEST")
-              this.setState({newAccount: true, fbLogin: true});
+              this.setState({
+                newAccount: true, 
+                fbLogin: true, 
+                fbEmail: fbEmail,
+                fbId: userId
+              });
             else
               this.history.pushState(null, this.props.location.query.fwd);
           }
@@ -177,10 +184,14 @@ module.exports = React.createClass({
         return(
             <div className="row" id="login">
             {(this.state.newAccount)? 
-              <AccountSetup complete={this.processComplete} fbLogin={this.state.fbLogin}/> :
+              <AccountSetup 
+                complete={this.processComplete} 
+                fbLogin={this.state.fbLogin}
+                fbEmail={this.state.fbEmail}
+                fbId={this.state.fbId}/> :
               <div className="col-xs-9">
                   <div className="row">
-                    <img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>
+                    <img onClick={this.handleFbLogin} className="fb-login" src="./img/fb-login.svg" id="fb"></img>
                   </div>
                   {error_messages}
                   <div className="row">
