@@ -89,9 +89,6 @@ var AddPhoto = React.createClass({
 	    };
 		img.src = e.target.result;
 	},
-	getInitialState: function() {
-		return({src: this.props.pic, errors: []})
-	},
 	uploadPhotoToServer: function(pic){
 		var api_resp = api_call("kitchenuser", {
 			method: "updateProfPic",
@@ -103,6 +100,21 @@ var AddPhoto = React.createClass({
 			this.props.success("photoAdded");
 		} else
 			this.setState({errors: [api_resp.Error]});
+	},
+	componentDidUpdate: function() {
+		this.updateDefaultPic();
+	},
+	componentDidMount: function() {
+		this.updateDefaultPic();
+	},
+	updateDefaultPic: function() { 
+		// resolves updates in parent state communicated through changes in props with local state.
+		if(this.state.src === "img/user-icon.svg" && 
+			this.props.pic !== "img/user-icon.svg")
+			this.setState({src: this.props.pic});
+	},
+	getInitialState: function() {
+		return({src: this.props.pic, errors: []})
 	},
 	render: function(){
 		var style = {maxHeight: "250px"};
@@ -294,6 +306,7 @@ module.exports = React.createClass({
 			default:
 				break;
 		}
+		console.log(this.state.fbId);
 		return (
 			<div className="row" id="account-setup">
 				<div className="col-xs-3 col-sm-2">
@@ -324,11 +337,11 @@ module.exports = React.createClass({
 			                </div>
 			                <div className="item" id="add_photo">
 			                	<AddPhoto 
-			                		pic={(this.state.fbId)?
-			                			"https://graph.facebook.com/" + this.state.fbId + "/picture?width=500&height=500" :
+			                		pic={(s.fbId)?
+			                			"https://graph.facebook.com/" + s.fbId + "/picture?width=500&height=500" :
 			                			"img/user-icon.svg"
 			                		}
-			                		success={this.handleSuccess} />
+			                		success={this.handleSuccess}/>
 			                </div>
 			                <div className="item" id="add_bio">
 			                	<AddBio success={this.handleSuccess}/>
