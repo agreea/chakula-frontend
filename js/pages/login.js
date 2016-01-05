@@ -194,7 +194,7 @@ module.exports = React.createClass({
                 <div className="row text-center">
                   <img onClick={this.handleFbLogin} className="fb-login" src="./img/fb-login.svg" id="fb"></img>
                 </div>
-                <p> - or - </p> 
+                <p className="text-center"> - or - </p> 
                 {error_messages}
                 <div className="row">
                   {text_fields}

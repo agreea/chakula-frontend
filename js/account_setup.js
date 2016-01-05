@@ -71,8 +71,8 @@ var AddPhoto = React.createClass({
 	    var component = this;
 	    img.onload = function(event) {
 	      var canvas = document.createElement("canvas");
-	      var MAX_WIDTH = 500;
-	      var MAX_HEIGHT = 500;
+	      var MAX_WIDTH = 350;
+	      var MAX_HEIGHT = 350;
 	      var width = img.width;
 	      var height = img.height;
 	      if (width > height && width > MAX_WIDTH) { // if landscape, resize by landscape
@@ -110,13 +110,15 @@ var AddPhoto = React.createClass({
 				<h3>Add a Photo</h3>
 				<p>{"Adding a photo of yourself helps our hosts get an idea of who they're welcoming into their homes."}</p>
 				<p>{"If you've connected Chakula with Facebook, we've included your profile picture below"}</p>
-				<img src={this.state.src} />
-		        <div className="upload-img-form">
-		          <div className="fileUpload btn-upload btn btn-primary">
-		            <span>Upload Picture</span>
-		            <input className="upload" id="img-upload" type="file" multiple onChange={this.handlePhotoUpload}/>
-		          </div>
-		        </div>
+				<img className="img-responsive img-circle img-responsive-center"src={this.state.src} />
+				<div className="row text-center">
+			        <div className="upload-img-form">
+			          <div className="fileUpload btn-upload btn btn-primary">
+			            <span>Upload Picture</span>
+			            <input className="upload" id="img-upload" type="file" multiple onChange={this.handlePhotoUpload}/>
+			          </div>
+			        </div>
+			    </div>
 			</div>);
 	}
 });
@@ -305,7 +307,7 @@ module.exports = React.createClass({
 					               		email={this.fbEmail}/>
 					            </div> :
 					            <div className="item active" id="add_fb">
-					               	<AddFb success={this.handleSuccess}/>
+					               	<AddFb success={this.handleFacebookAdded}/>
 				                </div>
 			                }	
 							<div className="item" id="add_phone">
