@@ -224,7 +224,7 @@ module.exports = React.createClass({
 		this.setState({activeScreen: $(".active").attr('id')});
 	},
 	getInitialState: function() {
-		return({activeScreen: "add_phone", fbId: this.props.fbId});
+		return({activeScreen: (this.props.fbLogin)? "add_email" : "add_fb", fbId: this.props.fbId});
 	},
 	render: function(){
 		var style = {"marginTop":"52px"},
