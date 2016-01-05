@@ -173,6 +173,9 @@ var AddFb = React.createClass({
 		return {connected: false, errors: []}
 	},
 	handleFbLogin: function() {
+    	FB.login(this.fbResponseHandler, { scope: 'public_profile, email'});
+    },
+	fbResponseHandler: function(response) {
         if (response.authResponse) {
           var accessToken = response.authResponse.accessToken, //get access token
               userId = response.authResponse.userID; //get FB UID
@@ -199,7 +202,7 @@ var AddFb = React.createClass({
 				<div>
 				{(s.connected)?
 					<button className="active-green-bg" disabled="true"><i className="fa fa-check"></i> Facebook Connected</button> :
-					<img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>
+					<img className="fb-login" onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>
 				}
 				</div>
 				<ul className="error-field">
