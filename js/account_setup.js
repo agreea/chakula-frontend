@@ -105,12 +105,15 @@ var AddPhoto = React.createClass({
 			this.setState({errors: [api_resp.Error]});
 	},
 	render: function(){
+		var style = {maxHeight: "250px"};
 		return (
 			<div>
 				<h3>Add a Photo</h3>
 				<p>{"Adding a photo of yourself helps our hosts get an idea of who they're welcoming into their homes."}</p>
 				<p>{"If you've connected Chakula with Facebook, we've included your profile picture below"}</p>
-				<img className="img-responsive img-circle img-responsive-center"src={this.state.src} />
+				<img className="img-responsive img-circle img-responsive-center"
+					src={this.state.src}
+					style={style}/>
 				<div className="row text-center">
 			        <div className="upload-img-form">
 			          <div className="fileUpload btn-upload btn btn-primary">
@@ -250,7 +253,7 @@ module.exports = React.createClass({
 		var addPhoneText = (s.phoneAdded)? <p>{checkmark} Phone Added</p> : <p>Add Phone</p>,
 			addEmailText = (s.emailAdded)? <p>{checkmark} Email Added</p> : <p>Add Email</p>,
 			addBioText = (s.bioAdded)? <p>{checkmark} Bio Added</p> : <p>Add Bio</p>,
-			addFbText = (s.fbAdded)? <p>{checkmark} Facebook Added</p> : <p>Add Facebook</p>,
+			addFbText = (s.fbAdded)? <p>{checkmark} FB Added</p> : <p>Add FB</p>,
 			addPhotoText = (s.photoAdded)? <p>{checkmark} Photo Added</p> : <p>Add Photo</p>;
 		var items = 
 			[<li className="inactive-gray">{inactive_circle} {(this.props.fbLogin)? addEmailText : addFbText}</li>,
