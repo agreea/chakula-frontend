@@ -70,9 +70,10 @@ module.exports = React.createClass({
         FB.login(this.fbResponseHandler, { scope: 'public_profile, email'});
     },
     fbResponseHandler: function(response) {
+      console.log(response);
         if (response.authResponse) {
-          var access_token = response.authResponse.accessToken, //get access token
-              user_id = response.authResponse.userID; //get FB UID
+          var access_token = response.authResponse.accessToken,
+              user_id = response.authResponse.userID; 
           var api_resp = api_call('kitchenuser', 
             {method: 'LoginFb', 
             fbToken: access_token});
