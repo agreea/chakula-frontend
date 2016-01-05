@@ -73,6 +73,7 @@ select {
     -webkit-appearance: none;
     font-size: 18px;
 }
+
 *:focus {
     outline: none;
 }
@@ -82,8 +83,8 @@ select {
 .row {
     margin-left: 0;
     margin-right: 0;
-
 }
+
 .disclaimer-text {
     font-size: 11px;
     color: @dark-gray;
@@ -156,6 +157,9 @@ button {
     margin-bottom: 0;
     border-radius: 0;
     line-height: 2;
+}
+.navbar-right {
+    margin-right: 0;
 }
 
 .navbar img {
@@ -248,6 +252,23 @@ textarea {
 
 .form-label {
     color: #aaa;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+}
+
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
 }
 /*
 Foot rules

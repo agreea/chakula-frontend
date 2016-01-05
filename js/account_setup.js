@@ -100,7 +100,7 @@ var AddPhoto = React.createClass({
 		});
 		if (api_resp.Success){
 			this.setState({src: api_resp.Return.Pic});
-			this.success("photoAdded");
+			this.props.success("photoAdded");
 		} else
 			this.setState({errors: [api_resp.Error]});
 	},
@@ -198,8 +198,8 @@ var AddFb = React.createClass({
 				<p>Connecting your Facebook account helps us set up your identity and allows us to use your profile picture </p>
 				<div>
 				{(s.connected)?
-					<img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img> :
-					<button className="active-green-bg" disabled="true"><i className="fa fa-check"></i> Facebook Connected</button>
+					<button className="active-green-bg" disabled="true"><i className="fa fa-check"></i> Facebook Connected</button> :
+					<img onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>
 				}
 				</div>
 				<ul className="error-field">
@@ -256,17 +256,18 @@ module.exports = React.createClass({
 		switch (s.activeScreen) {
 			case "add_email":
 				items[0] = <li>{active_circle} <b>{addEmailText}</b></li>;
+				prev = "";
 				if (s.emailAdded)
 					next = cont;
 				break;
 			case "add_fb":
 				items[0] = <li>{active_circle} <b>{addFbText}</b></li>;
+				prev = "";
 				if (s.fbAdded)
 					next = cont;
 				break;			
 			case "add_phone":
 				items[1] = <li>{active_circle} <b>{addPhoneText}</b></li>;
-				prev = "";
 				if (s.phoneAdded)
 					next = cont;
 				break;
