@@ -1,6 +1,6 @@
 var React = require("react"),
 	MealCard = require("../meal_card.js");
-var ChefProfile = React.createClass({
+module.exports = React.createClass({
 	handleFollowClicked: function() {
 		if (Cookies.get("session")) {
 			// forward to login screen, redirect here maybe with a follow action
@@ -109,4 +109,4 @@ var ChefProfile = React.createClass({
 		</div>);
 	},
 });
-React.render(<ChefProfile />, document.getElementById('chef'));
+// React.render(<ChefProfile />, document.getElementById('chef'));

@@ -1,6 +1,6 @@
 var React = require('react'),
 	Link = require('react-router').Link;
-modules.export = React.createClass({
+module.exports = React.createClass({
 	render: function() {
 		var d = this.props.data;
 		var card_img = { 
