@@ -43,7 +43,7 @@ module.exports = React.createClass({
 				if (moment(meal.Rsvp_by) > moment())
 					upcomingMeals.push(mealCard);
 				else
-					pasMeals.push(mealCard);
+					pastMeals.push(mealCard);
 			}
 		}
 		var upcomingMealsComponent = (upcomingMeals.length > 0)?
