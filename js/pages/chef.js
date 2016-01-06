@@ -103,7 +103,7 @@ module.exports = React.createClass({
 				</div>
 				<div className="col-xs-12 col-sm-6 col-md-7">
 					<h1>{s.Name}</h1>
-					<p>`${s.City}, ${s.State}`</p>
+					<p>{s.City}, {s.State}</p>
 					<hr />
 					<p>{s.Bio}</p>
 					<hr />
