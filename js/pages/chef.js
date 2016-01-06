@@ -19,7 +19,7 @@ module.exports = React.createClass({
 		var api_resp = api_call("host", {
 			method: "GetProfile",
 			session: Cookies.get("session"),
-			hostId: this.props.location
+			hostId: this.props.params.id
 		});
 		if (api_resp.Success){
 			this.setState(api_resp.Return)
