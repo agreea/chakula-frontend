@@ -25,6 +25,13 @@ module.exports = React.createClass({
 			this.setState(api_resp.Return)
 		}
 	},
+	getInitialState: function() {
+		return({
+			Name: "",
+			Bio: "",
+			Follows: false,
+		})
+	},
 	renderMeals: function() { // returns 
 		var s = this.state,
 			upcomingMeals = [],
