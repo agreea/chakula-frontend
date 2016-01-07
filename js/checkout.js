@@ -204,7 +204,7 @@ module.exports = React.createClass({
         return(
             <div className="text-left row">
                 <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">
-                    {folow_box}
+                    {follow_box}
                 </div>
                 <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} open_spots={this.props.open_spots}/>
                 <PaymentField cards={this.props.cards} handleSelectedCardChange={this.handleSelectedCardChange}></PaymentField>
