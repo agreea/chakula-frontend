@@ -610,6 +610,9 @@ button {
 .brand-btn .brand-btn-full-width {
   width: 100%;
 }
+.banner {
+  width: 100%;
+}
 .fb-login {
   max-height: 50px;
   cursor: pointer;
@@ -625,6 +628,10 @@ button {
 }
 .navbar-right {
   margin-right: 0;
+}
+.nav-button {
+  border-left: 1px solid;
+  border-color: #ccc;
 }
 .navbar img {
   margin: 4px 12px;
@@ -646,10 +653,6 @@ button {
   height: 100%;
   margin: auto 0px;
 }
-.nav > li {
-  border-left: 1px solid;
-  border-color: #ccc;
-}
 .nav > li * {
   margin: auto 0;
   -webkit-transition: all 0s ease-in-out;
@@ -659,7 +662,8 @@ button {
 .nav > li *:hover {
   background: #fff;
 }
-.nav > li img {
+.nav > li img,
+.nav > li button {
   margin: 4px 12px;
 }
 .nav > li > a,
@@ -763,6 +767,13 @@ Colors
 }
 .active-green-bg:disabled {
   background-color: #73c78e;
+}
+.warning-yellow {
+  color: #ffc43b;
+}
+.warning-yellow-bg {
+  background-color: #ffc43b;
+  color: #fff;
 }
 .inactive-gray {
   color: #999;

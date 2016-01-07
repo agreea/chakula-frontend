@@ -14,6 +14,7 @@ Colors
 @medium-gray: #ddd;
 @active-green: #06ba3f;
 @green-light: #73c78e;
+@warning-yellow: #ffc43b;
 @transparent: rgba(0,0,0,0);
 #app, .container-fluid {
     height: 100%;
@@ -144,6 +145,9 @@ button {
         width: 100%;
     }
 }
+.banner {
+    width: 100%;
+}
 .fb-login {
     max-height: 50px;
     cursor: pointer; 
@@ -153,13 +157,20 @@ button {
 .dropdown-menu {
     z-index: 50000;
 }
+
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
     line-height: 2;
 }
+
 .navbar-right {
     margin-right: 0;
+}
+
+.nav-button {
+    border-left: 1px solid;
+    border-color: #ccc;
 }
 
 .navbar img {
@@ -186,8 +197,6 @@ button {
 }
 
 .nav > li {
-    border-left: 1px solid;
-    border-color: #ccc;
     * {
         margin: auto 0;
         -webkit-transition: all 0s ease-in-out;
@@ -197,7 +206,7 @@ button {
             background: @white;
         };
     }
-    img {
+    img, button {
         margin: 4px 12px;        
     }
 }
@@ -308,6 +317,14 @@ Colors
         background-color: @green-light;
     }
 
+}
+.warning-yellow {
+    color: @warning-yellow;
+}
+
+.warning-yellow-bg {
+    background-color: @warning-yellow;
+    color: @white;
 }
 .inactive-gray {
     color: @inactive-gray;

@@ -30,9 +30,17 @@ var Link = require('react-router').Link;
       render: function() {
         var guest = this.state.guest;
         console.log(guest);
-        var right_nav;
+        var right_nav,
+            user_tab,
+            host_tab;
+        var host_tab = 
+          <li className="nav-item">
+            <Link className="nav-item-content" to={(Cookies.get("session")? "/edit_host_info.js" : "why_chakula.js")}>
+              <button className="c-blue-bg">Become a Chef</button>
+            </Link>
+          </li>;
         if (guest) {
-          var user_tab = (<li id="user">
+          user_tab = (<li id="user">
             <button className="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               <span className="nav-text">{guest.First_name}</span>
               <img className="img-responsive img-circle nav-icon" alt="Brand" src={guest.Prof_pic} align="right" />
@@ -43,16 +51,15 @@ var Link = require('react-router').Link;
               <li><a onClick={this.signout}>Signout</a></li>
             </ul>
           </li>);
-          var host_tab = (<li className="nav-item">
-                      <Link className="nav-item-content" to="/my_meals">
-                        <span>Host</span>
-                        <img className="img-responsive nav-icon" src="img/host-icon.svg"/>
-                      </Link>
+          if (guest.Is_host) {
+            host_tab = 
+              (<li className="nav-item">
+                <Link className="nav-item-content" to="/my_meals">
+                  <span>Host</span>
+                    <img className="img-responsive nav-icon" src="img/host-icon.svg"/>
+                </Link>
                     </li>);
-          right_nav = (<ul className="nav navbar-right">
-                        {host_tab}
-                        {user_tab} 
-                      </ul>);
+          }
         } else {
           right_nav = 
             <ul className="nav navbar-right">
@@ -64,6 +71,10 @@ var Link = require('react-router').Link;
               </li>
             </ul>
         }
+        right_nav = (<ul className="nav navbar-right">
+              {host_tab}
+              {user_tab} 
+            </ul>);
         return(
           <nav className="navbar navbar-default navbar-static-top">
             <div className="container-fluid">

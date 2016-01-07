@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+	Link = require('react-router').Link;
 
 module.exports = React.createClass({
 	render: function() {
@@ -50,6 +51,11 @@ module.exports = React.createClass({
 		            <li>Guests are encouraged to leave chefs a review in order to build their reputation.</li>
 		            <li>Chakula processes payments 6 days after the event, allowing time to handle any possible refunds.</li>
 		        </ol>
+		      </div>
+		      <div className="row body-section text-center">
+		      	<Link to={(Cookies.get("session"))? "/edit_host_info" : "/login?fwd=edit_host_info"}>
+			      	<button>Apply Now</button>
+			    </Link>
 		      </div>
 		    </div>
 		  </div>

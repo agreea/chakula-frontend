@@ -39,7 +39,7 @@ module.exports = React.createClass({
 		if (s.Meals && s.Meals.length > 0) {
 			for(var i in s.Meals) {
 				var meal = s.Meals[i];
-				var mealCard = <MealCard data={meal} />;
+				var mealCard = <MealCard key={i} data={meal} />;
 				if (moment(meal.Rsvp_by) > moment())
 					upcomingMeals.push(mealCard);
 				else
