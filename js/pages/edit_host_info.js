@@ -12,7 +12,7 @@ module.exports = React.createClass({
   handleStateChange: function(e) { // state as in Hawaii...
     console.log(e);
     state = e.target.value;
-    this.setState({State: state, saveDisabled: false});
+    this.setState({state: state, saveDisabled: false});
     console.log(this.state.state);
   },
   handleInputChanged: function(e) {

@@ -36,8 +36,27 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="js/pages/chef.js" type="text/babel">
-    </script>   
+    <script type="text/babel">
+        var Select = React.createClass({
+            getInitialState:function() {
+                return {state: ""};
+            },
+            handleStateChange: function(e) {
+                console.log(e.target.value);
+            },
+            render: function() {
+                var states = ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"];
+                var states_select_options = states.map(function(state) { return <option value={state}>{state}</option>;});
+                return(
+            <div className="col-xs-8 col-md-5">
+              <select className="state-select" value={this.state.state} onChange={this.handleStateChange}>
+                {states_select_options}
+              </select>
+            </div>);
+            }
+        });
+        React.render(<Select/>, document.getElementById("chef"));
+    </script>
 </head>
 
 <body class="container-fluid" data-spy="scroll" data-target=".navbar-fixed-top">
