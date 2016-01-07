@@ -231,6 +231,7 @@ var AddFb = React.createClass({
 	}
 })
 module.exports = React.createClass({
+	mixins: [require('react-router').History],
 	handleSuccess: function(field_key){
 		var obj = {};
 		obj[field_key] = true;
