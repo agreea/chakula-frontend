@@ -59,9 +59,7 @@ module.exports = React.createClass({
       if (api_resp.Success) {
         Cookies.set('session', api_resp.Return.Session_token);
         var fwd = this.props.location.query.fwd;
-        this.history.pushState(null, `account_setup?
-          &fbLogin=false
-          &fwd=${fwd}`);
+        this.history.pushState(null, "account_setup?&fbLogin=false&fwd="+fwd);
       } else 
         this.setState({errors: [api_resp.Error]});
       // api call

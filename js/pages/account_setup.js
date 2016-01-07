@@ -256,6 +256,7 @@ module.exports = React.createClass({
 			fbEmail: this.props.location.query.fbEmail,
 			fbLogin: this.props.location.query.fbLogin
 		});
+		console.log(this.state.fbLogin);
 	},
 	render: function(){
 		var style = {"marginTop":"52px"},
