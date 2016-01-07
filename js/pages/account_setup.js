@@ -243,6 +243,9 @@ module.exports = React.createClass({
 	carouselPressed: function() {
 		this.setState({activeScreen: $(".active").attr('id')});
 	},
+	complete: function() {
+        this.history.pushState(null, this.props.location.query.fwd);
+	},
 	getInitialState: function() {
 		return({activeScreen: (this.props.fbLogin)? "add_email" : "add_fb", fbId: this.props.location.query.fbId});
 	},
@@ -264,10 +267,7 @@ module.exports = React.createClass({
 			next = <a href="#carousel" role="button" data-slide="next" id="next">
 					<button onClick={this.carouselPressed} className="caro-nav">Skip</button></a>,
 			cont = <a href="#carousel" role="button" data-slide="next" id="next">
-					<button onClick={this.carouselPressed} className="c-blue-bg caro-nav">Continue</button></a>,
-			complete_gray = <button onClick={this.props.complete} className="caro-nav">Continue</button>,
-			complete_blue = <button onClick={this.props.complete} className="c-blue-bg caro-nav">Continue</button>;
-		
+					<button onClick={this.carouselPressed} className="c-blue-bg caro-nav">Continue</button></a>;		
 		var checkmark = <i className="fa fa-check active-green"></i>;
 
 		var addPhoneText = (s.phoneAdded)? <p>{checkmark} Phone Added</p> : <p>Add Phone</p>,
@@ -305,10 +305,9 @@ module.exports = React.createClass({
 				break;
 			case "add_bio":
 				items[3] = <li>{active_circle} <b>{addBioText}</b></li>;
-				if (s.bioAdded)
-					next = complete_blue;
-				else
-					next = complete_gray;
+				next = 
+					<button onClick={this.complete} 
+						className={"caro-nav" + (s.bioAdded)? " c-blue-bg" : ""}>Continue</button>;
 				break;
 			default:
 				break;
