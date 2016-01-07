@@ -248,15 +248,10 @@ module.exports = React.createClass({
         this.history.pushState(null, this.props.location.query.fwd);
 	},
 	getInitialState: function() {
-		return({activeScreen: (this.props.fbLogin)? "add_email" : "add_fb", fbId: this.props.location.query.fbId});
-	},
-	componentWillMount: function() {
-		this.setState({
-			fbId: this.props.location.query.fbId,
-			fbEmail: this.props.location.query.fbEmail,
-			fbLogin: this.props.location.query.fbLogin
-		});
-		console.log(this.state.fbLogin);
+		return({activeScreen: (this.props.location.query.fbLogin)? "add_email" : "add_fb",
+				fbId: this.props.location.query.fbId,
+				fbEmail: this.props.location.query.fbEmail,
+				fbLogin: this.props.location.query.fbLogin});
 	},
 	render: function(){
 		var style = {"marginTop":"52px"},
