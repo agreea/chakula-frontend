@@ -4,7 +4,7 @@ var AddPhone = require('../add_phone.js');
 var Modal = require('../modal.js');
 module.exports = React.createClass({
   getInitialState: function() {
-  	return {
+    return {
       firstName: '',
       lastName: '',
       bio: '', 
@@ -27,12 +27,12 @@ module.exports = React.createClass({
     this.setState(obj);
   },
   attemptSendGuestData: function() {
-		console.log("attempting to send guest data");
-		var errors = [];
-		if (!this.state.Email) errors.push("Email is mandatory");
+    console.log("attempting to send guest data");
+    var errors = [];
+    if (!this.state.Email) errors.push("Email is mandatory");
     if (!this.state.First_name) errors.push("First name is mandatory");
     if (!this.state.Last_name) errors.push("Last name is mandatory");
-		if (errors.length > 0)
+    if (errors.length > 0)
       this.setState({errors: errors});
     else
       this.sendGuestData();
@@ -70,8 +70,8 @@ module.exports = React.createClass({
       $('#stripe-modal').modal('show');
   },
   render: function() {
-  	var stripe_element;
-  	var guest = this.state;
+    var stripe_element;
+    var guest = this.state;
     var stripeModalBody;
     if(guest.saveSuccess && this.props.location.query.stripe_redir)
       stripeModalBody = 
@@ -82,60 +82,58 @@ module.exports = React.createClass({
       </div>;
     return (
       <div className="row" id="edit-host-info">
-    	 <div className="row">
-    	    <div className="col-xs-offset-4 col-sm-offset-2">
-    	    	<h3>Your Guest Profile</h3>
-            <span className="disclaimer-text">By setting up an account you agree to <b><a target="_blank" href="https://yaychakula.com/tos.html">the Chakula terms of service</a></b></span>
-    		  </div>
-    	 </div>
-      <FormTextRow form_name="First Name" 
-        place_holder="John" 
-        id="First_name" 
-        handleInputChanged={this.handleInputChanged}
-        default_value={guest.First_name}/>
-      <FormTextRow form_name="Last Name" 
-        place_holder="Doe" 
-        id="Last_name" 
-        handleInputChanged={this.handleInputChanged}
-        default_value={guest.Last_name}/>
-      <FormTextRow form_name="Email" 
-        place_holder="One you actually check" 
-        id="Email" 
-        handleInputChanged={this.handleInputChanged}
-        default_value={guest.Email}/>
-      <div className="row">
-        <div className="col-sm-2 col-xs-4">
-          <p className="form-label text-right">Phone</p>
+       <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 text-center">
+        <h3>Your Guest Profile</h3>
+        <span className="disclaimer-text">By setting up an account you agree to <b><a target="_blank" href="https://yaychakula.com/tos.html">the Chakula terms of service</a></b></span>
+        <FormTextRow form_name="First Name" 
+          place_holder="John" 
+          id="First_name" 
+          handleInputChanged={this.handleInputChanged}
+          default_value={guest.First_name}/>
+        <FormTextRow form_name="Last Name" 
+          place_holder="Doe" 
+          id="Last_name" 
+          handleInputChanged={this.handleInputChanged}
+          default_value={guest.Last_name}/>
+        <FormTextRow form_name="Email" 
+          place_holder="One you actually check" 
+          id="Email" 
+          handleInputChanged={this.handleInputChanged}
+          default_value={guest.Email}/>
+        <div className="row">
+          <div className="col-xs-4 col-sm-3">
+            <p className="form-label text-right">Phone</p>
+          </div>
+          <div className="col-xs-8 col-md-5">
+            <AddPhone phone={(guest.Phone == 0)? "" : guest.Phone} 
+              success={this.addPhoneSuccess}
+              verified={guest.Phone_verified} />
+          </div>
         </div>
-        <div className="col-sm-4 col-md-3 col-xs-8">
-          <AddPhone phone={(guest.Phone == 0)? "" : guest.Phone} 
-            success={this.addPhoneSuccess}
-            verified={guest.Phone_verified} />
+        <div className="row">
+          <div className="col-xs-4 col-sm-3">
+            <p className="form-label text-right">Bio</p>
+          </div>
+        <div className="col-xs-8 col-md-6">
+          <textarea className="text-field" id="Bio" rows="6"
+            placeholder="Tell us about yourself. Where are you from? Where have you been? What do you do? What food do you love?..."
+            defaultValue={guest.Bio} onChange={this.bioChanged}></textarea>
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-sm-2 col-xs-4">
-        	<p className="form-label text-right">Bio</p>
+        <div className="row error-field">
+          <ul>
+            {this.state.errors.map(function(error) {
+              return <li>{error}</li>;
+            })}
+          </ul>
         </div>
-      <div className="col-xs-8 col-sm-6">
-        <textarea className="text-field" id="Bio" rows="6"
-          placeholder="Tell us about yourself. Where are you from? Where have you been? What do you do? What food do you love?..."
-          defaultValue={guest.Bio} onChange={this.bioChanged}></textarea>
-        </div>
-      </div>
-      <div className="row error-field">
-        <ul>
-          {this.state.errors.map(function(error) {
-            return <li>{error}</li>;
-          })}
-        </ul>
-      </div>
-      <div className="row">
-        <div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
-          <button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
-            onClick={this.attemptSendGuestData} disabled={guest.saveDisabled}>{(guest.saveDisabled) ? "Saved" : "Save"}</button>
+        <div className="row">
+          <div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
+            <button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
+              onClick={this.attemptSendGuestData} disabled={guest.saveDisabled}>{(guest.saveDisabled) ? "Saved" : "Save"}</button>
+          </div>
         </div>
       </div>
       <Modal id="stripe-modal" body={stripeModalBody} title={"Ready to Connect With Stripe"}></Modal>
     </div>);}
-  });
+});
