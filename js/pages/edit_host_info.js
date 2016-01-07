@@ -1,5 +1,6 @@
-var React = require('react');
-var FormTextRow = require('../form-row.js');  
+var React = require('react'),
+    FormTextRow = require('../form-row.js'),
+    Link = require('react-router').Link;  
 module.exports = React.createClass({
   getInitialState: function() {
   	return {
