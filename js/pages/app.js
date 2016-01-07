@@ -38,7 +38,14 @@ var Link = require('react-router').Link;
             <Link className="nav-item-content" to={(Cookies.get("session")? "/edit_host_info" : "why_chakula.js")}>
               <button className="c-blue-bg">Become a Chef</button>
             </Link>
-          </li>;
+          </li>,
+            user_tab = 
+              <li id="signin"> 
+                <Link to="login?fwd=/">
+                  <span className="nav-text">Sign In</span>
+                  <img className="img-responsive nav-icon" alt="Brand" src="img/user-icon.svg" align="right" />
+                </Link>
+              </li>;
         if (guest) {
           user_tab = (<li id="user">
             <button className="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -60,21 +67,12 @@ var Link = require('react-router').Link;
                 </Link>
                     </li>);
           }
-        } else {
-          right_nav = 
-            <ul className="nav navbar-right">
-              <li id="signin"> 
-                <Link to="login?fwd=/">
-                  <span className="nav-text">Sign In</span>
-                  <img className="img-responsive nav-icon" alt="Brand" src="img/user-icon.svg" align="right" />
-                </Link>
-              </li>
-            </ul>
         }
-        right_nav = (<ul className="nav navbar-right">
-              {host_tab}
-              {user_tab} 
-            </ul>);
+        right_nav = 
+          (<ul className="nav navbar-right">
+            {host_tab}
+            {user_tab} 
+          </ul>);
         return(
           <nav className="navbar navbar-default navbar-static-top">
             <div className="container-fluid">
