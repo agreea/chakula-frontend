@@ -35,7 +35,7 @@ var Link = require('react-router').Link;
             host_tab;
         var host_tab = 
           <li className="nav-item">
-            <Link className="nav-item-content" to={(Cookies.get("session")? "/edit_host_info.js" : "why_chakula.js")}>
+            <Link className="nav-item-content" to={(Cookies.get("session")? "/edit_host_info" : "why_chakula.js")}>
               <button className="c-blue-bg">Become a Chef</button>
             </Link>
           </li>;

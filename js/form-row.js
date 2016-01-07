@@ -9,10 +9,10 @@ module.exports = React.createClass({
   },
   render: function() {
     return (<div className="row">
-        <div className="col-xs-4 col-sm-2">
+        <div className="col-xs-4 col-sm-3">
           <p className="text-right form-label">{this.props.form_name}</p>
         </div>
-        <div className="col-sm-4 col-md-3 col-xs-8">
+        <div className="col-xs-8 col-md-5">
         <input className="text-field" id={this.props.id} type="text" 
           defaultValue={this.props.default_value} 
           onChange={this.formChanged}
