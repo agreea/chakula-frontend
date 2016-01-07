@@ -10,6 +10,7 @@ module.exports = React.createClass({
       saveDisabled: true};
   },
   handleStateChange: function(e) { // state as in Hawaii...
+    console.log(e);
     state = e.target.value;
     this.setState({State: state, saveDisabled: false});
     console.log(this.state.state);
@@ -109,12 +110,12 @@ module.exports = React.createClass({
           <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
             <FormTextRow form_name="Address" 
               place_holder="3700 O St NW" 
-              id="Address"
+              id="address"
               default_value={host.Address}
               handleInputChanged={this.handleInputChanged}/>
             <FormTextRow form_name="City" 
               place_holder="Washington" 
-              id="City"
+              id="city"
               default_value={host.City}
               handleInputChanged={this.handleInputChanged}/>
             <div className="row">
@@ -122,7 +123,7 @@ module.exports = React.createClass({
               <p className="text-right form-label">State</p>
             </div>
             <div className="col-xs-8 col-md-5">
-              <select className="state-select" value={host.State} onChange={this.handleStateChange}>
+              <select className="state-select" value={host.state} onChange={this.handleStateChange}>
                 {states_select_options}
               </select>
             </div>
