@@ -64,25 +64,20 @@ module.exports = React.createClass({
   renderStripeElement: function() {
     var host = this.state;
     if (host.Stripe_connect){ // if the host has already connected w stripe show they're good 2 go
-      return 
-        (<p><span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Stripe Connected</p>);
+      return (<p><span className='glyphicon glyphicon-ok' aria-hidden='true'></span> Stripe Connected</p>);
     } else if(!host.Address || !host.City || !host.State){ // if they don't have their address set up, let them know
-      return 
-        (<p>Complete and save the information above to set up payments</p>);
+      return (<p>Complete and save the information above to set up payments</p>);
     } else if (host.needsGuestInfo){ 
-      return 
-        (<Link to={"edit_guest_info?stripe_redir=" + encodeURIComponent(host.Stripe_url)}>
+      return (<Link to={"edit_guest_info?stripe_redir=" + encodeURIComponent(host.Stripe_url)}>
           <p>Click here to complete your guest profile and return to set up payments</p> 
           </Link>);
     } else {
-      return 
-        (<a className="stripe-btn btn-lg btn"
+      return (<a className="stripe-btn btn-lg btn"
             href={host.Stripe_url} 
             target="_blank">Connect With Stripe</a>);
     }
   },
   render: function() {
-  	var stripe_element = this.renderStripeElement();
   	var host = this.state;
     var header_title = (this.props.location.query.create)? "Create Your Chef Profile" : "Your Chef Profile";
     var header = 
@@ -126,10 +121,10 @@ module.exports = React.createClass({
               default_value={host.City}
               handleInputChanged={this.handleInputChanged}/>
             <div className="row">
-            <div className="col-xs-4 col-sm-2">
+            <div className="col-xs-4 col-sm-3">
               <p className="text-right form-label">State</p>
             </div>
-            <div className="col-xs-8 col-sm-6">
+            <div className="col-xs-8 col-md-5">
               <select className="state-select" value={host.State} onChange={this.handleStateChange}>
                 {states_select_options}
               </select>
@@ -143,7 +138,7 @@ module.exports = React.createClass({
               </ul>
             </div>
             <div className="row">
-              <div className="col-sm-4 col-sm-offset-2 col-xs-6 col-xs-offset-4">
+              <div className="col-xs-4 col-xs-offset-4 col-sm-offset-3">
                 <button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
                   onClick={this.attemptSendHostData} disabled={host.saveDisabled}>{(host.saveDisabled) ? "Saved" : "Save"}</button>
               </div>
@@ -153,7 +148,7 @@ module.exports = React.createClass({
                 <p className="text-right form-label">Payment</p>
               </div>
               <div className="col-xs-6 col-sm-4">
-                {stripe_element}
+                {this.renderStripeElement()}
               </div>
               <ul className="warning-field" id="stripe-warning">
               </ul>
