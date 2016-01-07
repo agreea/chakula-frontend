@@ -144,10 +144,10 @@ module.exports = React.createClass({
               </div>
             </div>
             <div className="row">
-              <div className="col-xs-4 col-sm-2">
+              <div className="col-xs-4 col-sm-3">
                 <p className="text-right form-label">Payment</p>
               </div>
-              <div className="col-xs-6 col-sm-4">
+              <div className="col-xs-8 col-sm-6">
                 {this.renderStripeElement()}
               </div>
               <ul className="warning-field" id="stripe-warning">
