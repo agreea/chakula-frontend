@@ -11,7 +11,7 @@ module.exports = React.createClass({
   },
   handleStateChange: function(e) { // state as in Hawaii...
     state = e.target.value;
-    this.setState({state: state, saveDisabled: false});
+    this.setState({State: state, saveDisabled: false});
     console.log(this.state.state);
   },
   handleInputChanged: function(e) {
@@ -109,12 +109,12 @@ module.exports = React.createClass({
           <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
             <FormTextRow form_name="Address" 
               place_holder="3700 O St NW" 
-              id="address"
+              id="Address"
               default_value={host.Address}
               handleInputChanged={this.handleInputChanged}/>
             <FormTextRow form_name="City" 
               place_holder="Washington" 
-              id="city"
+              id="City"
               default_value={host.City}
               handleInputChanged={this.handleInputChanged}/>
             <div className="row">
