@@ -11,11 +11,8 @@ module.exports = React.createClass({
   },
   handleStateChange: function(e) { // state as in Hawaii...
     state = e.target.value;
-    enableSave();
-    this.setState({state: e.target.value});
-  },
-  enableSave: function() {
-    this.setState({saveDisabled: false});
+    this.setState({state: state, saveDisabled: false});
+    console.log(this.state.state);
   },
   handleInputChanged: function(e) {
     var obj = {},
