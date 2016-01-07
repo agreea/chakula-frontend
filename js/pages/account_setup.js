@@ -237,6 +237,24 @@ module.exports = React.createClass({
 		obj[field_key] = true;
 		this.setState(obj);
 	},
+	componentWillMount: function(){
+		window.fbAsyncInit = function() {
+          FB.init({
+            appId: '828767043907424',
+            cookie: true, 
+            xfbml: true,  
+            version: 'v2.4'
+          });
+        };
+      // Load the SDK asynchronously
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+	},
 	handleFacebookAdded: function(fbId){
 		this.setState({fbId: fbId, fbAdded: true});
 		console.log(this.state.fbId);

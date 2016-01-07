@@ -59,7 +59,7 @@ module.exports = React.createClass({
       if (api_resp.Success) {
         Cookies.set('session', api_resp.Return.Session_token);
         var fwd = this.props.location.query.fwd;
-        this.history.pushState(null, "account_setup?&fbLogin=false&fwd="+fwd);
+        this.history.pushState(null, "account_setup?fwd="+fwd);
       } else 
         this.setState({errors: [api_resp.Error]});
       // api call
@@ -82,10 +82,7 @@ module.exports = React.createClass({
           FB.api('/me', { locale: 'en_US', fields: 'name, email' }, function(r) { fbEmail = r.email});
           if (api_resp.Return.Facebook_long_token === "NEW_GUEST") {
             var fwd = this.props.location.query.fwd;
-            this.history.pushState(null, `account_setup?
-                &fbEmail=${fbEmail}
-                &fbId=${userId}
-                &fwd=${fwd}`);
+            this.history.pushState(null, "account_setup?&fbEmail=" + fbEmail + "&fbId=" + userId + "&fwd=" + fwd);
           } else
             this.history.pushState(null, this.props.location.query.fwd);
         }
