@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
+var BrowserHistory = ReactRouter.BrowserHistory;
 var App = require('./pages/app.js'),
     // Home = require('./pages/home.js'),
     // Meal = require('./pages/meal.js'),
@@ -19,9 +20,10 @@ var App = require('./pages/app.js'),
     MyMeals = require('./pages/my_meals.js'),
     CreateMeal = require('./pages/create_meal.js'),
     Login = require('./pages/login.js'),
-    Chef = require('./pages/chef.js'); // done
+    Chef = require('./pages/chef.js'),
+    AccountSetUp = require('./pages/account_setup.js'); // done
 ReactDOM.render(
-	<Router className="container-fluid">
+	<Router history={BrowserHistory} className="container-fluid">
 		<Route component={App}>
 			<Route name="Home" path="/" component={Home}/>
 			<Route name="Edit Host Info" path="edit_host_info" component={EditHost}/>
@@ -33,5 +35,6 @@ ReactDOM.render(
             <Route name="Create a Meal" path="create_meal/(:id)" component={CreateMeal}/>
             <Route name="Login/Sign Up" path="login" component={Login}/>
             <Route name="Chef" path="chef/:id" component={Chef}/>
+            <Route name="Account Setup" path="account_setup" component={AccountSetUp}/>
 	    </Route>
 	</Router>, document.getElementById('app'));

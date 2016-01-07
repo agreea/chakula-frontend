@@ -53,8 +53,8 @@ module.exports = React.createClass({
 			</div> : "";
 		var pastMealsComponent = (pastMeals.length > 0)?
 			<div>
-				<h3>Upcoming Meals</h3>
-				{upcomingMeals}
+				<h3>Past Meals</h3>
+				{pastMeals}
 			</div> : "";
 		return (
 			<div>
@@ -107,7 +107,6 @@ module.exports = React.createClass({
 					<hr />
 					<p>{s.Bio}</p>
 					<hr />
-					<h2>Past Meals</h2>
 					<div className="col-sm-12">
 						{mealsComponent}
 					</div>

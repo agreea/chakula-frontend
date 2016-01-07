@@ -1,5 +1,4 @@
 var React = require('react');
-var AccountSetup = require('../account_setup.js');
 module.exports = React.createClass({
     mixins: [require('react-addons-linked-state-mixin'), require('react-router').History],
     componentWillMount: function() {
@@ -59,8 +58,11 @@ module.exports = React.createClass({
         password: password});
       if (api_resp.Success) {
         Cookies.set('session', api_resp.Return.Session_token);
-        console.log("does this work??");
-        this.setState({errors: [], newAccount: true, fbLogin: false});
+        this.history.pushState(null, `account_setup?
+          &fbLogin=true
+          &fbEmail=${fbEmail}
+          &fbId=${userId}
+          &fwd=${fwd}`);
       } else 
         this.setState({errors: [api_resp.Error]});
       // api call
@@ -71,26 +73,25 @@ module.exports = React.createClass({
     },
     fbResponseHandler: function(response) {
       console.log(response);
-        if (response.authResponse) {
-          var accessToken = response.authResponse.accessToken,
-              userId = response.authResponse.userID; 
-          var api_resp = api_call('kitchenuser', 
-            {method: 'LoginFb', 
-            fbToken: accessToken});
-          if (api_resp.Success) {
-            Cookies.set('session', api_resp.Return.Session_token);
-            var fbEmail;
-            FB.api('/me', { locale: 'en_US', fields: 'name, email' }, function(r) { fbEmail = r.email});
-            if (api_resp.Return.Facebook_long_token === "NEW_GUEST")
-              this.setState({
-                newAccount: true, 
-                fbLogin: true, 
-                fbEmail: fbEmail,
-                fbId: userId
-              });
-            else
-              this.history.pushState(null, this.props.location.query.fwd);
-          }
+      if (response.authResponse) {
+        var accessToken = response.authResponse.accessToken,
+            userId = response.authResponse.userID; 
+        var api_resp = api_call('kitchenuser', 
+          {method: 'LoginFb', 
+          fbToken: accessToken});
+        if (api_resp.Success) {
+          Cookies.set('session', api_resp.Return.Session_token);
+          var fbEmail;
+          FB.api('/me', { locale: 'en_US', fields: 'name, email' }, function(r) { fbEmail = r.email});
+          if (api_resp.Return.Facebook_long_token === "NEW_GUEST") {
+            var fwd = this.props.location.query.fwd;
+            this.history.pushState(null, `account_setup?
+                &fbEmail=${fbEmail}
+                &fbId=${userId}
+                &fwd=${fwd}`);
+          } else
+            this.history.pushState(null, this.props.location.query.fwd);
+        }
       } else {
         this.setState({errors:["Facebook login failed."]});
       }
@@ -183,12 +184,6 @@ module.exports = React.createClass({
         }
         return(
             <div className="row" id="login">
-            {(this.state.newAccount)? 
-              <AccountSetup 
-                complete={this.processComplete} 
-                fbLogin={this.state.fbLogin}
-                fbEmail={this.state.fbEmail}
-                fbId={this.state.fbId}/> :
               <div className="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                 <h3>{(this.state.createAccount)? "Create Account" : "Login"}</h3>
                 <div className="row text-center">
@@ -208,7 +203,7 @@ module.exports = React.createClass({
                   </div>
                   {forgot_pass_text}
                 </div>
-              </div>}
+              </div>
             </div>
         );
     }
