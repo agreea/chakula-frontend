@@ -3,7 +3,7 @@ module.exports = React.createClass({
 	getInitialState: function() {
 		return (
 			{
-				phone: (this.props.phone)? this.props.phone : "", 
+				phone: this.props.phone, 
 				pin: "", 
 				sendCodePressed: false, 
 				verified: this.props.verified, 

@@ -87,7 +87,7 @@ module.exports = React.createClass({
     var header_title = (this.props.location.query.create)? "Create Your Chef Profile" : "Your Chef Profile";
     var header = 
       <div className="row">
-        <div className="col-xs-offset-12 col-sm-offset-2 text-center">
+        <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 text-center">
           <h3>{header_title}</h3>
           <span className="disclaimer-text">By setting up an account you agree to <b><a target="_blank" href="https://yaychakula.com/tos.html">the Chakula terms of service</a></b></span>
         </div>
