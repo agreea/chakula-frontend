@@ -83,7 +83,7 @@ module.exports = React.createClass({
   render: function() {
   	var stripe_element = this.renderStripeElement();
   	var host = this.state;
-    var header_title = (props.location.query.create)? "Create Your Chef Profile" : "Your Chef Profile";
+    var header_title = (this.props.location.query.create)? "Create Your Chef Profile" : "Your Chef Profile";
     var header = 
       <div className="row">
         <div className="col-xs-offset-12 col-sm-offset-2 text-center">
