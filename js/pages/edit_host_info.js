@@ -38,9 +38,12 @@ module.exports = React.createClass({
     data["method"] = "updateHost";
     data["session"] = Cookies.get("session");
     var api_resp = api_call('host', data);
-    if (api_resp.Success)
-      this.setState({saveDisabled: true, errors: []});
-      // show the saved button as green, add check mark, disable
+    if (api_resp.Success){
+      api_resp["saveDisabled"] = true,
+      api_resp["errors"] = [];
+      this.setState(api_resp);
+    }
+    // show the saved button as green, add check mark, disable
   },
   componentWillMount: function() {
     var get_guest = api_call('kitchenuser', {method: 'get', session: Cookies.get('session')});
