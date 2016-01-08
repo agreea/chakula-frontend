@@ -82,7 +82,7 @@ module.exports = React.createClass({
           FB.api('/me', { locale: 'en_US', fields: 'name, email' }, function(r) { fbEmail = r.email});
           if (api_resp.Return.Facebook_long_token === "NEW_GUEST") {
             var fwd = this.props.location.query.fwd;
-            this.history.pushState(null, "account_setup?&fbEmail=" + fbEmail + "&fbId=" + userId + "&fwd=" + fwd);
+            this.history.pushState(null, "account_setup?&fbEmail=" + fbEmail + "&fbLogin=true&fbId=" + userId + "&fwd=" + fwd);
           } else
             this.history.pushState(null, this.props.location.query.fwd);
         }
