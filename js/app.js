@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
-var BrowserHistory = ReactRouter.BrowserHistory;
+var createBrowserHistory = require('history/lib/createBrowserHistory');
 var App = require('./pages/app.js'),
     // Home = require('./pages/home.js'),
     // Meal = require('./pages/meal.js'),
@@ -23,7 +23,7 @@ var App = require('./pages/app.js'),
     Chef = require('./pages/chef.js'),
     AccountSetUp = require('./pages/account_setup.js'); // done
 ReactDOM.render(
-	<Router history={BrowserHistory} className="container-fluid">
+	<Router history={createBrowserHistory()} className="container-fluid">
 		<Route component={App}>
 			<Route name="Home" path="/" component={Home}/>
 			<Route name="Edit Host Info" path="edit_host_info" component={EditHost}/>
