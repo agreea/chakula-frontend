@@ -1,6 +1,6 @@
 api_call = function(api_fragment, data) {
   var response = $.ajax({
-                      url: 'https://yaychakula.com/api/' + api_fragment,
+                      url: '/api/' + api_fragment,
                       method: 'POST',
                       data: data,
                       dataType: 'json',
