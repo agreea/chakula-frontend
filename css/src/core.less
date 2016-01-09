@@ -162,8 +162,18 @@ button {
     margin-bottom: 0;
     border-radius: 0;
     line-height: 2;
-    &.dropdown-menu {
+    .dropdown-menu {
         background: @white;
+        border-radius: 0;
+    }
+    & * {
+        background: transparent;
+        color: #333;
+    }
+}
+@media (min-width: 800px) {
+    ul.nav li.dropdown:hover > ul.dropdown-menu {
+        display: block;
     }
 }
 
@@ -183,15 +193,6 @@ button {
     display: inline-block;
 }
 
-.navbar * {
-    background: transparent;
-    color: #333;
-}
-
-.nav-item-content {
-    margin: auto 0px;
-}
-
 .nav > li, .navbar-header {
     display: inline-flex;
     cursor: pointer;
@@ -205,14 +206,13 @@ button {
         -moz-transition: all 0s ease-in-out;
         transition: all 0s ease-in-out;
     }
-    img, button {
-        margin: 4px 12px;        
+    img {
+        margin: 0 12px;        
     }
 }
 
 .nav > li > a, .nav > li > button {
     padding: 8px;
-    border: none;
     &:hover {
         background-color: @white;
     }

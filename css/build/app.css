@@ -611,8 +611,18 @@ button {
   border-radius: 0;
   line-height: 2;
 }
-.navbar.dropdown-menu {
+.navbar .dropdown-menu {
   background: #fff;
+  border-radius: 0;
+}
+.navbar * {
+  background: transparent;
+  color: #333;
+}
+@media (min-width: 800px) {
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+  }
 }
 .navbar-right {
   margin-right: 0;
@@ -627,13 +637,6 @@ button {
   vertical-align: middle;
   display: inline-block;
 }
-.navbar * {
-  background: transparent;
-  color: #333;
-}
-.nav-item-content {
-  margin: auto 0px;
-}
 .nav > li,
 .navbar-header {
   display: inline-flex;
@@ -646,14 +649,12 @@ button {
   -moz-transition: all 0s ease-in-out;
   transition: all 0s ease-in-out;
 }
-.nav > li img,
-.nav > li button {
-  margin: 4px 12px;
+.nav > li img {
+  margin: 0 12px;
 }
 .nav > li > a,
 .nav > li > button {
   padding: 8px;
-  border: none;
 }
 .nav > li > a:hover,
 .nav > li > button:hover {

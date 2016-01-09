@@ -120,13 +120,15 @@ var HostAttendeesInfo = React.createClass({
     console.log("HostAttendeesInfo data: ");
     console.log(data);
     return (<div className="row host-attendees-col">
-      <div className="col-xs-12 col-sm-3">
-        <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
-      </div>
-      <div className="col-xs-12 col-sm-9">
-        <h3>{"About " + data.Host_name}</h3>
-        <p>{data.Host_bio}</p>
-      </div>
+      <Link to={`chef/${data.Host_id}`}>
+        <div className="col-xs-12 col-sm-3">
+          <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
+        </div>
+        <div className="col-xs-12 col-sm-9">
+          <h3>{"About " + data.Host_name}</h3>
+          <p>{data.Host_bio}</p>
+        </div>
+      </Link>
     </div>);
   }
 });
