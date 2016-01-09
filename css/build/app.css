@@ -272,18 +272,6 @@ body {
   background-size: cover;
   -o-background-size: cover;
 }
-@media (min-width: 767px) {
-  #home .content-section {
-    padding-top: 125px;
-  }
-  #home .download-section {
-    padding: 100px 0;
-  }
-  #home #map {
-    height: 400px;
-    margin-top: 250px;
-  }
-}
 #home .btn {
   border-radius: 0;
   font-family: Muli, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -651,7 +639,6 @@ button {
   display: inline-flex;
   cursor: pointer;
   height: 100%;
-  margin: 13px 0 0 0;
 }
 .nav > li * {
   margin: auto 0;
@@ -681,6 +668,10 @@ button {
   display: inline-block;
   padding: 0;
   height: auto;
+}
+a#navbar-brand {
+  padding-top: 8px;
+  margin-left: 0;
 }
 .nav-item-content {
   padding: 0;

@@ -77,7 +77,7 @@ var Link = require('react-router').Link;
           <nav className="navbar navbar-default navbar-static-top">
             <div className="container-fluid">
               <div className="navbar-header">
-                <Link className="navbar-brand" to="/">
+                <Link className="navbar-brand" id="navbar-brand" to="/">
                   <img className="img-responsive nav-icon" alt="Brand" src="/img/chakula_icon.svg" align="left" />
                 </Link>
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" align="right">                
