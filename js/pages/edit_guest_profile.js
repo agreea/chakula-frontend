@@ -128,7 +128,7 @@ module.exports = React.createClass({
           </ul>
         </div>
         <div className="row">
-          <div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-4">
+          <div className="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-4">
             <button type="button" className="brand-btn btn-info btn-lg btn" id="save" 
               onClick={this.attemptSendGuestData} disabled={guest.saveDisabled}>{(guest.saveDisabled) ? "Saved" : "Save"}</button>
           </div>
