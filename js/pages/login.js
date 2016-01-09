@@ -181,7 +181,7 @@ module.exports = React.createClass({
               <div className="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                 <h3>{(this.state.createAccount)? "Create Account" : "Login"}</h3>
                 <div className="row text-center">
-                  <img onClick={this.handleFbLogin} className="fb-login" src="./img/fb-login.svg" id="fb"></img>
+                  <img onClick={this.handleFbLogin} className="fb-login" src="/img/fb-login.svg" id="fb"></img>
                 </div>
                 <p className="text-center"> - or - </p> 
                 {error_messages}

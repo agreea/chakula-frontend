@@ -659,9 +659,6 @@ button {
   -moz-transition: all 0s ease-in-out;
   transition: all 0s ease-in-out;
 }
-.nav > li *:hover {
-  background: #fff;
-}
 .nav > li img,
 .nav > li button {
   margin: 4px 12px;
@@ -680,6 +677,7 @@ button {
 }
 .navbar-brand {
   margin: auto 0;
+  margin-left: 0;
   display: inline-block;
   padding: 0;
   height: auto;

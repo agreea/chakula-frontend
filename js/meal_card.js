@@ -4,7 +4,7 @@ module.exports = React.createClass({
 	render: function() {
 		var d = this.props.data;
 		var card_img = { 
-				background: `url(${d.Pics[0].Name})`
+				background: `url(${d.Pics[0].Name})`,
 				backgroundPosition: "center center",
     			backgroundRepeat: "no-repeat",
     			backgroundSize: "cover"
