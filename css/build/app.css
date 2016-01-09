@@ -651,7 +651,7 @@ button {
   display: inline-flex;
   cursor: pointer;
   height: 100%;
-  margin: auto 0px;
+  margin: 13px 0;
 }
 .nav > li * {
   margin: auto 0;
@@ -797,6 +797,9 @@ Colors
 /*
 Rules on multiple pages
 */
+.intro-text {
+  color: #fff;
+}
 .review-meal-title {
   padding-left: 0;
 }
