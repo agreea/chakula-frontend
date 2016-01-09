@@ -104,7 +104,7 @@ module.exports = React.createClass({
     }
     var host = api_resp.Return;
     if (!host.Stripe_connect) {
-      this.setState({alert_create_host_profile: "Please complete your host profile and connect to Stripe to host meals"});
+      this.setState({alert_create_host_profile: "Please complete your chef profile and connect to Stripe to host meals"});
       return;
     }
     this.getMeals();
@@ -142,7 +142,12 @@ module.exports = React.createClass({
     });
     var first_item = 
       (this.state.alert_create_host_profile)?
-        <Link to="edit_host_info">{this.state.alert_create_host_profile}</Link> :
+        <div className="row text-center">
+          <p className="banner warning-yellow-bg">{this.state.alert_create_host_profile}</p>
+        <Link to="edit_host_info">
+          <button className="c-blue-bg">Complete Chef Profile</button>
+        </Link> 
+        </div> :
         <Link to="create_meal/">
           <img className="img-responsive img-responsive-center add-meal-icon" src="img/add-icon.svg"/>
         </Link>
