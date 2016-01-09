@@ -43,7 +43,7 @@ var Link = require('react-router').Link;
               <li id="signin"> 
                 <Link to="login?fwd=/">
                   <span className="nav-text">Sign In</span>
-                  <img className="img-responsive nav-icon" alt="Brand" src="img/user-icon.svg" align="right" />
+                  <img className="img-responsive nav-icon" alt="Brand" src="/img/user-icon.svg" align="right" />
                 </Link>
               </li>;
         if (guest) {
@@ -63,7 +63,7 @@ var Link = require('react-router').Link;
               (<li className="nav-item">
                 <Link className="nav-item-content" to="/my_meals">
                   <span>Host</span>
-                    <img className="img-responsive nav-icon" src="img/host-icon.svg"/>
+                    <img className="img-responsive nav-icon" src="/img/host-icon.svg"/>
                 </Link>
                     </li>);
           }
@@ -78,7 +78,7 @@ var Link = require('react-router').Link;
             <div className="container-fluid">
               <div className="navbar-header">
                 <Link className="navbar-brand" to="/">
-                  <img className="img-responsive nav-icon" alt="Brand" src="img/chakula_icon.svg" align="left" />
+                  <img className="img-responsive nav-icon" alt="Brand" src="/img/chakula_icon.svg" align="left" />
                 </Link>
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" align="right">                
                 <span className="sr-only">Toggle navigation</span>
