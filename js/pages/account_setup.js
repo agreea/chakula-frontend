@@ -248,14 +248,16 @@ module.exports = React.createClass({
           });
 	      var component = this;
 	      if (fbId) {
+	      	console.log("there was a fb id")
 		      FB.api('/' + fbId, 
 		      	{ locale: 'en_US', fields: 'name, email' },
-		      	function(r) { 
+		      	function(r) {
+		      		console.log(r)
 		      		if (r && !r.error) {
 		      			component.setState({fbEmail: r.email});
 		      			console.log(r.email);
 		      			console.log(component.state.fbEmail);
-		      		} 
+		      		}
 		      	});
 	      }
         };
