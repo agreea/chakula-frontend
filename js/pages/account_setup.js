@@ -245,6 +245,18 @@ module.exports = React.createClass({
             xfbml: true,  
             version: 'v2.4'
           });
+	      var component = this;
+	      if (this.props.location.query.fbId) {
+		      FB.api('/' + this.props.location.query.fbId, 
+		      	{ locale: 'en_US', fields: 'name, email' },
+		      	function(r) { 
+		      		if (r && !r.error) {
+		      			component.setState({fbEmail: r.email});
+		      			console.log(r.email);
+		      			console.log(component.state.fbEmail);
+		      		} 
+		      	});
+	      }
         };
       // Load the SDK asynchronously
       (function(d, s, id) {
@@ -254,17 +266,6 @@ module.exports = React.createClass({
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-      var component = this;
-      if (this.props.location.query.fbId) {
-	      FB.api('/' + this.props.location.query.fbId, { locale: 'en_US', fields: 'name, email' },
-	      	function(r) { 
-	      		if (r && !r.error) {
-	      			component.setState({fbEmail: r.email});
-	      			console.log(r.email);
-	      			console.log(component.state.fbEmail);
-	      		} 
-	      	});
-      }
 	},
 	handleFacebookAdded: function(fbId){
 		this.setState({fbId: fbId, fbAdded: true});
