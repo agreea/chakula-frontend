@@ -254,6 +254,13 @@ module.exports = React.createClass({
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+      var component = this;
+      if (this.props.location.query.fbId)
+	      FB.api('/' + this.props.location.query.fbId, { locale: 'en_US', fields: 'name, email' },
+	      	function(r) { 
+	      		if (r && !r.Error) 
+	      			component.setState({fbEmail: r.email})
+	      	});
 	},
 	handleFacebookAdded: function(fbId){
 		this.setState({fbId: fbId, fbAdded: true});
