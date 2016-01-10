@@ -25,9 +25,9 @@ var AddEmail = React.createClass({
 		});
 		if (api_resp.Success){
 			this.props.success("emailAdded");
-		} else {
+			this.setState({emailAdded: true});
+		} else
 			this.setState({errors: [api_resp.Error]});
-		}
 	},
 	render: function() {
 		var s = this.state;
@@ -43,7 +43,9 @@ var AddEmail = React.createClass({
 							className="text-field"
 							onChange={this.handleInputChange}></input>
 				   <span className="input-group-btn">
-				        <button className="c-blue-bg" onClick={this.handleAddEmailClicked}>Add Email</button>
+				        <button className={(s.emailAdded)? "active-green-bg" : "c-blue-bg"} 
+				        	onClick={this.handleAddEmailClicked} 
+				        	disabled={s.emailAdded}>{(s.emailAdded)? "Email Added" : "Add Email"}</button>
 				   </span>
 				</div>
 				<ul className="error-field">
@@ -301,6 +303,11 @@ module.exports = React.createClass({
 				prev = "";
 				if (s.emailAdded)
 					next = cont;
+				else // email is mandatory, so don't let them leave until they've given us one.
+					next = 
+						<a href="#carousel" role="button" data-slide="next" id="next" disabled="true">
+							<button onClick={this.carouselPressed} className="caro-nav">Continue</button>
+						</a>
 				break;
 			case "add_fb":
 				items[0] = <li>{active_circle} <b>{addFbText}</b></li>;
@@ -330,51 +337,44 @@ module.exports = React.createClass({
 		console.log(s.fbId);
 		return (
 			<div className="row" id="account-setup">
-				<div className="col-xs-3 col-sm-2">
-					<ul className="nav-list">
-						{items}
-					</ul>
-				</div>
-				<div className="col-xs-8">
-					<div id="carousel" className="carousel" data-ride="carousel" data-interval="false">
-				        <div className="carousel-inner" id="carousel-pages" role="listbox">
-							{(s.fbLogin)?
-					            <div className="item active" id="add_email">
-					               	<AddEmail 
-					               		success={this.handleSuccess}
-					               		email={s.fbEmail}/>
-					            </div> :
-					            <div className="item active" id="add_fb">
-					               	<AddFb success={this.handleFacebookAdded}/>
-				                </div>
-			                }	
-							<div className="item" id="add_phone">
-								<div className="col-xs-8">
-									<h3>Add Phone</h3>
-									<p>Verifying your phone number will help confirm your identity and 
-										allow us to send you real time updates about the meals you attend.</p>
-				                    <AddPhone success={this.handleSuccess}/>
-				                </div>
-			                </div>
-			                <div className="item" id="add_photo">
-			                	<AddPhoto 
-			                		pic={(s.fbId)?
-			                			"https://graph.facebook.com/" + s.fbId + "/picture?width=500&height=500" :
-			                			"img/user-icon.svg"
-			                		}
-			                		success={this.handleSuccess}/>
-			                </div>
-			                <div className="item" id="add_bio">
-			                	<AddBio success={this.handleSuccess}/>
-			                </div>
-			            </div>
-			            <div className="row">
-			            	<div className="col-xs-8 text-right">
-			            		{prev}
-			            		{next}
-			            	</div>
-			            </div>
-				     </div>
+				<ul className="nav-list col-xs-4 col-sm-3 col-sm-offset-1 col-lg-2 col-md-offset-2">
+					{items}
+				</ul>
+				<div id="carousel" className="carousel col-xs-8 col-sm-6 col-md-5" data-ride="carousel" data-interval="false">
+					<div className="carousel-inner" id="carousel-pages" role="listbox">
+						{(s.fbLogin)?
+					    	<div className="item active" id="add_email">
+					    	   	<AddEmail 
+					    	   		success={this.handleSuccess}
+					    	   		email={s.fbEmail}/>
+					    	</div> :
+					   	 	<div className="item active" id="add_fb">
+					    	   	<AddFb success={this.handleFacebookAdded}/>
+					  		</div>
+				      	}	
+						<div className="item" id="add_phone">
+							<h3>Add Phone</h3>
+							<p>Verifying your phone number will help confirm your identity and 
+								allow us to send you real time updates about the meals you attend.</p>
+						  	<AddPhone success={this.handleSuccess}/>
+						</div>
+					    <div className="item" id="add_photo">
+					      	<AddPhoto pic={(s.fbId)?
+					      			"https://graph.facebook.com/" + s.fbId + "/picture?width=500&height=500" :
+					      			"img/user-icon.svg"
+					      		}
+					      		success={this.handleSuccess}/>
+					    </div>
+					    <div className="item" id="add_bio">
+					      	<AddBio success={this.handleSuccess}/>
+					    </div>
+					    <div className="row">
+					    	<div className="text-right">
+					      	   	{prev}
+					      		{next}
+					    	</div>
+			      	    </div>
+			      	</div>
 				</div>
 			</div>
 		);
