@@ -239,6 +239,8 @@ module.exports = React.createClass({
 	},
 	componentWillMount: function(){
 		var fbId = this.props.location.query.fbId;
+		var component = this;
+
 		window.fbAsyncInit = function() {
           FB.init({
             appId: '828767043907424',
@@ -246,10 +248,9 @@ module.exports = React.createClass({
             xfbml: true,  
             version: 'v2.4'
           });
-	      var component = this;
 	      if (fbId) {
 	      	console.log("there was a fb id")
-		      FB.api('/' + fbId, 
+		      FB.api('/me', 
 		      	{ locale: 'en_US', fields: 'name, email' },
 		      	function(r) {
 		      		console.log(r)
