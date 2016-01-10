@@ -32,7 +32,7 @@ var AddEmail = React.createClass({
 	render: function() {
 		var s = this.state;
 		return(
-			<div className="col-xs-8">
+			<div>
 				<h3>Add Email</h3>
 				<p>We will send receipts and details, including addresses, for your meals to your email.</p>
 				<div className="input-group">
@@ -121,7 +121,7 @@ var AddPhoto = React.createClass({
 	render: function(){
 		var style = {maxHeight: "250px"};
 		return (
-			<div className="col-xs-8">
+			<div>
 				<h3>Add a Photo</h3>
 				<p>{"Adding a photo of yourself helps our hosts get an idea of who they're welcoming into their homes."}</p>
 				<p>{"If you've connected Chakula with Facebook, we've included your profile picture below"}</p>
@@ -165,7 +165,7 @@ var AddBio = React.createClass({
 	render: function() {
 		var s = this.state;
 		return(
-			<div className="col-xs-8">
+			<div>
 				<h3>Add Bio</h3>
 				<p>Please introduce yourself to the Chakula community. :)</p>
 				<div className="input-group">
@@ -215,7 +215,7 @@ var AddFb = React.createClass({
 	render: function() {
 		var s = this.state;
 		return(
-			<div className="col-xs-8">
+			<div>
 				<h3>Connect with Facebook</h3>
 				<p>Connecting your Facebook account helps us set up your identity and allows us to use your profile picture </p>
 				<div>

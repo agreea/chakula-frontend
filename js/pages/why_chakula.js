@@ -8,8 +8,8 @@ module.exports = React.createClass({
 			<header>
 		      <div className="row text-center" id="header">
 		        <h1 >Why Chakula?</h1>
-		        <p>We make it easier for you to focus on the cooking.</p>
-		        <p className="text-center" id="down-btn" ><a href="#body"><i className="fa fa-chevron-down" id="down-icon"></i></a></p>
+		        <p className="intro-text">We make it easier for you to focus on the cooking.</p>
+		        <p id="down-btn" ><a href="#body"><i className="fa fa-chevron-down" id="down-icon"></i></a></p>
 		      </div>
 		  </header>
 		  <div className="row body" id="body">
