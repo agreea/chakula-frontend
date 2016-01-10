@@ -254,7 +254,7 @@ module.exports = React.createClass({
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-	}
+	},
 	handleFacebookAdded: function(fbId){
 		this.setState({fbId: fbId, fbAdded: true});
 		console.log(this.state.fbId);

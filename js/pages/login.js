@@ -73,7 +73,7 @@ module.exports = React.createClass({
       if (response.authResponse) {
         var accessToken = response.authResponse.accessToken,
             fbId = response.authResponse.userID;
-        this.setState(fbId: fbId);
+        this.setState({fbId: fbId});
         var api_resp = api_call('kitchenuser', 
           {method: 'LoginFb', 
           fbToken: accessToken});
@@ -90,11 +90,10 @@ module.exports = React.createClass({
     },
     fbRegistrationSuccess: function(fb_response) {
       var fwd = this.props.location.query.fwd;
-      component.history.pushState(null, 
+      this.history.pushState(null, 
         "account_setup?&fbEmail=" + fb_response.email +
         "&fbLogin=true&fbId=" + this.state.fbId + 
-        "&fwd=" + fwd)
-      });
+        "&fwd=" + fwd);
     },
     handleSignin: function() {
         var email = this.state.email;
