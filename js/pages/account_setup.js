@@ -238,9 +238,6 @@ module.exports = React.createClass({
 		this.setState(obj);
 	},
 	componentWillMount: function(){
-		var fbId = this.props.location.query.fbId;
-		var component = this;
-
 		window.fbAsyncInit = function() {
           FB.init({
             appId: '828767043907424',
@@ -248,19 +245,6 @@ module.exports = React.createClass({
             xfbml: true,  
             version: 'v2.4'
           });
-	      if (fbId) {
-	      	console.log("there was a fb id")
-		      FB.api('/me', 
-		      	{ locale: 'en_US', fields: 'name, email' },
-		      	function(r) {
-		      		console.log(r)
-		      		if (r && !r.error) {
-		      			component.setState({fbEmail: r.email});
-		      			console.log(r.email);
-		      			console.log(component.state.fbEmail);
-		      		}
-		      	});
-	      }
         };
       // Load the SDK asynchronously
       (function(d, s, id) {
@@ -270,7 +254,7 @@ module.exports = React.createClass({
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-	},
+	}
 	handleFacebookAdded: function(fbId){
 		this.setState({fbId: fbId, fbAdded: true});
 		console.log(this.state.fbId);

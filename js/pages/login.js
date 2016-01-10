@@ -72,23 +72,29 @@ module.exports = React.createClass({
       console.log(response);
       if (response.authResponse) {
         var accessToken = response.authResponse.accessToken,
-            userId = response.authResponse.userID; 
+            fbId = response.authResponse.userID;
+        this.setState(fbId: fbId);
         var api_resp = api_call('kitchenuser', 
           {method: 'LoginFb', 
           fbToken: accessToken});
         if (api_resp.Success) {
           Cookies.set('session', api_resp.Return.Session_token);
-          var fbEmail;
-          FB.api('/me', { locale: 'en_US', fields: 'name, email' }, function(r) { fbEmail = r.email});
-          if (api_resp.Return.Facebook_long_token === "NEW_GUEST") {
-            var fwd = this.props.location.query.fwd;
-            this.history.pushState(null, "account_setup?&fbEmail=" + fbEmail + "&fbLogin=true&fbId=" + userId + "&fwd=" + fwd);
-          } else
+          if (api_resp.Return.Facebook_long_token === "NEW_GUEST")
+            FB.api('/me', { locale: 'en_US', fields: 'name, email'}, this.fbRegistrationSuccess);
+          else
             this.history.pushState(null, this.props.location.query.fwd);
         }
       } else {
         this.setState({errors:["Facebook login failed."]});
       }
+    },
+    fbRegistrationSuccess: function(fb_response) {
+      var fwd = this.props.location.query.fwd;
+      component.history.pushState(null, 
+        "account_setup?&fbEmail=" + fb_response.email +
+        "&fbLogin=true&fbId=" + this.state.fbId + 
+        "&fwd=" + fwd)
+      });
     },
     handleSignin: function() {
         var email = this.state.email;
