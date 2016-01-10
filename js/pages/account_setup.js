@@ -238,6 +238,7 @@ module.exports = React.createClass({
 		this.setState(obj);
 	},
 	componentWillMount: function(){
+		var fbId = this.props.location.query.fbId;
 		window.fbAsyncInit = function() {
           FB.init({
             appId: '828767043907424',
@@ -246,8 +247,8 @@ module.exports = React.createClass({
             version: 'v2.4'
           });
 	      var component = this;
-	      if (this.props.location.query.fbId) {
-		      FB.api('/' + this.props.location.query.fbId, 
+	      if (fbId) {
+		      FB.api('/' + fbId, 
 		      	{ locale: 'en_US', fields: 'name, email' },
 		      	function(r) { 
 		      		if (r && !r.error) {
