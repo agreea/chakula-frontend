@@ -5,13 +5,11 @@ module.exports = React.createClass({
 	render: function() {
 		return(
 		<div id="why-chakula">
-			<header>
-		      <div className="row text-center" id="header">
+			<header className="intro-text row text-center" id="header">
 		        <h1 >Why Chakula?</h1>
-		        <p className="intro-text">We make it easier for you to focus on the cooking.</p>
-		        <p id="down-btn" ><a href="#body"><i className="fa fa-chevron-down" id="down-icon"></i></a></p>
-		      </div>
-		  </header>
+		        <p>We make it easier for you to focus on the cooking.</p>
+		    	<p id="down-btn" ><a href="#body"><i className="fa fa-chevron-down" id="down-icon"></i></a></p>
+		  	</header>
 		  <div className="row body" id="body">
 		    <div className="col-sm-10 col-sm-offset-1 text-center">
 		      <div className="row body-section">

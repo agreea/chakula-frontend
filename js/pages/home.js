@@ -33,7 +33,7 @@ module.exports = React.createClass({
         return(
             <div id="home">
             <header className="home-intro">
-                <div className="intro-body">
+                <div className="intro-text">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-10 col-md-offset-1">
@@ -64,15 +64,22 @@ module.exports = React.createClass({
                 </div>
             </header>
             <section id="about" className="how container content-section text-center">
+                <h2>How it Works</h2>
                 <div className="how-section row">
-                    <div className="col-lg-8 col-lg-offset-2">
-                        <h2>How it Works</h2>
-                        <p>Chakula connects the best cooks in DC with guests who are hungry for a new way to dine. Hosts make money doing what they love and guests get an unforgetable meal.</p>
-                        <ol>
-                            <li><b> Discover upcoming meals </b> prepared by our incredible hosts in our weekly email.</li>
-                            <li><b> See something you like? </b> Request a spot at the table.</li>
-                            <li>Once the host welcomes you to their meal, we send you their address. <b> Bon appetit!</b></li>
-                        </ol>
+                    <div className="col-xs-12 col-md-4">
+                        <img className="img-responsive img-responsive-centered" src="/img/chakula-explore.png"/>
+                        <h3>Find</h3>
+                        <p>a meal that makes your mouth water.</p>
+                    </div>
+                    <div className="col-xs-12 col-md-4">
+                        <img className="img-responsive img-responsive-centered" src="/img/chakula-reserve.png"/>
+                        <h3>Reserve</h3>
+                        <p>your spot at the table.</p>
+                    </div>
+                    <div className="col-xs-12 col-md-4">
+                        <img className="img-responsive img-responsive-centered" src="/img/chakula-break-bread.png"/>
+                        <h3>Break Bread</h3>
+                        <p>and enjoy great food with great company.</p>
                     </div>
                 </div>
             </section>

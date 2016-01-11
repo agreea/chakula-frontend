@@ -6,12 +6,12 @@ var Carousel = React.createClass({
     var pictures = this.props.data.map(function(pic, index) {
       if (index == 0) {
         return (<div className="item active">
-          <img src={"img/" + pic.Name}></img>
+          <img src={pic.Name}></img>
           <div className="carousel-caption">{pic.Caption}</div>
         </div>);
       }
       return (<div className="item">
-        <img src={"img/" + pic.Name}></img>
+        <img src={pic.Name}></img>
         <div className="carousel-caption">{pic.Caption}</div>
       </div>);
     });
@@ -65,9 +65,9 @@ var Review = React.createClass({
           <p>{this.props.children}</p>
           <div className="row">
             <div className="col-sm-8 review-meal-title">
-              <p><a href={"https://yaychakula.com/meal.html?Id=" + this.props.meal_id}>
+              <p><Link to={"https://yaychakula.com/meal/" + this.props.meal_id}>
                 {this.props.title}
-              </a></p>
+              </Link></p>
             </div>
             <div className="col-sm-4">
               <p>

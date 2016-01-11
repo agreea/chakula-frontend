@@ -307,9 +307,7 @@ module.exports = React.createClass({
       saveDisabled: false
     });
   },
-  componentWillMount: function() {
-    if (!this.props.params.id) 
-      return;
+  getMealDraft: function() {
     var api_resp = api_call('meal',{
         method: 'getMealDraft',
         mealId: this.props.params.id, 
@@ -331,6 +329,37 @@ module.exports = React.createClass({
       publishDisabled: false,
       possibleSeats: [2,3,4,5,6,7,8,9,10,11,12]
     });
+  },
+  getMealCopy: function () {
+    var api_resp = api_call('meal',{
+        method: 'getMealDraft',
+        mealId: this.props.location.query.copy, 
+        session: Cookies.get('session')
+      });
+    if (!api_resp.Success)
+      return;
+    var d = api_resp.Return;
+    this.setState({
+      title: d.Title,
+      description: d.Description,
+      price: d.Price,
+      seats: d.Capacity,
+      pics: d.Pics,
+      rsvpBy: d.Rsvp_by,
+      starts: d.Starts,
+      published: false,
+      saveDisabled: false,
+      publishDisabled: false,
+      possibleSeats: [2,3,4,5,6,7,8,9,10,11,12]
+    });
+  },
+  componentWillMount: function() {
+    if (!this.props.params.id && !this.props.location.query.copy) 
+      return;
+    if (this.props.params.id)
+      this.getMealDraft();
+    else if (this.props.location.query.copy)
+      this.getMealCopy();
   },
   componentDidMount: function(){
     this.initDatepicker('#starts', this.state.starts);
