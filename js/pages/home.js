@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+    MealCard = require('../meal_card.js');
 module.exports = React.createClass({
     validateEmail: function(email) {
   // http://stackoverflow.com/a/46181/11236
@@ -22,8 +23,23 @@ module.exports = React.createClass({
     handleEmailChange: function(e) {
         this.setState({email: e.target.value});
     },
+    componentWillMount: function() {
+        var api_resp = api_call("meal", {
+            method: "GetUpcomingMeals"
+        });
+        if (api_resp.Success) {
+            this.setState({upcomingMeals: api_resp.Return});
+        }
+    },
     getInitialState: function() {
         return({email: '', emailSubmitSuccess: false});
+    },
+    renderUpcomingMeals: function() {
+        var s = this.state;
+        if (s.upcomingMeals && s.upcomingMeals.length > 0)
+            return s.upcomingMeals.map(function(meal) {
+                return <MealCard data={meal} />
+            });
     },
     render: function() {        
         var email_message = "Get invites to unforgettable popup meals hosted by the best chefs in DC.";
@@ -84,6 +100,9 @@ module.exports = React.createClass({
                 </div>
             </section>
             <section className="row">
+                <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                    {this.renderUpcomingMeals()}
+                </div>
             </section>
         </div>);
     }

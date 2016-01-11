@@ -1,5 +1,6 @@
 var React = require('react'),
 	Link = require('react-router').Link;
+// takes a meal object in its data prop as received from the server
 module.exports = React.createClass({
 	render: function() {
 		var d = this.props.data;
