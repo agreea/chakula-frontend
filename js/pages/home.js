@@ -15,9 +15,8 @@ module.exports = React.createClass({
                 email: email,
                 host: checkedStatus
             });
-            if (api_resp.Success) {
+            if (api_resp.Success)
                 this.setState({emailSubmitSuccess: true});
-            }
         }
     },
     handleEmailChange: function(e) {
@@ -27,9 +26,8 @@ module.exports = React.createClass({
         var api_resp = api_call("meal", {
             method: "GetUpcomingMeals"
         });
-        if (api_resp.Success) {
+        if (api_resp.Success)
             this.setState({upcomingMeals: api_resp.Return});
-        }
     },
     getInitialState: function() {
         return({email: '', emailSubmitSuccess: false});
@@ -43,9 +41,8 @@ module.exports = React.createClass({
     },
     render: function() {        
         var email_message = "Get invites to unforgettable popup meals hosted by the best chefs in DC.";
-        if (this.state.emailSubmitSuccess) {
+        if (this.state.emailSubmitSuccess)
             email_message = "Thanks for signing up! We'll be in touch soon";
-        }
         return(
             <div id="home">
             <header className="home-intro">
@@ -100,12 +97,11 @@ module.exports = React.createClass({
                 </div>
             </section>
             <section className="row">
-                <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 text-center">
+                    {(this.state.upcomingMeals)? <h2>Upcoming Meals<h2> : ""}
                     {this.renderUpcomingMeals()}
                 </div>
             </section>
         </div>);
     }
 });
-
-//                 <UpcomingMeals/>
