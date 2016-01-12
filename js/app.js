@@ -21,7 +21,8 @@ var App = require('./pages/app.js'),
     CreateMeal = require('./pages/create_meal.js'),
     Login = require('./pages/login.js'),
     Chef = require('./pages/chef.js'),
-    AccountSetUp = require('./pages/account_setup.js'); // done
+    AccountSetUp = require('./pages/account_setup.js'),
+    ConfirmEmail = require('./pages/confirm_email.js'); // done
 ReactDOM.render(
 	<Router history={createBrowserHistory()} className="container-fluid">
 		<Route component={App}>
@@ -36,5 +37,6 @@ ReactDOM.render(
             <Route name="Login/Sign Up" path="login" component={Login}/>
             <Route name="Chef" path="chef/:id" component={Chef}/>
             <Route name="Account Setup" path="account_setup" component={AccountSetUp}/>
+            <Route name="Confirm Email" path="confirm_email" component={ConfirmEmail}/>
 	    </Route>
 	</Router>, document.getElementById('app'));
