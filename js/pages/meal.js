@@ -248,6 +248,7 @@ var MealInfo = React.createClass({
           <HostAttendeesInfo data={this.props.data}/>
           <div className="row">
             <p><i className="fa fa-map-marker"></i>{" " + data.Address}</p>
+            {(data.Status != "ATTENDING")? "" : <p>Full address revealed upon purchase</p>}
           </div>
           {map_row}
           <div className="row">
