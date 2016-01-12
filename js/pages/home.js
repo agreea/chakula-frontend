@@ -33,8 +33,7 @@ module.exports = React.createClass({
     componentDidMount: function() {
         if (Cookies.get("session"))
             $("#browse-meals").click(function() {
-                var sectionTag = $("div[name='upcoming']");
-                $('html,body').animate({scrollTop: sectionTag.offset().top},'medium');
+                $('html,body').animate({scrollTop: $("#upcoming").offset().top},'medium');
             });
     },
     getInitialState: function() {
