@@ -1,10 +1,9 @@
 function sendStripeData() {
 	params = getUrlVars();
-	session = Cookies.get("session")
 	api_resp = api_call('host', {
                 method: "StripeConnect",
                 auth: params.code,
- 				session: session 
+ 				session: Cookies.get("session") 
             });
 	if (api_resp.Success) {
 		$('#status-label').text("Successfully Connected Your Stripe Account!");
