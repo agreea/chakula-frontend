@@ -30,6 +30,13 @@ module.exports = React.createClass({
         if (api_resp.Success)
             this.setState({upcomingMeals: api_resp.Return});
     },
+    componentDidMount: function() {
+        if (Cookies.get("session"))
+            $("#browse-meals").click(function() {
+                var sectionTag = $("section[name='upcoming']");
+                $('html,body').animate({scrollTop: sectionTag.offset().top},'medium');
+            });
+    },
     getInitialState: function() {
         return({email: '', emailSubmitSuccess: false});
     },
@@ -57,9 +64,7 @@ module.exports = React.createClass({
                         <div className="row">
                             <div className="col-md-8 col-md-offset-2 text-center">
                                 {(Cookies.get("session"))?
-                                    <Link to="#upcoming">
-                                        <button className="c-blue-bg">Browse Meals</button>
-                                    </Link> :
+                                    <button id='browse-meals' className="c-blue-bg">Browse Meals</button> :
                                     <Link to="login?signup=true">
                                         <button className="c-blue-bg">Sign Up</button>
                                     </Link>
