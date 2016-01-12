@@ -27,10 +27,12 @@ module.exports = React.createClass({
 	},
 	render: function() {
 		return (
-			<div id="confirm-email">
+			<div id="confirm-email"> 
+			{
 				(this.state.success)?
 					this.renderSuccess() :
 					this.renderFail()
+			}
 			</div>
 		)
 	}
