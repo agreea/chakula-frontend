@@ -256,6 +256,9 @@ body {
     transform: scale(1);
   }
 }
+#home .content-section {
+  padding-top: 100px;
+}
 #home .how {
   padding-bottom: 40px;
 }
@@ -268,6 +271,18 @@ body {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
+}
+@media (min-width: 767px) {
+  #home .content-section {
+    padding-top: 125px;
+  }
+  #home .download-section {
+    padding: 100px 0;
+  }
+  #home #map {
+    height: 400px;
+    margin-top: 250px;
+  }
 }
 #home .btn {
   border-radius: 0;
@@ -474,26 +489,11 @@ For the requirements section
 /*
 Colors
 */
+#app,
 .container-fluid {
-  width: 100%;
+  height: 100%;
   padding: 0;
 }
-#app {
-  padding: 0;
-}
-/*
-FONTS
-*/
-@font-face {
-  font-family: 'BebasNeue Bold';
-  src: url('/fonts/BebasNeue Bold.eot');
-  src: local('☺'), url('/fonts/BebasNeue Bold.woff') format('woff'), url('/fonts/BebasNeue Bold.ttf') format('truetype'), url('/fonts/BebasNeue Bold.svg') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-/*
-General
-*/
 body {
   width: 100%;
   height: 100%;
@@ -511,18 +511,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'BebasNeue Bold', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
   letter-spacing: 1px;
-}
-h1 {
-  font-size: 40px;
-}
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Lato', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h3 {
   font-size: 20px;
@@ -635,19 +626,6 @@ button {
   border-radius: 0;
   line-height: 2;
 }
-.navbar .dropdown-menu {
-  background: #fff;
-  border-radius: 0;
-}
-.navbar * {
-  background: transparent;
-  color: #333;
-}
-@media (min-width: 800px) {
-  ul.nav li.dropdown:hover > ul.dropdown-menu {
-    display: block;
-  }
-}
 .navbar-right {
   margin-right: 0;
 }
@@ -661,11 +639,19 @@ button {
   vertical-align: middle;
   display: inline-block;
 }
+.navbar * {
+  background: transparent;
+  color: #333;
+}
+.nav-item-content {
+  margin: auto 0px;
+}
 .nav > li,
 .navbar-header {
   display: inline-flex;
   cursor: pointer;
   height: 100%;
+  margin: 13px 0 0 0;
 }
 .nav > li * {
   margin: auto 0;
@@ -673,12 +659,14 @@ button {
   -moz-transition: all 0s ease-in-out;
   transition: all 0s ease-in-out;
 }
-.nav > li img {
-  margin: 0 12px;
+.nav > li img,
+.nav > li button {
+  margin: 4px 12px;
 }
 .nav > li > a,
 .nav > li > button {
   padding: 8px;
+  border: none;
 }
 .nav > li > a:hover,
 .nav > li > button:hover {
@@ -693,10 +681,6 @@ button {
   display: inline-block;
   padding: 0;
   height: auto;
-}
-a#navbar-brand {
-  padding-top: 8px;
-  margin-left: 0;
 }
 .nav-item-content {
   padding: 0;
@@ -815,13 +799,6 @@ Rules on multiple pages
 */
 .intro-text {
   color: #fff;
-}
-.intro-text h1 {
-  font-size: 60px;
-  font-family: "Lato";
-}
-.intro-text .row {
-  padding-bottom: 28px;
 }
 .review-meal-title {
   padding-left: 0;
@@ -1683,14 +1660,14 @@ span.card-title {
   position: relative;
   padding: 205px 0 0 16px;
   line-height: 48px;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+1,1c1c1c+100&0+56,0.85+100 */
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 1%, rgba(129, 129, 129, 0) 56%, rgba(28, 28, 28, 0.85) 100%);
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+62,333333+85&0+0,0.5+92,0.54+100 */
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.34) 62%, rgba(51, 51, 51, 0.46) 85%, rgba(51, 51, 51, 0.5) 92%, rgba(51, 51, 51, 0.54) 100%);
   /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 1%, rgba(129, 129, 129, 0) 56%, rgba(28, 28, 28, 0.85) 100%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.34) 62%, rgba(51, 51, 51, 0.46) 85%, rgba(51, 51, 51, 0.5) 92%, rgba(51, 51, 51, 0.54) 100%);
   /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 1%, rgba(129, 129, 129, 0) 56%, rgba(28, 28, 28, 0.85) 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.34) 62%, rgba(51, 51, 51, 0.46) 85%, rgba(51, 51, 51, 0.5) 92%, rgba(51, 51, 51, 0.54) 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#d91c1c1c', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#8a333333', GradientType=0);
   /* IE6-9 */
 }
 span.card-title:hover {
