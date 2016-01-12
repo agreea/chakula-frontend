@@ -1,5 +1,6 @@
 var React = require('react'),
-    MealCard = require('../meal_card.js');
+    MealCard = require('../meal_card.js'),
+    Link = require('react-router').Link;
 module.exports = React.createClass({
     validateEmail: function(email) {
   // http://stackoverflow.com/a/46181/11236
@@ -35,14 +36,13 @@ module.exports = React.createClass({
     renderUpcomingMeals: function() {
         var s = this.state;
         if (s.upcomingMeals && s.upcomingMeals.length > 0)
-            return s.upcomingMeals.map(function(meal) {
-                return <MealCard data={meal} />
-            });
+            return (
+                <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 text-center">
+                    <h2>Upcoming Meals</h2>
+                    { s.upcomingMeals.map(function(meal) { return <MealCard data={meal} />}) }
+                </div>);
     },
     render: function() {        
-        var email_message = "Get invites to unforgettable popup meals hosted by the best chefs in DC.";
-        if (this.state.emailSubmitSuccess)
-            email_message = "Thanks for signing up! We'll be in touch soon";
         return(
             <div id="home">
             <header className="home-intro">
@@ -56,21 +56,14 @@ module.exports = React.createClass({
                         </div>
                         <div className="row">
                             <div className="col-md-8 col-md-offset-2 text-center">
-                                <p className="intro-text">{email_message}</p>
-                                <form className="text-center" id="signup" role="form">
-                                    <div className="input-group">
-                                        <input className="email-field btn-lg" 
-                                            name="email" 
-                                            id="email" 
-                                            type="email" 
-                                            placeholder="Your email" 
-                                            value={this.state.email} onChange={this.handleEmailChange} required></input>
-                                        <button className="submit-btn btn-info btn-lg" type="button" onClick={this.validate}>Signup</button>
-                                        <div className="checkbox">
-                                            <label><input type="checkbox" id="host-check">I can cook and wanna get paid to host!</input></label>
-                                        </div>
-                                    </div>
-                                </form>
+                                {(Cookies.get("session"))?
+                                    <Link to="#upcoming">
+                                        <button className="c-blue-bg">Browse Meals</button>
+                                    </Link> :
+                                    <Link to="login?signup=true">
+                                        <button className="c-blue-bg">Sign Up</button>
+                                    </Link>
+                                }
                             </div>
                         </div>
                     </div>
@@ -96,11 +89,8 @@ module.exports = React.createClass({
                     </div>
                 </div>
             </section>
-            <section className="row">
-                <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 text-center">
-                    {(this.state.upcomingMeals)? <h2>Upcoming Meals<h2> : ""}
-                    {this.renderUpcomingMeals()}
-                </div>
+            <section className="row" id="upcoming">
+                {this.renderUpcomingMeals()}
             </section>
         </div>);
     }

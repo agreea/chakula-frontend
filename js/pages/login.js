@@ -122,7 +122,7 @@ module.exports = React.createClass({
     },
     getInitialState: function() {
         return({
-          createAccount: false, 
+          createAccount: this.props.location.query.signup, 
           errors: [], 
           email: '', 
           password: '', 
