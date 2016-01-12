@@ -36,10 +36,11 @@ var Carousel = React.createClass({
 var ReviewBox = React.createClass({
   render: function() {
     return (
+      (this.props.data.length > 0) ?
       <div className="reviewBox">
         <h3 className="text-left">Reviews</h3>
         <ReviewList data={this.props.data} />
-      </div>
+      </div> : ""
     );
   }
 });
