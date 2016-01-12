@@ -33,7 +33,7 @@ module.exports = React.createClass({
     componentDidMount: function() {
         if (Cookies.get("session"))
             $("#browse-meals").click(function() {
-                var sectionTag = $("section[name='upcoming']");
+                var sectionTag = $("div[name='upcoming']");
                 $('html,body').animate({scrollTop: sectionTag.offset().top},'medium');
             });
     },
@@ -44,8 +44,8 @@ module.exports = React.createClass({
         var s = this.state;
         if (s.upcomingMeals && s.upcomingMeals.length > 0)
             return (
-                <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 text-center">
-                    <h2>Upcoming Meals</h2>
+                <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                    <h2 className="text-center">Upcoming Meals</h2>
                     { s.upcomingMeals.map(function(meal) { return <MealCard data={meal} />}) }
                 </div>);
     },
@@ -94,9 +94,9 @@ module.exports = React.createClass({
                     </div>
                 </div>
             </section>
-            <section className="row" id="upcoming">
+            <div className="row" id="upcoming">
                 {this.renderUpcomingMeals()}
-            </section>
+            </div>
         </div>);
     }
 });
