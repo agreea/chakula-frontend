@@ -191,13 +191,9 @@ span {
     padding: 0;
     height: auto;
 }
-
-ul.nav li.dropdown:hover > ul.dropdown-menu {
-    display: block;
-}
-
-
-@media (min-width: 979px) {
+.nav-item-content {
+    padding: 0;
+    border: none;
 }
 
 /*span {
