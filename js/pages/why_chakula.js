@@ -6,7 +6,7 @@ module.exports = React.createClass({
 		return(
 		<div id="why-chakula">
 			<header>
-		      <div className="row text-center" id="header">
+		      <div className="row text-center intro-text" id="header">
 		        <h1 >Why Chakula?</h1>
 		        <p>We make it easier for you to focus on the cooking.</p>
 		        <p className="text-center" id="down-btn" ><a href="#body"><i className="fa fa-chevron-down" id="down-icon"></i></a></p>
