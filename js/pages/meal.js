@@ -6,7 +6,7 @@ var Carousel = React.createClass({
     var pictures = this.props.data.map(function(pic, index) {
       if (index == 0) {
         return (<div className="item active">
-          <img src={pic.Name}></img>
+          <img src={"https://yaychakula.com/img/" + pic.Name}></img>
           <div className="carousel-caption">{pic.Caption}</div>
         </div>);
       }

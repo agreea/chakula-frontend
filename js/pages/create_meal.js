@@ -182,7 +182,7 @@ var Pic = React.createClass({
           <a className="btn-delete-photo" onClick={this.deletePic}>
             <span className=" glyphicon glyphicon-trash delete-icon" aria-hidden="true"></span>
           </a>
-          <img className="img-responsive pic" src={pic.Name}/>
+          <img className="img-responsive pic" src={"https://yaychakula.com/img/" + pic.Name}/>
         </div>
       </div>
     );
@@ -499,8 +499,8 @@ module.exports = React.createClass({
         <PriceSeatsRow 
           handleChange={this.handleInputChange}
           data={s} />f
-        <DatesRow data={s} handleChange={this.handleChange}/>
-        <AddressRow data={s} handleChange={this.handleChange}/>
+        <DatesRow data={s} handleChange={this.handleInputChange}/>
+        <AddressRow data={s} handleChange={this.handleInputChange}/>
         <PicList data={s} handlePicsChange={this.handleInputChange}/>
         <div className="col-md-8 col-md-offset-2">
           <div>

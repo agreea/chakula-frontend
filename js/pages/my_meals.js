@@ -149,7 +149,7 @@ module.exports = React.createClass({
         </Link> 
         </div> :
         <Link to="create_meal/">
-          <img className="img-responsive img-responsive-center add-meal-icon" src="img/add-icon.svg"/>
+          <img className="img-responsive img-responsive-center add-meal-icon" src="/img/add-icon.svg"/>
         </Link>
     return (
       <div className="row non-white" id="create-meal">
