@@ -4,7 +4,7 @@ module.exports = React.createClass({
 	componentWillMount: function() {
 		var api_resp = api_call("kitchenuser", {
 			method: "verifyEmail",
-			Code: this.props.location.query.Code,
+			code: this.props.location.query.Code,
 			Id: this.props.location.query.Id
 		});
 		this.setState({success: api_resp.Success});
@@ -20,8 +20,6 @@ module.exports = React.createClass({
 		return (
 			<div className="text-center">
 				<h3>{"Email verified!"}</h3>
-				<p>{"This will now show on your guest profile"}</p>
-				<button className="c-blue-bg">View Guest Profile</button>
 			</div>
 		);
 	},

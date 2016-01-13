@@ -1,7 +1,11 @@
 var React = require('react');
 var TitleDescription = React.createClass({
   getInitialState: function() {
-    return {title: this.props.title, description: this.props.description};
+    var d = this.props.data;
+    return {
+      Title: d.Title, 
+      Description: d.Description
+    };
   },
   handleChange: function(e) {
     var obj = {},
@@ -12,13 +16,14 @@ var TitleDescription = React.createClass({
     this.props.handleChange(obj);
   },
   render: function() {
+    var s = this.state;
     return(
       <div>
         <div className="row form-row">
           <div className="col-sm-8 col-sm-offset-2">
             <input className="title-field" id="title" type="text" 
               placeholder="Give your meal a snazzy title." 
-              value={this.state.title} 
+              value={s.Title} 
               onChange={this.handleChange}/>
           </div>
         </div>
@@ -29,7 +34,7 @@ var TitleDescription = React.createClass({
           <div className="col-xs-8">
             <textarea className="text-field" id="description" type="text" rows="8" 
               placeholder="What's in your meal? What inspired you to make it?" 
-              value={this.state.description} 
+              value={s.Description} 
               onChange={this.handleChange}></textarea>
           </div>
         </div>
@@ -40,9 +45,10 @@ var TitleDescription = React.createClass({
 
 var PriceSeatsRow = React.createClass({
   getInitialState: function() {
+    var d = this.props.data;
     return {
-      price: this.props.price, 
-      seats: this.props.seats
+      Price: d.Price, 
+      Capacity: d.Capacity
     };
   },
   handleChange: function(e) {
@@ -54,7 +60,8 @@ var PriceSeatsRow = React.createClass({
     this.setState(obj);
     this.props.handleChange(obj);
   },
-  getPriceWithCommission: function(price) {
+  getPriceWithCommission: function() {
+    var price = this.state.Price;
     if(price <= 15)
       price *= 1.28
     else if (price < 100) {
@@ -76,9 +83,9 @@ var PriceSeatsRow = React.createClass({
             <div className="input-group text-field">
               <span className="input-group-addon">$</span>
               <input className="text-field" id="price" type="text" 
-                value={s.price} 
+                value={s.Price} 
                 onChange={this.handleChange} 
-                disabled={this.props.published}/>
+                disabled={this.props.data.published}/>
             </div>
           </div>
         </div>
@@ -87,19 +94,19 @@ var PriceSeatsRow = React.createClass({
             <p className="text-right" id="guests-pay">Guests pay</p>
           </div>
           <div className="col-xs-5 col-sm-4">
-            <p>{"$" + this.getPriceWithCommission(s.price)}</p>
+            <p>{"$" + this.getPriceWithCommission()}</p>
           </div>
         </div>
         <div className="row form-row">
           <div className="col-xs-4 col-sm-2 form-label">
             <p className="text-right">Guest Seats</p>
           </div>
-          <select value={s.seats} className="col-xs-2 col-sm-1" id="seats" onChange={this.handleChange}>
-                {this.props.possibleSeats.map(function(seat_count, i) {
-                    return (
-                      <option value={seat_count}>{seat_count}</option>
-                    );
-                  })}
+          <select value={s.Capacity} className="col-xs-2 col-sm-1" id="seats" onChange={this.handleChange}>
+            {this.props.data.possibleSeats.map(function(seat_count, i) {
+                return (
+                  <option value={seat_count}>{seat_count}</option>
+                );
+              })}
           </select>
         </div>
         <div className="row form-row">
@@ -107,7 +114,7 @@ var PriceSeatsRow = React.createClass({
             <p className="text-right">Max pay</p>
           </div>
           <div className="col-xs-8 col-sm-5">
-            <p id="payout-val">{"$" + s.seats * s.price}</p>
+            <p id="payout-val">{"$" + s.Capacity * s.Price}</p>
           </div>
         </div>
       </div>
@@ -116,7 +123,8 @@ var PriceSeatsRow = React.createClass({
 });
 var DatesRow = React.createClass({
   getInitialState: function() {
-    return {starts: this.props.starts, rsvpBy: this.props.rsvp_by};
+    var d = this.props.data;
+    return {Starts: d.Starts, Rsvp_by: d.Rsvp_by};
   },
   handleChange: function(e) {
     var key = e.target.id,
@@ -127,6 +135,7 @@ var DatesRow = React.createClass({
     this.props.handleChange(obj);
   },
   render: function() {
+    var s = this.state;
     return (
       <div>
         <div className="row form-row">
@@ -134,11 +143,11 @@ var DatesRow = React.createClass({
             <p className="text-right">Meal Time</p>
           </div>
           <div className="col-xs-6 col-sm-3">
-            <input className="text-field" type="text" size="20" id="starts"
+            <input className="text-field" type="text" size="20" id="Starts"
               placeholder="When do you break bread?" 
-              value={this.state.starts} 
+              value={s.Starts} 
               onChange={this.handleChange}
-              disabled={this.props.published}/>
+              disabled={this.props.data.published}/>
           </div>
         </div>
         <div className="row form-row">
@@ -146,9 +155,9 @@ var DatesRow = React.createClass({
             <p className="text-right">RSVP By</p>
           </div>
           <div className="col-xs-6 col-sm-3">
-            <input className="text-field" type="text" size="40" id="rsvpBy"
+            <input className="text-field" type="text" size="40" id="Rsvp_by"
               placeholder="Rsvp by?" 
-              value={this.state.rsvpBy} 
+              value={s.Rsvp_by} 
               onChange={this.handleChange}/>
           </div>
         </div>
@@ -200,7 +209,7 @@ var PicList = React.createClass({
   },
   onload: function(e){
     var img = document.createElement("img");
-    var pics = this.state.pics;
+    var pics = this.state.Pics;
     var updatePics = this.updatePics;
     img.onload = function(event) {
       var canvas = document.createElement("canvas");
@@ -223,22 +232,24 @@ var PicList = React.createClass({
     };
     img.src = e.target.result;
   },
-  updatePics: function(pics) {
-    this.setState({pics: pics});
-    this.props.handlePicsChange(this.state.pics);
+  updatePics: function(pics) {}
+    var update_state = {Pics: pics};
+    this.setState(update_state);
+    this.props.handlePicsChange(update_state);
   },
   deletePic: function(index) {
-    var pics = this.state.pics;
-    pics.splice(this.props.k, 1);
-    this.setState({pics: pics});
-    this.props.handlePicsChange(this.state.pics);
+    var pics = this.state.Pics;
+    pics.splice(index, 1);
+    var update_state = {Pics: pics};
+    this.setState(update_state);
+    this.props.handlePicsChange(update_state);
   },
   getInitialState: function() {
-    return ({pics: this.props.pics});
+    return ({Pics: this.props.data.Pics});
   },
   render: function() {
     var deletePic = this.deletePic;
-    var picNodes = this.state.pics.map(function (pic, index) {
+    var picNodes = this.state.Pics.map(function (pic, index) {
       return <Pic pic={pic} k={index} deletePic={deletePic}/>;
     });
     var picRows = [], // two dimensional array. Each row contains 3 pic items
@@ -279,19 +290,80 @@ var PicList = React.createClass({
     );
   }
 });
-
+var AddressRow = React.createClass({
+  handleChange: function(e) {
+    var key = e.target.id,
+        val = e.target.value;
+    var obj = {};
+    obj[key] = val;
+    this.setState(obj);
+    this.props.handleChange(obj);
+  },
+  getInitialState: function() {
+    var d = this.props.data;
+    return ({
+      Address: d.Address,
+      City: d.City,
+      State: d.State
+    });
+  },
+  render: function() {
+    var states = ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"];
+    var states_select_options = states.map(function(state) { return <option value={state}>{state}</option>;});
+    return (
+      <div>
+        <div className="row form-row">
+          <div className="col-xs-4 col-sm-2 form-label">
+            <p className="text-right">Street Address</p>
+          </div>
+          <div className="col-xs-4 col-sm-2">
+            <div className="input-group text-field">
+              <input className="text-field" id="Address" type="text" 
+                value={s.Address} 
+                placeHolder="3700 O St"
+                onChange={this.handleChange}/>
+            </div>
+          </div>
+        </div>
+        <div className="row form-row">
+          <div className="col-xs-4 col-sm-2 form-label">
+            <p className="text-right">City</p>
+          </div>
+          <div className="col-xs-6 col-sm-3 col-lg-2">
+            <div className="input-group text-field">
+              <input className="text-field" id="City" type="text" 
+                value={s.City} 
+                placeHolder="Washington"
+                onChange={this.handleChange}/>
+            </div>
+          </div>
+        </div>
+        <div className="row form-row">
+          <div className="col-xs-4 col-sm-2 form-label">
+            <p className="text-right">State</p>
+          </div>
+          <div className="col-xs-6 col-sm-3 col-lg-2">
+            <select className="state-select" value={host.state} id="State" onChange={this.handleChange}>
+              {states_select_options}
+            </select>
+          </div>
+        </div>
+      </div>
+    );
+  }
+})
 module.exports = React.createClass({
   mixins: [require('react-router').History],
   getInitialState: function() {
     return({
-      title: '',
-      description: '',
-      price: '',
-      seats: 2,
-      pics: [],
-      rsvpBy: '',
-      starts: '',
-      published: '',
+      Title: '',
+      Description: '',
+      Price: '',
+      Capacity: 2,
+      Pics: [],
+      RsvpBy: '',
+      Starts: '',
+      Published: '',
       saveDisabled: false,
       publishDisabled: false,
       possibleSeats: [2,3,4,5,6,7,8,9,10,11,12]
@@ -300,12 +372,6 @@ module.exports = React.createClass({
   handleInputChange: function(key_val) {
     key_val["saveDisabled"] = false;
     this.setState(key_val);
-  },
-  handlePicsChange: function(pics) {
-    this.setState({
-      pics: pics,
-      saveDisabled: false
-    });
   },
   getMealDraft: function() {
     var api_resp = api_call('meal',{
@@ -316,19 +382,9 @@ module.exports = React.createClass({
     if (!api_resp.Success)
       return;
     var d = api_resp.Return;
-    this.setState({
-      title: d.Title,
-      description: d.Description,
-      price: d.Price,
-      seats: d.Capacity,
-      pics: d.Pics,
-      rsvpBy: d.Rsvp_by,
-      starts: d.Starts,
-      published: d.Published,
-      saveDisabled: true,
-      publishDisabled: false,
-      possibleSeats: [2,3,4,5,6,7,8,9,10,11,12]
-    });
+    d["saveDisabled"] = true,
+    d["publishDisabled"] = true;
+    this.setState(d);
   },
   getMealCopy: function () {
     var api_resp = api_call('meal',{
@@ -339,22 +395,14 @@ module.exports = React.createClass({
     if (!api_resp.Success)
       return;
     var d = api_resp.Return;
-    this.setState({
-      title: d.Title,
-      description: d.Description,
-      price: d.Price,
-      seats: d.Capacity,
-      pics: d.Pics,
-      rsvpBy: d.Rsvp_by,
-      starts: d.Starts,
-      published: false,
-      saveDisabled: false,
-      publishDisabled: false,
-      possibleSeats: [2,3,4,5,6,7,8,9,10,11,12]
-    });
+    d["saveDisabled"] = false,
+    d["publishDisabled"] = false,
+    d["Published"] = false; // override the response from the server because you are saving a copy
+    this.setState(d);
   },
   componentWillMount: function() {
-    if (!this.props.params.id && !this.props.location.query.copy) 
+    if (!this.props.params.id && !this.props.location.query.copy)
+      // get host object from server, set the city state and address
       return;
     if (this.props.params.id)
       this.getMealDraft();
@@ -362,8 +410,8 @@ module.exports = React.createClass({
       this.getMealCopy();
   },
   componentDidMount: function(){
-    this.initDatepicker('#starts', this.state.starts);
-    this.initDatepicker('#rsvpBy', this.state.rsvpBy);
+    this.initDatepicker('#starts', this.state.Starts);
+    this.initDatepicker('#rsvpBy', this.state.Rsvp_by);
   },
   initDatepicker: function(picker_id, default_string) {
     var defaultDate = (default_string == "")? moment() : moment(default_string);
@@ -375,43 +423,32 @@ module.exports = React.createClass({
         s = this.state,
         starts = $('#starts').data("DateTimePicker").date(),
         rsvpBy = $('#rsvpBy').data("DateTimePicker").date();
-    console.log(s.price);
-    console.log(isFinite(price));
-    if (!isFinite(s.price)) errors.push("Price must be a valid dollar value.");
+    if (!isFinite(s.Price)) errors.push("Price must be a valid dollar value.");
     if (rsvpBy > starts) errors.push("Rsvp by time cannot be after meal starts.");
     if (rsvpBy < moment()) errors.push("Rsvp by time cannot be in the past.");
     if (starts < moment()) errors.push("Start time cannot be in the past.");
     this.setState({errors: errors})
     if(errors.length > 0)
       return;
-    var mealId = (this.props.params.id)? this.props.params.id : "";
-    var api_resp = api_call('meal', {
-          method: 'saveMealDraft',
-          title: s.title,
-          description: s.description,
-          starts: starts.unix(),
-          rsvpBy: rsvpBy.unix(),
-          price: s.price,
-          seats: s.seats,
-          pics: JSON.stringify(s.pics),
-          session: Cookies.get('session'),
-          mealId: mealId
-    });
+    var api_data = this.state;
+    api_data["Starts"] = starts.unix(),
+    api_data["Rsvp_by"] = rsvpBy.unix(),
+    api_data["Meal_id"] = (this.props.params.id)? this.props.params.id : "",
+    api_data["Pics"] = JSON.stringify(s.Pics),
+    api_data["Session"] = Cookies.get('session'),
+    api_data["method"] = "saveMealDraft";
+    var api_resp = api_call('meal', {api_data});
     this.setState({saveDisabled: true});
-    if (!api_resp.Success) {
-      this.setState({
-        errors: [api_resp.Error],
-        saveDisabled: false
-      });
-      return;
-    }
+    var errors = [];
+    if (!api_resp.Success)
+      errors.push(api_resp.Error)
     this.setState({
-      errors: [], 
+      errors: errors, 
       publishDisabled: false,
-      saveDisabled: true,
+      saveDisabled: api_resp.Success,
     });
     if (!this.props.params.id && flag !== "publish") // reload the page if you haven't done so already
-        this.history.pushState(null, "create_meal/" + api_resp.Return);
+        this.history.pushState(null, api_resp.Return);
     return api_resp;
   },
   attemptPublish: function() {
@@ -419,13 +456,13 @@ module.exports = React.createClass({
         rsvpBy = $('#rsvpBy').data("DateTimePicker").date(),
         s = this.state;
     var errors = [];
-    if (!isFinite(s.price)) errors.push("Price must be a valid dollar value.");
+    if (!isFinite(s.Price)) errors.push("Price must be a valid dollar value.");
     if (rsvpBy.unix() > starts.unix()) errors.push("Rsvp-by time cannot be after when the meal starts.");
     if (starts < moment()) errors.push("Start time cannot be in the past.");
     if (rsvpBy < moment()) errors.push("Rsvp-by time cannot be in the past.");
-    if (this.state.title === "") errors.push("Title cannot be empty.")
-    if (this.state.description === "") errors.push("Description cannot be empty.");
-    if (!this.state.pics || this.state.pics.length < 1) errors.push("Upload a picture before publishing your meal");
+    if (s.Title === "") errors.push("Title cannot be empty.")
+    if (s.Description === "") errors.push("Description cannot be empty.");
+    if (!s.Pics || s.Pics.length < 1) errors.push("Upload a picture before publishing your meal");
     if (errors.length > 0) {
       this.setState({errors: errors});
       return;
@@ -445,29 +482,26 @@ module.exports = React.createClass({
   },
   render: function() {
     var s = this.state;
-    var errors = [];
+    var errorElements = [];
     if (s.errors) {
-      errors = s.errors.map(function(error){ return(<li>{error}</li>) })
+      errorElements = s.errors.map(function(error){ return(<li>{error}</li>) })
     }
     console.log("SaveDisabled? " + s.saveDisabled);
     return(
       <div id="create-meal">
-        <TitleDescription 
-          title={s.title} 
-          description={s.description} 
+        <TitleDescription
+          data={s} 
           handleChange={this.handleInputChange} />
         <PriceSeatsRow 
-          seats={s.seats}
           handleChange={this.handleInputChange}
-          price={s.price} 
-          possibleSeats={s.possibleSeats}
-          published={s.published} />
-        <DatesRow starts={s.start} rsvp_by={s.rsvpB} published={s.published} />
-        <PicList pics={s.pics} handlePicsChange={this.handlePicsChange}/>
+          data={s} />f
+        <DatesRow data={s} />
+        <AddressRow data={s} />
+        <PicList data={s} handlePicsChange={this.handleInputChange}/>
         <div className="col-md-8 col-md-offset-2">
           <div>
             <ul className="error-field" id="error-field">
-              {errors}
+              {errorElements}
             </ul>
             <button 
               className="brand-btn btn-info btn-lg btn" 
