@@ -174,8 +174,9 @@ var Pic = React.createClass({
     this.props.deletePic(this.props.k);
   },
   render: function() {
-    var pic = this.props.pic
-    var pic_src;
+    var pic = this.props.pic;
+    var pic_src = (pic.Name.startsWith("data:image"))?
+      pic_src = pic.Name : "https://yaychakula.com/img/"+pic.Name;
     return (
       <div className="col-sm-4">
         <div className="pic-card text-center">
@@ -378,8 +379,10 @@ module.exports = React.createClass({
         mealId: this.props.params.id, 
         session: Cookies.get('session')
       });
-    if (!api_resp.Success)
+    if (!api_resp.Success) {
+      this.history.pushState(null, "my_meals");
       return;
+    }
     var d = api_resp.Return;
     d["saveDisabled"] = true,
     d["publishDisabled"] = true;
