@@ -142,14 +142,17 @@ var BookMeal = React.createClass({
       (meal_closes < moment()) || 
       data.Status == "ATTENDING" || 
       data.Status == "DECLINED" || 
-      data.Status == "PENDING";
+      data.Status == "PENDING" ||
+      data.Open_spots == 0;
     var starts = moment(data.Starts);
     var req_btn_text;
-    if (meal_closes < moment()) {
+    if (meal_closes < moment())
       req_btn_text = 'Meal closed';
-    } else {
+    else if (data.Open_spots == 0)
+      req_btn_text = "Sold out"
+    else 
       req_btn_text = "Book";
-    }
+
     var order_btn = <button 
           className="brand-btn btn" 
           id="request-meal-btn" 
