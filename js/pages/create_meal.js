@@ -386,7 +386,7 @@ module.exports = React.createClass({
     d["saveDisabled"] = true,
     d["publishDisabled"] = true;
     this.setState(d);
-    console.log(d);
+    console.log(this.state);
   },
   getMealCopy: function () {
     var api_resp = api_call('meal',{
