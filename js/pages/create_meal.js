@@ -22,7 +22,7 @@ var TitleDescription = React.createClass({
         <div className="row form-row">
           <div className="col-sm-8 col-sm-offset-2">
             <input className="title-field" id="title" type="text" 
-              placeHolder="Give your meal a snazzy title." 
+              placeholder="Give your meal a snazzy title." 
               value={s.Title} 
               onChange={this.handleChange}/>
           </div>
@@ -321,7 +321,7 @@ var AddressRow = React.createClass({
             <div className="input-group text-field">
               <input className="text-field" id="Address" type="text" 
                 value={s.Address} 
-                placeHolder="3700 O St"
+                placeholder="3700 O St"
                 onChange={this.handleChange}/>
             </div>
           </div>
@@ -334,7 +334,7 @@ var AddressRow = React.createClass({
             <div className="input-group text-field">
               <input className="text-field" id="City" type="text" 
                 value={s.City} 
-                placeHolder="Washington"
+                placeholder="Washington"
                 onChange={this.handleChange}/>
             </div>
           </div>
@@ -401,7 +401,7 @@ module.exports = React.createClass({
     d["publishDisabled"] = false,
     d["Published"] = false; // override the response from the server because you are saving a copy
     this.setState(d);
-    
+
   },
   componentWillMount: function() {
     if (!this.props.params.id && !this.props.location.query.copy)
