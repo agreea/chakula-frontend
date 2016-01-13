@@ -253,7 +253,6 @@ var PicList = React.createClass({
     });
     var picRows = [], // two dimensional array. Each row contains 3 pic items
         thisRow = []; // second dimension of the array. Once a row stores 3 pics, you add it to the pic rows
-    console.log("Pic node length: " + picNodes.length);
     for (var i in picNodes) {
       // add this row to pic rows if it's full
       if (thisRow.length === 3) {
@@ -457,7 +456,7 @@ module.exports = React.createClass({
       saveDisabled: api_resp.Success,
     });
     if (!this.props.params.id && flag !== "publish") // reload the page if you haven't done so already
-        this.history.pushState(null, api_resp.Return);
+        this.history.pushState(null, "create_meal/" + api_resp.Return);
     return api_resp;
   },
   attemptPublish: function() {
@@ -495,7 +494,6 @@ module.exports = React.createClass({
     if (s.errors) {
       errorElements = s.errors.map(function(error){ return(<li>{error}</li>) })
     }
-    console.log("SaveDisabled? " + s.saveDisabled);
     return(
       <div id="create-meal">
         <TitleDescription
