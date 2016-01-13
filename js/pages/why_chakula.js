@@ -17,7 +17,7 @@ module.exports = React.createClass({
 		      <div className="row body-section">
 		        <div className="col-sm-4">
 		            <img className="img-responsive img-responsive-center icon" src="img/audience-icon.svg"/>
-		            <h3>AUDIENCO TARGETTA</h3>
+		            <h3>Targeted Audience</h3>
 		            <p>Reach nearby customers looking for home cooked meals and classes.</p>
 		        </div>
 		        <div className="col-sm-4 text-center">
