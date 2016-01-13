@@ -21,7 +21,7 @@ var TitleDescription = React.createClass({
       <div>
         <div className="row form-row">
           <div className="col-sm-8 col-sm-offset-2">
-            <input className="title-field" id="title" type="text" 
+            <input className="title-field" id="Title" type="text" 
               placeholder="Give your meal a snazzy title." 
               value={s.Title} 
               onChange={this.handleChange}/>
@@ -32,7 +32,7 @@ var TitleDescription = React.createClass({
             <p className="text-right">Description</p>
           </div>
           <div className="col-xs-8">
-            <textarea className="text-field" id="description" type="text" rows="8" 
+            <textarea className="text-field" id="Description" type="text" rows="8" 
               placeholder="What's in your meal? What inspired you to make it?" 
               value={s.Description} 
               onChange={this.handleChange}></textarea>
@@ -82,7 +82,7 @@ var PriceSeatsRow = React.createClass({
           <div className="col-xs-4 col-sm-2">
             <div className="input-group text-field">
               <span className="input-group-addon">$</span>
-              <input className="text-field" id="price" type="text" 
+              <input className="text-field" id="Price" type="text" 
                 value={s.Price} 
                 onChange={this.handleChange} 
                 disabled={this.props.data.published}/>
@@ -101,7 +101,7 @@ var PriceSeatsRow = React.createClass({
           <div className="col-xs-4 col-sm-2 form-label">
             <p className="text-right">Guest Seats</p>
           </div>
-          <select value={s.Capacity} className="col-xs-2 col-sm-1" id="seats" onChange={this.handleChange}>
+          <select value={s.Capacity} className="col-xs-2 col-sm-1" id="Capacity" onChange={this.handleChange}>
             {this.props.data.possibleSeats.map(function(seat_count, i) {
                 return (
                   <option value={seat_count}>{seat_count}</option>
