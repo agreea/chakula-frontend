@@ -440,6 +440,7 @@ module.exports = React.createClass({
     api_data["Pics"] = JSON.stringify(s.Pics),
     api_data["Session"] = Cookies.get('session'),
     api_data["method"] = "saveMealDraft";
+    console.log(api_data);
     var api_resp = api_call('meal', api_data);
     this.setState({saveDisabled: true});
     var errors = [];
