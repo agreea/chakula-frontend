@@ -372,6 +372,7 @@ module.exports = React.createClass({
   handleInputChange: function(key_val) {
     key_val["saveDisabled"] = false;
     this.setState(key_val);
+    console.log(this.state);
   },
   getMealDraft: function() {
     var api_resp = api_call('meal',{
