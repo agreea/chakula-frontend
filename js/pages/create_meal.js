@@ -498,8 +498,8 @@ module.exports = React.createClass({
         <PriceSeatsRow 
           handleChange={this.handleInputChange}
           data={s} />f
-        <DatesRow data={s} />
-        <AddressRow data={s} />
+        <DatesRow data={s} handleChange={this.handleChange}/>
+        <AddressRow data={s} handleChange={this.handleChange}/>
         <PicList data={s} handlePicsChange={this.handleInputChange}/>
         <div className="col-md-8 col-md-offset-2">
           <div>
