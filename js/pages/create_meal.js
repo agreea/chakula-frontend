@@ -147,7 +147,7 @@ var DatesRow = React.createClass({
               placeholder="When do you break bread?" 
               value={s.Starts} 
               onChange={this.handleChange}
-              disabled={this.props.data.published}/>
+              disabled={this.props.data.Published}/>
           </div>
         </div>
         <div className="row form-row">
@@ -232,7 +232,7 @@ var PicList = React.createClass({
     };
     img.src = e.target.result;
   },
-  updatePics: function(pics) {}
+  updatePics: function(pics) {
     var update_state = {Pics: pics};
     this.setState(update_state);
     this.props.handlePicsChange(update_state);
