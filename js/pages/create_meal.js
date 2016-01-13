@@ -22,7 +22,7 @@ var TitleDescription = React.createClass({
         <div className="row form-row">
           <div className="col-sm-8 col-sm-offset-2">
             <input className="title-field" id="title" type="text" 
-              placeholder="Give your meal a snazzy title." 
+              placeHolder="Give your meal a snazzy title." 
               value={s.Title} 
               onChange={this.handleChange}/>
           </div>
@@ -386,6 +386,7 @@ module.exports = React.createClass({
     d["saveDisabled"] = true,
     d["publishDisabled"] = true;
     this.setState(d);
+    console.log(d);
   },
   getMealCopy: function () {
     var api_resp = api_call('meal',{
