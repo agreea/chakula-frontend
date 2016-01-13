@@ -176,18 +176,13 @@ var Pic = React.createClass({
   render: function() {
     var pic = this.props.pic
     var pic_src;
-    if (pic.Name.startsWith("data:image")) {
-      pic_src = pic.Name;
-    } else {
-      pic_src = "https://yaychakula.com/img/"+pic.Name;
-    }
     return (
       <div className="col-sm-4">
         <div className="pic-card text-center">
           <a className="btn-delete-photo" onClick={this.deletePic}>
             <span className=" glyphicon glyphicon-trash delete-icon" aria-hidden="true"></span>
           </a>
-          <img className="img-responsive pic" src={pic_src}/>
+          <img className="img-responsive pic" src={pic.Name}/>
         </div>
       </div>
     );
