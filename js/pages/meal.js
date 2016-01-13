@@ -232,11 +232,13 @@ var MealInfo = React.createClass({
       }
     }
     // handle newlines in the meal description
-    var desc_lines = data.Description.split(/[\n\r]/g);
-    var description = desc_lines.map(function(desc_line) {
+    var descLines = data.Description.split(/[\n\r]/g);
+    var description = descLines.map(function(desc_line) {
       return <p>{desc_line}</p>;
     });
-
+    var displayAddress = `${data.City}, ${data.State}`;
+    if (data.Address)
+      displayAddress = `${data.Address}, ${displayAddress}`;
     return (
       <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-0">
           <div className="row">
@@ -248,7 +250,7 @@ var MealInfo = React.createClass({
           </div>
           <HostAttendeesInfo data={this.props.data}/>
           <div className="row">
-            <p><i className="fa fa-map-marker"></i>{" " + data.Address}</p>
+            <p><i className="fa fa-map-marker"></i>{" " + displayAddress}</p>
             {(data.Status === "ATTENDING")? "" : <p>Full address is revealed upon purchase</p>}
           </div>
           {map_row}
