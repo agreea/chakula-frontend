@@ -437,7 +437,8 @@ module.exports = React.createClass({
     api_data["Starts"] = starts.unix(),
     api_data["Rsvp_by"] = rsvpBy.unix(),
     api_data["Meal_id"] = (this.props.params.id)? this.props.params.id : "",
-    api_data["Pics"] = JSON.stringify(s.Pics),
+    api_data["Pictures"] = JSON.stringify(s.Pics), 
+    // NOTE: you have to change the key, because overwriting "Pics" creates subtle bugs caused by JS pass-by-sharing
     api_data["Session"] = Cookies.get('session'),
     api_data["method"] = "saveMealDraft";
     console.log(api_data);
