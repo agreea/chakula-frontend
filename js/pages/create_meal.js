@@ -124,7 +124,10 @@ var PriceSeatsRow = React.createClass({
 var DatesRow = React.createClass({
   getInitialState: function() {
     var d = this.props.data;
-    return {Starts: d.Starts, Rsvp_by: d.Rsvp_by};
+    // HAD TO COMMENT THIS SHIT FOR THE MOTHER FUCKUHZ Who DIDN'T GET IT THE FIRST TIME:
+    // We clip this shit so that when the component mounts, you guys get that sweet sweet
+    // FORMATTED GOSH DANG DATE!!!!!!! !!! !!! !1!! !!! !!
+    return {Starts: d.Start, Rsvp_by: d.Rsvp_b};
   },
   handleChange: function(e) {
     var key = e.target.id,
