@@ -344,7 +344,7 @@ var AddressRow = React.createClass({
             <p className="text-right">State</p>
           </div>
           <div className="col-xs-6 col-sm-3 col-lg-2">
-            <select className="state-select" value={host.state} id="State" onChange={this.handleChange}>
+            <select className="state-select" value={s.State} id="State" onChange={this.handleChange}>
               {states_select_options}
             </select>
           </div>
