@@ -54,7 +54,7 @@ module.exports = React.createClass({
 		      </div>
 		      <div className="row body-section text-center">
 		      	<Link to={(Cookies.get("session"))? "/edit_host_info" : "/login?fwd=edit_host_info"}>
-			      	<button>Apply Now</button>
+			      	<button className="c-blue-bg">Apply Now</button>
 			    </Link>
 		      </div>
 		    </div>
