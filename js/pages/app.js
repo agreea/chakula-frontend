@@ -113,10 +113,21 @@ module.exports = React.createClass({
     render: function() {
         return(
             <div className="container-fluid">
-                <div>
-                    <NavBar/>
-                </div>
-                {this.props.children}
+              <NavBar/>
+              {this.props.children}
+              <footer className="row">
+                      <div className="col-sm-4 col-sm-offset-2">
+                          <p><a href="/about.html">About</a></p>
+                          <p><a href="/privacy.html">Privacy</a></p>
+                      </div>
+                  </div>
+                  <div className="row text-center">
+                      <p>Copyright &copy; Chakula 2015</p>
+                      <p>717 Newton Pl NW, Washington DC</p>
+                  </div>
+                  </div>
+              </footer>
+
             </div>
         )
     }
