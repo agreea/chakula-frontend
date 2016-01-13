@@ -415,8 +415,8 @@ module.exports = React.createClass({
       this.getMealCopy();
   },
   componentDidMount: function(){
-    this.initDatepicker('#starts', this.state.Starts);
-    this.initDatepicker('#rsvpBy', this.state.Rsvp_by);
+    this.initDatepicker('#Starts', this.state.Starts);
+    this.initDatepicker('#Rsvp_by', this.state.Rsvp_by);
   },
   initDatepicker: function(picker_id, default_string) {
     var defaultDate = (default_string == "")? moment() : moment(default_string);
@@ -426,8 +426,8 @@ module.exports = React.createClass({
   attemptSave: function(flag) { // flag is optional arg used by publish to prevent a forward
     var errors = [],
         s = this.state,
-        starts = $('#starts').data("DateTimePicker").date(),
-        rsvpBy = $('#rsvpBy').data("DateTimePicker").date();
+        starts = $('#Starts').data("DateTimePicker").date(),
+        rsvpBy = $('#Rsvp_by').data("DateTimePicker").date();
     if (!isFinite(s.Price)) errors.push("Price must be a valid dollar value.");
     if (rsvpBy > starts) errors.push("Rsvp by time cannot be after meal starts.");
     if (rsvpBy < moment()) errors.push("Rsvp by time cannot be in the past.");
@@ -457,8 +457,8 @@ module.exports = React.createClass({
     return api_resp;
   },
   attemptPublish: function() {
-    var starts = $('#starts').data("DateTimePicker").date(),
-        rsvpBy = $('#rsvpBy').data("DateTimePicker").date(),
+    var starts = $('#Starts').data("DateTimePicker").date(),
+        rsvpBy = $('#Rsvp_by').data("DateTimePicker").date(),
         s = this.state;
     var errors = [];
     if (!isFinite(s.Price)) errors.push("Price must be a valid dollar value.");
