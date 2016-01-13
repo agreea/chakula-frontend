@@ -401,6 +401,7 @@ module.exports = React.createClass({
     d["publishDisabled"] = false,
     d["Published"] = false; // override the response from the server because you are saving a copy
     this.setState(d);
+    
   },
   componentWillMount: function() {
     if (!this.props.params.id && !this.props.location.query.copy)
