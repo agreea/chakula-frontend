@@ -407,8 +407,10 @@ module.exports = React.createClass({
     if (!this.props.params.id && !this.props.location.query.copy)
       // get host object from server, set the city state and address
       return;
-    if (this.props.params.id)
+    if (this.props.params.id) {
+      console.log("Made params id");
       this.getMealDraft();
+    }
     else if (this.props.location.query.copy)
       this.getMealCopy();
   },
