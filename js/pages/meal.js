@@ -11,7 +11,7 @@ var Carousel = React.createClass({
         </div>);
       }
       return (<div className="item">
-        <img src={pic.Name}></img>
+        <img src={"https://yaychakula.com/img/" + pic.Name}></img>
         <div className="carousel-caption">{pic.Caption}</div>
       </div>);
     });
