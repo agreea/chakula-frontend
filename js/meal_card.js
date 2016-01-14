@@ -13,11 +13,12 @@ module.exports = React.createClass({
     			backgroundRepeat: "no-repeat",
     			backgroundSize: "cover"
 			};
+		var price = Math.round(this.props.data.Price*100)/100;
 		return(
 			<div className="card">
 			    <Link to={`meal/${d.Id}`} target="new_blank">
 			        <div className="card-image" style={card_img}>
-			            <span className="card-title">{`${d.Title} - $${d.Price}`}</span>
+			            <span className="card-title">{`${d.Title} - $${price}`}</span>
 			        </div>
 			        <div className="card-action">
 			        	<div className="row">

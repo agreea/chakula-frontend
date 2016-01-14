@@ -176,7 +176,7 @@ var Pic = React.createClass({
   render: function() {
     var pic = this.props.pic;
     var pic_src = (pic.Name.startsWith("data:image"))?
-      pic_src = pic.Name : "https://yaychakula.com/img/"+pic.Name;
+      pic.Name : "https://yaychakula.com/img/"+pic.Name;
     return (
       <div className="col-sm-4">
         <div className="pic-card text-center">
@@ -380,7 +380,7 @@ module.exports = React.createClass({
         session: Cookies.get('session')
       });
     if (!api_resp.Success) {
-      this.history.pushState(null, "my_meals");
+      this.history.pushState(null, "/my_meals");
       return;
     }
     var d = api_resp.Return;
@@ -456,7 +456,7 @@ module.exports = React.createClass({
       saveDisabled: api_resp.Success,
     });
     if (!this.props.params.id && flag !== "publish") // reload the page if you haven't done so already
-        this.history.pushState(null, "create_meal/" + api_resp.Return);
+        this.history.pushState(null, "/create_meal/" + api_resp.Return);
     return api_resp;
   },
   attemptPublish: function() {
@@ -505,8 +505,8 @@ module.exports = React.createClass({
         <DatesRow data={s} handleChange={this.handleInputChange}/>
         <AddressRow data={s} handleChange={this.handleInputChange}/>
         <PicList data={s} handlePicsChange={this.handleInputChange}/>
-        <div className="col-md-8 col-md-offset-2">
-          <div>
+        <div className="row">
+          <div className="col-md-8 col-md-offset-2">
             <ul className="error-field" id="error-field">
               {errorElements}
             </ul>
