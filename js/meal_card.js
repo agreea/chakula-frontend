@@ -13,7 +13,7 @@ module.exports = React.createClass({
     			backgroundRepeat: "no-repeat",
     			backgroundSize: "cover"
 			};
-		var price = Math.round(this.props.data.Price*100)/100;
+		var price = Math.round(d.Price*100)/100;
 		return(
 			<div className="card">
 			    <Link to={`meal/${d.Id}`} target="new_blank">
