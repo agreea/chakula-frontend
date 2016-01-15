@@ -130,7 +130,7 @@ module.exports = React.createClass({
   render: function() {
     return(
       <div className="container-fluid">
-        <div className="row">
+        <div className="row" id="app-body">
           <NavBar/>
           {this.props.children}
         </div>
