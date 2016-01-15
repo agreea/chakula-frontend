@@ -1630,11 +1630,40 @@ span.card-title {
   font-size: 24px;
   font-weight: 300;
   text-transform: uppercase;
+  display: block;
+  overflow: visible;
+  position: absolute;
+  padding: 48px 0 0 16px;
+  bottom: 0;
+  line-height: 48px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+1,1c1c1c+100&0+7,0.85+100 */
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 1%, rgba(129, 129, 129, 0) 7%, rgba(28, 28, 28, 0.85) 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 1%, rgba(129, 129, 129, 0) 7%, rgba(28, 28, 28, 0.85) 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 1%, rgba(129, 129, 129, 0) 7%, rgba(28, 28, 28, 0.85) 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#d91c1c1c', GradientType=0);
+  /* IE6-9 */
+}
+span.card-title:hover {
+  text-decoration: none;
+}
+span.sold-out {
+  color: white;
+  position: absolute;
+  top: 10%;
+  right: 0;
+  /* width: 100%; */
+  padding-right: 16px;
+  padding-left: 16px;
+  font-size: 26px;
+  background: rgba(50, 50, 50, 0.85);
 }
 .card-image {
   position: relative;
   overflow: hidden;
-  height: 250px;
+  height: 350px;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -1644,25 +1673,6 @@ span.card-title {
   background-clip: padding-box;
   display: block;
   z-index: -1;
-}
-span.card-title {
-  display: block;
-  overflow: visible;
-  position: relative;
-  padding: 205px 0 0 16px;
-  line-height: 48px;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+1,1c1c1c+100&0+56,0.85+100 */
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 1%, rgba(129, 129, 129, 0) 56%, rgba(28, 28, 28, 0.85) 100%);
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 1%, rgba(129, 129, 129, 0) 56%, rgba(28, 28, 28, 0.85) 100%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 1%, rgba(129, 129, 129, 0) 56%, rgba(28, 28, 28, 0.85) 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#d91c1c1c', GradientType=0);
-  /* IE6-9 */
-}
-span.card-title:hover {
-  text-decoration: none;
 }
 .card-content {
   padding: 16px;
