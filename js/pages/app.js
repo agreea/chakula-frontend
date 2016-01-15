@@ -110,12 +110,29 @@ function load(){
 }
 
 module.exports = React.createClass({
-    render: function() {
-        return(
-          <div className="container-fluid">
-            <NavBar/>
-            {this.props.children}
+  renderFooter: function() {
+    return(
+      <div className="row">
+        <footer className="col-xs-12">
+          <div className="row">
+            <div className="col-xs-6 col-xs-offset-3">
+              <p><Link to="/about">About</Link></p>
+              <p><a href="/privacy.html">Privacy</a></p>
+              <div className="text-center">
+                <p>Copyright © Chakula 2015</p>
+                <p>717 Newton Pl NW, Washington DC</p>
+              </div>
+            </div>
           </div>
-        )
+        </footer>
+      </div>);
+  },
+  render: function() {
+    return(
+      <div className="container-fluid">
+        <NavBar/>
+        {this.props.children}
+        {this.renderFooter()}
+      </div>);
     }
 });
