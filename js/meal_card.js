@@ -22,11 +22,17 @@ module.exports = React.createClass({
 			break;
 			case 1:
 				alert = <span className="meal-card-alert text-right">1 Seat Left</span>;
+			break;
 			case 2: 
-				alert = <span className="meal-card-alert text-right">1 Seat Left</span>;
+				alert = <span className="meal-card-alert text-right">2 Seats Left</span>;
+			break;
+			case 3:
+				alert = <span className="meal-card-alert text-right">3 Seats Left</span>;
+			break;
+			default:
+				"";
+			break;
 		}
-		if (d.Open_spots == 0)
-			(d.Open_spots == 0)?   : "";
 		return(
 			<div className="card">
 			    <Link to={`meal/${d.Id}`} target="new_blank">
