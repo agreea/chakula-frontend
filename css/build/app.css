@@ -162,10 +162,13 @@ body {
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
+#home {
+  height: 100%;
+}
 #home .home-intro {
   display: table;
   width: 100%;
-  height: auto;
+  height: 100%;
   padding: 100px 0;
   text-align: center;
   color: #fff;
@@ -511,6 +514,9 @@ p {
   font-size: 16px;
   line-height: 1.5;
   color: #434343;
+}
+p .intro-text {
+  font-family: Lora;
 }
 ul {
   list-style: none;
