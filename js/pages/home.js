@@ -56,17 +56,17 @@ module.exports = React.createClass({
                 <h2>How it Works</h2>
                 <div className="how-section row">
                     <div className="col-xs-12 col-md-4">
-                        <img className="img-responsive img-responsive-centered" src="/img/chakula-explore.png"/>
+                        <img className="img-responsive img-responsive-center" src="/img/chakula-explore.png"/>
                         <h3>Find</h3>
                         <p>a meal that makes your mouth water.</p>
                     </div>
                     <div className="col-xs-12 col-md-4">
-                        <img className="img-responsive img-responsive-centered" src="/img/chakula-reserve.png"/>
+                        <img className="img-responsive img-responsive-center" src="/img/chakula-reserve.png"/>
                         <h3>Reserve</h3>
                         <p>your spot at the table.</p>
                     </div>
                     <div className="col-xs-12 col-md-4">
-                        <img className="img-responsive img-responsive-centered" src="/img/chakula-break-bread.png"/>
+                        <img className="img-responsive img-responsive-center" src="/img/chakula-break-bread.png"/>
                         <h3>Break Bread</h3>
                         <p>and enjoy great food with great company.</p>
                     </div>

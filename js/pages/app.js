@@ -115,16 +115,6 @@ module.exports = React.createClass({
           <div className="container-fluid">
             <NavBar/>
             {this.props.children}
-            <footer className="row">
-              <div className="col-sm-4 col-sm-offset-2">
-                  <p><a href="/about.html">About</a></p>
-                  <p><a href="/privacy.html">Privacy</a></p>
-              </div>
-              <div className="row text-center">
-                <p>Copyright &copy; Chakula 2015</p>
-                <p>717 Newton Pl NW, Washington DC</p>
-              </div>
-            </footer>
           </div>
         )
     }
