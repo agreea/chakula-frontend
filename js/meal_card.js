@@ -15,8 +15,18 @@ module.exports = React.createClass({
     			backgroundSize: "cover"
 			};
 		var price = Math.round(d.Price*100)/100;
-		var soldOut = 
-			(d.Open_spots == 0)? <span className="sold-out text-right">Sold out</span>  : "";
+		var alert;
+		switch(d.Open_spots){
+			case 0:
+				alert = <span className="meal-card-alert text-right">Sold out</span>;
+			break;
+			case 1:
+				alert = <span className="meal-card-alert text-right">1 Seat Left</span>;
+			case 2: 
+				alert = <span className="meal-card-alert text-right">1 Seat Left</span>;
+		}
+		if (d.Open_spots == 0)
+			(d.Open_spots == 0)?   : "";
 		return(
 			<div className="card">
 			    <Link to={`meal/${d.Id}`} target="new_blank">
