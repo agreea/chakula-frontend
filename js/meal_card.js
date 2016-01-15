@@ -29,9 +29,6 @@ module.exports = React.createClass({
 			case 3:
 				alert = <span className="meal-card-alert text-right">3 Seats Left</span>;
 			break;
-			default:
-				alert = <p>""</p>;
-			break;
 		}
 		return(
 			<div className="card">
