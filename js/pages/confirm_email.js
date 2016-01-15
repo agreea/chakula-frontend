@@ -4,7 +4,7 @@ module.exports = React.createClass({
 	componentWillMount: function() {
 		var api_resp = api_call("kitchenuser", {
 			method: "verifyEmail",
-			code: this.props.location.query.Code,
+			Code: this.props.location.query.Code,
 			Id: this.props.location.query.Id
 		});
 		this.setState({success: api_resp.Success});

@@ -14,10 +14,13 @@ module.exports = React.createClass({
     			backgroundSize: "cover"
 			};
 		var price = Math.round(d.Price*100)/100;
+		var soldOut = 
+			(d.Open_spots == 0)? <span className="sold-out text-right">Sold out</span>  : "";
 		return(
 			<div className="card">
 			    <Link to={`meal/${d.Id}`} target="new_blank">
 			        <div className="card-image" style={card_img}>
+			        	{soldOut}
 			            <span className="card-title">{`${d.Title} - $${price}`}</span>
 			        </div>
 			        <div className="card-action">
