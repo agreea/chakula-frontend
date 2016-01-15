@@ -130,8 +130,10 @@ module.exports = React.createClass({
   render: function() {
     return(
       <div className="container-fluid">
-        <NavBar/>
-        {this.props.children}
+        <div className="row">
+          <NavBar/>
+          {this.props.children}
+        </div>
         {this.renderFooter()}
       </div>);
     }
