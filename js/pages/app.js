@@ -134,7 +134,6 @@ module.exports = React.createClass({
           <NavBar/>
           {this.props.children}
         </div>
-        {this.renderFooter()}
       </div>);
     }
 });
