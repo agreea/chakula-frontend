@@ -478,7 +478,8 @@ For the requirements section
 Colors
 */
 #app,
-.container-fluid {
+.container-fluid,
+#app-body {
   height: 100%;
   padding: 0;
 }
