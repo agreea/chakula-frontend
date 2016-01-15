@@ -30,14 +30,14 @@ module.exports = React.createClass({
 				alert = <span className="meal-card-alert text-right">3 Seats Left</span>;
 			break;
 			default:
-				"";
+				alert = <p>""</p>;
 			break;
 		}
 		return(
 			<div className="card">
 			    <Link to={`meal/${d.Id}`} target="new_blank">
 			        <div className="card-image" style={card_img}>
-			        	{soldOut}
+			        	{alert}
 			            <span className="card-title">{`${d.Title} - $${price}`}</span>
 			        </div>
 			        <div className="card-action">
