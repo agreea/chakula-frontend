@@ -7,6 +7,7 @@ var React = require('react'),
 module.exports = React.createClass({
 	render: function() {
 		var d = this.props.data;
+		console.log(d);
 		var card_img = { 
 				background: `url(/img/${d.Pics[0].Name})`,
 				backgroundPosition: "center center",
