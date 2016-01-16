@@ -221,7 +221,7 @@ var AddFb = React.createClass({
 				<div>
 				{(s.connected)?
 					<button className="active-green-bg" disabled="true"><i className="fa fa-check"></i> Facebook Connected</button> :
-					<img className="fb-login" onClick={this.handleFbLogin} src="./img/fb-login.svg" id="fb"></img>
+					<img className="fb-login" onClick={this.handleFbLogin} src="/img/fb-login.svg" id="fb"></img>
 				}
 				</div>
 				<ul className="error-field">
@@ -361,7 +361,7 @@ module.exports = React.createClass({
 					    <div className="item" id="add_photo">
 					      	<AddPhoto pic={(s.fbId)?
 					      			"https://graph.facebook.com/" + s.fbId + "/picture?width=500&height=500" :
-					      			"img/user-icon.svg"
+					      			"/img/user-icon.svg"
 					      		}
 					      		success={this.handleSuccess}/>
 					    </div>

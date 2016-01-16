@@ -203,8 +203,10 @@ module.exports = React.createClass({
         var follow_box = (this.props.follows_host)? "" : <input type="checkbox" onClick={this.handleFollowClicked} checked={this.state.follow_checked}>Follow this chef to receive email updates when they host future meals</input>
         return(
             <div className="text-left row">
-                <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">
-                    {follow_box}
+                <div className="row">
+                    <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">
+                        {follow_box}
+                    </div>
                 </div>
                 <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} open_spots={this.props.open_spots}/>
                 <PaymentField cards={this.props.cards} handleSelectedCardChange={this.handleSelectedCardChange}></PaymentField>

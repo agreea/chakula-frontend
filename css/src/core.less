@@ -57,11 +57,6 @@ p {
     font-size: 16px;
     line-height: 1.5;
     color: #434343;
-    &.intro-text {
-        font-family: "Sorts Mill Goudy";
-        font-size: 24px;
-        color: #fff;
-    }
 }
 ul {
     list-style: none;
@@ -363,7 +358,20 @@ Rules on multiple pages
 */
 .intro-text {
     color: @white;
+    & > * {
+        padding-bottom: 16px;
+    }
+    & > h1 {
+        font-size: 48px;
+        font-family: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    };
+    & > p {
+        font-family: "Sorts Mill Goudy";
+        font-size: 24px;
+        color: #fff;
+    };
 }
+
 .review-meal-title {
     padding-left: 0;
 }

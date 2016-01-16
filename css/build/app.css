@@ -516,11 +516,6 @@ p {
   line-height: 1.5;
   color: #434343;
 }
-p.intro-text {
-  font-family: "Sorts Mill Goudy";
-  font-size: 24px;
-  color: #fff;
-}
 ul {
   list-style: none;
 }
@@ -798,6 +793,18 @@ Colors
 Rules on multiple pages
 */
 .intro-text {
+  color: #fff;
+}
+.intro-text > * {
+  padding-bottom: 16px;
+}
+.intro-text > h1 {
+  font-size: 48px;
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.intro-text > p {
+  font-family: "Sorts Mill Goudy";
+  font-size: 24px;
   color: #fff;
 }
 .review-meal-title {
