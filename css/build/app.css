@@ -462,9 +462,6 @@ For the requirements section
   font-size: 18px;
   margin: 12px auto;
 }
-#why-chakula h1 {
-  font-size: 48px;
-}
 #why-chakula body {
   background-color: #f1f1f1;
   color: #434343;
@@ -574,6 +571,9 @@ button {
   line-height: 1.2;
   padding: 8px;
   margin-left: 0;
+}
+button:focus {
+  color: #fff;
 }
 .brand-btn {
   border-radius: 0;
