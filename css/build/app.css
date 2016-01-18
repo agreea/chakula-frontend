@@ -795,14 +795,18 @@ Rules on multiple pages
 .intro-text {
   color: #fff;
 }
-.intro-text > * {
+.intro-text h1,
+.intro-text h2,
+.intro-text h3,
+.intro-text h4,
+.intro-text p {
   padding-bottom: 16px;
 }
-.intro-text > h1 {
+.intro-text h1 {
   font-size: 48px;
   font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.intro-text > p {
+.intro-text p {
   font-family: "Sorts Mill Goudy";
   font-size: 24px;
   color: #fff;

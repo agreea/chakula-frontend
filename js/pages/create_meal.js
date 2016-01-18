@@ -315,8 +315,8 @@ var AddressRow = React.createClass({
           <div className="col-xs-4 col-sm-2 form-label">
             <p className="text-right">Street Address</p>
           </div>
-          <div className="col-xs-4 col-sm-2">
-            <div className="input-group text-field">
+          <div className="col-xs-6 col-sm-4 col-lg-3">
+            <div className="text-field">
               <input className="text-field" id="Address" type="text" 
                 value={s.Address} 
                 placeholder="3700 O St"
@@ -328,8 +328,8 @@ var AddressRow = React.createClass({
           <div className="col-xs-4 col-sm-2 form-label">
             <p className="text-right">City</p>
           </div>
-          <div className="col-xs-6 col-sm-3 col-lg-2">
-            <div className="input-group text-field">
+          <div className="col-xs-6 col-sm-4 col-lg-3">
+            <div className="text-field">
               <input className="text-field" id="City" type="text" 
                 value={s.City} 
                 placeholder="Washington"
@@ -341,7 +341,7 @@ var AddressRow = React.createClass({
           <div className="col-xs-4 col-sm-2 form-label">
             <p className="text-right">State</p>
           </div>
-          <div className="col-xs-6 col-sm-3 col-lg-2">
+          <div className="col-xs-6 col-sm-4 col-lg-3">
             <select className="state-select" value={s.State} id="State" onChange={this.handleChange}>
               {states_select_options}
             </select>
@@ -374,7 +374,7 @@ module.exports = React.createClass({
     console.log(this.state);
   },
   getMealDraft: function() {
-    var api_resp = api_call('meal',{
+    var api_resp = api_call('meal', {
         method: 'getMealDraft',
         mealId: this.props.params.id, 
         session: Cookies.get('session')
@@ -402,16 +402,16 @@ module.exports = React.createClass({
     d["publishDisabled"] = false,
     d["Published"] = false; // override the response from the server because you are saving a copy
     this.setState(d);
-
   },
   componentWillMount: function() {
-    if (!this.props.params.id && !this.props.location.query.copy)
-      // get host object from server, set the city state and address
+    if (!this.props.params.id && !this.props.location.query.copy) {
+      var api_resp = api_call("host", {method: "getHost", session: Cookies.get("session")});
+      if (api_resp.Success)
+        this.setState(api_resp.Return);
       return;
-    if (this.props.params.id) {
-      console.log("Made params id");
-      this.getMealDraft();
     }
+    if (this.props.params.id)
+      this.getMealDraft();
     else if (this.props.location.query.copy)
       this.getMealCopy();
   },
@@ -424,7 +424,7 @@ module.exports = React.createClass({
     $(picker_id).datetimepicker({sideBySide: true, defaultDate: defaultDate})
       .on('dp.change', this.setState({saveDisabled: false}));
   },
-  attemptSave: function(flag) { // flag is optional arg used by publish to prevent a forward
+  validateForSave: function() {
     var errors = [],
         s = this.state,
         starts = $('#Starts').data("DateTimePicker").date(),
@@ -433,15 +433,21 @@ module.exports = React.createClass({
     if (rsvpBy > starts) errors.push("Rsvp by time cannot be after meal starts.");
     if (rsvpBy < moment()) errors.push("Rsvp by time cannot be in the past.");
     if (starts < moment()) errors.push("Start time cannot be in the past.");
-    this.setState({errors: errors})
-    if(errors.length > 0)
+    this.setState({errors: errors});
+    return errors.length === 0;
+  },
+  attemptSave: function(flag) { // flag is optional arg used by publish to prevent a forward
+    if (!this.validateForSave())
       return;
+    var s = this.state,
+        starts = $('#Starts').data("DateTimePicker").date(),
+        rsvpBy = $('#Rsvp_by').data("DateTimePicker").date();
     var api_data = this.state;
     api_data["Starts"] = starts.unix(),
     api_data["Rsvp_by"] = rsvpBy.unix(),
     api_data["Meal_id"] = (this.props.params.id)? this.props.params.id : "",
     api_data["Pictures"] = JSON.stringify(s.Pics), 
-    // NOTE: you have to change the key, because overwriting "Pics" creates subtle bugs caused by JS pass-by-sharing
+    // NOTE: you have to change the key for pics, because overwriting "Pics" creates subtle bugs caused by JS pass-by-sharing
     api_data["Session"] = Cookies.get('session'),
     api_data["method"] = "saveMealDraft";
     console.log(api_data);
@@ -459,7 +465,7 @@ module.exports = React.createClass({
         this.history.pushState(null, "/create_meal/" + api_resp.Return);
     return api_resp;
   },
-  attemptPublish: function() {
+  validateForPublish: function() { // returns true if meal is well formed and ready to publish
     var starts = $('#Starts').data("DateTimePicker").date(),
         rsvpBy = $('#Rsvp_by').data("DateTimePicker").date(),
         s = this.state;
@@ -470,23 +476,30 @@ module.exports = React.createClass({
     if (rsvpBy < moment()) errors.push("Rsvp-by time cannot be in the past.");
     if (s.Title === "") errors.push("Title cannot be empty.")
     if (s.Description === "") errors.push("Description cannot be empty.");
-    if (!s.Pics || s.Pics.length < 1) errors.push("Upload a picture before publishing your meal");
-    if (errors.length > 0) {
-      this.setState({errors: errors});
-      return;
-    }
-    // make sure everything is well-formed and then try to save
-    var save_result = this.attemptSave("publish"); // flag true for "publish"
-    var mealid;
-    if (save_result.Success)
-      mealid = save_result.Return;
+    if (!s.Pics || s.Pics.length < 1) errors.push("Upload at least one picture before publishing your meal");
+    if (s.Address.length < 1) errors.push("Address is required.");
+    if (s.City.length < 1) errors.push("City is required.");
+    this.setState({errors: errors});
+    return errors.length == 0;
+  },
+  publishMeal: function(mealId) {
     var api_resp = api_call('meal', {
         method: 'publishMeal',
         session: Cookies.get('session'),
-        mealId: mealid
+        mealId: mealId
       });
     if (api_resp.Success)
         this.history.pushState(null, "meal/" + api_resp.Return);
+  },
+  attemptPublish: function() {
+    if (!this.validateForPublish())
+      return;
+    var starts = $('#Starts').data("DateTimePicker").date(),
+        rsvpBy = $('#Rsvp_by').data("DateTimePicker").date(),
+        s = this.state;
+    var save_result = this.attemptSave("publish"); // flag true for "publish"
+    if (save_result.Success)
+      this.publishMeal(save_result.Return)
   },
   render: function() {
     var s = this.state;

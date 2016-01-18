@@ -192,14 +192,10 @@ var MealInfo = React.createClass({
     // $('#time-left-subtext').css("color", "#aaa"); // set text to grey
     var data = this.props.data;
     var map_row;
-    if (data.Status != "ATTENDING") {
+    if (data.Status != "ATTENDING")
         map_row = 
-          <div className="row map-row" style={{backgroundImage: 'url("' + data.Maps_url + '")'}}>
-            <svg className="map-radius" height="100" width="100">
-              <circle cx="50" cy="50" r="40" stroke="#3C8BA6" stroke-width="2" fill="#6DCDED" opacity=".8" />
-            </svg>   
-          </div>;
-    } else {
+          <img src={data.Maps_url}/>;
+    else {
       map_row = 
         <div className="row map-row">
           <a href={'https://www.google.com/maps/place/' + data.Address + ' Washington, DC'} target="_blank">
