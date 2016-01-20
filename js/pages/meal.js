@@ -238,12 +238,12 @@ var MealInfo = React.createClass({
     var map_row;
     if (data.Status != "ATTENDING")
         map_row = 
-          <img src={data.Maps_url}/>;
+          <img className="img-responsive" src={data.Maps_url}/>;
     else {
       map_row = 
         <div className="row map-row">
           <a href={'https://www.google.com/maps/place/' + data.Address + ' Washington, DC'} target="_blank">
-            <img className="map-img" src={data.Maps_url} />
+            <img className="map-img img-responsive" src={data.Maps_url} />
           </a>
         </div>;
     }
