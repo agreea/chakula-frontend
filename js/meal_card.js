@@ -39,7 +39,7 @@ module.exports = React.createClass({
 			        </div>
 			        <div className="card-action">
 			        	<div className="row">
-			               	<p>{moment(d.Starts).format("hh:mm ddd a MMM Do")}</p>
+			               	<p>{moment(d.Starts).format("hh:mm a ddd MMM Do")}</p>
 			            </div>
 			        </div>
 			    </Link>

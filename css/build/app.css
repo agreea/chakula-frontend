@@ -612,6 +612,7 @@ button:focus {
 }
 .dropdown-menu {
   z-index: 50000;
+  background: #f8f8f8;
 }
 .navbar {
   margin-bottom: 0;

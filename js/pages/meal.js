@@ -206,7 +206,7 @@ var BookMeal = React.createClass({
     if (attendees.length > 0)
       return (
         <div>
-          <h4>Attendees</h4>
+          <h4 className="text-center">Attendees</h4>
           <div className="row">
             {this.renderAttendeeRows(attNodes)}
           </div>

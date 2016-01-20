@@ -197,6 +197,7 @@ module.exports = React.createClass({
             return (
                 <div className="text-center">
                     <h2 className="text-center">Meal successfully booked!</h2>
+                    <p>Check your email for details including address and time.</p>
                 </div>
             );
         }
