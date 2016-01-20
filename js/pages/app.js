@@ -51,7 +51,7 @@ var Link = require('react-router').Link;
             (<li id="user" className="dropdown">
               <button className="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <span className="nav-text">{guest.First_name}</span>
-                <img className="img-responsive img-circle nav-icon" alt="Brand" src={guest.Prof_pic} align="right" />
+                <img className="img-responsive img-circle nav-icon" alt="Brand" src={guest.Prof_pic || "/img/user-icon.svg"} align="right" />
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><Link to="/edit_guest_info">My Profile</Link></li>
