@@ -135,16 +135,18 @@ var HostAttendeesInfo = React.createClass({
 });
 
 var BookMeal = React.createClass({
-  render: function() {
+  renderOrderWithLogin: function() {
+      return
+        <Link to={"login?fwd=meal/" + this.props.data.Id + "?book_meal=true"}>
+          <button className="brand-btn btn">{req_btn_text}</button>
+        </Link>;
+  },
+  renderOrderBtn: function() {
     var data = this.props.data;
     var meal_closes = moment(data.Rsvp_by);
     var req_btn_disabled = 
-      (meal_closes < moment()) || 
-      data.Status == "ATTENDING" || 
-      data.Status == "DECLINED" || 
-      data.Status == "PENDING" ||
-      data.Open_spots == 0;
-    var starts = moment(data.Starts);
+      (meal_closes < moment()) || data.Status == "ATTENDING" || 
+      data.Status == "DECLINED" || data.Status == "PENDING" || data.Open_spots == 0;
     var req_btn_text;
     if (meal_closes < moment())
       req_btn_text = 'Meal closed';
@@ -152,33 +154,75 @@ var BookMeal = React.createClass({
       req_btn_text = "Sold out"
     else 
       req_btn_text = "Book";
-
-    var order_btn = <button 
+    if(!Cookies.get('session') && !req_btn_disabled)
+      return this.renderOrderWithLogin();
+    return <button 
           className="brand-btn btn" 
           id="request-meal-btn" 
           disabled={req_btn_disabled} 
           data-toggle="modal" 
           data-target="#request-modal">{req_btn_text}</button>;
-    if(!Cookies.get('session') && !req_btn_disabled)
-      order_btn = 
-        <Link to={"login?fwd=meal/" + this.props.data.Id + "?book_meal=true"}>
-          <button className="brand-btn btn">{req_btn_text}</button>
-        </Link>;
-    var time_left_text;
+  },
+  renderBookingInfo: function() { // returns the date and time left to book the meal
+    var meal_closes = moment(this.props.data.Rsvp_by),
+        starts = moment(this.props.data.Starts);
     var booking_info = 
-      [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>];
+      [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>]; 
     var booking_subinfo = 
-      (meal_closes > moment())? 
+      (meal_closes > moment() && this.props.data.Open_spots > 0)? 
         <p>{"Meal closes " + moment().to(meal_closes)}</p> :
         <p><span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Event is closed</p>
     booking_info.push(booking_subinfo);
+    return booking_info;
+  },
+  renderAttendeeRows: function(attNodes) {
+    var attendeeRows = [], // two dimensional array. Each row contains 3 pic items
+        thisRow = []; // second dimension of the array. Once a row stores 3 pics, you add it to the pic rows
+    for (var i in attNodes) {
+      // add this row to pic rows if it's full
+      if (thisRow.length === 3) {
+        var fullRow = thisRow;
+        attendeeRows.push(<div className="row">{fullRow}</div>);
+        thisRow = []; // empty the array
+      }
+      thisRow.push(attNodes[i]);
+      if (i == (attNodes.length - 1)) { // if this is the last pic, add the current row once you've added the pic
+        attendeeRows.push(<div className="row">{thisRow}</div>);
+      }
+    }
+    return attendeeRows;
+  },
+  renderAttendees: function() {
+    var attendees = this.props.data.Attendees;
+    var attNodes = attendees.map(function(attendee, i) {
+      return (
+        <div className="col-xs-6 col-sm-4" k={i}>
+          <img className="img-circle img-responsive img-responsive-center" 
+            src={attendee.Prof_pic_url || "/img/user-icon.svg"} />
+          <p>{attendee.First_name}</p>
+        </div>
+      )
+    });
+    if (attendees.length > 0)
+      return (
+        <div>
+          <h4>Attendees</h4>
+          <div className="row">
+            {this.renderAttendeeRows(attNodes)}
+          </div>
+        </div>
+      )
+  },
+  render: function() {
+    var data = this.props.data;
     return(
       <div className="col-xs-12 col-sm-3">
         <div className="book-meal">
-          <div className="price-row"><h2>{"$" + Math.round(this.props.data.Price*100)/100}</h2><p>/person</p></div>
-          {order_btn}
-          {booking_info}
+          <div className="price-row"><h2>{"$" + Math.round(data.Price*100)/100}</h2><p>/person</p></div>
+          {this.renderOrderBtn()}
+          {this.renderBookingInfo()}
         </div>
+        {this.renderAttendees()}
       </div>
     );
   }
