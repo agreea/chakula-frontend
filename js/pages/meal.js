@@ -136,9 +136,8 @@ var HostAttendeesInfo = React.createClass({
 
 var BookMeal = React.createClass({
   renderOrderWithLogin: function() {
-      return
-        <Link to={"login?fwd=meal/" + this.props.data.Id + "?book_meal=true"}>
-          <button className="brand-btn btn">{req_btn_text}</button>
+      return <Link to={"login?fwd=meal/" + this.props.data.Id + "?book_meal=true"}>
+          <button className="brand-btn btn">Book</button>
         </Link>;
   },
   renderOrderBtn: function() {
@@ -154,8 +153,9 @@ var BookMeal = React.createClass({
       req_btn_text = "Sold out"
     else 
       req_btn_text = "Book";
-    if(!Cookies.get('session') && !req_btn_disabled)
+    if(!Cookies.get('session') && !req_btn_disabled) {
       return this.renderOrderWithLogin();
+    }
     return <button 
           className="brand-btn btn" 
           id="request-meal-btn" 
@@ -199,7 +199,7 @@ var BookMeal = React.createClass({
         <div className="col-xs-6 col-sm-4" k={i}>
           <img className="img-circle img-responsive img-responsive-center" 
             src={attendee.Prof_pic_url || "/img/user-icon.svg"} />
-          <p>{attendee.First_name}</p>
+          <p className="text-center">{attendee.First_name}</p>
         </div>
       )
     });
