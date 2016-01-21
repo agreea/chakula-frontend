@@ -218,16 +218,23 @@ var BookMeal = React.createClass({
   },
   render: function() {
     var data = this.props.data;
-    return(
-      <Sticky className="col-xs-12 col-sm-3" stickyClass="col-sm-3 col-sm-offset-9">
-          <div className="book-meal">
-            <div className="price-row"><h2>{"$" + Math.round(data.Price*100)/100}</h2><p>/person</p></div>
+    var bookMeal = 
+      <div>
+        <div className="book-meal">
+          <div className="price-row"><h2>{"$" + Math.round(data.Price*100)/100}</h2><p>/person</p></div>
             {this.renderOrderBtn()}
             {this.renderBookingInfo()}
           </div>
-          {this.renderAttendees()}
-      </Sticky>
-    );
+        {this.renderAttendees()}
+      </div>
+    if (document.documentElement.clientWidth > 768) {
+      return(
+        <Sticky className="col-xs-12 col-sm-3" stickyClass="col-sm-3 col-sm-offset-9">
+          {bookMeal}
+        </Sticky>
+      );
+    } else 
+      return bookMeal;
   }
 });
 
