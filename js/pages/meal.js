@@ -1,6 +1,7 @@
-var React = require('react');
-var Link = require('react-router').Link;
-var Checkout = require('../checkout.js');
+var React = require('react'),
+    Link = require('react-router').Link,
+    Checkout = require('../checkout.js'),
+    Sticky = require('react-sticky');
 var Carousel = React.createClass({
   render: function() {
     var pictures = this.props.data.map(function(pic, index) {
@@ -16,6 +17,7 @@ var Carousel = React.createClass({
       </div>);
     });
     return (
+      <div className="col-xs-12 col-sm-9">
       <div id="carousel-example-generic" className="carousel slide text-center" data-ride="carousel" data-interval="false">
         <div className="carousel-inner" id="carousel-pics" role="listbox">
           {pictures}
@@ -28,6 +30,7 @@ var Carousel = React.createClass({
           <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
           <span className="sr-only">Next</span>
         </a>
+      </div>
       </div>
     );
   }
@@ -157,7 +160,7 @@ var BookMeal = React.createClass({
       return this.renderOrderWithLogin();
     }
     return <button 
-          className="brand-btn btn" 
+          className="c-blue-bg book-btn" 
           id="request-meal-btn" 
           disabled={req_btn_disabled} 
           data-toggle="modal" 
@@ -216,14 +219,14 @@ var BookMeal = React.createClass({
   render: function() {
     var data = this.props.data;
     return(
-      <div className="col-xs-12 col-sm-3">
-        <div className="book-meal">
-          <div className="price-row"><h2>{"$" + Math.round(data.Price*100)/100}</h2><p>/person</p></div>
-          {this.renderOrderBtn()}
-          {this.renderBookingInfo()}
-        </div>
-        {this.renderAttendees()}
-      </div>
+      <Sticky className="col-xs-12 col-sm-3" stickyClass="col-sm-3 col-sm-offset-9">
+          <div className="book-meal">
+            <div className="price-row"><h2>{"$" + Math.round(data.Price*100)/100}</h2><p>/person</p></div>
+            {this.renderOrderBtn()}
+            {this.renderBookingInfo()}
+          </div>
+          {this.renderAttendees()}
+      </Sticky>
     );
   }
 });
@@ -283,7 +286,7 @@ var MealInfo = React.createClass({
     if (data.Address)
       displayAddress = `${data.Address}, ${displayAddress}`;
     return (
-      <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-0">
+      <div className="col-xs-12 col-sm-8 col-sm-offset-1">
           <div className="row">
             <h2>{data.Title}</h2>
             <p className="star-rating">{avg_stars}</p>
@@ -327,12 +330,10 @@ module.exports = React.createClass({
     return(
       <div className="row">
         <div className="row text-center">
-          <div className="col-xs-12 col-sm-9 col-sm-offset-2">
-            <Carousel data={data.Pics}></Carousel>
-          </div>
+          <Carousel data={data.Pics}></Carousel>
+          <BookMeal data={data}></BookMeal>
         </div>
         <div className="row">
-          <BookMeal data={data}></BookMeal>
           <MealInfo data={data}></MealInfo>
         </div>
       <div id="request-modal" className="modal fade" role="dialog">
