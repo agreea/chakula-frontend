@@ -629,16 +629,16 @@ button:focus {
   border-left: 1px solid;
   border-color: #ccc;
 }
-.navbar img * {
+.navbar * {
   color: #333;
 }
-.navbar img img {
+.navbar img {
   margin: 4px 12px;
   max-height: 50px;
   vertical-align: middle;
   display: inline-block;
 }
-.navbar img button {
+.navbar button {
   background: transparent;
 }
 .nav-item-content {
