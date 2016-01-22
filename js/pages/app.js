@@ -35,7 +35,9 @@ var Link = require('react-router').Link;
             host_tab;
         var host_tab = 
           <li className="nav-item">
-            <Link className="nav-item-content" to={(Cookies.get("session")? "/edit_host_info" : "/why_chakula")}>
+            <Link className="nav-item-content" 
+                  to={(Cookies.get("session"))? "/edit_host_info" : "/why_chakula"}
+                  id="be-a-chef">
               <button className="c-blue-bg">Become a Chef</button>
             </Link>
           </li>,
@@ -49,7 +51,7 @@ var Link = require('react-router').Link;
         if (guest) {
           user_tab = 
             (<li id="user" className="dropdown">
-              <button className="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <button className="btn dropdown-toggle" type="button" id="user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <span className="nav-text">{guest.First_name}</span>
                 <img className="img-responsive img-circle nav-icon" alt="Brand" src={guest.Prof_pic || "/img/user-icon.svg"} align="right" />
               </button>

@@ -632,14 +632,18 @@ button:focus {
 .navbar * {
   color: #333;
 }
+.navbar .user-dropdown,
+.navbar #signin {
+  background: rgba(0, 0, 0, 0);
+}
 .navbar img {
   margin: 4px 12px;
   max-height: 50px;
   vertical-align: middle;
   display: inline-block;
 }
-.navbar button {
-  background: transparent;
+.navbar #be-a-chef:hover {
+  background: rgba(0, 0, 0, 0);
 }
 .nav-item-content {
   margin: auto 0px;
