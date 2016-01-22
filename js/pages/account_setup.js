@@ -168,9 +168,10 @@ var AddBio = React.createClass({
 			<div>
 				<h3>Add Bio</h3>
 				<p>Please introduce yourself to the Chakula community. :)</p>
+				<p>{"Diners will receive each others' bios prior to each meal to enrich the social experience."}</p>
 				<div className="input-group">
 					<textarea type="textarea" 
-							placeholder="Write from the first person please! Where do you work? Where are you from? What are your hobbies?" 
+							placeholder="Write from the first person please! Where do you work? Where are you from? What makes you tick?" 
 							value={s.bio}
 							id="bio"
 							className="text-field"
