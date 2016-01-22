@@ -186,15 +186,18 @@ button {
 }
 
 .navbar img {
-    margin: 4px 12px;
-    max-height: 50px;
-    vertical-align: middle;
-    display: inline-block;
-}
-
-.navbar * {
-    background: transparent;
-    color: #333;
+    & * {
+        color: #333;
+    }
+    & img {
+        margin: 4px 12px;
+        max-height: 50px;
+        vertical-align: middle;
+        display: inline-block;
+    }
+    & button {
+        background: transparent;
+    }
 }
 
 .nav-item-content {

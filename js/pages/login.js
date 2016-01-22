@@ -185,6 +185,7 @@ module.exports = React.createClass({
             <div className="row" id="login">
               <div className="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                 <h3>{(this.state.createAccount)? "Create Account" : "Login"}</h3>
+                <p>{(this.state.createAccount)? "Sign up with Chakula to get updates on all of the most exciting home popups happening in DC." : ""}</p>
                 <div className="row text-center">
                   <img onClick={this.handleFbLogin} className="fb-login" src="/img/fb-login.svg" id="fb"></img>
                 </div>
