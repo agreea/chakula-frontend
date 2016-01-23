@@ -164,6 +164,7 @@ var AddBio = React.createClass({
 	},
 	render: function() {
 		var s = this.state;
+		
 		return(
 			<div>
 				<h3>Add Bio</h3>
