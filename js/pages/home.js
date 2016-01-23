@@ -73,7 +73,7 @@ module.exports = React.createClass({
                 </div>
             </section>
         );
-    },
+    }
     render: function() {        
         return(
             <div id="home">
