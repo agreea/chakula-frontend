@@ -136,6 +136,8 @@ module.exports = React.createClass({
           <NavBar/>
           {this.props.children}
         </div>
+        <div id="js-working">
+        </div>
       </div>);
     }
 });
