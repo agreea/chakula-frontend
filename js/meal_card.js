@@ -39,7 +39,8 @@ module.exports = React.createClass({
 			        </div>
 			        <div className="card-action">
 			        	<div className="row">
-			               	<p>{moment(d.Starts).format("hh:mm a ddd MMM Do")}</p>
+			               	<p className="col-xs-6">{moment(d.Starts).format("hh:mm a ddd MMM Do")}</p>
+			              	<p className="col-xs-6 text-right">{`${d.City}, ${d.State}`}</p>
 			            </div>
 			        </div>
 			    </Link>

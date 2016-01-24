@@ -44,7 +44,7 @@ module.exports = React.createClass({
         if (s.upcomingMeals && s.upcomingMeals.length > 0)
             return (
                 <div className="row" id="upcoming">
-                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                    <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                         <h2 className="text-center">Upcoming Meals</h2>
                         { s.upcomingMeals.map(function(meal) { return <MealCard data={meal} />}) }
                     </div>
@@ -55,17 +55,17 @@ module.exports = React.createClass({
             <section id="about" className="how container content-section text-center">
                 <h2>How it Works</h2>
                 <div className="how-section row">
-                    <div className="col-xs-12 col-md-4">
+                    <div className="col-xs-12 col-sm-4">
                         <img className="img-responsive img-responsive-center" src="/img/chakula-explore.png"/>
                         <h3>Find</h3>
                         <p>a meal that makes your mouth water.</p>
                     </div>
-                    <div className="col-xs-12 col-md-4">
+                    <div className="col-xs-12 col-sm-4">
                         <img className="img-responsive img-responsive-center" src="/img/chakula-reserve.png"/>
                         <h3>Reserve</h3>
                         <p>your spot at the table.</p>
                     </div>
-                    <div className="col-xs-12 col-md-4">
+                    <div className="col-xs-12 col-sm-4">
                         <img className="img-responsive img-responsive-center" src="/img/chakula-break-bread.png"/>
                         <h3>Break Bread</h3>
                         <p>and enjoy great food with great company.</p>
