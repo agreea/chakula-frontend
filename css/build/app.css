@@ -622,10 +622,10 @@ button:focus {
   border-radius: 0;
   line-height: 2;
 }
-.navbar.dropdown-menu {
+.navbar .dropdown-menu {
   background: #fff;
 }
-.navbar.dropdown-toggle {
+.navbar .dropdown-toggle {
   background: rgba(0, 0, 0, 0);
 }
 .navbar-right {
