@@ -17,11 +17,10 @@ module.exports = React.createClass({
 	},
 	renderLogin: function() {
 		var query = window.location.search.replace("?", "");
-		var fwd_url = encodeURIComponent("stripe_connect?" + query);
 		return(
 			<div className="text-center">
 				<h1>Login to Chakula to Connect With Stripe</h1>
-				<Link to={"login?fwd=" + fwd_url}>
+				<Link to={"login?fwd=" + "/stripe_connect?" + query}>
 					<button className="c-blue-bg">Login</button>
 				</Link>
 			</div>
