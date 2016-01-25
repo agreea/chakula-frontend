@@ -6,7 +6,7 @@ module.exports = React.createClass({
 		if (Cookies.get("session")) {
 			var api_resp = api_call('host', {
 		                method: "StripeConnect",
-		                auth: params.code,
+		                auth: this.props.location.query.code,
 		 				session: Cookies.get("session") 
 		            });
 			this.setState({success: api_resp.Success});
@@ -16,11 +16,15 @@ module.exports = React.createClass({
 		return <h1>Successfully Connected to Stripe!</h1>
 	},
 	renderLogin: function() {
+		var query = window.location.search.replace("?", "");
+		var fwd_url = encodeURIComponent("stripe_connect?" + query);
 		return(
-			<h1>Login to Chakula to Connect With Stripe</h1>
-			<Link to={"login?fwd=" + window.location.search.slice(1)} />
-				<button className="c-blue-bg">Login</button>
-			</Link>
+			<div className="text-center">
+				<h1>Login to Chakula to Connect With Stripe</h1>
+				<Link to={"login?fwd=" + fwd_url}>
+					<button className="c-blue-bg">Login</button>
+				</Link>
+			</div>
 		);
 	},
 	renderError: function() {
@@ -38,19 +42,3 @@ module.exports = React.createClass({
 			return this.renderError();
 	}
 });
-function sendStripeData() {
-	params = getUrlVars();
-	api_resp = api_call('host', {
-                method: "StripeConnect",
-                auth: params.code,
- 				session: Cookies.get("session") 
-            });
-	if (api_resp.Success) {
-		$('#status-label').text("Successfully Connected Your Stripe Account!");
-  		window.location.replace("https://yaychakula.com/my_meals.html");
-	} else {
-		$('#status-label').text(api_resp.Error);
-		console.log(api_resp.Error);
-		// show failure
-	}
-}

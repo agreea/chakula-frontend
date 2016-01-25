@@ -22,7 +22,8 @@ var App = require('./pages/app.js'),
     Login = require('./pages/login.js'),
     Chef = require('./pages/chef.js'),
     AccountSetUp = require('./pages/account_setup.js'),
-    ConfirmEmail = require('./pages/confirm_email.js'); // done
+    ConfirmEmail = require('./pages/confirm_email.js'),
+    StripeConnect = require('./pages/stripe_connect');
 ReactDOM.render(
 	<Router history={createBrowserHistory()} className="container-fluid">
 		<Route component={App}>
@@ -38,5 +39,6 @@ ReactDOM.render(
             <Route name="Chef" path="chef/:id" component={Chef}/>
             <Route name="Account Setup" path="account_setup" component={AccountSetUp}/>
             <Route name="Confirm Email" path="confirm_email" component={ConfirmEmail}/>
+            <Route name="Stripe Connect" path="stripe_connect" component={StripeConnect}/>
 	    </Route>
 	</Router>, document.getElementById('app'));
