@@ -23,7 +23,7 @@ var App = require('./pages/app.js'),
     Chef = require('./pages/chef.js'),
     AccountSetUp = require('./pages/account_setup.js'),
     ConfirmEmail = require('./pages/confirm_email.js'),
-    StripeConnect = require('./pages/stripe_connect');
+    StripeConnect = require('./pages/stripe_connect.js');
 ReactDOM.render(
 	<Router history={createBrowserHistory()} className="container-fluid">
 		<Route component={App}>
