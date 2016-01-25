@@ -69,7 +69,7 @@ var Review = React.createClass({
           <p>{this.props.children}</p>
           <div className="row">
             <div className="col-sm-8 review-meal-title">
-              <p><Link to={"https://yaychakula.com/meal/" + this.props.meal_id}>
+              <p><Link to={"/meal/" + this.props.meal_id}>
                 {this.props.title}
               </Link></p>
             </div>
@@ -124,7 +124,7 @@ var HostAttendeesInfo = React.createClass({
     console.log("HostAttendeesInfo data: ");
     console.log(data);
     return (<div className="row host-attendees-col">
-      <Link to={`chef/${data.Host_id}`}>
+      <Link to={`/chef/${data.Host_id}`}>
         <div className="col-xs-12 col-sm-3">
           <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
         </div>
