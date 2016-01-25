@@ -28,7 +28,11 @@ module.exports = React.createClass({
 		);
 	},
 	renderError: function() {
-
+		return(
+			<div className="text-center">
+				<h1>Failed to Connect With Stripe</h1>
+			</div>
+		)
 	},
 	getInitialState: function() {
 		return({success: false});

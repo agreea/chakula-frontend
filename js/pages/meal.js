@@ -139,7 +139,7 @@ var HostAttendeesInfo = React.createClass({
 
 var BookMeal = React.createClass({
   renderOrderWithLogin: function() {
-      return <Link to={"login?fwd=meal/" + this.props.data.Id + "?book_meal=true"}>
+      return <Link to={"/login?fwd=meal/" + this.props.data.Id + "?book_meal=true"}>
           <button className="c-blue-bg book-btn">Book</button>
         </Link>;
   },
