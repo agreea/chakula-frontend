@@ -13,7 +13,16 @@ module.exports = React.createClass({
 		}
 	},
 	renderSuccess: function() {
-		return <h1>Successfully Connected to Stripe!</h1>
+		return(
+			<div className="text-center">
+				<h1>Successfully Connected to Stripe!</h1>
+				<p>You can now create listings for your meals, popups, and cooking classes</p>
+				<Link to="/my_meals">
+					<button className="c-blue-bg cta">Create Your First Meal</button>
+				</Link>
+			</div>
+
+		)
 	},
 	renderLogin: function() {
 		var query = window.location.search.replace("?", "");
@@ -21,7 +30,7 @@ module.exports = React.createClass({
 			<div className="text-center">
 				<h1>Login to Chakula to Connect With Stripe</h1>
 				<Link to={"login?fwd=" + "/stripe_connect?" + query}>
-					<button className="c-blue-bg">Login</button>
+					<button className="c-blue-bg cta">Login</button>
 				</Link>
 			</div>
 		);
