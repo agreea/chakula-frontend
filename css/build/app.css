@@ -578,9 +578,6 @@ button {
   padding: 8px;
   margin-left: 0;
 }
-button:focus {
-  color: #fff;
-}
 .brand-btn {
   border-radius: 0;
   border-width: 0;
@@ -726,6 +723,12 @@ textarea:focus {
 .form-label {
   color: #aaa;
 }
+.border-btn {
+  background: rgba(0, 0, 0, 0);
+  border-color: #555;
+  border-width: 2px;
+  border-style: solid;
+}
 .fileUpload {
   position: relative;
   overflow: hidden;
@@ -776,12 +779,19 @@ Colors
 }
 .active-green-bg:disabled {
   background-color: #73c78e;
+  color: #fff;
+}
+.active-green-bg:focused {
+  color: #fff;
 }
 .warning-yellow {
   color: #ffc43b;
 }
 .warning-yellow-bg {
   background-color: #ffc43b;
+  color: #fff;
+}
+.warning-yellow-bg:focused {
   color: #fff;
 }
 .inactive-gray {
@@ -800,6 +810,9 @@ Colors
 }
 .c-blue-bg:disabled {
   background-color: #abdceb;
+  color: #fff;
+}
+.c-blue-bg:focused {
   color: #fff;
 }
 .transparent-bg {
@@ -891,12 +904,6 @@ Payment UI Styling
 }
 .price-row * {
   display: inline;
-}
-.payment-button {
-  background: rgba(0, 0, 0, 0);
-  border-color: #555;
-  border-width: 2px;
-  border-style: solid;
 }
 #payment-form {
   padding-bottom: 16px;

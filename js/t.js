@@ -5,8 +5,4 @@ if (!webapp_validated) {
 		session: Cookies.get("session"),
 		url: window.location.href.split("yaychakula.com")[1]
 	});
-	console.log(window.location.href)
-	console.log(window.location.href.split("yaychakula.com"))
-	console.log(window.location.href.split("yaychakula.com")[1])
-
 }

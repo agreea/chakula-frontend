@@ -59,7 +59,8 @@ var PaymentField = React.createClass({
                 name="card" 
                 onChange={radioChanged}
                 checked={card == selected_card}
-                id={card}>{" **** - **** - **** - " + card}</input></p>
+                id={card}
+                key={index}>{" **** - **** - **** - " + card}</input></p>
         });
         var add_card; // add-card radio option. shows input form if it's selected
         if (this.state.showAddCardForm) {
@@ -98,7 +99,7 @@ var PaymentField = React.createClass({
             paymentField = 
                 <div className="col-xs-8 col-sm-6 col-md-5">
                     <p>
-                        <button className="payment-button"
+                        <button className="border-btn"
                             onClick={this.handlePaymentPress}>
                             <i className="fa fa-credit-card"></i> {this.props.cards[0]}</button>
                     </p>
@@ -126,7 +127,7 @@ var SeatsSelect = React.createClass({
     render: function(){
         var options = [];
         for(var i = 1; i < this.props.open_spots; i++) {
-            options.push(<option value={i}>{i}</option>);
+            options.push(<option value={i} key={i}>{i}</option>);
         }
         return (<div className="row">
             <div className="col-xs-3 col-sm-2 label-text text-right">

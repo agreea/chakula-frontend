@@ -1,7 +1,9 @@
 var React = require('react'),
     Link = require('react-router').Link,
     Checkout = require('../checkout.js'),
-    Sticky = require('react-sticky');
+    Sticky = require('react-sticky'),
+    Modal = require('../modal.js'),
+    MealCard = require('../meal_card.js');
 var Carousel = React.createClass({
   render: function() {
     var pictures = this.props.data.map(function(pic, index) {
@@ -150,11 +152,11 @@ var BookMeal = React.createClass({
       (meal_closes < moment()) || data.Status == "ATTENDING" || 
       data.Status == "DECLINED" || data.Status == "PENDING" || data.Open_spots == 0;
     var req_btn_text;
-    if (meal_closes < moment())
-      req_btn_text = 'Meal closed';
-    else if (data.Open_spots == 0)
+    if (data.Open_spots == 0)
       req_btn_text = "Sold out"
-    else 
+    else if (meal_closes < moment())
+      req_btn_text = 'Meal closed';
+    else
       req_btn_text = "Book";
     if(!Cookies.get('session') && !req_btn_disabled) {
       return this.renderOrderWithLogin();
@@ -166,17 +168,24 @@ var BookMeal = React.createClass({
           data-toggle="modal" 
           data-target="#request-modal">{req_btn_text}</button>;
   },
+  renderMealClosesInfo: function() {
+    var d = this.props.data;
+    var meal_closes = moment(d.Rsvp_by);
+    // if there are < 5 days left and open spots, show alert
+    // else show view other meals
+    // alert user if meal closes in the next 5 days and there's open spots
+    if (meal_closes.isBetween(moment(), moment().add(5, "days")) && d.Open_spots > 0)
+      return <p>{"Meal closes " + moment().to(meal_closes)}</p>
+    // else link them to the other meals section
+  },
   renderBookingInfo: function() { // returns the date and time left to book the meal
     var meal_closes = moment(this.props.data.Rsvp_by),
         starts = moment(this.props.data.Starts);
-    var booking_info = 
-      [<p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>]; 
-    var booking_subinfo = 
-      (meal_closes > moment() && this.props.data.Open_spots > 0)? 
-        <p>{"Meal closes " + moment().to(meal_closes)}</p> :
-        <p><span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Event is closed</p>
-    booking_info.push(booking_subinfo);
-    return booking_info;
+    return(
+      <div>
+      <p><i className="fa fa-clock-o"></i>{" " + starts.format("h:mm a ddd, MMM Do")}</p>
+      {this.renderMealClosesInfo()}
+      </div>); 
   },
   renderAttendeeRows: function(attNodes) {
     var attendeeRows = [], // two dimensional array. Each row contains 3 pic items
@@ -218,12 +227,17 @@ var BookMeal = React.createClass({
   },
   render: function() {
     var data = this.props.data;
+    var viewOtherMealsStyle = {paddingTop: "8px"};
     var bookMeal = 
       <div>
         <div className="book-meal">
-          <div className="price-row"><h2>{"$" + Math.round(data.Price*100)/100}</h2><p>/person</p></div>
-            {this.renderOrderBtn()}
+          <div className="price-row">
+            <h2>{"$" + Math.round(data.Price*100)/100}</h2><p>/person</p></div>
             {this.renderBookingInfo()}
+            {this.renderOrderBtn()}
+            <div className="row" style={viewOtherMealsStyle}>
+              <button className="border-btn" id="view-other-meals"><b>View Other Meals</b></button>
+            </div>
           </div>
         {this.renderAttendees()}
       </div>
@@ -242,8 +256,6 @@ var MealInfo = React.createClass({
   render: function() {
     // todo: truncate descriptions
     moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
-    // $('#time-left-subtext').text('Requests are now closed.');
-    // $('#time-left-subtext').css("color", "#aaa"); // set text to grey
     var data = this.props.data;
     var map_row;
     if (data.Status != "ATTENDING")
@@ -310,11 +322,27 @@ var MealInfo = React.createClass({
           <div className="row">
             <ReviewBox data={data.Host_reviews} />
           </div>
+          <div className="row">
+            <UpcomingMeals data={data} />
+          </div>
       </div>
     );
   }
 });
-
+var UpcomingMeals = React.createClass({
+  render: function() {
+    var d = this.props.data;
+    return(
+      <div id="other-meals"
+        className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-0">
+        <h2>Other Meals</h2>
+        {d.Upcoming_meals.map(function(meal) {
+          if(meal.Id != d.Id)
+            return <MealCard data={meal}/>
+        }) }
+      </div>);
+  }
+});
 module.exports = React.createClass({
   componentWillMount: function(){
     var resp = 
@@ -328,12 +356,17 @@ module.exports = React.createClass({
   componentDidMount: function() {
     if(this.props.location.query.book_meal)
       $('#request-modal').modal('show');
+    $("#view-other-meals").click(function() {
+      $('html,body').animate({scrollTop: $("#other-meals").offset().top},'medium');
+    });
   },
   getInitialState: function() {
     return({data: this.props.data});
   },
   render: function() {
     var data = this.state.data;
+    var checkout = 
+      <Checkout cards={(data.Cards)? data.Cards : []} mealId={data.Id} open_spots={data.Open_spots} />;
     return(
       <div className="row">
         <div className="row text-center">
@@ -343,21 +376,9 @@ module.exports = React.createClass({
         <div className="row">
           <MealInfo data={data}></MealInfo>
         </div>
-      <div id="request-modal" className="modal fade" role="dialog">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="close" data-dismiss="modal" id="request-meal-btn">&times;</button>
-              <h4 className="modal-title text-center">Request Meal</h4>
-            </div>
-            <div className="modal-body row" id="modal-body">
-              <div className="row">
-                <Checkout cards={(data.Cards)? data.Cards : []} mealId={data.Id} open_spots={data.Open_spots} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>);
+        <Modal id="request-modal"
+          title="Book Meal"
+          body={checkout} />
+      </div>);
   }
 });

@@ -127,9 +127,6 @@ button {
     line-height: 1.2;
     padding: 8px;
     margin-left: 0;
-    &:focus {
-        color: @white;
-    };
 }
 .brand-btn {
     border-radius: 0;
@@ -289,6 +286,14 @@ textarea {
     color: #aaa;
 }
 
+.border-btn {
+    background: rgba(0,0,0,0);
+    border-color: #555;
+    border-width: 2px;
+    border-style: solid;
+}
+
+
 .fileUpload {
     position: relative;
     overflow: hidden;
@@ -341,8 +346,11 @@ Colors
     color: @white;
     &:disabled{
         background-color: @green-light;
+        color: @white;
     }
-
+    &:focused {
+        color: @white;
+    }
 }
 .warning-yellow {
     color: @warning-yellow;
@@ -351,6 +359,9 @@ Colors
 .warning-yellow-bg {
     background-color: @warning-yellow;
     color: @white;
+    &:focused {
+        color: @white;
+    }
 }
 .inactive-gray {
     color: @inactive-gray;
@@ -367,6 +378,9 @@ Colors
     color: @white;
     &:disabled {
         background-color: @chakula-blue-light;
+        color: @white;
+    }
+    &:focused {
         color: @white;
     }
 }

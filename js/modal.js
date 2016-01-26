@@ -1,5 +1,6 @@
 var React = require('react');
 module.exports = React.createClass({
+	// props: body (component), title (string), id (string)
 	render: function() {
 		return(
 	      <div id={this.props.id} className="modal fade" role="dialog">
