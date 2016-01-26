@@ -1,6 +1,7 @@
 var React = require('react'),
     MealCard = require('../meal_card.js'),
-    Link = require('react-router').Link;
+    Link = require('react-router').Link,
+    Review = require('../review.js');
 module.exports = React.createClass({
     validateEmail: function(email) {
   // http://stackoverflow.com/a/46181/11236
@@ -52,7 +53,7 @@ module.exports = React.createClass({
     },
     renderHowItWorks: function() {
         return (
-            <section id="about" className="how container content-section text-center">
+            <section className="how content-section text-center">
                 <h2>How it Works</h2>
                 <div className="how-section row">
                     <div className="col-xs-12 col-sm-4">
@@ -69,6 +70,45 @@ module.exports = React.createClass({
                         <img className="img-responsive img-responsive-center" src="/img/chakula-break-bread.png"/>
                         <h3>Break Bread</h3>
                         <p>and enjoy great food with great company.</p>
+                    </div>
+                </div>
+            </section>
+        );
+    },
+    renderTestimonials: function() {
+        var review_data = [{
+    "First_name": "Livia",
+    "Prof_pic_url": "https://graph.facebook.com/10153707959143024/picture?width=200&height=200",
+    "Meal_id": 6,
+    "Meal_title": "Sri Lankan Spicy Pumpkin Curry",
+    "Rating": 5,
+    "Comment": "I can't say enough good things about my first dinner with Chakula! Erin was a fantastic cook- the pumpkin curry, cucumber yogurt soup, and homemade roti were all delicious. The company and conversation were also fantastic, even though I didn't know most of the other attendees. Overall a wonderful experience and I can't wait until my next Chakula dinner!",
+    "Date": "2015-10-18T00:41:17Z"
+    },
+    {
+    "First_name": "Suzanne",
+    "Prof_pic_url": "https://graph.facebook.com/10153191455001238/picture?width=200&height=200",
+    "Meal_id": 4,
+    "Meal_title": "Moldovan Mamaliga ca la Mamica Acasa",
+    "Rating": 5,
+    "Comment": "Felicia's traditional Moldovan dinner was a delicious, awesome experience! She is such a good cook and a friendly person!",
+    "Date": "2015-10-06T16:05:21Z"
+  },
+  {
+    "First_name": "Brandon",
+    "Prof_pic_url": "https://graph.facebook.com/10154232450893989/picture?width=200&height=200",
+    "Meal_id": 3,
+    "Meal_title": "Cuban Paladar",
+    "Rating": 5,
+    "Comment": "Izzy's dinner perfectly combined the best aspects of both restaurant and family dining--we enjoyed delicious food prepared by a talented chef while having great conversation all gathered around one large table. Out of all the meals that I had during my four years at Georgetown, this one was truly unique. ",
+    "Date": "2015-09-29T17:13:58Z"
+  }];
+        return (
+            <section className="how container content-section">
+                <h2 className="text-center">DC Loves Us</h2>
+                <div className="how-section row">
+                    <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+                        {review_data.map(function(review) { return <Review data={review}/>})}
                     </div>
                 </div>
             </section>
@@ -97,6 +137,7 @@ module.exports = React.createClass({
                 </div>
             </header>
             {this.renderHowItWorks()}
+            {this.renderTestimonials()}
             {this.renderUpcomingMeals()}
         </div>);
     }

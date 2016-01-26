@@ -3,7 +3,8 @@ var React = require('react'),
     Checkout = require('../checkout.js'),
     Sticky = require('react-sticky'),
     Modal = require('../modal.js'),
-    MealCard = require('../meal_card.js');
+    MealCard = require('../meal_card.js'),
+    Review = require('../review.js');
 var Carousel = React.createClass({
   render: function() {
     var pictures = this.props.data.map(function(pic, index) {
@@ -50,44 +51,6 @@ var ReviewBox = React.createClass({
   }
 });
 
-var Review = React.createClass({
-  render: function() {
-    var stars = [];
-    for (var i = 0; i < this.props.rating; i++) {
-      stars.push(<i className="fa fa-star"></i>);
-    }
-    return (
-      <div className="review row">
-        <div className="col-sm-2 text-center">
-            <img className="img-circle guest-pic img-responsive" src={this.props.pic_url}/>
-            <p className="reviewer-name">
-              {this.props.first_name}
-            </p>
-        </div>
-        <div className="col-sm-10 review-text">
-          <p className="star-rating">
-            {stars}
-          </p>
-          <p>{this.props.children}</p>
-          <div className="row">
-            <div className="col-sm-8 review-meal-title">
-              <p><Link to={"/meal/" + this.props.meal_id}>
-                {this.props.title}
-              </Link></p>
-            </div>
-            <div className="col-sm-4">
-              <p>
-                {this.props.date}
-              </p>
-            </div>
-          </div>
-          <hr className="hr-review"/>
-        </div>
-      </div>
-    );
-  }
-});
-
 var ReviewList = React.createClass({
   render: function() {
     if (!this.props.data){
@@ -99,14 +62,7 @@ var ReviewList = React.createClass({
     }
     var reviewNodes = this.props.data.map(function (review) {
       return (
-        <Review first_name={review.First_name} 
-                date={moment(review.Date).format("MMM Do YYYY")} 
-                pic_url={review.Prof_pic_url}
-                rating={review.Rating}
-                title={review.Meal_title}
-                meal_id={review.Meal_id}>
-          {review.Comment}
-        </Review>
+        <Review data={review}/>
       );
     });
     return (
@@ -158,6 +114,7 @@ var BookMeal = React.createClass({
       req_btn_text = 'Meal closed';
     else
       req_btn_text = "Book";
+
     if(!Cookies.get('session') && !req_btn_disabled) {
       return this.renderOrderWithLogin();
     }
