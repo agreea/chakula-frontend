@@ -19,7 +19,7 @@ module.exports = React.createClass({
           <p className="star-rating">
             {stars}
           </p>
-          <p>{d.Comment}</p>
+          <p className="comment">{d.Comment}</p>
           <div className="row">
             <div className="col-sm-8 review-meal-title">
               <p><b><Link to={"/meal/" + d.Meal_id}>

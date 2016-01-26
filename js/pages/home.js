@@ -125,12 +125,7 @@ module.exports = React.createClass({
                                 <h1>Come for the Food</h1>
                                 <h1>Stay for the People</h1>
                                 <p className="intro-text">Delectable homecooked meals with friends both old and new</p>
-                                {(Cookies.get("session"))?
-                                    <button id='browse-meals' className="c-blue-bg cta">Browse Meals</button> :
-                                    <Link to="login?signup=true">
-                                        <button className="c-blue-bg cta">Sign Up</button>
-                                    </Link>
-                                }                 
+                                <button id='browse-meals' className="c-blue-bg cta">Browse Meals</button>
                             </div>
                         </div>
                     </div>
