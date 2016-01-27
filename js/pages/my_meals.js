@@ -57,7 +57,7 @@ var MealListItem = React.createClass({
             </h4>
             <p><i className="fa fa-clock-o"></i>{" " + starts_s}</p>
             <div className="row">
-              <p className="col-sm-3 cost"><span className="glyphicon glyphicon-usd"></span>{" " + this.props.price}</p>
+              <p className="col-sm-3 cost"><span className="glyphicon glyphicon-usd"></span>{" " + Math.round(this.props.price*100)/100}</p>
               <p className="col-sm-8"> <i className="fa fa-users"></i>{ " " + this.props.seats + " seats"}</p>
             </div>
           </div>
