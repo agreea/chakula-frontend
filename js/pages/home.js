@@ -32,10 +32,9 @@ module.exports = React.createClass({
             this.setState({upcomingMeals: api_resp.Return});
     },
     componentDidMount: function() {
-        if (Cookies.get("session"))
-            $("#browse-meals").click(function() {
-                $('html,body').animate({scrollTop: $("#upcoming").offset().top},'medium');
-            });
+        $("#browse-meals").click(function() {
+            $('html,body').animate({scrollTop: $("#upcoming").offset().top},'medium');
+        });
     },
     getInitialState: function() {
         return({email: '', emailSubmitSuccess: false});
