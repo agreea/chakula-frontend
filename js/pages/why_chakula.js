@@ -8,7 +8,7 @@ module.exports = React.createClass({
 			<header>
 		      <div className="row text-center intro-text" id="header">
 		        <h1 >Why Chakula?</h1>
-		        <p className="intro-text">So you to focus on the cooking.</p>
+		        <p className="intro-text">So you can focus on the cooking.</p>
 		        <p className="text-center" id="down-btn" ><a href="#body"><i className="fa fa-chevron-down" id="down-icon"></i></a></p>
 		      </div>
 		  </header>
