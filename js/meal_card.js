@@ -32,7 +32,7 @@ module.exports = React.createClass({
 		}
 		return(
 			<div className="card">
-			    <Link to={`/meal/${d.Id}`} target="new_blank">
+			    <Link to={`/meal/${d.Id}?modal=true`} target="new_blank">
 			        <div className="card-image" style={card_img}>
 			        	{alert}
 			            <span className="card-title">{`${d.Title} - $${price}`}</span>

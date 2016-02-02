@@ -79,6 +79,8 @@ modules.export = React.createClass({
             <section className="row">
                 <UpcomingMeals/>
             </section>
+            <Sticky>
+            </Sticky>
         </div>);
     }
 });

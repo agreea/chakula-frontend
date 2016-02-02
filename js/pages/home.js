@@ -113,7 +113,15 @@ module.exports = React.createClass({
             </section>
         );
     },
-    render: function() {        
+    render: function() {
+        var stickyStyle = 
+            {  
+                position: "fixed",
+                bottom: "0",
+                left: "0",
+                right: "0",
+                width: "100%"
+            }   
         return(
             <div id="home">
             <header className="home-intro">

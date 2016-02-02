@@ -4,6 +4,7 @@ var React = require('react'),
     Sticky = require('react-sticky'),
     Modal = require('../modal.js'),
     MealCard = require('../meal_card.js'),
+    EmailSignup = require('../email_signup.js'),
     Review = require('../review.js');
 var Carousel = React.createClass({
   render: function() {
@@ -165,7 +166,7 @@ var BookMeal = React.createClass({
     var attendees = this.props.data.Attendees;
     var attNodes = attendees.map(function(attendee, i) {
       return (
-        <div className="col-xs-6 col-sm-4" k={i}>
+        <div className="col-xs-6 col-sm-4" key={i}>
           <img className="img-circle img-responsive img-responsive-center" 
             src={attendee.Prof_pic_url || "/img/user-icon.svg"} />
           <p className="text-center">{attendee.First_name}</p>
@@ -255,8 +256,8 @@ var MealInfo = React.createClass({
     }
     // handle newlines in the meal description
     var descLines = data.Description.split(/[\n\r]/g);
-    var description = descLines.map(function(desc_line) {
-      return <p>{desc_line}</p>;
+    var description = descLines.map(function(desc_line, index) {
+      return <p key={index}>{desc_line}</p>;
     });
     var displayAddress = `${data.City}, ${data.State}`;
     if (data.Address)
@@ -293,9 +294,9 @@ var UpcomingMeals = React.createClass({
       <div id="other-meals"
         className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-0">
         <h2>Other Meals</h2>
-        {d.Upcoming_meals.map(function(meal) {
+        {d.Upcoming_meals.map(function(meal, index) {
           if(meal.Id != d.Id)
-            return <MealCard data={meal}/>
+            return <MealCard data={meal} key={index}/>
         }) }
       </div>);
   }
@@ -311,8 +312,11 @@ module.exports = React.createClass({
       this.setState({data: resp.Return});
   },
   componentDidMount: function() {
-    if(this.props.location.query.book_meal)
+    var q = this.props.location.query;
+    if (q.book_meal)
       $('#request-modal').modal('show');
+    if (q.modal && !Cookies.get('session') && !Cookies.get('email'))
+      $('#email-modal').modal('show');
     $("#view-other-meals").click(function() {
       $('html,body').animate({scrollTop: $("#other-meals").offset().top},'medium');
     });
@@ -324,6 +328,7 @@ module.exports = React.createClass({
     var data = this.state.data;
     var checkout = 
       <Checkout cards={(data.Cards)? data.Cards : []} mealId={data.Id} open_spots={data.Open_spots} />;
+    var emailSignup = <EmailSignup />;
     return(
       <div className="row">
         <div className="row text-center">
@@ -336,6 +341,9 @@ module.exports = React.createClass({
         <Modal id="request-modal"
           title="Book Meal"
           body={checkout} />
+        <Modal id="email-modal"
+          title="Get Weekly Invites to Chakula Popups"
+          body={emailSignup} />
       </div>);
   }
 });
