@@ -25,6 +25,8 @@ module.exports = React.createClass({
         this.setState({hidden: true});
     },
     componentDidMount: function() {
+        if (Cookies.get("session") || Cookies.get("email"))
+            $('#subscribe-footer').hide();
         if (this.props.triggerElementId) {
             $('#subscribe-footer').hide();
             $(window).scroll(this.scrollListener);
