@@ -16,6 +16,7 @@ Colors
 @green-light: #73c78e;
 @warning-yellow: #ffc43b;
 @transparent: rgba(0,0,0,0);
+@welcome-green: #78d4a1;
 #app, .container-fluid, #app-body {
     height: 100%;
     padding: 0;
@@ -271,6 +272,7 @@ textarea {
     padding: 8px 0;
     width: 100%;
     border-radius: 0;
+    color: #434343;
     &:focus{
         transition: border-color 0.4s ease;
         outline: none;
@@ -352,6 +354,21 @@ Colors
         color: @white;
     }
 }
+.welcome-green {
+    color: @welcome-green;
+}
+.welcome-green-bg {
+    background-color: @welcome-green;
+    color: @white;
+    &:disabled{
+        background-color: @green-light;
+        color: @white;
+    }
+    &:focused {
+        color: @white;
+    }
+
+}
 .warning-yellow {
     color: @warning-yellow;
 }
@@ -384,6 +401,12 @@ Colors
         color: @white;
     }
 }
+.white {
+    color: @white;
+}
+.white-bg {
+    background-color: @white;
+}
 .transparent-bg {
     background-color: @transparent;
 }
@@ -405,6 +428,16 @@ Rules on multiple pages
         color: #fff;
     };
 }
+
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100
+}
+
 .review {
     & .review-meal-title {
         padding-left: 0;
@@ -425,4 +458,3 @@ Rules on multiple pages
         margin: 0 2px;
     }
 }
-

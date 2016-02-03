@@ -709,6 +709,7 @@ textarea {
   padding: 8px 0;
   width: 100%;
   border-radius: 0;
+  color: #434343;
 }
 input[type=text]:focus,
 input[type=password]:focus,
@@ -784,6 +785,20 @@ Colors
 .active-green-bg:focused {
   color: #fff;
 }
+.welcome-green {
+  color: #78d4a1;
+}
+.welcome-green-bg {
+  background-color: #78d4a1;
+  color: #fff;
+}
+.welcome-green-bg:disabled {
+  background-color: #73c78e;
+  color: #fff;
+}
+.welcome-green-bg:focused {
+  color: #fff;
+}
 .warning-yellow {
   color: #ffc43b;
 }
@@ -815,6 +830,12 @@ Colors
 .c-blue-bg:focused {
   color: #fff;
 }
+.white {
+  color: #fff;
+}
+.white-bg {
+  background-color: #fff;
+}
 .transparent-bg {
   background-color: rgba(0, 0, 0, 0);
 }
@@ -839,6 +860,14 @@ Rules on multiple pages
   font-family: "Sorts Mill Goudy";
   font-size: 24px;
   color: #fff;
+}
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
 }
 .review .review-meal-title {
   padding-left: 0;

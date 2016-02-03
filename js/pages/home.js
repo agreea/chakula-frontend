@@ -1,7 +1,9 @@
 var React = require('react'),
     MealCard = require('../meal_card.js'),
     Link = require('react-router').Link,
-    Review = require('../review.js');
+    Review = require('../review.js'),
+    Sticky = require('react-sticky'),
+    EmailSignupFooter = require('../email_signup_footer.js');
 module.exports = React.createClass({
     validateEmail: function(email) {
   // http://stackoverflow.com/a/46181/11236
@@ -52,7 +54,7 @@ module.exports = React.createClass({
     },
     renderHowItWorks: function() {
         return (
-            <section className="how content-section text-center">
+            <section className="how content-section text-center" id="how-it-works">
                 <h2>How it Works</h2>
                 <div className="how-section row">
                     <div className="col-xs-12 col-sm-4">
@@ -114,33 +116,26 @@ module.exports = React.createClass({
         );
     },
     render: function() {
-        var stickyStyle = 
-            {  
-                position: "fixed",
-                bottom: "0",
-                left: "0",
-                right: "0",
-                width: "100%"
-            }   
         return(
             <div id="home">
-            <header className="home-intro">
-                <div className="intro-text">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-10 col-md-offset-1">
-                                <h1>Come for the Food</h1>
-                                <h1>Stay for the People</h1>
-                                <p className="intro-text">Delectable homecooked meals with friends both old and new</p>
-                                <button id='browse-meals' className="c-blue-bg cta">Browse Meals</button>
+                <EmailSignupFooter triggerElementId="how-it-works"/>
+                <header className="home-intro">
+                    <div className="intro-text">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-10 col-md-offset-1">
+                                    <h1>Come for the Food</h1>
+                                    <h1>Stay for the People</h1>
+                                    <p className="intro-text">Delectable homecooked meals with friends both old and new</p>
+                                    <button id='browse-meals' className="c-blue-bg cta">Browse Meals</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </header>
-            {this.renderHowItWorks()}
-            {this.renderTestimonials()}
-            {this.renderUpcomingMeals()}
-        </div>);
+                </header>
+                {this.renderHowItWorks()}
+                {this.renderTestimonials()}
+                {this.renderUpcomingMeals()}
+            </div>);
     }
 });
