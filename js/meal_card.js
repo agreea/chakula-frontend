@@ -9,7 +9,7 @@ module.exports = React.createClass({
 		var d = this.props.data;
 		console.log(d);
 		var card_img = { 
-				background: `url(/img/${d.Pics[0].Name})`,
+				background: "url(/img/" + d.Pics[0].Name + ")",
 				backgroundPosition: "center center",
     			backgroundRepeat: "no-repeat",
     			backgroundSize: "cover"
@@ -32,15 +32,15 @@ module.exports = React.createClass({
 		}
 		return(
 			<div className="card">
-			    <Link to={`/meal/${d.Id}?modal=true`} target="new_blank">
+			    <Link to={"/meal/" + d.Id + "?modal=true"} target="new_blank">
 			        <div className="card-image" style={card_img}>
 			        	{alert}
-			            <span className="card-title">{`${d.Title} - $${price}`}</span>
+			            <span className="card-title">{d.Title + " - $" + price}</span>
 			        </div>
 			        <div className="card-action">
 			        	<div className="row">
 			               	<p className="col-xs-6">{moment(d.Starts).format("hh:mm a ddd MMM Do")}</p>
-			              	<p className="col-xs-6 text-right">{`${d.City}, ${d.State}`}</p>
+			              	<p className="col-xs-6 text-right">{d.City + ", " + d.State}</p>
 			            </div>
 			        </div>
 			    </Link>

@@ -5,6 +5,7 @@ var React = require('react'),
     Modal = require('../modal.js'),
     MealCard = require('../meal_card.js'),
     EmailSignup = require('../email_signup.js'),
+    EmailSignup 
     Review = require('../review.js');
 var Carousel = React.createClass({
   render: function() {
@@ -83,7 +84,7 @@ var HostAttendeesInfo = React.createClass({
     console.log("HostAttendeesInfo data: ");
     console.log(data);
     return (<div className="row host-attendees-col">
-      <Link to={`/chef/${data.Host_id}`}>
+      <Link to={"/chef/" + data.Host_id}>
         <div className="col-xs-12 col-sm-3">
           <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
         </div>
