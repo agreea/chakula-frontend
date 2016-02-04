@@ -36,9 +36,7 @@ module.exports = React.createClass({
     },
     scrollListener: function(event) {
         var triggerTop = $('#' + this.props.triggerElementId).position().top;
-        console.log(triggerTop)
         var scrollTop = $(window).scrollTop();
-        console.log(scrollTop)
         if (scrollTop > triggerTop && !this.state.hidden)
             $('#subscribe-footer').show();            
     },
