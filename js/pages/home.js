@@ -109,7 +109,7 @@ module.exports = React.createClass({
                 <h2 className="text-center">DC Loves Us</h2>
                 <div className="how-section row">
                     <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
-                        {review_data.map(function(review) { return <Review data={review}/>})}
+                        {review_data.map(function(review, index) { return <Review key={index} data={review}/>})}
                     </div>
                 </div>
             </section>
