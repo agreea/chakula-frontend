@@ -4,14 +4,14 @@ var React = require('react'),
 module.exports = React.createClass({
   getInitialState: function() {
   	return {
-      address: '',
-      state: '',
-      city: '',
+      Address: '',
+      State: '',
+      City: '',
       saveDisabled: true};
   },
   handleStateChange: function(e) { // state as in Hawaii...
     console.log(e);
-    state = e.target.value;
+    var state = e.target.value;
     this.setState({state: state, saveDisabled: false});
     console.log(this.state.state);
   },
@@ -24,11 +24,12 @@ module.exports = React.createClass({
     this.setState(obj);
   },
   attemptSendHostData: function() {
-		console.log("attempting to send host data");
+    var s = this.state;
+		console.log(s);
 		var errors = [];
-		if (!this.state.address) errors.push("Address is mandatory");
-    if (!this.state.state) errors.push("State is mandatory");      
-    if (!this.state.city) errors.push("City is mandatory");      
+		if (!s.Address) errors.push("Address is mandatory");
+    if (!s.State) errors.push("State is mandatory");      
+    if (!s.City) errors.push("City is mandatory");      
 		if (errors.length === 0)
 			this.sendHostData();
     this.setState({errors: errors});
@@ -113,12 +114,12 @@ module.exports = React.createClass({
           <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
             <FormTextRow form_name="Address" 
               place_holder="3700 O St NW" 
-              id="address"
+              id="Address"
               default_value={host.Address}
               handleInputChanged={this.handleInputChanged}/>
             <FormTextRow form_name="City" 
               place_holder="Washington" 
-              id="city"
+              id="City"
               default_value={host.City}
               handleInputChanged={this.handleInputChanged}/>
             <div className="row">
@@ -126,13 +127,13 @@ module.exports = React.createClass({
               <p className="text-right form-label">State</p>
             </div>
             <div className="col-xs-8 col-md-5">
-              <select className="state-select" value={host.state} onChange={this.handleStateChange}>
+              <select className="state-select" value={host.State} onChange={this.handleStateChange}>
                 {states_select_options}
               </select>
             </div>
             </div>
             <div className="row error-field">
-              <ul>
+              <ul className="col-xs-8 col-md-5">
                 {this.state.errors.map(function(error) {
                   return <li>{error}</li>;
                 })}
