@@ -5,7 +5,7 @@ module.exports = React.createClass({
     var d = this.props.data;
     var stars = [];
     for (var i = 0; i < d.Rating; i++) {
-      stars.push(<i className="fa fa-star"></i>);
+      stars.push(<i className="fa fa-star" key={i}></i>);
     }
     return (
       <div className="review row">

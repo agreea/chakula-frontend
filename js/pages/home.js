@@ -48,7 +48,7 @@ module.exports = React.createClass({
                 <div className="row" id="upcoming">
                     <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                         <h2 className="text-center">Upcoming Meals</h2>
-                        { s.upcomingMeals.map(function(meal) { return <MealCard data={meal} />}) }
+                        { s.upcomingMeals.map(function(meal, index) { return <MealCard key={index} data={meal} />}) }
                     </div>
                 </div>);
     },
