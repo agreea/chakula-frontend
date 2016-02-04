@@ -29,7 +29,6 @@ var Link = require('react-router').Link;
       },
       render: function() {
         var guest = this.state.guest;
-        console.log(guest);
         var right_nav,
             user_tab,
             host_tab;
@@ -97,19 +96,6 @@ var Link = require('react-router').Link;
         );
       }
     });
-
-function load(){
-  console.log("inside load()");
-    var session = Cookies.get('session');
-    console.log("Session: " + session);
-    if (session) {
-      var api_resp = api_call('kitchenuser', {method: 'Get', session: session});
-      if (api_resp.Success){
-        guest = api_resp.Return;
-      }
-      console.log(api_resp);
-    }
-}
 
 module.exports = React.createClass({
   renderFooter: function() {
