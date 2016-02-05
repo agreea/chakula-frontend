@@ -116,6 +116,9 @@ module.exports = React.createClass({
         );
     },
     render: function() {
+        var howItWorks = this.renderHowItWorks(),
+            testimonials = this.renderTestimonials(),
+            upcomingMeals = this.renderUpcomingMeals();
         return(
             <div id="home">
                 <EmailSignupFooter triggerElementId="how-it-works"/>
@@ -133,9 +136,9 @@ module.exports = React.createClass({
                         </div>
                     </div>
                 </header>
-                {this.renderHowItWorks()}
-                {this.renderTestimonials()}
-                {this.renderUpcomingMeals()}
+                {howItWorks}
+                {testimonials}
+                {upcomingMeals}
             </div>);
     }
 });
