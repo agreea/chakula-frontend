@@ -80,6 +80,7 @@ modules.export = React.createClass({
                 <UpcomingMeals/>
             </section>
             <Sticky>
+                
             </Sticky>
         </div>);
     }

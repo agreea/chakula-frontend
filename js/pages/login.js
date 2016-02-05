@@ -132,10 +132,6 @@ module.exports = React.createClass({
         });
     },
     render: function() {
-        // if it's sigin mode: show fb, email, password, button is signin
-        // if it's create account mode: show fb, email, password, confirm password, button is 'Create account'
-        // how can the same... it can't
-
         var error_messages;
         if (this.state.errors.length > 0) 
           error_messages = this.state.errors.map(function(error) {
