@@ -260,9 +260,9 @@ var MealInfo = React.createClass({
     var description = descLines.map(function(desc_line, index) {
       return <p key={index}>{desc_line}</p>;
     });
-    var displayAddress = `${data.City}, ${data.State}`;
+    var displayAddress = data.City + ", " + data.State;
     if (data.Address)
-      displayAddress = `${data.Address}, ${displayAddress}`;
+      displayAddress = data.Address + ", " + displayAddress;
     return (
       <div className="col-xs-12 col-sm-8 col-sm-offset-1">
           <div className="row">
