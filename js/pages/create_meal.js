@@ -462,7 +462,7 @@ module.exports = React.createClass({
       saveDisabled: api_resp.Success,
     });
     if (!this.props.params.id && flag !== "publish") // reload the page if you haven't done so already
-        this.history.pushState(null, "/create_meal/" + api_resp.Return);
+        window.location.assign("https://yaychakula.com/create_meal/" + api_resp.Return);
     return api_resp;
   },
   validateForPublish: function() { // returns true if meal is well formed and ready to publish
@@ -489,7 +489,7 @@ module.exports = React.createClass({
         mealId: mealId
       });
     if (api_resp.Success)
-        this.history.pushState(null, "/meal/" + api_resp.Return);
+        window.location.assign("https://yaychakula.com/meal/" + api_resp.Return);
   },
   attemptPublish: function() {
     if (!this.validateForPublish())
