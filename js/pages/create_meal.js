@@ -489,7 +489,7 @@ module.exports = React.createClass({
         mealId: mealId
       });
     if (api_resp.Success)
-        this.history.pushState(null, "meal/" + api_resp.Return);
+        this.history.pushState(null, "/meal/" + api_resp.Return);
   },
   attemptPublish: function() {
     if (!this.validateForPublish())

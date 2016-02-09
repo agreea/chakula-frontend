@@ -8,48 +8,82 @@ var MealListItem = React.createClass({
     var api_resp = api_call('meal', {
       method: 'deleteMeal', 
       session: Cookies.get('session'), 
-      mealId: this.props.id
+      mealId: this.props.data.Id
     });
     if (!api_resp.Success){
       this.setState({delete_error: resp.Error});
       return;
     }
-    this.props.handleMealDelete(this.props.k);
-    $('#myModal' + this.props.k).modal('hide');
+    this.props.handleMealDelete(this.props.key);
+    $('#myModal' + this.props.key).modal('hide');
     // launch the modal
     // upon confirm, delete the meal
   },
+  // renderPopups: function() { // renders a single popup screen
+  //   var d = this.props.data;
+  //   var starts_s = moment(d.Starts).format("dddd, MMMM Do h:mm a");
+  //   return(
+  //     <div className="row">
+  //       <p><i className="fa fa-calendar"></i> {starts_s}</p>
+  //       <p><i className="fa fa-map-marker"></i> {d.Address + ", " + d.City + ", " + d.State}</p>
+  //       <p><i className="fa fa-user"></i> {d.Open_spots + " spots available"}</p>
+  //     </div>
+  //   );
+  // },
+  renderModal: function() {
+    var d = this.props.data;
+    var modalContent = 
+      <div className="row text-center">
+        <p>{"Are you sure you want to delete " + d.Title + "? This is forever-ever."}</p>
+        <div className="row">
+          <div className="col-xs-5 col-xs-offset-1 col-sm-4 col-sm-offset-2">
+            <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+          <p className="error-field">{this.state.delete_error}</p>
+          <div className="col-xs-5 col-xs-offset-1 col-sm-4 col-sm-offset-2">
+            <button type="button" className="btn-primary" onClick={this.deleteMeal}>Delete Meal</button>
+          </div>
+        </div>
+      </div>;
+    return (
+        <Modal 
+          id={"myModal" + this.props.key}
+          title="Delete Meal?"
+          body={modalContent} />
+      );
+  },
   render: function() {
-    var pic_src = (this.props.pic)? 
-      "https://yaychakula.com/img/" + this.props.pic :
+    var d = this.props.data;
+    var pic_src = (d.Pics.length != 0)? 
+      "https://yaychakula.com/img/" + d.Pics[0].Name :
       "https://yaychakula.com/img/camera.svg";  
-    var edit_link = "/create_meal/" + this.props.id;
-    var title_s = this.props.title;
+    var edit_link = "/create_meal/" + d.Id;
+    var title_s = d.Title;
     var title;
-    var starts_s = moment(this.props.starts).format("h:mm a dddd, MMMM Do YYYY");
+    var starts_s = moment(d.Starts).format("h:mm a dddd, MMMM Do YYYY");
     if (!title_s) {
       title = <p>Untitled</p>;
-    } else if (moment(this.props.starts) < moment()) { // show the meal is past
-      title = <p>{this.props.title + " [PAST]"}</p>;
-    } else if (this.props.published) {
-      title = <p><i className="fa fa-circle live"></i>{this.props.title}</p>;
+    } else if (moment(d.Starts) < moment()) { // show the meal is past
+      title = <p>{d.Title + " [PAST]"}</p>;
+    } else if (d.Published) {
+      title = <p><i className="fa fa-circle live"></i>{d.Title}</p>;
     } else {
-      title = <p>{this.props.title}</p>
+      title = <p>{d.Title}</p>
     }
     return (
       <div className="meal-list-item">
         <div className="row">
-            <button className="btn-delete-meal text-center" 
-              data-toggle="modal" 
-              data-target={"#myModal" + this.props.k}>
+          <button className="btn-delete-meal text-center" 
+            data-toggle="modal" 
+            data-target={"#myModal" + this.props.key}>
               <span className=" glyphicon glyphicon-trash delete-icon" aria-hidden="true"></span>
-            </button>
-          <div className="col-sm-3 text-center">
+          </button>
+          <div className="col-xs-3 text-center">
             <Link to={edit_link}>
               <img className="img-responsive meal-thumb" src={pic_src}/>
             </Link>
           </div>
-          <div className="col-sm-8">
+          <div className="col-xs-8">
             <h4 className="meal-list-title">
               <Link to={edit_link}>
                 {title}
@@ -57,37 +91,15 @@ var MealListItem = React.createClass({
             </h4>
             <p><i className="fa fa-clock-o"></i>{" " + starts_s}</p>
             <div className="row">
-              <p className="col-sm-3 cost"><span className="glyphicon glyphicon-usd"></span>{" " + Math.round(this.props.price*100)/100}</p>
-              <p className="col-sm-8"> <i className="fa fa-users"></i>{ " " + this.props.seats + " seats"}</p>
+              <p className="col-xs-3 cost"><span className="glyphicon glyphicon-usd"></span>{" " + Math.round(d.Price*100)/100}</p>
+              <p className="col-xs-8"> <i className="fa fa-users"></i>{ " " + d.Capacity + " seats"}</p>
             </div>
           </div>
         </div>
         <hr className="list-hr"/>
-      <div className="modal fade" id={"myModal" + this.props.k} tabIndex="-1" role="dialog">
-      <div className="modal-dialog" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 className="modal-title text-center" id="myModalLabel">Delete Meal?</h4>
-          </div>
-          <div className="error-field">
-            {this.state.delete_error}
-          </div>
-          <div className="modal-body text-center">
-            <p>{"Are you sure you want to delete " + this.props.title + "? This is forever-ever."}</p>
-            <div className="row">
-              <div className="col-xs-5 col-xs-offset-1 col-sm-4 col-sm-offset-2">
-                <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
-              </div>
-              <div className="col-xs-5 col-xs-offset-1 col-sm-4 col-sm-offset-2">
-                <button type="button" className="btn-primary" onClick={this.deleteMeal}>Delete Meal</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        {this.renderPopups()}
+        {this.renderModal()}
       </div>
-    </div>
-  </div>
     );
   }
 });
@@ -130,13 +142,14 @@ module.exports = React.createClass({
     if (this.state.meals)
       listItems = this.state.meals.map(function(meal, index){
         return <MealListItem 
+          data={meal}
           title={meal.Title} 
           starts={meal.Starts}
           price={meal.Price}
           seats={meal.Capacity}
           id={meal.Id}
           pic={(meal.Pics.length != 0)? meal.Pics[0].Name : ''}
-          k={index}
+          key={index}
           published={meal.Published}
           handleMealDelete={handleMealDelete} />;
     });
