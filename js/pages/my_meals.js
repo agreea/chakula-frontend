@@ -70,6 +70,7 @@ var MealListItem = React.createClass({
     } else {
       title = <p>{d.Title}</p>
     }
+    
     return (
       <div className="meal-list-item">
         <div className="row">
