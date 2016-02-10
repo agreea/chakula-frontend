@@ -97,7 +97,6 @@ var MealListItem = React.createClass({
           </div>
         </div>
         <hr className="list-hr"/>
-        {this.renderPopups()}
         {this.renderModal()}
       </div>
     );
