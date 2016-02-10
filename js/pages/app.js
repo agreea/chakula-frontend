@@ -53,9 +53,7 @@ var React = require('react'),
             (<li id="user" className="dropdown">
               <button className="btn dropdown-toggle" type="button" id="user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <span className="nav-text">{guest.First_name}</span>
-                <div align="right">
-                  <ProfImg alt="Brand" src={guest.Prof_pic || "/img/user-icon.svg"} />
-                </div>
+                <ProfImg className="img-responsive img-circle" alt="Brand" src={guest.Prof_pic || "/img/user-icon.svg"} align="right" />
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><Link to="/edit_guest_info">My Profile</Link></li>
