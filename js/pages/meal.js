@@ -5,7 +5,7 @@ var React = require('react'),
     Modal = require('../modal.js'),
     MealCard = require('../meal_card.js'),
     EmailSignup = require('../email_signup.js'),
-    EmailSignup 
+    ProfImg = require('../prof_img.js'),
     Review = require('../review.js');
 var Carousel = React.createClass({
   render: function() {
@@ -75,7 +75,7 @@ var ReviewList = React.createClass({
   }
 });
 
-var HostAttendeesInfo = React.createClass({
+var HostInfo = React.createClass({
   render: function() {
     // check meal type
     // if takeout, only show host
@@ -86,7 +86,7 @@ var HostAttendeesInfo = React.createClass({
     return (<div className="row host-attendees-col">
       <Link to={"/chef/" + data.Host_id}>
         <div className="col-xs-12 col-sm-3">
-          <img className="img-responsive img-responsive-center img-circle" src={data.Host_pic}/>
+          <ProfImg src={data.Host_pic}/>
         </div>
         <div className="col-xs-12 col-sm-9">
           <h3>{"About " + data.Host_name}</h3>
@@ -168,8 +168,8 @@ var BookMeal = React.createClass({
     var attNodes = attendees.map(function(attendee, i) {
       return (
         <div className="col-xs-6 col-sm-4" key={i}>
-          <img className="img-circle img-responsive img-responsive-center" 
-            src={attendee.Prof_pic_url || "/img/user-icon.svg"} />
+          <ProfImg 
+            src={attendee.Prof_pic_url} />
           <p className="text-center">{attendee.First_name}</p>
         </div>
       )
@@ -272,7 +272,7 @@ var MealInfo = React.createClass({
           <div className="row">
             {description}
           </div>
-          <HostAttendeesInfo data={this.props.data}/>
+          <HostInfo data={this.props.data}/>
           <div className="row">
             <p><i className="fa fa-map-marker"></i>{" " + displayAddress}</p>
             {(data.Status === "ATTENDING")? "" : <p>Full address is revealed upon purchase</p>}

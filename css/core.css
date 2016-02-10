@@ -124,7 +124,8 @@ span {
     line-height: 2;
 }
 
-.navbar img {
+.navbar img, 
+.navbar canvas {
     margin: 4px 12px;
     max-height: 50px;
     vertical-align: middle;
@@ -140,7 +141,8 @@ span {
     margin: auto 0px;
 }
 
-.nav > li, .navbar-header {
+.nav > li, 
+.navbar-header {
     display: inline-flex;
     cursor: pointer;
     height: 100%;
@@ -170,14 +172,6 @@ span {
     background: #fff;
 }
 
-.nav > li img {
-    margin: 4px 12px;
-}
-
-/*.nav > li:hover {
-    background: ;
-}
-*/
 .nav > li > a, .nav > li > button {
     padding: 0 15px;
     border: none;

@@ -639,7 +639,8 @@ button {
 .navbar #signin {
   background: rgba(0, 0, 0, 0);
 }
-.navbar img {
+.navbar img,
+.navbar canvas {
   margin: 4px 12px;
   max-height: 50px;
   vertical-align: middle;
@@ -657,14 +658,15 @@ button {
   cursor: pointer;
   height: 100%;
 }
-.nav > li * {
+.nav > li {
   margin: auto 0;
   -webkit-transition: all 0s ease-in-out;
   -moz-transition: all 0s ease-in-out;
   transition: all 0s ease-in-out;
 }
 .nav > li img,
-.nav > li button {
+.nav > li button,
+.nav > li canvas {
   margin: 4px 12px;
 }
 .nav > li > a,

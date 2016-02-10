@@ -1,5 +1,6 @@
-var React = require('react');
-var Link = require('react-router').Link;
+var React = require('react'),
+    Link = require('react-router').Link,
+    ProfImg = require('../prof_img.js');
   var guest;
   var NavBar = React.createClass({
       componentWillMount: function() {
@@ -52,7 +53,9 @@ var Link = require('react-router').Link;
             (<li id="user" className="dropdown">
               <button className="btn dropdown-toggle" type="button" id="user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <span className="nav-text">{guest.First_name}</span>
-                <img className="img-responsive img-circle nav-icon" alt="Brand" src={guest.Prof_pic || "/img/user-icon.svg"} align="right" />
+                <div align="right">
+                  <ProfImg alt="Brand" src={guest.Prof_pic || "/img/user-icon.svg"} />
+                </div>
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><Link to="/edit_guest_info">My Profile</Link></li>

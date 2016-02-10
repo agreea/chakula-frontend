@@ -1,71 +1,51 @@
 var React = require('react');
 
 module.exports = React.createClass({
-	// 
-  photoUpload: function(e){
-    console.log(e);
-    var files = e.target.files;
-    for (var i in files) {
-      console.log("i:" + i);
-      console.log(files[i]);
-      var file = files[i]
-      if (!/image.*/.test(file.type)) {
-        continue;
-      }
-      var reader = new FileReader();
-      reader.onload = this.onload;
-      reader.readAsDataURL(file);
-    }
-  },
-  onload: function(e){
-    var img = document.createElement("img");
-    var pics = this.state.Pics;
-    var updatePics = this.updatePics;
-    img.onload = function(event) {
-      var canvas = document.createElement("canvas");
-      var width = img.width;
-      var height = img.height;
-      if (width > height) { // if landscape, resize by height
-        height *= MAX_WIDTH / width;
-        width = MAX_WIDTH;
-      } else if (height > MAX_HEIGHT) { // if portrait, resize by width
-          width *= MAX_HEIGHT / height;
-          height = MAX_HEIGHT;
-      }
-      canvas.width = width;
-      canvas.height = height;
-      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-      pics.push({Name: canvas.toDataURL("image/jpeg"), Caption: ""});
-      updatePics(pics);
-    };
-    img.src = e.target.result;
-  },
-
-
+  	componentDidMount: function() {
+  		if (this.props.src.length === 0)
+  			return;
+    	var canvas = document.getElementById(this.hash());
+    	var context = canvas.getContext('2d');
+    	var img = new Image();
+    	img.onload = function() {
+       	// draw cropped image
+    		var width = img.width,
+    			height = img.height;
+       		var sourceX = 0,
+       			sourceY = 0,
+       			destX = 0,
+       			destY = 0;
+   			var destLength = width;
+    		if (width > height) { // if landscape, resize by height
+    			destLength = height;
+    			sourceX = (width - height) / 2;
+    		}
+    		canvas.height = destLength,
+    		canvas.width = destLength;
+    		var imgdata = {sourceX: sourceX}
+    		console.log(imgdata);
+       		context.drawImage(img, sourceX, sourceY, destLength, destLength, destX, destY, destLength, destLength);
+    	};
+     	img.src = this.props.src;
+  	},
+  	hash: function() {
+  		var s = this.props.src;
+	  	var hash = 0, i, chr, len;
+		if (s.length === 0) return hash;
+		for (i = 0, len = s.length; i < len; i++) {
+			chr   = s.charCodeAt(i);
+		    hash  = ((hash << 5) - hash) + chr;
+		    hash |= 0; // Convert to 32bit integer
+		}
+		return hash;
+	},
 	render: function() {
-      var canvas = document.getElementById('myCanvas');
-      var context = canvas.getContext('2d');
-      var imageObj = new Image();
-      imageObj.onload = function() {
-        // draw cropped image
-	    var width = img.width;
-	    var height = img.height;
-	    if (width > height) { // if landscape, resize by height
-	    	var destWidth = height;
-	    	var destHeight = height;
-	    } else if (height > MAX_HEIGHT) { // if portrait, resize by width
-	    }
-        var sourceX = 150;
-        var sourceY = 0;
-        var destWidth = sourceWidth;
-        var destHeight = sourceHeight;
-        var destX = canvas.width / 2 - destWidth / 2;
-        var destY = canvas.height / 2 - destHeight / 2;
-        context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
-      };
-      imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';		
-		return (
-
+		return ((this.props.src.length > 0)?
+			<canvas 
+				className="img-circle img-responsive img-responsive-center" 
+				id={this.hash()} height="200" width="200" style={this.props.style}/> :
+			<img className="img-circle img-responsive img-responsive-center"
+				src="/img/user-icon.svg" style={this.props.style}/>
 		);
 	}
 })

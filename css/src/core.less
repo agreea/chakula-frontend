@@ -195,7 +195,7 @@ button {
     & .user-dropdown, & #signin {
         background: @transparent;
     }
-    & img {
+    & img, & canvas {
         margin: 4px 12px;
         max-height: 50px;
         vertical-align: middle;
@@ -217,13 +217,12 @@ button {
 }
 
 .nav > li {
-    * {
-        margin: auto 0;
-        -webkit-transition: all 0s ease-in-out;
-        -moz-transition: all 0s ease-in-out;
-        transition: all 0s ease-in-out;
-    }
-    img, button {
+    margin: auto 0;
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out;
+
+    & img, & button, & canvas {
         margin: 4px 12px;        
     }
 }

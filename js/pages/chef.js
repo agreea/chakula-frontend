@@ -1,5 +1,6 @@
 var React = require("react"),
-	MealCard = require("../meal_card.js");
+	MealCard = require("../meal_card.js"),
+	ProfImg = require('../prof_img.js');
 module.exports = React.createClass({
 	handleFollowClicked: function() {
 		if (Cookies.get("session")) {
@@ -86,7 +87,7 @@ module.exports = React.createClass({
 				paddingLeft: "75px",
 				marginTop: "-90px"				
 			},
-			cps ={ maxHeight: "180px"};
+			cps ={ maxHeight: "200px"};
 		mealsComponent = this.renderMeals();
 		return( 
 		<div id="chef-profile" className="container-fluid" >
@@ -96,9 +97,7 @@ module.exports = React.createClass({
 			</div>
 			<div className="row" parent_style={parent_style}>
 				<div className="col-xs-12 col-sm-4 col-md-3 text-center" style={chef_pic_style}>
-					<img className="chef-pic img-responsive img-circle img-responsive-center"
-						src={s.Prof_pic}
-						style={cps}/>
+					<ProfImg src={s.Prof_pic} style={cps}/>
 					<button className="c-blue-bg" onClick={this.handleFollowClicked}>{(s.Follows)? "Following" : "Follow"}</button>
 				</div>
 				<div className="col-xs-12 col-sm-6 col-md-7">
