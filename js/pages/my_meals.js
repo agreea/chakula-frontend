@@ -1,5 +1,6 @@
 var React = require('react');
-var Link = require('react-router').Link;
+var Link = require('react-router').Link,
+    Modal = require('../modal.js');
 var MealListItem = React.createClass({
   getInitialState: function() {
       return {delete_error: ""};
@@ -70,7 +71,7 @@ var MealListItem = React.createClass({
     } else {
       title = <p>{d.Title}</p>
     }
-    
+
     return (
       <div className="meal-list-item">
         <div className="row">
