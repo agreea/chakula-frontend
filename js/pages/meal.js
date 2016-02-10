@@ -8,8 +8,21 @@ var React = require('react'),
     ProfImg = require('../prof_img.js'),
     Review = require('../review.js');
 var Carousel = React.createClass({
+  componentDidMount: function() { // dynamically center each image in the carousel frame
+    $(".carousel img").each(function(){
+        if ($(this).height() > $(this).parent().height()){
+            var top_dif= ($(this).height()-$(this).parent().height())/2;
+            $(this).css("top",-top_dif);
+        }
+        if ($(this).width() > $(this).parent().width()){
+            var left_dif= ($(this).width()-$(this).parent().width())/2;
+            $(this).css("left",-left_dif);
+        }
+    });
+  },
   render: function() {
-    var pictures = this.props.data.map(function(pic, index) {
+    var data = this.props.data;
+    var pictures = data.Pics.map(function(pic, index) {
       if (index == 0) {
         return (<div className="item active">
           <img src={"https://yaychakula.com/img/" + pic.Name}></img>
@@ -22,7 +35,7 @@ var Carousel = React.createClass({
       </div>);
     });
     return (
-      <div className="col-xs-12 col-sm-9">
+      <div className="col-xs-12 col-sm-9" id="carousel-container">
       <div id="carousel" className="carousel slide text-center" data-ride="carousel" data-interval="false">
         <div className="carousel-inner" id="carousel-pics" role="listbox">
           {pictures}
@@ -36,6 +49,7 @@ var Carousel = React.createClass({
           <span className="sr-only">Next</span>
         </a>
       </div>
+      <h2 className="meal-title">{data.Title}</h2>
       </div>
     );
   }
@@ -202,7 +216,7 @@ var BookMeal = React.createClass({
       </div>
     if (document.documentElement.clientWidth > 768) {
       return(
-        <Sticky className="col-xs-12 col-sm-3" stickyClass="col-sm-3 col-sm-offset-9">
+        <Sticky className="col-xs-12 col-sm-3 book-sticky" stickyClass="col-sm-3 col-sm-offset-9 book-sticky">
           {bookMeal}
         </Sticky>
       );
@@ -266,7 +280,6 @@ var MealInfo = React.createClass({
     return (
       <div className="col-xs-12 col-sm-8 col-sm-offset-1">
           <div className="row">
-            <h2>{data.Title}</h2>
             <p className="star-rating">{avg_stars}</p>
           </div>
           <div className="row">
@@ -333,7 +346,7 @@ module.exports = React.createClass({
     return(
       <div className="row">
         <div className="row text-center">
-          <Carousel data={data.Pics}></Carousel>
+          <Carousel data={data}></Carousel>
           <BookMeal data={data}></BookMeal>
         </div>
         <div className="row">

@@ -1,5 +1,6 @@
 var React = require('react'),
-    Link = require('react-router').Link;
+    Link = require('react-router').Link,
+    ProfImg = require('./prof_img.js');
 module.exports = React.createClass({
   render: function() {
     var d = this.props.data;
@@ -10,7 +11,7 @@ module.exports = React.createClass({
     return (
       <div className="review row">
         <div className="col-sm-2 text-center">
-            <img className="img-circle guest-pic img-responsive" src={d.Prof_pic_url}/>
+            <ProfImg src={d.Prof_pic_url}/>
             <p className="reviewer-name">
               {d.First_name}
             </p>
