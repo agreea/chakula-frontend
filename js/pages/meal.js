@@ -95,8 +95,6 @@ var HostInfo = React.createClass({
     // if takeout, only show host
     // else show attendees too
     var data = this.props.data;
-    console.log("HostAttendeesInfo data: ");
-    console.log(data);
     return (<div className="row host-attendees-col">
       <Link to={"/chef/" + data.Host_id}>
         <div className="col-xs-12 col-sm-3">
