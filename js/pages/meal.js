@@ -49,7 +49,6 @@ var Carousel = React.createClass({
           <span className="sr-only">Next</span>
         </a>
       </div>
-      <h2 className="meal-title">{data.Title}</h2>
       </div>
     );
   }
@@ -97,11 +96,11 @@ var HostInfo = React.createClass({
     var data = this.props.data;
     return (<div className="row host-attendees-col">
       <Link to={"/chef/" + data.Host_id}>
-        <div className="col-xs-12 col-sm-3">
+        <div className="col-xs-12 col-sm-3 col-md-2">
           <ProfImg src={data.Host_pic}/>
         </div>
         <div className="col-xs-12 col-sm-9">
-          <h3>{"About " + data.Host_name}</h3>
+          <h3 className="chef-header">{"About " + data.Host_name}</h3>
           <p>{data.Host_bio}</p>
         </div>
       </Link>
@@ -277,9 +276,8 @@ var MealInfo = React.createClass({
       displayAddress = data.Address + ", " + displayAddress;
     return (
       <div className="col-xs-12 col-sm-8 col-sm-offset-1">
-          <div className="row">
-            <p className="star-rating">{avg_stars}</p>
-          </div>
+          <h2 className="meal-title">{data.Title}</h2>
+          <p className="star-rating">{avg_stars}</p>
           <div className="row">
             {description}
           </div>
