@@ -35,7 +35,7 @@ var Carousel = React.createClass({
       </div>);
     });
     return (
-      <div className="col-xs-12 col-sm-9" id="carousel-container">
+      <div className="col-xs-12 col-sm-8 col-md-9" id="carousel-container">
       <div id="carousel" className="carousel slide text-center" data-ride="carousel" data-interval="false">
         <div className="carousel-inner" id="carousel-pics" role="listbox">
           {pictures}
@@ -213,7 +213,7 @@ var BookMeal = React.createClass({
       </div>
     if (document.documentElement.clientWidth > 768) {
       return(
-        <Sticky className="col-xs-12 col-sm-3 book-sticky" stickyClass="col-sm-3 col-sm-offset-9 book-sticky">
+        <Sticky className="col-xs-12 col-sm-4 col-md-3 book-sticky" stickyClass="col-sm-4 col-sm-offset-8 col-md-3 col-md-offset-9 book-sticky">
           {bookMeal}
         </Sticky>
       );
