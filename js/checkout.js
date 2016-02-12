@@ -125,8 +125,14 @@ var SeatsSelect = React.createClass({
         return({seats: this.props.seats});
     },
     render: function(){
+        var attendees = this.props.popup.Attendees;
+        var bookedSeats = 0;
+        for (var i in attendees){
+            bookedSeats += attendees[i].Seats;
+        }
+        var openSeats = this.props.popup.Capacity - bookedSeats;
         var options = [];
-        for(var i = 1; i < this.props.open_spots; i++) {
+        for(var i = 1; i < openSeats + 1; i++) {
             options.push(<option value={i} key={i}>{i}</option>);
         }
         return (<div className="row">
@@ -134,7 +140,7 @@ var SeatsSelect = React.createClass({
                 <p className="label-text">Seats</p>
             </div>
             <div className="col-xs-8 col-sm-6 col-md-5">
-                <select onChange={this.handleSelectChange} value={this.state.seats}>
+                <select className="border-btn" onChange={this.handleSelectChange} value={this.state.seats}>
                     {options}
                 </select>
             </div>
@@ -158,7 +164,7 @@ module.exports = React.createClass({
         }
         var api_resp = api_call('mealrequest', {
             method: 'sendRequest', 
-            mealId: this.props.mealId,
+            popupId: this.props.popup.Id,
             session: Cookies.get('session'), 
             last4: selectedCard,
             seats: this.state.seats,
@@ -202,15 +208,19 @@ module.exports = React.createClass({
                 </div>
             );
         }
+        var popup = this.props.popup;
         var follow_box = (this.props.follows_host)? "" : <input type="checkbox" onClick={this.handleFollowClicked} checked={this.state.follow_checked}>Follow this chef to receive email updates when they host future meals</input>
         return(
             <div className="text-left row">
+                <div className="text-center">
+                    <p>{moment(popup.Starts).format("dddd, MMMM Do, h:mma")}</p>
+                </div>
                 <div className="row">
                     <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">
                         {follow_box}
                     </div>
                 </div>
-                <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} open_spots={this.props.open_spots}/>
+                <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} popup={popup}/>
                 <PaymentField cards={this.props.cards} handleSelectedCardChange={this.handleSelectedCardChange}></PaymentField>
                 <div className="row error-field">
                     <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">

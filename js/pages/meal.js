@@ -7,6 +7,13 @@ var React = require('react'),
     EmailSignup = require('../email_signup.js'),
     ProfImg = require('../prof_img.js'),
     Review = require('../review.js');
+function getOpenSpots(capacity, attendees) {
+  var bookedSeats = 0;
+  for(var i in attendees) {
+    bookedSeats += attendees[i].Seats;
+  }
+  return capacity - bookedSeats;
+}
 var Carousel = React.createClass({
   componentDidMount: function() { // dynamically center each image in the carousel frame
     $(".carousel img").each(function(){
@@ -114,6 +121,7 @@ var BookMeal = React.createClass({
   },
   handlePopupSelected: function(e) {
     this.setState({selectedPopup: e.target.id});
+    this.props.handlePopupSelectedParent(e.target.id);
   },
   renderOrderWithLogin: function() {
       return <Link to={"/login?fwd=meal/" + this.props.data.Id + "?book_meal=true"}>
@@ -121,13 +129,16 @@ var BookMeal = React.createClass({
         </Link>;
   },
   renderOrderBtn: function() {
-    var data = this.props.data;
-    var meal_closes = moment(data.Rsvp_by);
+    var popup = this.getSelectedPopup();
+    var data = this.props.data,
+        meal_closes = moment(popup.Starts),
+        openSpots = getOpenSpots(popup.Capacity, popup.Attendees);
+
     var req_btn_disabled = 
       (meal_closes < moment()) || data.Status == "ATTENDING" || 
-      data.Status == "DECLINED" || data.Status == "PENDING" || data.Open_spots == 0;
+      data.Status == "DECLINED" || data.Status == "PENDING" || openSpots == 0;
     var req_btn_text;
-    if (data.Open_spots == 0)
+    if (openSpots == 0)
       req_btn_text = "Sold out"
     else if (meal_closes < moment())
       req_btn_text = 'Meal closed';
@@ -213,16 +224,12 @@ var BookMeal = React.createClass({
     var d = this.props.data.Popups;
     var handlePopupSelected = this.handlePopupSelected;
     var popups = d.map(function(popup){
-      var bookedSeats = 0;
-      for(var i in popup.Attendees) {
-        bookedSeats += popup.Attendees[i].Seats;
-      }
-      console.log(bookedSeats);
+      var openSpots = getOpenSpots(popup.Capacity, popup.Attendees);
       return(
         <li key={popup.Id}>
-          <button id={popup.Id} onClick={handlePopupSelected}>
-            <p id={popup.Id}>{moment(popup.Starts).format("dddd, MMMM Do, @h:mma")}</p>
-            <p id={popup.Id}>{(popup.Capacity - bookedSeats) + "/" + popup.Capacity + " seats available"}</p>
+          <button className="white-bg" id={popup.Id} onClick={handlePopupSelected}>
+            <p id={popup.Id}>{moment(popup.Starts).format("dddd, MMMM Do, h:mma")}</p>
+            <p id={popup.Id}>{openSpots + "/" + popup.Capacity + " seats available"}</p>
             <p id={popup.Id}>{popup.City + ", " + popup.State}</p>
             <hr id={popup.Id}/>
           </button>
@@ -242,13 +249,10 @@ var BookMeal = React.createClass({
     )
   },
   renderPopupInfo: function(){
-    var selectedPopup = this.getSelectedPopup();
-    var bookedSeats = 0;
-    for(var i in selectedPopup.Attendees){
-      bookedSeats += selectedPopup.Attendees[i].Seats;
-    }
+    var popup = this.getSelectedPopup();
+    var openSpots = getOpenSpots(popup.Capacity, popup.Attendees);
     return(
-      <p>{(selectedPopup.Capacity - bookedSeats) + " of " + selectedPopup.Capacity + " seats available"}</p>
+      <p>{openSpots + " of " + popup.Capacity + " seats available"}</p>
     );
   },
   render: function() {
@@ -368,32 +372,32 @@ var UpcomingMeals = React.createClass({
       </div>);
   }
 });
+
 module.exports = React.createClass({
+  handlePopupSelected: function(id) {
+    this.setState({selectedPopup: id});
+  },
+  getSelectedPopup: function() {
+    var selectedPopupId = this.state.selectedPopup;
+    if (this.state.selectedPopup === 0) {
+      return;
+    }
+    return this.state.data.Popups.reduce(function(previous, current){
+      if(previous.Id == selectedPopupId)
+        return previous;
+      if(current.Id == selectedPopupId)
+        return current;
+    });
+  },
   componentWillMount: function(){
     var resp = 
       api_call("meal", {
         method: "getMeal",
         session: Cookies.get("session"),
         mealId: this.props.params.id});
-    if (resp.Success)
-      this.setState({data: resp.Return});
-  },
-  componentDidMount: function() {
-    var q = this.props.location.query;
-    if (q.book_meal)
-      $('#request-modal').modal('show');
-    if (q.modal && !Cookies.get('session') && !Cookies.get('email'))
-      $('#email-modal').modal('show');
-    $("#view-other-meals").click(function() {
-      $('html,body').animate({scrollTop: $("#other-meals").offset().top},'medium');
-    });
-  },
-  getInitialState: function() {
-    return({data: this.props.data});
-  },
-  render: function() {
-    var data = this.state.data;
-    data["Popups"] = [{
+    if (resp.Success) {
+      var data = resp.Return;
+      data["Popups"] = [{
       Starts: "2016-02-26T19:00:00Z", 
       Maps_url: "",
       Capacity: 8,
@@ -439,14 +443,34 @@ module.exports = React.createClass({
       State: "MD",
       Id: 80
     }];
+    this.setState({data: data, selectedPopup: 79});
+    }
+  },
+  componentDidMount: function() {
+    var q = this.props.location.query;
+    if (q.book_meal)
+      $('#request-modal').modal('show');
+    if (q.modal && !Cookies.get('session') && !Cookies.get('email'))
+      $('#email-modal').modal('show');
+    $("#view-other-meals").click(function() {
+      $('html,body').animate({scrollTop: $("#other-meals").offset().top},'medium');
+    });
+  },
+  getInitialState: function() {
+    return({data: this.props.data, selectedPopup: 0});
+  },
+  render: function() {
+    var data = this.state.data;
+    // checkout needs popup_id
+    var selectedPopup = this.getSelectedPopup();
     var checkout = 
-      <Checkout cards={(data.Cards)? data.Cards : []} mealId={data.Id} open_spots={data.Open_spots} />;
+      <Checkout cards={(data.Cards)? data.Cards : []} popup={selectedPopup} />;
     var emailSignup = <EmailSignup />;
     return(
       <div className="row">
         <div className="row text-center">
           <Carousel data={data}></Carousel>
-          <BookMeal data={data}></BookMeal>
+          <BookMeal data={data} handlePopupSelectedParent={this.handlePopupSelected}></BookMeal>
         </div>
         <div className="row">
           <MealInfo data={data}></MealInfo>

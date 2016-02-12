@@ -731,6 +731,7 @@ textarea:focus {
   border-color: #555;
   border-width: 2px;
   border-style: solid;
+  padding: 8px;
 }
 .fileUpload {
   position: relative;

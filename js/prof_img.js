@@ -12,8 +12,6 @@ module.exports = React.createClass({
   			return;
   		var hashId = this.hash();
     	var canvas = document.getElementById(hashId);
-    	console.log(hashId);
-    	console.log(this.props.src);
     	var context = canvas.getContext('2d');
     	var img = new Image();
     	img.onload = function() {
