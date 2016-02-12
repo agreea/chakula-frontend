@@ -238,7 +238,7 @@ var BookMeal = React.createClass({
     var selectedPopup = this.getSelectedPopup();
     return(
       <div className="dropdown">
-        <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <button className="border-btn white-bg" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           {moment(selectedPopup.Starts).format("dddd, MMMM Do, @h:mma")}
           <span className="caret"></span>
         </button>
