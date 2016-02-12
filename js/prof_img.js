@@ -1,10 +1,19 @@
 var React = require('react');
 
 module.exports = React.createClass({
+	componentDidUpdate: function() {
+		this.loadImage();
+	},
   	componentDidMount: function() {
+  		this.loadImage();
+  	},
+  	loadImage: function() {
   		if (this.props.src.length === 0)
   			return;
-    	var canvas = document.getElementById(this.hash());
+  		var hashId = this.hash();
+    	var canvas = document.getElementById(hashId);
+    	console.log(hashId);
+    	console.log(this.props.src);
     	var context = canvas.getContext('2d');
     	var img = new Image();
     	img.onload = function() {
@@ -22,8 +31,6 @@ module.exports = React.createClass({
     		}
     		canvas.height = destLength,
     		canvas.width = destLength;
-    		var imgdata = {sourceX: sourceX}
-    		console.log(imgdata);
        		context.drawImage(img, sourceX, sourceY, destLength, destLength, destX, destY, destLength, destLength);
     	};
      	img.src = this.props.src;

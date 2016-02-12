@@ -24,12 +24,12 @@ var Carousel = React.createClass({
     var data = this.props.data;
     var pictures = data.Pics.map(function(pic, index) {
       if (index == 0) {
-        return (<div className="item active">
+        return (<div className="item active" key={index}>
           <img src={"https://yaychakula.com/img/" + pic.Name}></img>
           <div className="carousel-caption">{pic.Caption}</div>
         </div>);
       }
-      return (<div className="item">
+      return (<div className="item" key={index}>
         <img src={"https://yaychakula.com/img/" + pic.Name}></img>
         <div className="carousel-caption">{pic.Caption}</div>
       </div>);
@@ -109,6 +109,12 @@ var HostInfo = React.createClass({
 });
 
 var BookMeal = React.createClass({
+  getInitialState: function() {
+    return({selectedPopup: this.props.data.Popups[0].Id});
+  },
+  handlePopupSelected: function(e) {
+    this.setState({selectedPopup: e.target.id});
+  },
   renderOrderWithLogin: function() {
       return <Link to={"/login?fwd=meal/" + this.props.data.Id + "?book_meal=true"}>
           <button className="c-blue-bg book-btn">Book</button>
@@ -175,15 +181,15 @@ var BookMeal = React.createClass({
     return attendeeRows;
   },
   renderAttendees: function() {
-    var attendees = this.props.data.Attendees;
+    var attendees = this.getSelectedPopup().Attendees;
     var attNodes = attendees.map(function(attendee, i) {
+      console.log(attendee.Prof_pic_url);
       return (
         <div className="col-xs-6 col-sm-4" key={i}>
           <ProfImg 
             src={attendee.Prof_pic_url} />
           <p className="text-center">{attendee.First_name}</p>
-        </div>
-      )
+        </div>);
     });
     if (attendees.length > 0)
       return (
@@ -192,8 +198,58 @@ var BookMeal = React.createClass({
           <div className="row">
             {this.renderAttendeeRows(attNodes)}
           </div>
-        </div>
-      )
+        </div>);
+  },
+  getSelectedPopup: function() {
+    var selectedPopupId = this.state.selectedPopup;
+    return this.props.data.Popups.reduce(function(previous, current){
+      if(previous.Id == selectedPopupId)
+        return previous;
+      if(current.Id == selectedPopupId)
+        return current;
+    });
+  },
+  renderPopups: function() {
+    var d = this.props.data.Popups;
+    var handlePopupSelected = this.handlePopupSelected;
+    var popups = d.map(function(popup){
+      var bookedSeats = 0;
+      for(var i in popup.Attendees) {
+        bookedSeats += popup.Attendees[i].Seats;
+      }
+      console.log(bookedSeats);
+      return(
+        <li key={popup.Id}>
+          <button id={popup.Id} onClick={handlePopupSelected}>
+            <p id={popup.Id}>{moment(popup.Starts).format("dddd, MMMM Do, @h:mma")}</p>
+            <p id={popup.Id}>{(popup.Capacity - bookedSeats) + "/" + popup.Capacity + " seats available"}</p>
+            <p id={popup.Id}>{popup.City + ", " + popup.State}</p>
+            <hr id={popup.Id}/>
+          </button>
+        </li>);
+    });
+    var selectedPopup = this.getSelectedPopup();
+    return(
+      <div className="dropdown">
+        <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          {moment(selectedPopup.Starts).format("dddd, MMMM Do, @h:mma")}
+          <span className="caret"></span>
+        </button>
+        <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+          {popups}
+        </ul>
+      </div>
+    )
+  },
+  renderPopupInfo: function(){
+    var selectedPopup = this.getSelectedPopup();
+    var bookedSeats = 0;
+    for(var i in selectedPopup.Attendees){
+      bookedSeats += selectedPopup.Attendees[i].Seats;
+    }
+    return(
+      <p>{(selectedPopup.Capacity - bookedSeats) + " of " + selectedPopup.Capacity + " seats available"}</p>
+    );
   },
   render: function() {
     var data = this.props.data;
@@ -203,7 +259,8 @@ var BookMeal = React.createClass({
         <div className="book-meal">
           <div className="price-row">
             <h2>{"$" + Math.round(data.Price*100)/100}</h2><p>/person</p></div>
-            {this.renderBookingInfo()}
+            {this.renderPopups()}
+            {this.renderPopupInfo()}
             {this.renderOrderBtn()}
             <div className="row" style={viewOtherMealsStyle}>
               <button className="border-btn" id="view-other-meals"><b>View Other Meals</b></button>
@@ -336,6 +393,52 @@ module.exports = React.createClass({
   },
   render: function() {
     var data = this.state.data;
+    data["Popups"] = [{
+      Starts: "2016-02-26T19:00:00Z", 
+      Maps_url: "",
+      Capacity: 8,
+      Attendees: [{
+          First_name: "Kerrie",
+          Prof_pic_url: "https://yaychakula.com/img/b0c7cd9c-12e2-455b-b26c-5a502584d080.jpeg",
+          Seats: 2
+        },
+        {
+          First_name: "Michele",
+          Prof_pic_url: "https://graph.facebook.com/10100435742136159/picture?width=200&height=200",
+          Seats: 1
+        },
+        {
+          First_name: "Stephen",
+          Prof_pic_url: "https://graph.facebook.com/10100435742136159/picture?width=201&height=201",
+          Seats: 1
+        }],
+      City: "Silver Spring",
+      State: "MD",
+      Id: 79
+    },
+    {
+      Starts: "2016-03-21T19:00:00Z", 
+      Maps_url: "",
+      Capacity: 6,
+      Attendees: [{
+          First_name: "James",
+          Prof_pic_url: "https://graph.facebook.com/10205352404625637/picture?width=200&height=200",
+          Seats: 2
+        },
+        {
+          First_name: "Alfred",
+          Prof_pic_url: "https://yaychakula.com/img/user-icon.png",
+          Seats: 1
+        },
+        {
+          First_name: "Stephen",
+          Prof_pic_url: "https://graph.facebook.com/10205352404625637/picture?width=220&height=220",
+          Seats: 1
+        }],
+      City: "Bethesda",
+      State: "MD",
+      Id: 80
+    }];
     var checkout = 
       <Checkout cards={(data.Cards)? data.Cards : []} mealId={data.Id} open_spots={data.Open_spots} />;
     var emailSignup = <EmailSignup />;
