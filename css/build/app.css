@@ -904,7 +904,6 @@ Rules on multiple pages
 }
 .carousel-inner > .item > img {
   width: 150%;
-  height: 150%;
   overflow: hidden;
   text-align: center;
   position: relative;
