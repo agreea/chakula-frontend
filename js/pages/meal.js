@@ -14,10 +14,10 @@ var Carousel = React.createClass({
     $(".carousel img").each(function(){
         console.log("carousel image check:");
         console.log(this);
-        console.log("My height: " + this.height());
-        console.log("My width: " + this.width());
-        console.log("Daddy's height: " + this.height());
-        console.log("Daddy's width: " + this.width());
+        console.log("My height: " + $(this).height());
+        console.log("My width: " + $(this).width());
+        console.log("Daddy's height: " + $(this).parent().height());
+        console.log("Daddy's width: " + $(this).parent().width());
         if ($(this).height() > $(this).parent().height()){
           console.log("adjusting for height");
             var top_dif= ($(this).height()-$(this).parent().height())/2;
