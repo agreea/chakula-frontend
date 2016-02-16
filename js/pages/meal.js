@@ -46,11 +46,11 @@ var Carousel = React.createClass({
         <div className="carousel-inner" id="carousel-pics" role="listbox">
           {pictures}
         </div>
-        <a className="left carousel-control" href="#carousel" role="button" data-slide="prev">
+        <a className="left carousel-control" href="#carousel" role="button" data-slide="prev" hidden={pictures.length == 1}>
           <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
           <span className="sr-only">Previous</span>
         </a>
-        <a className="right carousel-control" href="#carousel" role="button" data-slide="next">
+        <a className="right carousel-control" href="#carousel" role="button" data-slide="next" hidden={pictures.length == 1}>
           <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
           <span className="sr-only">Next</span>
         </a>
