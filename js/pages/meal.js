@@ -9,6 +9,7 @@ var React = require('react'),
     Review = require('../review.js');
 var Carousel = React.createClass({
   componentDidMount: function() { // dynamically center each image in the carousel frame
+    console.log("component did mount");
     $(".carousel img").each(function(){
         if ($(this).height() > $(this).parent().height()){
             var top_dif= ($(this).height()-$(this).parent().height())/2;
