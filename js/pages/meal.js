@@ -284,22 +284,28 @@ var BookMeal = React.createClass({
 });
 
 var MealInfo = React.createClass({
+  renderMapsRow: function() {
+    var popup = this.props.popup;
+    if (popup.Attending)
+      return( 
+        <div className="row map-row">
+          <p><i className="fa fa-map-marker"></i>{" " + popup.Address + ", " + popup.City + ", " + popup.State}</p>
+          <a href={'https://www.google.com/maps/place/' + popup.Address + ', ' + popup.City + ' ,' + popup.State} target="_blank">
+            <img className="map-img img-responsive" src={popup.Maps_url} />
+          </a>
+        </div>);
+    else
+      return(
+        <div className="row">
+          <p><i className="fa fa-map-marker"></i>{" " + popup.City + ", " + popup.State}</p>
+          <p>Full address is revealed upon purchase</p>
+          <img className="img-responsive" src={popup.Maps_url}/>
+        </div>);
+  },
   render: function() {
     // todo: truncate descriptions
     moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
     var data = this.props.data;
-    var map_row;
-    if (data.Status != "ATTENDING")
-        map_row = 
-          <img className="img-responsive" src={data.Maps_url}/>;
-    else {
-      map_row = 
-        <div className="row map-row">
-          <a href={'https://www.google.com/maps/place/' + data.Address + ' Washington, DC'} target="_blank">
-            <img className="map-img img-responsive" src={data.Maps_url} />
-          </a>
-        </div>;
-    }
     var avg_stars = [];
     if (data.Host_reviews !== null && data.Host_reviews.length > 0) { // process avg rating
       var ratings = data.Host_reviews.map(function(review) {
@@ -343,11 +349,7 @@ var MealInfo = React.createClass({
             {description}
           </div>
           <HostInfo data={this.props.data}/>
-          <div className="row">
-            <p><i className="fa fa-map-marker"></i>{" " + displayAddress}</p>
-            {(data.Status === "ATTENDING")? "" : <p>Full address is revealed upon purchase</p>}
-          </div>
-          {map_row}
+          {this.renderMapsRow()}
           <div className="row">
             <ReviewBox data={data.Host_reviews} />
           </div>
@@ -397,53 +399,53 @@ module.exports = React.createClass({
         mealId: this.props.params.id});
     if (resp.Success) {
       var data = resp.Return;
-      data["Popups"] = [{
-      Starts: "2016-02-26T19:00:00Z", 
-      Maps_url: "",
-      Capacity: 8,
-      Attendees: [{
-          First_name: "Kerrie",
-          Prof_pic_url: "https://yaychakula.com/img/b0c7cd9c-12e2-455b-b26c-5a502584d080.jpeg",
-          Seats: 2
-        },
-        {
-          First_name: "Michele",
-          Prof_pic_url: "https://graph.facebook.com/10100435742136159/picture?width=200&height=200",
-          Seats: 1
-        },
-        {
-          First_name: "Stephen",
-          Prof_pic_url: "https://graph.facebook.com/10100435742136159/picture?width=201&height=201",
-          Seats: 1
-        }],
-      City: "Silver Spring",
-      State: "MD",
-      Id: 79
-    },
-    {
-      Starts: "2016-03-21T19:00:00Z", 
-      Maps_url: "",
-      Capacity: 6,
-      Attendees: [{
-          First_name: "James",
-          Prof_pic_url: "https://graph.facebook.com/10205352404625637/picture?width=200&height=200",
-          Seats: 2
-        },
-        {
-          First_name: "Alfred",
-          Prof_pic_url: "https://yaychakula.com/img/user-icon.png",
-          Seats: 1
-        },
-        {
-          First_name: "Stephen",
-          Prof_pic_url: "https://graph.facebook.com/10205352404625637/picture?width=220&height=220",
-          Seats: 1
-        }],
-      City: "Bethesda",
-      State: "MD",
-      Id: 80
-    }];
-    this.setState({data: data, selectedPopup: 79});
+    //   data["Popups"] = [{
+    //   Starts: "2016-02-26T19:00:00Z", 
+    //   Maps_url: "",
+    //   Capacity: 8,
+    //   Attendees: [{
+    //       First_name: "Kerrie",
+    //       Prof_pic_url: "https://yaychakula.com/img/b0c7cd9c-12e2-455b-b26c-5a502584d080.jpeg",
+    //       Seats: 2
+    //     },
+    //     {
+    //       First_name: "Michele",
+    //       Prof_pic_url: "https://graph.facebook.com/10100435742136159/picture?width=200&height=200",
+    //       Seats: 1
+    //     },
+    //     {
+    //       First_name: "Stephen",
+    //       Prof_pic_url: "https://graph.facebook.com/10100435742136159/picture?width=201&height=201",
+    //       Seats: 1
+    //     }],
+    //   City: "Silver Spring",
+    //   State: "MD",
+    //   Id: 79
+    // },
+    // {
+    //   Starts: "2016-03-21T19:00:00Z", 
+    //   Maps_url: "",
+    //   Capacity: 6,
+    //   Attendees: [{
+    //       First_name: "James",
+    //       Prof_pic_url: "https://graph.facebook.com/10205352404625637/picture?width=200&height=200",
+    //       Seats: 2
+    //     },
+    //     {
+    //       First_name: "Alfred",
+    //       Prof_pic_url: "https://yaychakula.com/img/user-icon.png",
+    //       Seats: 1
+    //     },
+    //     {
+    //       First_name: "Stephen",
+    //       Prof_pic_url: "https://graph.facebook.com/10205352404625637/picture?width=220&height=220",
+    //       Seats: 1
+    //     }],
+    //   City: "Bethesda",
+    //   State: "MD",
+    //   Id: 80
+    // }];
+    this.setState({data: data, selectedPopup: data.Popups[0].Id});
     }
   },
   componentDidMount: function() {
@@ -473,7 +475,7 @@ module.exports = React.createClass({
           <BookMeal data={data} handlePopupSelectedParent={this.handlePopupSelected}></BookMeal>
         </div>
         <div className="row">
-          <MealInfo data={data}></MealInfo>
+          <MealInfo data={data} popup={selectedPopup}></MealInfo>
         </div>
         <Modal id="request-modal"
           title="Book Meal"

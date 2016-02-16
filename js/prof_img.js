@@ -1,6 +1,10 @@
 var React = require('react');
 
 module.exports = React.createClass({
+	getInitialState: function() {
+		var id = this.hash();
+		return({id: id});
+	},
 	componentDidUpdate: function() {
 		this.loadImage();
 	},
@@ -10,8 +14,7 @@ module.exports = React.createClass({
   	loadImage: function() {
   		if (this.props.src.length === 0)
   			return;
-  		var hashId = this.hash();
-    	var canvas = document.getElementById(hashId);
+    	var canvas = document.getElementById(this.state.id);
     	var context = canvas.getContext('2d');
     	var img = new Image();
     	img.onload = function() {
@@ -34,7 +37,8 @@ module.exports = React.createClass({
      	img.src = this.props.src;
   	},
   	hash: function() {
-  		var s = this.props.src;
+  		var randInt = Math.round(Math.random() * 100000);
+  		var s = this.props.src + randInt;
 	  	var hash = 0, i, chr, len;
 		if (s.length === 0) return hash;
 		for (i = 0, len = s.length; i < len; i++) {
@@ -48,7 +52,7 @@ module.exports = React.createClass({
 		return ((this.props.src.length > 0)?
 			<canvas 
 				className="img-circle img-responsive img-responsive-center prof-img" 
-				id={this.hash()} height="200" width="200" style={this.props.style}/> :
+				id={this.state.id} height="200" width="200" style={this.props.style}/> :
 			<img className="img-circle img-responsive img-responsive-center prof-img"
 				src="/img/user-icon.svg" style={this.props.style}/>
 		);

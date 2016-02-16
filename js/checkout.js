@@ -162,8 +162,9 @@ module.exports = React.createClass({
             console.log('Card was invalid: ' + selectedCard);
             return;
         }
+        console.log(this.props.popup);
         var api_resp = api_call('mealrequest', {
-            method: 'sendRequest', 
+            method: 'BookPopup', 
             popupId: this.props.popup.Id,
             session: Cookies.get('session'), 
             last4: selectedCard,
