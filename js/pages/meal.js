@@ -15,10 +15,12 @@ var Carousel = React.createClass({
         console.log("carousel image check:");
         console.log(this);
         if ($(this).height() > $(this).parent().height()){
+          console.log("adjusting for height");
             var top_dif= ($(this).height()-$(this).parent().height())/2;
             $(this).css("top",-top_dif);
         }
         if ($(this).width() > $(this).parent().width()){
+            console.log("adjusting for width");
             var left_dif= ($(this).width()-$(this).parent().width())/2;
             $(this).css("left",-left_dif);
         }
