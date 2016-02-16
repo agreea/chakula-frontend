@@ -43,22 +43,27 @@ var Carousel = React.createClass({
         <div className="carousel-caption">{pic.Caption}</div>
       </div>);
     });
+    var chevron_r, chevron_l;
+    if (pictures.length > 1) {
+      chevron_l = 
+        <a className="left carousel-control" href="#carousel" role="button" data-slide="prev">
+          <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span className="sr-only">Previous</span>
+        </a>,
+      chevron_r =
+        <a className="right carousel-control" href="#carousel" role="button" data-slide="next">
+          <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span className="sr-only">Next</span>
+        </a>;
+    }
     return (
       <div className="col-xs-12 col-sm-8 col-md-9" id="carousel-container">
         <div id="carousel" className="carousel slide text-center" data-ride="carousel" data-interval="false">
           <div className="carousel-inner" id="carousel-pics" role="listbox">
             {pictures}
           </div>
-          {if (pictures.length > 1)
-            <a className="left carousel-control" href="#carousel" role="button" data-slide="prev">
-              <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-              <span className="sr-only">Previous</span>
-            </a>}
-          {if (pictures.length > 1)
-            <a className="right carousel-control" href="#carousel" role="button" data-slide="next">
-              <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              <span className="sr-only">Next</span>
-            </a>}
+          {chevron_l}
+          {chevron_r}
         </div>
       </div>
     );
