@@ -10,7 +10,10 @@ var React = require('react'),
 var Carousel = React.createClass({
   componentDidMount: function() { // dynamically center each image in the carousel frame
     console.log("component did mount");
+
     $(".carousel img").each(function(){
+        console.log("carousel image check:");
+        console.log(this);
         if ($(this).height() > $(this).parent().height()){
             var top_dif= ($(this).height()-$(this).parent().height())/2;
             $(this).css("top",-top_dif);
