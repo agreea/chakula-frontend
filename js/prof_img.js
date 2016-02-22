@@ -52,9 +52,9 @@ module.exports = React.createClass({
 		return ((this.props.src.length > 0)?
 			<canvas 
 				className="img-circle img-responsive img-responsive-center prof-img" 
-				id={this.state.id} height="200" width="200" style={this.props.style}/> :
+				id={this.state.id} height="200" width="200" style={this.props.style} title={this.props.title}/> :
 			<img className="img-circle img-responsive img-responsive-center prof-img"
-				src="/img/user-icon.svg" style={this.props.style}/>
+				src="/img/user-icon.svg" style={this.props.style} title={this.props.title}/>
 		);
 	}
 })

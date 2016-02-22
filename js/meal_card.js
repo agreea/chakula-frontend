@@ -5,6 +5,14 @@ var React = require('react'),
 // getMeal
 // getUpcoming meal
 module.exports = React.createClass({
+	getOpenSeats: function(popup) {
+		var capacity = popup.Capacity;
+		var takenSeats = 0;
+		for (var i in popup.Attendees){
+			takenSeats += popup.Attendees.Seats;
+		}
+		return capacity - takenSeats;
+	},
 	render: function() {
 		var d = this.props.data;
 		console.log(d);
@@ -16,7 +24,8 @@ module.exports = React.createClass({
 			};
 		var price = Math.round(d.Price*100)/100;
 		var alert;
-		switch(d.Open_spots){
+		var popup = d.Popups[0];
+		switch(this.getOpenSeats(popup)){
 			case 0:
 				alert = <span className="meal-card-alert text-right">Sold out</span>;
 			break;
@@ -39,8 +48,8 @@ module.exports = React.createClass({
 			        </div>
 			        <div className="card-action">
 			        	<div className="row">
-			               	<p className="col-xs-6">{moment(d.Starts).format("hh:mm a ddd MMM Do")}</p>
-			              	<p className="col-xs-6 text-right">{d.City + ", " + d.State}</p>
+			               	<p className="col-xs-6">{moment(popup.Starts).format("hh:mm a ddd MMM Do")}</p>
+			              	<p className="col-xs-6 text-right">{popup.City + ", " + popup.State}</p>
 			            </div>
 			        </div>
 			    </Link>

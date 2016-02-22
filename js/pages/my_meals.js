@@ -1,9 +1,334 @@
 var React = require('react');
 var Link = require('react-router').Link,
     Modal = require('../modal.js');
+
+var DatesRow = React.createClass({
+  getInitialState: function() {
+    var d = this.props.data;
+    // HAD TO COMMENT THIS SHIT FOR THE MOTHER FUCKUHZ Who DIDN'T GET IT THE FIRST TIME:
+    // We clip this shit so that when the component mounts, you guys get that sweet sweet
+    // FORMATTED GOSH DANG DATE!!!!!!! !!! !!! !1!! !!! !!
+    ;
+    return {Starts: "", Rsvp_by: ""};
+  },
+  initDatepicker: function(picker_id, default_string) {
+    var defaultDate = (default_string == "")? moment() : moment(default_string);
+    $(picker_id).datetimepicker({sideBySide: true, defaultDate: defaultDate})
+      .on('dp.change', this.setState({saveDisabled: false}));
+  },
+  componentDidMount: function() {
+    this.initDatepicker('#Starts', this.state.Starts);
+    this.initDatepicker('#Rsvp_by', this.state.Rsvp_by);
+  },
+  handleChange: function(e) {
+    var key = e.target.id,
+        val = e.target.value;
+    var obj = {};
+    obj[key] = val;
+    this.setState(obj);
+    this.props.handleChange(obj);
+  },
+  render: function() {
+    var s = this.state;
+    return (
+      <div>
+        <div className="row form-row">
+          <div className="col-xs-5 col-sm-3 form-label">
+            <p className="text-right">Meal Time</p>
+          </div>
+          <div className="col-xs-7">
+            <input className="text-field" type="text" size="20" id={"Starts" + this.props.data.Id}
+              placeholder="When do you break bread?" 
+              value={s.Starts} 
+              onChange={this.handleChange}/>
+          </div>
+        </div>
+        <div className="row form-row">
+          <div className="col-xs-5 col-sm-3 form-label">
+            <p className="text-right">RSVP By</p>
+          </div>
+          <div className="col-xs-7">
+            <input className="text-field" type="text" size="40" id={"Rsvp_by" + this.props.data.Id}
+              placeholder="Rsvp by?" 
+              value={s.Rsvp_by} 
+              onChange={this.handleChange}/>
+          </div>
+        </div>
+      </div>
+    );
+  }
+});
+
+var SeatsRow = React.createClass({
+  getInitialState: function() {
+    return {
+      Capacity: 1
+    };
+  },
+  handleChange: function(e) {
+    var key = e.target.id,
+        val = e.target.value;
+    var obj = {};
+    obj[key] = val;
+    this.setState(obj);
+    this.props.handleChange(obj);
+  },
+  render: function() {
+    var s = this.state;
+    var possSeats = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+    return (
+      <div>
+        <div className="row form-row">
+          <div className="col-xs-5 col-sm-3 form-label">
+            <p className="text-right">Guest Seats</p>
+          </div>
+          <div className="col-xs-2 col-sm-1">
+            <select value={s.Capacity} className="border-btn" id="Capacity" onChange={this.handleChange}>
+              {possSeats.map(function(seat_count, i) {
+                  return <option value={seat_count} key={i}>{seat_count}</option>;})
+              }
+            </select>
+          </div>
+        </div>
+        <div className="row form-row">
+          <div className="col-xs-5 col-sm-3 form-label">
+            <p className="text-right">Max pay</p>
+          </div>
+          <div className="col-xs-7 col-sm-9">
+            <p id="payout-val">{"$" + s.Capacity * this.props.price}</p>
+          </div>
+        </div>
+      </div>);
+ }
+});
+
+var AddressRow = React.createClass({
+  handleChange: function(e) {
+    var key = e.target.id,
+        val = e.target.value;
+    var obj = {};
+    obj[key] = val;
+    this.setState(obj);
+    this.props.handleChange(obj);
+  },
+  getInitialState: function() {
+    var d = this.props.data;
+    return ({
+      Address: d.Address,
+      City: d.City,
+      State: d.State
+    });
+  },
+  render: function() {
+    var s = this.state;
+    var states = ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"];
+    var states_select_options = states.map(function(state) { return <option value={state}>{state}</option>;});
+    return (
+      <div>
+        <div className="row form-row">
+          <div className="col-xs-5 col-sm-3 form-label">
+            <p className="text-right">Street Address</p>
+          </div>
+          <div className="col-xs-7">
+            <div className="text-field">
+              <input className="text-field" id="Address" type="text" 
+                value={s.Address} 
+                placeholder="3700 O St"
+                onChange={this.handleChange}/>
+            </div>
+          </div>
+        </div>
+        <div className="row form-row">
+          <div className="col-xs-5 col-sm-3 form-label">
+            <p className="text-right">City</p>
+          </div>
+          <div className="col-xs-7">
+            <div className="text-field">
+              <input className="text-field" id="City" type="text" 
+                value={s.City} 
+                placeholder="Washington"
+                onChange={this.handleChange}/>
+            </div>
+          </div>
+        </div>
+        <div className="row form-row">
+          <div className="col-xs-5 col-sm-3 form-label">
+            <p className="text-right">State</p>
+          </div>
+          <div className="col-xs-7">
+            <select className="state-select border-btn" value={s.State} id="State" onChange={this.handleChange}>
+              {states_select_options}
+            </select>
+          </div>
+        </div>
+      </div>
+    );
+  }
+});
+
+var AddPopupRow = React.createClass({
+  getInitialState: funciton() {
+    return {errors: []};
+  },
+  handleChange: function(obj) {
+    this.setState(obj);
+  },
+  createPopup: function() {
+    // check start date against current
+    // check rsvp by date against current
+    // check that street city, and state are all valid
+    // pass your state to the server
+    var api_data = this.state,
+        starts = $('#Starts' + this.props.Id).data("DateTimePicker").date(),
+        rsvpBy = $('#Rsvp_by' + this.props.Id).data("DateTimePicker").date();
+    api_data["method"] = "createPopup",
+    api_data["Session"] = Cookies.get("session"),
+    api_data["MealId"] = this.props.data.Id,
+    api_data["Starts"] = starts.unix(),
+    api_data["Rsvp_by"] = rsvpBy.unix();
+    var api_resp = api_call("meal", api_data);
+    if (api_resp.Success){
+      // show success
+      this.setState({success: true});
+    } else {
+      // show error
+      this.setState({errors: [api_resp.Error]});
+    }
+  },
+  renderErrors: function() {
+    var errors = this.state.errors;
+    var errorItems = errors.map(function(error, i){
+      return <li key={i}>error</li>;
+    });
+    return (
+      <ul className="error-field">
+        {errorItems}
+      </ul>);
+  },
+  render: function() {
+    var address = {Address: "", City: "", State: ""};
+    var d = this.props.data;
+    var modalBody =
+      <div className="row">
+        <DatesRow handleChange={this.handleChange} data={d}/>
+        <SeatsRow handleChange={this.handleChange} price={d.Price}/>
+        <AddressRow handleChange={this.handleChange} data={address}/>
+        {this.renderErrors()}
+        <div className="text-center">
+          <button className="c-blue-bg" onClick={this.createPopup}>Submit</button>
+        </div>
+      </div>;
+    return(
+      <div>
+        <button className="transparent-bg"             
+          data-toggle="modal" 
+          data-target={"#addPopup" + d.Id}><i className="fa fa-plus-circle"></i> Add Popup</button>
+        <Modal 
+          title={"New Popup for " + d.Title}
+          body={modalBody}
+          id={"addPopup" + d.Id}/>
+      </div>
+      );
+  }
+});
+
+var PopupRow = React.createClass({
+  getInitialState: function() {
+    return {moreClicked: false};
+  },
+  handleMoreClicked: function() { // simple switch
+    var moreClicked = this.state.moreClicked;
+    this.setState({moreClicked: !moreClicked});
+  },
+  renderAttendeeRows: function(attNodes) {
+    var attendeeRows = [], // two dimensional array. Each row contains 3 pic items
+        thisRow = []; // second dimension of the array. Once a row stores 3 pics, you add it to the pic rows
+    for (var i in attNodes) {
+      // add this row to pic rows if it's full
+      if (thisRow.length === 4) {
+        var fullRow = thisRow;
+        attendeeRows.push(<div className="row">{fullRow}</div>);
+        thisRow = []; // empty the array
+      }
+      thisRow.push(attNodes[i]);
+      if (i == (attNodes.length - 1)) { // if this is the last pic, add the current row once you've added the pic
+        attendeeRows.push(<div className="row">{thisRow}</div>);
+      }
+    }
+    return attendeeRows;
+  },
+  renderAttendees: function() {
+    var attendees = this.props.data.Attendees;
+    var attNodes = attendees.map(function(attendee, i) {
+      console.log(attendee.Prof_pic_url);
+      return (
+        <div className="col-xs-6 col-sm-4" key={i}>
+          <ProfImg 
+            src={attendee.Prof_pic_url} title={attendee.First_name} />
+        </div>);
+    });
+    if (attendees.length > 0)
+      return (
+        <div>
+          <h4 className="text-center">Attendees</h4>
+          <div className="row">
+            {this.renderAttendeeRows(attNodes)}
+          </div>
+        </div>);
+  },
+  render: function() {
+    var d = this.props.data;
+    var starts = moment(d.Starts),
+        rsvpBy = moment(d.Rsvp_by);
+    var details;
+    if (this.state.moreClicked) {
+      details = 
+        <div>
+          <p><i className="fa fa-clock-o"></i>{" Rsvp by " + rsvpBy.format("h:mm a ddd, MMM Do")}</p>
+          <p><i className="fa fa-user"></i>{" " + d.Capacity + " seats"}</p>        
+          {this.renderAttendees()}
+          <p><i className="fa fa-map-marker"></i> {" " + d.Address + ", " + d.City + ", " + d.State}</p>
+        </div>
+
+    }
+    return(
+      <div className="row">
+        <p className="inline-block">{starts.format("h:mm a ddd, MMM Do")}</p>
+        <button className="transparent-bg inline-block" onClick={this.handleMoreClicked}>
+          <i className={(this.state.moreClicked)? "fa fa-chevron-up" :  "fa fa-chevron-down"}></i>
+        </button>
+        {details}
+      </div>
+    );
+  }
+});
+
+var PopupsList = React.createClass({
+  render: function() {
+    var d = this.props.data;
+    if(d.Popups.length > 0) {
+      var popups = d.Popups.map(function(popup, key) {
+        return <PopupRow data={popup} key={key} />;
+      });
+      return (
+        <div className="row">
+          <div className="col-xs-9 col-xs-offset-3">
+            <h5>Popups</h5>
+            {popups}
+            <AddPopupRow data={d} />
+          </div>
+        </div>
+      )
+    }
+  },
+});
+
 var MealListItem = React.createClass({
   getInitialState: function() {
       return {delete_error: ""};
+  },
+  handleChange: function(obj) {
+    this.setState(obj);
   },
   deleteMeal: function() {
     var api_resp = api_call('meal', {
@@ -20,17 +345,6 @@ var MealListItem = React.createClass({
     // launch the modal
     // upon confirm, delete the meal
   },
-  // renderPopups: function() { // renders a single popup screen
-  //   var d = this.props.data;
-  //   var starts_s = moment(d.Starts).format("dddd, MMMM Do h:mm a");
-  //   return(
-  //     <div className="row">
-  //       <p><i className="fa fa-calendar"></i> {starts_s}</p>
-  //       <p><i className="fa fa-map-marker"></i> {d.Address + ", " + d.City + ", " + d.State}</p>
-  //       <p><i className="fa fa-user"></i> {d.Open_spots + " spots available"}</p>
-  //     </div>
-  //   );
-  // },
   renderModal: function() {
     var d = this.props.data;
     var modalContent = 
@@ -48,7 +362,7 @@ var MealListItem = React.createClass({
       </div>;
     return (
         <Modal 
-          id={"myModal" + this.props.key}
+          id={"deleteMeal" + this.props.key}
           title="Delete Meal?"
           body={modalContent} />
       );
@@ -58,26 +372,24 @@ var MealListItem = React.createClass({
     var pic_src = (d.Pics.length != 0)? 
       "https://yaychakula.com/img/" + d.Pics[0].Name :
       "https://yaychakula.com/img/camera.svg";  
-    var edit_link = "/create_meal/" + d.Id;
-    var title_s = d.Title;
-    var title;
+    var edit_link = "/create_meal/" + d.Id,
+        title_s = d.Title,
+        title;
     var starts_s = moment(d.Starts).format("h:mm a dddd, MMMM Do YYYY");
-    if (!title_s) {
+    if (!title_s)
       title = <p>Untitled</p>;
-    } else if (moment(d.Starts) < moment()) { // show the meal is past
+    else if (moment(d.Starts) < moment()) // show the meal is past
       title = <p>{d.Title + " [PAST]"}</p>;
-    } else if (d.Published) {
+    else if (d.Published)
       title = <p><i className="fa fa-circle live"></i>{d.Title}</p>;
-    } else {
+    else
       title = <p>{d.Title}</p>
-    }
-
     return (
       <div className="meal-list-item">
         <div className="row">
           <button className="btn-delete-meal text-center" 
             data-toggle="modal" 
-            data-target={"#myModal" + this.props.key}>
+            data-target={"#deleteMeal" + this.props.key}>
               <span className=" glyphicon glyphicon-trash delete-icon" aria-hidden="true"></span>
           </button>
           <div className="col-xs-3 text-center">
@@ -91,13 +403,13 @@ var MealListItem = React.createClass({
                 {title}
               </Link>
             </h4>
-            <p><i className="fa fa-clock-o"></i>{" " + starts_s}</p>
             <div className="row">
-              <p className="col-xs-3 cost"><span className="glyphicon glyphicon-usd"></span>{" " + Math.round(d.Price*100)/100}</p>
-              <p className="col-xs-8"> <i className="fa fa-users"></i>{ " " + d.Capacity + " seats"}</p>
+              <p className="cost"><span className="glyphicon glyphicon-usd"></span>{" " + Math.round(d.Price*100)/100}</p>
+              <p>{d.Description.substring(0, 100) + "..."}</p>
             </div>
           </div>
         </div>
+        <PopupsList data={d} />
         <hr className="list-hr"/>
         {this.renderModal()}
       </div>

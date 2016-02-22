@@ -350,7 +350,7 @@ var AddressRow = React.createClass({
       </div>
     );
   }
-})
+});
 module.exports = React.createClass({
   mixins: [require('react-router').History],
   getInitialState: function() {
@@ -494,9 +494,6 @@ module.exports = React.createClass({
   attemptPublish: function() {
     if (!this.validateForPublish())
       return;
-    var starts = $('#Starts').data("DateTimePicker").date(),
-        rsvpBy = $('#Rsvp_by').data("DateTimePicker").date(),
-        s = this.state;
     var save_result = this.attemptSave("publish"); // flag true for "publish"
     if (save_result.Success)
       this.publishMeal(save_result.Return)

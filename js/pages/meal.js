@@ -135,16 +135,17 @@ var BookMeal = React.createClass({
         openSpots = getOpenSpots(popup.Capacity, popup.Attendees);
 
     var req_btn_disabled = 
-      (meal_closes < moment()) || data.Status == "ATTENDING" || 
-      data.Status == "DECLINED" || data.Status == "PENDING" || openSpots == 0;
+      (meal_closes < moment()) || popup.Attending || openSpots == 0;
     var req_btn_text;
     if (openSpots == 0)
       req_btn_text = "Sold out"
     else if (meal_closes < moment())
       req_btn_text = 'Meal closed';
+    else if (popup.Attending)
+      req_btn_text = "Attending"
     else
       req_btn_text = "Book";
-
+    // TODO: show booked even if you render order w login
     if(!Cookies.get('session') && !req_btn_disabled) {
       return this.renderOrderWithLogin();
     }
