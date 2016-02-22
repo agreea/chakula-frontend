@@ -8,8 +8,7 @@ var DatesRow = React.createClass({
     // HAD TO COMMENT THIS SHIT FOR THE MOTHER FUCKUHZ Who DIDN'T GET IT THE FIRST TIME:
     // We clip this shit so that when the component mounts, you guys get that sweet sweet
     // FORMATTED GOSH DANG DATE!!!!!!! !!! !!! !1!! !!! !!
-    ;
-    return {Starts: "", Rsvp_by: ""};
+    return {Starts: d.Starts, Rsvp_by: d.Rsvp_by};
   },
   initDatepicker: function(picker_id, default_string) {
     var defaultDate = (default_string == "")? moment() : moment(default_string);
@@ -21,9 +20,10 @@ var DatesRow = React.createClass({
     this.initDatepicker('#Rsvp_by', this.state.Rsvp_by);
   },
   handleChange: function(e) {
+    console.log(e);
     var key = e.target.id,
-        val = e.target.value;
-    var obj = {};
+        val = e.target.value,
+        obj = {};
     obj[key] = val;
     this.setState(obj);
     this.props.handleChange(obj);
@@ -37,9 +37,9 @@ var DatesRow = React.createClass({
             <p className="text-right">Meal Time</p>
           </div>
           <div className="col-xs-7">
-            <input className="text-field" type="text" size="20" id={"Starts" + this.props.data.Id}
+            <input className="text-field" type="text" size="20" id={"Starts"}
               placeholder="When do you break bread?" 
-              value={s.Starts} 
+              value={s.Starts}
               onChange={this.handleChange}/>
           </div>
         </div>
@@ -48,7 +48,7 @@ var DatesRow = React.createClass({
             <p className="text-right">RSVP By</p>
           </div>
           <div className="col-xs-7">
-            <input className="text-field" type="text" size="40" id={"Rsvp_by" + this.props.data.Id}
+            <input className="text-field" type="text" size="40" id={"Rsvp_by"}
               placeholder="Rsvp by?" 
               value={s.Rsvp_by} 
               onChange={this.handleChange}/>
@@ -62,20 +62,20 @@ var DatesRow = React.createClass({
 var SeatsRow = React.createClass({
   getInitialState: function() {
     return {
-      Capacity: 1
+      Capacity: 2
     };
   },
   handleChange: function(e) {
     var key = e.target.id,
-        val = e.target.value;
-    var obj = {};
+        val = e.target.value,
+        obj = {};
     obj[key] = val;
     this.setState(obj);
     this.props.handleChange(obj);
   },
   render: function() {
     var s = this.state;
-    var possSeats = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+    var possSeats = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
     return (
       <div>
         <div className="row form-row">
@@ -105,8 +105,8 @@ var SeatsRow = React.createClass({
 var AddressRow = React.createClass({
   handleChange: function(e) {
     var key = e.target.id,
-        val = e.target.value;
-    var obj = {};
+        val = e.target.value,
+        obj = {};
     obj[key] = val;
     this.setState(obj);
     this.props.handleChange(obj);
@@ -167,20 +167,27 @@ var AddressRow = React.createClass({
 });
 
 var AddPopupRow = React.createClass({
-  getInitialState: funciton() {
-    return {errors: []};
+  getInitialState: function() {
+    return {errors: [], success: false, Capacity: 2};
   },
   handleChange: function(obj) {
+    console.log(obj);
     this.setState(obj);
   },
   createPopup: function() {
-    // check start date against current
-    // check rsvp by date against current
-    // check that street city, and state are all valid
-    // pass your state to the server
+    var modalId = "#addPopup" + this.props.data.Id
     var api_data = this.state,
-        starts = $('#Starts' + this.props.Id).data("DateTimePicker").date(),
-        rsvpBy = $('#Rsvp_by' + this.props.Id).data("DateTimePicker").date();
+        starts = $(modalId).find('#Starts').data("DateTimePicker").date(),
+        rsvpBy = $(modalId).find('#Rsvp_by').data("DateTimePicker").date(),
+        errors = [];
+    if (rsvpBy > starts) errors.push("Rsvp by time cannot be after meal starts.");
+    if (rsvpBy < moment()) errors.push("Rsvp by time cannot be in the past.");
+    if (starts < moment()) errors.push("Start time cannot be in the past.");
+    if (s.Address.length < 1) errors.push("Address is required.");
+    if (s.City.length < 1) errors.push("City is required.");
+    this.setState({errors: errors});
+    if (errors.length > 0)
+      return;
     api_data["method"] = "createPopup",
     api_data["Session"] = Cookies.get("session"),
     api_data["MealId"] = this.props.data.Id,
@@ -190,6 +197,7 @@ var AddPopupRow = React.createClass({
     if (api_resp.Success){
       // show success
       this.setState({success: true});
+      this.props.handleAddPopupSuccess(api_resp.Return);
     } else {
       // show error
       this.setState({errors: [api_resp.Error]});
@@ -198,7 +206,7 @@ var AddPopupRow = React.createClass({
   renderErrors: function() {
     var errors = this.state.errors;
     var errorItems = errors.map(function(error, i){
-      return <li key={i}>error</li>;
+      return <li key={i}>{error}</li>;
     });
     return (
       <ul className="error-field">
@@ -208,10 +216,13 @@ var AddPopupRow = React.createClass({
   render: function() {
     var address = {Address: "", City: "", State: ""};
     var d = this.props.data;
-    var modalBody =
+    var modalBody = (this.state.success)?
+      <div className="row text-center">
+        <h2>Popup Successfully added!</h2>
+      </div> :
       <div className="row">
         <DatesRow handleChange={this.handleChange} data={d}/>
-        <SeatsRow handleChange={this.handleChange} price={d.Price}/>
+        <SeatsRow handleChange={this.handleChange} price={d.Price} />
         <AddressRow handleChange={this.handleChange} data={address}/>
         {this.renderErrors()}
         <div className="text-center">
@@ -227,8 +238,7 @@ var AddPopupRow = React.createClass({
           title={"New Popup for " + d.Title}
           body={modalBody}
           id={"addPopup" + d.Id}/>
-      </div>
-      );
+      </div>);
   }
 });
 
@@ -289,7 +299,6 @@ var PopupRow = React.createClass({
           {this.renderAttendees()}
           <p><i className="fa fa-map-marker"></i> {" " + d.Address + ", " + d.City + ", " + d.State}</p>
         </div>
-
     }
     return(
       <div className="row">
@@ -304,18 +313,28 @@ var PopupRow = React.createClass({
 });
 
 var PopupsList = React.createClass({
+  getInitialState: function(){
+    var popups = this.props.data.Popups;
+    return {popups: popups}
+  },
+  handleAddPopupSuccess: function(popup) {
+    var popups = this.state.popups;
+    popups.push(popup);
+    this.setState({popups: popups});
+  },
   render: function() {
-    var d = this.props.data;
-    if(d.Popups.length > 0) {
-      var popups = d.Popups.map(function(popup, key) {
+    var d = this.props.data,
+        popups = this.state.popups;
+    if(popups.length > 0) {
+      popupsNodes = d.Popups.map(function(popup, key) {
         return <PopupRow data={popup} key={key} />;
       });
       return (
         <div className="row">
           <div className="col-xs-9 col-xs-offset-3">
             <h5>Popups</h5>
-            {popups}
-            <AddPopupRow data={d} />
+            {popupsNodes}
+            <AddPopupRow data={d} handleAddPopupSuccess={this.handleAddPopupSuccess}/>
           </div>
         </div>
       )
@@ -329,6 +348,11 @@ var MealListItem = React.createClass({
   },
   handleChange: function(obj) {
     this.setState(obj);
+  },
+  publishMeal: function() {
+    // api_call to publish meal
+    // do some other shit
+    // some other other other shit
   },
   deleteMeal: function() {
     var api_resp = api_call('meal', {
@@ -409,7 +433,10 @@ var MealListItem = React.createClass({
             </div>
           </div>
         </div>
-        <PopupsList data={d} />
+        {(d.Published)? 
+          <PopupsList data={d} handleAddPopupSuccess={this.handleAddPopupSuccess}/> :
+          <button className="c-blue-bg" onClick={this.publishMeal}>Publish</button
+        }
         <hr className="list-hr"/>
         {this.renderModal()}
       </div>
