@@ -435,7 +435,7 @@ var MealListItem = React.createClass({
         </div>
         {(d.Published)? 
           <PopupsList data={d} handleAddPopupSuccess={this.handleAddPopupSuccess}/> :
-          <button className="c-blue-bg" onClick={this.publishMeal}>Publish</button
+          <button className="c-blue-bg" onClick={this.publishMeal}>Publish</button>
         }
         <hr className="list-hr"/>
         {this.renderModal()}
