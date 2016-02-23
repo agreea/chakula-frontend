@@ -358,7 +358,7 @@ var MealListItem = React.createClass({
     // check if the time is proper
     var d = this.props.data;
     var starts = moment(d.Starts),
-        rsvp_by = moment(d.Rsvp_by),
+        rsvpBy = moment(d.Rsvp_by),
         errors = [];
     if (rsvpBy > starts) errors.push("Rsvp by time cannot be after meal starts.");
     if (rsvpBy < moment()) errors.push("Rsvp by time cannot be in the past.");
