@@ -183,8 +183,8 @@ var AddPopupRow = React.createClass({
     if (rsvpBy > starts) errors.push("Rsvp by time cannot be after meal starts.");
     if (rsvpBy < moment()) errors.push("Rsvp by time cannot be in the past.");
     if (starts < moment()) errors.push("Start time cannot be in the past.");
-    if (s.Address.length < 1) errors.push("Address is required.");
-    if (s.City.length < 1) errors.push("City is required.");
+    if (api_data.Address.length < 1) errors.push("Address is required.");
+    if (api_data.City.length < 1) errors.push("City is required.");
     this.setState({errors: errors});
     if (errors.length > 0)
       return;
@@ -344,12 +344,42 @@ var PopupsList = React.createClass({
 
 var MealListItem = React.createClass({
   getInitialState: function() {
-      return {delete_error: ""};
+      return {
+        delete_error: "", 
+        published: this.props.data.Published,
+        errors: []
+      };
   },
   handleChange: function(obj) {
     this.setState(obj);
   },
   publishMeal: function() {
+    // check if there are pictures
+    // check if the time is proper
+    var d = this.props.data;
+    var starts = moment(d.Starts),
+        rsvp_by = moment(d.Rsvp_by),
+        errors = [];
+    if (rsvpBy > starts) errors.push("Rsvp by time cannot be after meal starts.");
+    if (rsvpBy < moment()) errors.push("Rsvp by time cannot be in the past.");
+    if (starts < moment()) errors.push("Start time cannot be in the past.");
+    if (d.Description.length < 1) errors.push("Add a description");
+    if (d.Title.length < 1) errors.push("Add a title");
+    if (d.Description.length < 1) errors.push("Please add a description");
+    if (d.Pics.length < 1) errors.push("You must add pictures before you can publish your meal");
+    this.setState({errors: errors});
+    if (errors.length > 0) 
+      return;
+    var api_resp = api_call({
+      method: "publishMeal", 
+      mealId: this.props.data.Id, 
+      session: Cookies.get("session")
+    });
+    if (api_resp.Success) {
+      this.setState({published: true});
+    } else {
+      this.setState({})
+    }
     // api_call to publish meal
     // do some other shit
     // some other other other shit
@@ -407,7 +437,10 @@ var MealListItem = React.createClass({
     else if (d.Published)
       title = <p><i className="fa fa-circle live"></i>{d.Title}</p>;
     else
-      title = <p>{d.Title}</p>
+      title = <p>{d.Title}</p>;
+    var errors = this.state.errors.map(function(error, i) {
+      return <li key={i}>{error}</li>
+    });
     return (
       <div className="meal-list-item">
         <div className="row">
@@ -433,6 +466,9 @@ var MealListItem = React.createClass({
             </div>
           </div>
         </div>
+        <ul className="error-field">
+          {errors}
+        </ul>
         {(d.Published)? 
           <PopupsList data={d} handleAddPopupSuccess={this.handleAddPopupSuccess}/> :
           <button className="c-blue-bg" onClick={this.publishMeal}>Publish</button>
