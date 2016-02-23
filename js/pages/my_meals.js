@@ -325,7 +325,6 @@ var PopupsList = React.createClass({
   render: function() {
     var d = this.props.data,
         popups = this.state.popups;
-    if(popups.length > 0) {
       popupsNodes = d.Popups.map(function(popup, key) {
         return <PopupRow data={popup} key={key} />;
       });
@@ -338,7 +337,6 @@ var PopupsList = React.createClass({
           </div>
         </div>
       )
-    }
   },
 });
 
