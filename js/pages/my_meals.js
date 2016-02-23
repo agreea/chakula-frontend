@@ -346,7 +346,7 @@ var MealListItem = React.createClass({
   getInitialState: function() {
       return {
         delete_error: "", 
-        published: this.props.data.Published,
+        Published: this.props.data.Published,
         errors: []
       };
   },
@@ -376,9 +376,9 @@ var MealListItem = React.createClass({
       session: Cookies.get("session")
     });
     if (api_resp.Success) {
-      this.setState({published: true});
+      this.setState({Published: true});
     } else {
-      this.setState({})
+      this.setState({errors: [api_resp.Error]})
     }
     // api_call to publish meal
     // do some other shit
