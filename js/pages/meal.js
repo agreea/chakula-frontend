@@ -17,14 +17,13 @@ function getOpenSpots(capacity, attendees) {
 var Carousel = React.createClass({
   componentDidMount: function() { // dynamically center each image in the carousel frame
     console.log("component did mount");
-
     $(".carousel img").each(function(){
-        console.log("carousel image check:");
-        console.log(this);
-        console.log("My height: " + $(this).height());
-        console.log("My width: " + $(this).width());
-        console.log("Daddy's height: " + $(this).parent().height());
-        console.log("Daddy's width: " + $(this).parent().width());
+        // console.log("carousel image check:");
+        // console.log(this);
+        // console.log("My height: " + $(this).height());
+        // console.log("My width: " + $(this).width());
+        // console.log("Daddy's height: " + $(this).parent().height());
+        // console.log("Daddy's width: " + $(this).parent().width());
         if ($(this).height() > $(this).parent().height()){
           console.log("adjusting for height");
             var top_dif= ($(this).height()-$(this).parent().height())/2;
@@ -240,7 +239,6 @@ var BookMeal = React.createClass({
         <li key={popup.Id}>
           <button className="white-bg" id={popup.Id} onClick={handlePopupSelected}>
             <p id={popup.Id}>{moment(popup.Starts).format("dddd, MMMM Do, h:mma")}</p>
-            <p id={popup.Id}>{openSpots + "/" + popup.Capacity + " seats available"}</p>
             <p id={popup.Id}>{popup.City + ", " + popup.State}</p>
             <hr id={popup.Id}/>
           </button>
@@ -262,9 +260,10 @@ var BookMeal = React.createClass({
   renderPopupInfo: function(){
     var popup = this.getSelectedPopup();
     var openSpots = getOpenSpots(popup.Capacity, popup.Attendees);
-    return(
-      <p>{openSpots + " of " + popup.Capacity + " seats available"}</p>
-    );
+    if (openSpots < 5)
+      return <p>{"Only " + openSpots + " seats available"}</p>;
+    else if (this.props.data.New_host)
+      return <p><strong>{"Limited new chef sale price!"}</strong></p>;
   },
   render: function() {
     var data = this.props.data;

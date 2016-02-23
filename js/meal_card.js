@@ -27,18 +27,20 @@ module.exports = React.createClass({
 		var popup = d.Popups[0];
 		switch(this.getOpenSeats(popup)){
 			case 0:
-				alert = <span className="meal-card-alert text-right">Sold out</span>;
+				alert = <span className="transluscent-grey-bg meal-card-alert text-right">Sold out</span>;
 			break;
 			case 1:
-				alert = <span className="meal-card-alert text-right">1 Seat Left</span>;
+				alert = <span className="transluscent-grey-bg meal-card-alert text-right">1 Seat Left</span>;
 			break;
 			case 2: 
-				alert = <span className="meal-card-alert text-right">2 Seats Left</span>;
+				alert = <span className="transluscent-grey-bg meal-card-alert text-right">2 Seats Left</span>;
 			break;
 			case 3:
-				alert = <span className="meal-card-alert text-right">3 Seats Left</span>;
+				alert = <span className="transluscent-grey-bg meal-card-alert text-right">3 Seats Left</span>;
 			break;
 		}
+		if (d.New_host)
+			alert = <span className="c-blue-bg meal-card-alert text-right">New Chef Sale!</span>;
 		return(
 			<div className="card">
 			    <Link to={"/meal/" + d.Id + "?modal=true"} target="new_blank">
