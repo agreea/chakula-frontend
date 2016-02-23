@@ -370,7 +370,7 @@ var MealListItem = React.createClass({
     this.setState({errors: errors});
     if (errors.length > 0) 
       return;
-    var api_resp = api_call({
+    var api_resp = api_call('meal',{
       method: "publishMeal", 
       mealId: this.props.data.Id, 
       session: Cookies.get("session")
