@@ -57,7 +57,7 @@ module.exports = React.createClass({
         <div>
             <div className="col-xs-12 col-md-7">
                 <h4 className="white">Get Weekly Invites To Chakula Meals</h4>
-                <p className="white">Never miss a chance at delicious food again</p>
+                <p className="white">Never miss another meal</p>
             </div>
             <div className="col-xs-12 col-md-5">
                <div className="input-group" style={paddingTop}>
