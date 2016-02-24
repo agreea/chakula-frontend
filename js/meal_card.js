@@ -5,6 +5,23 @@ var React = require('react'),
 // getMeal
 // getUpcoming meal
 module.exports = React.createClass({
+	componentDidMount: function() {
+		var d = this.props.data;
+		$(function(){
+		        //prepare Your data array with img urls
+		        var picSrcs = d.Pics(function(pic){
+		        	return "https://yaychakula.com/img/" + pic.Name;
+		        });
+		        //start with id=0 after 5 seconds
+		        var index = 0;
+		        window.setInterval(function(){
+		            $('#cardImg'+d.Id).css('background-image','url('+ picSrcs[index] +')');
+		            thisId++;
+		            if (index == picSrcs.length) 
+		            	index = 0; //repeat from start
+		        },750);        
+		    });
+	},
 	getOpenSeats: function(popup) {
 		var capacity = popup.Capacity;
 		var takenSeats = 0;
@@ -44,7 +61,7 @@ module.exports = React.createClass({
 		return(
 			<div className="card">
 			    <Link to={"/meal/" + d.Id + "?modal=true"} target="new_blank">
-			        <div className="card-image" style={card_img}>
+			        <div className="card-image" style={card_img} id={"cardImg"+d.Id}>
 			        	{alert}
 			            <span className="card-title">{d.Title + " - $" + price}</span>
 			        </div>
