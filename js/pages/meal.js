@@ -261,9 +261,9 @@ var BookMeal = React.createClass({
     var popup = this.getSelectedPopup();
     var openSpots = getOpenSpots(popup.Capacity, popup.Attendees);
     if (openSpots < 5)
-      return <p>{"Only " + openSpots + " seats available"}</p>;
+      return <p>{"Only " + openSpots + " seats left"}</p>;
     else if (this.props.data.New_host)
-      return <p><strong>{"Limited new chef sale price!"}</strong></p>;
+      return <h3><strong>{"New chef discount!"}</strong></h3>;
   },
   render: function() {
     var data = this.props.data;
