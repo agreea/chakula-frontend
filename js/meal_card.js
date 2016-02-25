@@ -9,17 +9,21 @@ module.exports = React.createClass({
 		var d = this.props.data;
 		$(function(){
 		        //prepare Your data array with img urls
-		        var picSrcs = d.Pics(function(pic){
+		        var picSrcs = d.Pics.map(function(pic){
 		        	return "https://yaychakula.com/img/" + pic.Name;
 		        });
+		        console.log(picSrcs);
 		        //start with id=0 after 5 seconds
 		        var index = 0;
 		        window.setInterval(function(){
-		            $('#cardImg'+d.Id).css('background-image','url('+ picSrcs[index] +')');
-		            thisId++;
+		        	var cardImg = $('#cardImg'+d.Id);
+		        	if (!cardImg.is(":hover"))
+		        		return;
+		            cardImg.css('background-image','url('+ picSrcs[index] +')');
+		            index++;
 		            if (index == picSrcs.length) 
 		            	index = 0; //repeat from start
-		        },750);        
+		        },850);        
 		    });
 	},
 	getOpenSeats: function(popup) {
@@ -34,10 +38,10 @@ module.exports = React.createClass({
 		var d = this.props.data;
 		console.log(d);
 		var card_img = { 
-				background: "url(/img/" + d.Pics[0].Name + ")",
+				backgroundImage: "url(https://yaychakula.com/img/" + d.Pics[0].Name + ")",
 				backgroundPosition: "center center",
     			backgroundRepeat: "no-repeat",
-    			backgroundSize: "cover"
+    			backgroundSize: "cover",
 			};
 		var price = Math.round(d.Price*100)/100;
 		var alert;
