@@ -843,6 +843,13 @@ Colors
 .c-blue-bg:focused {
   color: #fff;
 }
+.seapunk {
+  color: #34b3a7;
+}
+.seapunk-bg {
+  background-color: #34b3a7;
+  color: #fff;
+}
 .white {
   color: #fff;
 }
@@ -915,6 +922,7 @@ Rules on multiple pages
 .badge {
   font-size: 14px;
   border-radius: 2px;
+  margin: 4px;
 }
 hr {
   margin: 0;
