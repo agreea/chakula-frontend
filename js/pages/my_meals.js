@@ -51,10 +51,12 @@ var PopupRow = React.createClass({
       seatsBadgeText = seatSold + " seat sold";
     else
       seatsBadgeText = seatsSold + " seats sold";
-    var hotOrangeClass = (d.Capacity == seatsSold)? "hot-orange-bg" : "";
+    var colorMod = (d.Capacity == seatsSold)? "hot-orange-bg" : "seapunk-bg";
+    if (moment(d.Rsvp_by) < moment())
+      colorMod = "inactive-gray-bg";
     if (seatsSold > 0)
       return(
-        <p className={"badge " + hotOrangeClass}>
+        <p className={"badge " + colorMod}>
           {seatsBadgeText}
         </p>);
   },
