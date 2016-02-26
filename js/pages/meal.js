@@ -202,8 +202,9 @@ var BookMeal = React.createClass({
     return attendeeRows;
   },
   renderAttendees: function() {
-    var attendees = this.getSelectedPopup().Attendees;
-    var attNodes = attendees.map(function(attendee, i) {
+    var attendees = this.getSelectedPopup().Attendees,
+        maxPerRow = { xs: 3 };
+    var attendeeNodes = attendees.map(function(attendee, i) {
       console.log(attendee.Prof_pic_url);
       return (
         <div className="col-xs-6 col-sm-4" key={i}>
@@ -216,9 +217,7 @@ var BookMeal = React.createClass({
       return (
         <div>
           <h4 className="text-center">Attendees</h4>
-          <div className="row">
-            {this.renderAttendeeRows(attNodes)}
-          </div>
+          {attendeeNodes}
         </div>);
   },
   getSelectedPopup: function() {
@@ -409,52 +408,6 @@ module.exports = React.createClass({
         mealId: this.props.params.id});
     if (resp.Success) {
       var data = resp.Return;
-    //   data["Popups"] = [{
-    //   Starts: "2016-02-26T19:00:00Z", 
-    //   Maps_url: "",
-    //   Capacity: 8,
-    //   Attendees: [{
-    //       First_name: "Kerrie",
-    //       Prof_pic_url: "https://yaychakula.com/img/b0c7cd9c-12e2-455b-b26c-5a502584d080.jpeg",
-    //       Seats: 2
-    //     },
-    //     {
-    //       First_name: "Michele",
-    //       Prof_pic_url: "https://graph.facebook.com/10100435742136159/picture?width=200&height=200",
-    //       Seats: 1
-    //     },
-    //     {
-    //       First_name: "Stephen",
-    //       Prof_pic_url: "https://graph.facebook.com/10100435742136159/picture?width=201&height=201",
-    //       Seats: 1
-    //     }],
-    //   City: "Silver Spring",
-    //   State: "MD",
-    //   Id: 79
-    // },
-    // {
-    //   Starts: "2016-03-21T19:00:00Z", 
-    //   Maps_url: "",
-    //   Capacity: 6,
-    //   Attendees: [{
-    //       First_name: "James",
-    //       Prof_pic_url: "https://graph.facebook.com/10205352404625637/picture?width=200&height=200",
-    //       Seats: 2
-    //     },
-    //     {
-    //       First_name: "Alfred",
-    //       Prof_pic_url: "https://yaychakula.com/img/user-icon.png",
-    //       Seats: 1
-    //     },
-    //     {
-    //       First_name: "Stephen",
-    //       Prof_pic_url: "https://graph.facebook.com/10205352404625637/picture?width=220&height=220",
-    //       Seats: 1
-    //     }],
-    //   City: "Bethesda",
-    //   State: "MD",
-    //   Id: 80
-    // }];
     this.setState({data: data, selectedPopup: data.Popups[0].Id});
     }
   },

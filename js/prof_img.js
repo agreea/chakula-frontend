@@ -1,5 +1,6 @@
 var React = require('react');
 
+// props: src, style (optional), title (optional)
 module.exports = React.createClass({
 	getInitialState: function() {
 		var id = this.hash();
