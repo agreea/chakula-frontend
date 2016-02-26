@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+    Modal = require('modal.js');
 var DatesRow = React.createClass({
   getInitialState: function() {
     var d = this.props.data;
