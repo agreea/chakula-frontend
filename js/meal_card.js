@@ -17,7 +17,7 @@ module.exports = React.createClass({
 		        var index = 0;
 		        window.setInterval(function(){
 		        	var cardImg = $('#cardImg'+d.Id);
-		        	if (!cardImg.is(":hover"))
+		        	if (!cardImg || !cardImg.is(":hover"))
 		        		return;
 		            cardImg.css('background-image','url('+ picSrcs[index] +')');
 		            index++;

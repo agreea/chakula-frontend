@@ -1,6 +1,7 @@
 var React = require('react');
 var Link = require('react-router').Link,
-    Modal = require('../modal.js');
+    Modal = require('../modal.js'),
+    ProfImg = require('../prof_img.js');
 
 var DatesRow = React.createClass({
   getInitialState: function() {

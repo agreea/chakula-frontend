@@ -179,15 +179,6 @@ module.exports = React.createClass({
             this.setState({error: api_resp.Error});
         }
     },
-    // handleLoginSuccess: function(){ 
-    //     var api_resp = api_call('kitchenuser', {method: 'getLast4s', session: Cookies.get('session')});
-    //     console.log(api_resp);
-    //     if (api_resp.Success) {
-    //         this.props.cards = api_resp.Return;
-    //         this.setState({selectedCard: api_resp.Return[0]});
-    //     }
-    //     this.props.handleLoginSuccess() 
-    // },
     handleFollowClicked: function(e) {
         this.setState({follow_checked: event.target.checked});
     },
@@ -222,6 +213,10 @@ module.exports = React.createClass({
                     </div>
                 </div>
                 <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} popup={popup}/>
+                <div className="row">
+                    <div className="col-xs-4 text-right">Total</div>
+                    <div className="col-xs-8">{"$" + this.state.seats * this.props.price}</div>
+                </div>
                 <PaymentField cards={this.props.cards} handleSelectedCardChange={this.handleSelectedCardChange}></PaymentField>
                 <div className="row error-field">
                     <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">

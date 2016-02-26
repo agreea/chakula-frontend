@@ -476,7 +476,7 @@ module.exports = React.createClass({
     // checkout needs popup_id
     var selectedPopup = this.getSelectedPopup();
     var checkout = 
-      <Checkout cards={(data.Cards)? data.Cards : []} popup={selectedPopup} />;
+      <Checkout cards={(data.Cards)? data.Cards : []} popup={selectedPopup} price={data.Price} />;
     var emailSignup = <EmailSignup />;
     return(
       <div className="row">

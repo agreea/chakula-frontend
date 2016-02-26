@@ -76,9 +76,11 @@ module.exports = React.createClass({
         this.setState({fbId: fbId});
         var api_resp = api_call('kitchenuser', 
           {method: 'LoginFb', 
-          fbToken: accessToken});
+          fbToken: accessToken,
+          // email: response.authResponse.email
+        });
         if (api_resp.Success) {
-          Cookies.set('session', api_resp.Return.Session_token);
+          Cookies.set('session', api_resp.Return.Session_token, {expires: 59});
           if (api_resp.Return.Facebook_long_token === "NEW_GUEST")
             FB.api('/me', { locale: 'en_US', fields: 'name, email'}, this.fbRegistrationSuccess);
           else
