@@ -794,6 +794,10 @@ Colors
 .active-green-bg:focused {
   color: #fff;
 }
+.hot-organge-bg {
+  background-color: #ea6c00;
+  color: #fff;
+}
 .welcome-green {
   color: #78d4a1;
 }
@@ -907,6 +911,10 @@ Rules on multiple pages
 }
 .dropdown-menu {
   border-radius: 0;
+}
+.badge {
+  font-size: 14px;
+  border-radius: 2px;
 }
 hr {
   margin: 0;
@@ -1126,6 +1134,10 @@ Payment UI Styling
 #create-meal .meal-list-item:hover .btn-delete-meal {
   display: inline;
   border: none;
+}
+#host_meal .live-dot,
+#create-meal .live-dot {
+  font-size: 12px;
 }
 #host_meal .spinner,
 #create-meal .spinner {

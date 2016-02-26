@@ -7,7 +7,18 @@ var PopupRow = React.createClass({
   getInitialState: function() {
     return {moreClicked: false};
   },
-  handleMoreClicked: function() { // simple switch
+  componentDidMount: function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  },
+  getSeatsSold: function() {
+    var attendees = this.props.data.Attendees,
+        seatsSold = 0;
+    for (var i in attendees){
+      seatsSold += attendees[i].Seats;
+    }
+    return seatsSold;
+  },
+  handleMoreClicked: function() {
     var moreClicked = this.state.moreClicked;
     this.setState({moreClicked: !moreClicked});
   },
@@ -29,27 +40,62 @@ var PopupRow = React.createClass({
           </div>
         </div>);
   },
+  renderSeatsBadge: function() {
+    var d = this.props.data,
+        seatsSold = this.getSeatsSold(),
+        seatsBadgeText, 
+        seatsBadge;
+    if (seatsSold == d.Capacity)
+      seatsBadgeText = "SOLD OUT!";
+    else if (seatsSold == 1)
+      seatsBadgeText = seatSold + " seat sold";
+    else
+      seatsBadgeText = seatsSold + " seats sold";
+    if (seatsSold > 0)
+      return(
+        <p className={"badge " + (d.Capacity == seatsSold)? "hot-orange-bg" : ""}>
+          {seatsBadgeText}
+        </p>);
+  },
+  renderDetails: function(){
+    if (!this.state.moreClicked)
+      return;
+    var d = this.props.data;
+    var starts = moment(d.Starts),
+        rsvpBy = moment(d.Rsvp_by);
+    return(
+      <div>
+        <p><i className="fa fa-clock-o"></i>{" Rsvp by " + rsvpBy.format("h:mm a ddd, MMM Do")}</p>
+        <p><i className="fa fa-user"></i>{" " + d.Capacity + " seats"}</p>        
+        {this.renderAttendees()}
+        <p><i className="fa fa-map-marker"></i> {" " + d.Address + ", " + d.City + ", " + d.State}</p>
+      </div>);
+  },
   render: function() {
     var d = this.props.data;
     var starts = moment(d.Starts),
         rsvpBy = moment(d.Rsvp_by);
-    var details;
-    if (this.state.moreClicked) {
-      details = 
-        <div>
-          <p><i className="fa fa-clock-o"></i>{" Rsvp by " + rsvpBy.format("h:mm a ddd, MMM Do")}</p>
-          <p><i className="fa fa-user"></i>{" " + d.Capacity + " seats"}</p>        
-          {this.renderAttendees()}
-          <p><i className="fa fa-map-marker"></i> {" " + d.Address + ", " + d.City + ", " + d.State}</p>
-        </div>
-    }
+    var liveDot = 
+      (rsvpBy > moment())? 
+            <i className="fa fa-circle live-dot active-green"
+              data-toggle="tooltip" 
+              data-placement="top" 
+              title="Reservations are open"></i> :
+            <i className="fa fa-circle live-dot inactive-gray"
+              data-toggle="tooltip" 
+              data-placement="top" 
+              title="Reservations are closed"></i>;
     return(
       <div className="row">
-        <p className="inline-block">{starts.format("h:mm a ddd, MMM Do")}</p>
+        <p className="inline-block">
+          {liveDot}
+          {" " + starts.format("h:mm a ddd, MMM Do")}
+        </p>
+        {this.renderSeatsBadge()}
         <button className="transparent-bg inline-block" onClick={this.handleMoreClicked}>
           <i className={(this.state.moreClicked)? "fa fa-chevron-up" :  "fa fa-chevron-down"}></i>
         </button>
-        {details}
+        {this.renderDetails()}
       </div>
     );
   }
@@ -136,7 +182,7 @@ var MealListItem = React.createClass({
       return;
     }
     this.props.handleMealDelete(this.props.key);
-    $('#myModal' + this.props.key).modal('hide');
+    $('#deleteMeal' + this.props.key).modal('hide');
     // launch the modal
     // upon confirm, delete the meal
   },
@@ -168,20 +214,11 @@ var MealListItem = React.createClass({
       "https://yaychakula.com/img/" + d.Pics[0].Name :
       "https://yaychakula.com/img/camera.svg";  
     var edit_link = "/create_meal/" + d.Id,
-        title_s = d.Title,
-        title;
-    var starts_s = moment(d.Starts).format("h:mm a dddd, MMMM Do YYYY");
-    if (!title_s)
-      title = <p>Untitled</p>;
-    else if (moment(d.Starts) < moment()) // show the meal is past
-      title = <p>{d.Title + " [PAST]"}</p>;
-    else if (d.Published)
-      title = <p><i className="fa fa-circle live"></i>{d.Title}</p>;
-    else
-      title = <p>{d.Title}</p>;
-    var errors = this.state.errors.map(function(error, i) {
-      return <li key={i}>{error}</li>
-    });
+        title = (!d.Title)? <p>Untitled</p> : <p>{d.Title}</p>,
+        starts_s = moment(d.Starts).format("h:mm a dddd, MMMM Do YYYY"),
+        errors = this.state.errors.map(function(error, i) {
+          return <li key={i}>{error}</li>
+        });
     return (
       <div className="meal-list-item">
         <div className="row">
