@@ -3,7 +3,6 @@ var Link = require('react-router').Link,
     Modal = require('../modal.js'),
     ProfImg = require('../prof_img.js'),
     AddPopupRow = require('../add_popup.js');
-
 var PopupRow = React.createClass({
   getInitialState: function() {
     return {moreClicked: false};
