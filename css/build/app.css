@@ -909,6 +909,10 @@ Rules on multiple pages
 .grey-star {
   color: #828282;
 }
+.rating-star {
+  font-size: 36px;
+  margin: 4px;
+}
 .star-rating {
   color: #fad850;
   font-size: 32px;

@@ -2,7 +2,10 @@ var React = require('react');
 module.exports = React.createClass({
 	handleAddCard: function() {
         this.setState({disableAddCard: true});
-    	Stripe.setPublishableKey('pk_live_N4yRGKt9KwKwi9WfpAtnPdMs');
+        var stripe_key = 
+            (window.location.href.startsWith("https://yaychakula"))?
+                'pk_live_N4yRGKt9KwKwi9WfpAtnPdMs' : 'pk_test_BIZGDe0MftvY6O5JiSj2rBJ8';
+    	Stripe.setPublishableKey(stripe_key);
     	console.log($('#cc-form'));
         Stripe.card.createToken($('#cc-form'), this.handleStripeResponse);
     },
