@@ -1,4 +1,5 @@
 var React = require('react');
+// props: handleAddCardSuccess: function(last4)
 module.exports = React.createClass({
 	handleAddCard: function() {
         this.setState({disableAddCard: true});
@@ -11,7 +12,8 @@ module.exports = React.createClass({
     },
     handleStripeResponse: function(status, stripe_resp) {
         if (stripe_resp.error) {
-            this.setState({disableAddCard: false, error: stripe_resp.error});
+            console.log(stripe_resp.error);
+            this.setState({disableAddCard: false, err: stripe_resp.error.message});
             return;
         }
         console.log(stripe_resp);
@@ -25,13 +27,17 @@ module.exports = React.createClass({
                 stripeToken: stripe_resp.id,
                 last4: stripe_resp.card.last4});
         if (!api_resp.Success) {
-            this.setState({addCardError: api_resp.Error, disableAddCard: false});
+            this.setState({
+                addCardError: api_resp.Error, 
+                disableAddCard: false,
+                err: "Failed to add card. Check your credentials and try again"
+            });
             return;
         }
         this.props.handleAddCardSuccess(stripe_resp.card.last4);
     },
     getInitialState: function() {
-    	return ({disableAddCard: false});
+    	return ({disableAddCard: false, err: ""});
     },
 	render: function() {
 		return (
@@ -56,10 +62,11 @@ module.exports = React.createClass({
                              <input type="text" size="4" data-stripe="cvc" placeholder="CVC"/>
                           </label>
                     </div>
-                  <div className="text-center">
-                      <button className="brand-btn btn btn-payment" id="add-card-btn" onClick={this.handleAddCard} disabled={this.state.disableAddCard}>Add Card</button>
-                  </div>
                 </form>
+                <p className="error-field">{this.state.err}</p>
+                <div className="text-center">
+                    <button className="brand-btn btn btn-payment" id="add-card-btn" onClick={this.handleAddCard} disabled={this.state.disableAddCard}>Add Card</button>
+                </div>
             </div>);
 	}
 });

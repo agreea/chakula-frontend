@@ -1,7 +1,41 @@
-var React = require('react');
-var FormTextRow = require('../form-row.js');  
-var AddPhone = require('../add_phone.js');
-var Modal = require('../modal.js');
+var React = require('react'),
+    FormTextRow = require('../form-row.js'),  
+    AddPhone = require('../add_phone.js'),
+    Modal = require('../modal.js'),
+    AddCard = require('../add_card.js');
+var Cards = React.createClass({
+  getInitialState: function() {
+    return {
+      addCardPressed: false, 
+      cards: this.props.data.Last4s
+    };
+  },
+  handleAddCardPressed: function(){
+    this.setState({addCardPressed: true});
+  },
+  handleAddCardSuccess: function(last4){
+    var cards = this.state.cards;
+    cards.push(last4);
+    this.setState({handleAddCardPressed: false, cards: cards});
+  },
+  renderCards: function() {
+    var cards = this.state.cards;
+    cardNodes = cards.map(function(card, index){
+      return <p key={index}>{"..." + card}</p>;
+    });
+    return <div>{cardNodes}</div>;
+  },
+  render: function() {
+    var addCard = (this.state.addCardPressed)?
+      <AddCard handleAddCardSuccess={this.handleAddCardSuccess}/> : 
+      <button className="c-blue-bg" onClick={this.handleAddCardPressed}>Add Card</button>
+    return(<div className="text-left col-xs-8 col-md-6 col-xs-offset-4 col-sm-offset-3">
+        <h4>Your Cards</h4>
+        {this.renderCards()}
+        {addCard}
+      </div>)
+  }
+});
 module.exports = React.createClass({
   getInitialState: function() {
     return {
@@ -127,6 +161,7 @@ module.exports = React.createClass({
             })}
           </ul>
         </div>
+        <Cards data={this.state}/>
         <div className="row">
           <div className="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-4">
             <button type="button" className="brand-btn btn-info btn-lg btn" id="save" 

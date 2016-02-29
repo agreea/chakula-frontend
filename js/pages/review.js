@@ -114,7 +114,7 @@ module.exports = React.createClass({
 					<h2>Log in to Leave Your Review</h2>
 					<div className="text-center">
 						<Link to={"login?fwd=/review/" + this.props.params.id}>
-							<button className="c-blue">Login</button>
+							<button className="c-blue-bg">Login</button>
 						</Link>
 					</div>
 				</div>
@@ -124,8 +124,12 @@ module.exports = React.createClass({
 	renderSubmitSuccess: function() {
 		return(
 			<div className="row">
-				<div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+				<div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 text-center">
 					<h3>Successfully submitted your review!</h3>
+					<h4>{"View it on Sharon's chef profile"}</h4>
+					<Link to={"/chef/" + this.state.data.Host_id}>
+						<button className="c-blue-bg">{"Go to Sharon's Profile"}</button>
+					</Link>
 				</div>
 			</div>
 		);
@@ -136,7 +140,6 @@ module.exports = React.createClass({
 	renderTips: function() {
 		if (this.state.data.Price == 0) // don't ask for tips if they didn't pay
 			return;
-
 		return(
 			<div className="row">
 				<h3>Gratuity (%)</h3>
