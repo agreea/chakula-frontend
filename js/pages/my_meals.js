@@ -25,16 +25,23 @@ var PopupRow = React.createClass({
   renderAttendees: function() {
     var attendees = this.props.data.Attendees;
     var attendeeNodes = attendees.map(function(attendee, i) {
+      var additional_seats = attendee.Seats - 1;
+      var tooltip = (additional_seats > 1)? 
+            attendee.First_name + " +" + additional_seats : attendee.First_name; 
       return (
-        <div className="col-xs-4 col-sm-3 col-lg-2" key={i}>
+        <div className="col-xs-4 col-sm-3 col-lg-2" 
+              key={i} 
+              data-toggle="tooltip" 
+              data-placement="bottom" 
+              title={tooltip}>
           <ProfImg 
-            src={attendee.Prof_pic_url} title={attendee.First_name} />
+            src={attendee.Prof_pic_url} />
         </div>);
     });
     if (attendees.length > 0)
       return (
         <div>
-          <h4 className="text-center">Attendees</h4>
+          <h5>Attendees</h5>
           <div className="row">
             {attendeeNodes}
           </div>
@@ -123,7 +130,7 @@ var PopupsList = React.createClass({
       return (
         <div className="row">
           <div className="col-xs-9 col-xs-offset-3">
-            <h5>Popups</h5>
+            <h4>Popups</h4>
             {popupsNodes}
             <AddPopupRow data={d} handleAddPopupSuccess={this.handleAddPopupSuccess}/>
           </div>
