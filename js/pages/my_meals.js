@@ -26,7 +26,7 @@ var PopupRow = React.createClass({
     var attendees = this.props.data.Attendees;
     var attendeeNodes = attendees.map(function(attendee, i) {
       var additional_seats = attendee.Seats - 1;
-      var tooltip = (additional_seats > 1)? 
+      var tooltip = (additional_seats > 0)? 
             attendee.First_name + " +" + additional_seats : attendee.First_name; 
       return (
         <div className="col-xs-4 col-sm-3 col-lg-2" 
