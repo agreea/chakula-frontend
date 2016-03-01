@@ -2,7 +2,8 @@ var React = require('react'),
     FormTextRow = require('../form-row.js'),  
     AddPhone = require('../add_phone.js'),
     Modal = require('../modal.js'),
-    AddCard = require('../add_card.js');
+    AddCard = require('../add_card.js'),
+    Link = require('react-router').Link;
 var Cards = React.createClass({
   getInitialState: function() {
     return {
@@ -103,7 +104,21 @@ module.exports = React.createClass({
     if(this.props.location.query.stripe_redir && this.state.saveSuccess)
       $('#stripe-modal').modal('show');
   },
+  renderLogin: function() {
+    return(
+      <div className="row" id="edit-host-info">
+        <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 text-center">
+          <h2>Log in To Chakula to Access Your Profile</h2>
+          <Link to="/login?fwd=edit_guest_info">
+            <button className="brand-btn c-blue-bg">Login</button>
+          </Link>
+        </div>
+      </div>
+      )
+  },
   render: function() {
+    if (!Cookies.get("session"))
+      return this.renderLogin();
     var stripe_element;
     var guest = this.state;
     var stripeModalBody;
