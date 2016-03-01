@@ -109,9 +109,11 @@ module.exports = React.createClass({
       <div className="row" id="edit-host-info">
         <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 text-center">
           <h2>Log in To Chakula to Access Your Profile</h2>
-          <Link to="/login?fwd=edit_guest_info">
-            <button className="brand-btn c-blue-bg">Login</button>
-          </Link>
+          <div className="text-center"
+            <Link to="/login?fwd=edit_guest_info">
+              <button className="brand-btn c-blue-bg text-center">Login</button>
+            </Link>
+          </div>
         </div>
       </div>
       )
