@@ -73,11 +73,12 @@ module.exports = React.createClass({
       if (response.authResponse) {
         var accessToken = response.authResponse.accessToken,
             fbId = response.authResponse.userID;
+        console.log(response.authResponse);
         this.setState({fbId: fbId});
         var api_resp = api_call('kitchenuser', 
           {method: 'LoginFb', 
           fbToken: accessToken,
-          // email: response.authResponse.email
+          email: response.authResponse.email
         });
         if (api_resp.Success) {
           Cookies.set('session', api_resp.Return.Session_token, {expires: 59});
