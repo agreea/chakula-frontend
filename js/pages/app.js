@@ -19,7 +19,11 @@ var React = require('react'),
         var api_resp = 
           api_call('kitchenuser', {method: 'Get', session: Cookies.get("session")});
         if (api_resp.Success)
-          this.setState({guest: api_resp.Return});       
+          this.setState({guest: api_resp.Return});
+        else {
+          Cookies.remove('session');
+          location.reload();
+        }
       },
       signout: function() {
         Cookies.remove('session');
