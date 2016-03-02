@@ -74,7 +74,7 @@ module.exports = React.createClass({
         var accessToken = response.authResponse.accessToken,
             fbId = response.authResponse.userID;
         console.log(response.authResponse);
-        this.setState({fbId: fbId});
+        this.setState({fbId: fbId})
         var api_resp = api_call('kitchenuser', 
           {method: 'LoginFb', 
           fbToken: accessToken,

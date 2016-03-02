@@ -258,6 +258,14 @@ module.exports = React.createClass({
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+      if (this.props.location.query.fbEmail) {
+      	var api_resp = api_call("kitchenuser", {
+      		method:"UpdateEmail", 
+      		session: Cookies.get("session"),
+      		email: this.props.location.query.fbEmail
+      	});
+      	this.setState({emailAdded: api_resp.Success});
+      }
 	},
 	handleFacebookAdded: function(fbId){
 		this.setState({fbId: fbId, fbAdded: true});
