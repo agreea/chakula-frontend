@@ -105,18 +105,31 @@ var ReviewList = React.createClass({
 });
 
 var HostInfo = React.createClass({
+  getInitialState: function() {
+    return {followsHost: this.props.data.Follows_host};
+  },
+  handleFollowClicked: function() {
+    // if followed, show unfollow modal
+    // if not followed, tell the api to follow host
+  },
   render: function() {
     // check meal type
     // if takeout, only show host
     // else show attendees too
     var data = this.props.data;
+    var followsBadge = (data.Follows_host)? 
+      <span className="badge inline-block seapunk">Following</span> :
+      <span className="badge inline-block c-blue-bg" onClick={this.handleFollowClicked}>Follow Chef</span>;
     return (<div className="row host-attendees-col">
       <Link to={"/chef/" + data.Host_id}>
         <div className="col-xs-12 col-sm-3 col-md-2">
           <ProfImg src={data.Host_pic}/>
         </div>
         <div className="col-xs-12 col-sm-9">
-          <h3 className="chef-header">{"About " + data.Host_name}</h3>
+          <div>
+            <h3 className="chef-header inline-block">{"About " + data.Host_name}</h3>
+            {followsBadge}
+          </div>
           <p>{data.Host_bio}</p>
         </div>
       </Link>
@@ -327,15 +340,11 @@ var MealInfo = React.createClass({
       var avg_rating = (sum_ratings/data.Host_reviews.length);
       console.log("Average rating: " + avg_rating);
       while(avg_rating > 0) { // show the average rating in filled stars
-        if (avg_rating < 1) { // for any remainder, round up to the next half-star and exit the loop
-          if (avg_rating > .7) {
-            avg_stars.push(<i className="fa fa-star"></i>);
-          } else if (avg_rating > .3) {
-            avg_stars.push(<i className="fa fa-star-half-o"></i>);
-          }
-          break;
+        if (avg_rating > .3 && avg_rating < .7) {
+            avg_stars.push(<i className="fa fa-star-half-o" id={5 - avg_rating}></i>);
+            break;
         }
-        avg_stars.push(<i className="fa fa-star"></i>);
+        avg_stars.push(<i className="fa fa-star" id={5 - avg_rating}></i>);
         avg_rating--;
       }
       while(avg_stars.length < 5) { // for the remaining stars until five, show empty stars.

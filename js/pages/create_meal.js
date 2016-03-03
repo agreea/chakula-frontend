@@ -329,10 +329,8 @@ module.exports = React.createClass({
     return api_resp;
   },
   validateForPublish: function() { // returns true if meal is well formed and ready to publish
-    var starts = $('#Starts').data("DateTimePicker").date(),
-        rsvpBy = $('#Rsvp_by').data("DateTimePicker").date(),
-        s = this.state;
-    var errors = [];
+    var s = this.state,
+        errors = [];
     if (!isFinite(s.Price)) errors.push("Price must be a valid dollar value.");
     if (s.Title === "") errors.push("Title cannot be empty.")
     if (s.Description === "") errors.push("Description cannot be empty.");
