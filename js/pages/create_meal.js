@@ -345,7 +345,7 @@ module.exports = React.createClass({
         mealId: mealId
       });
     if (api_resp.Success)
-        window.location.assign("https://yaychakula.com/meal/" + api_resp.Return);
+        window.location.assign("https://yaychakula.com/my_meals");
   },
   attemptPublish: function() {
     if (!this.validateForPublish())
