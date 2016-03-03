@@ -253,7 +253,7 @@ module.exports = React.createClass({
     }
     var d = api_resp.Return;
     d["saveDisabled"] = true,
-    d["publishDisabled"] = true;
+    d["publishDisabled"] = false;
     this.setState(d);
     console.log(this.state);
   },
