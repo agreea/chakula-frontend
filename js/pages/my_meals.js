@@ -182,17 +182,18 @@ var MealListItem = React.createClass({
     // some other other other shit
   },
   deleteMeal: function() {
+    var d = this.props.data;
     var api_resp = api_call('meal', {
       method: 'deleteMeal', 
       session: Cookies.get('session'), 
-      mealId: this.props.data.Id
+      mealId: d.Id
     });
     if (!api_resp.Success){
       this.setState({delete_error: resp.Error});
       return;
     }
-    this.props.handleMealDelete(this.props.key);
-    $('#deleteMeal' + this.props.key).modal('hide');
+    this.props.handleMealDelete(d.Id);
+    $('#deleteMeal' + d.Id).modal('hide');
     // launch the modal
     // upon confirm, delete the meal
   },
@@ -213,7 +214,7 @@ var MealListItem = React.createClass({
       </div>;
     return (
         <Modal 
-          id={"deleteMeal" + this.props.key}
+          id={"deleteMeal" + d.Id}
           title="Delete Meal?"
           body={modalContent} />
       );
@@ -234,7 +235,7 @@ var MealListItem = React.createClass({
         <div className="row">
           <button className="btn-delete-meal text-center" 
             data-toggle="modal" 
-            data-target={"#deleteMeal" + this.props.key}>
+            data-target={"#deleteMeal" + d.Id}>
               <span className=" glyphicon glyphicon-trash delete-icon" aria-hidden="true"></span>
           </button>
           <div className="col-xs-3 text-center">
@@ -295,22 +296,24 @@ module.exports = React.createClass({
     }
     this.setState({meals: api_resp.Return});
   },
-  handleMealDelete: function(index) {
-      var meals = this.state.meals;
-      meals.splice(index, 1);
-      this.setState({meals: meals});
+  handleMealDelete: function(mealId) {
+    var meals = this.state.meals;
+    for (var i in meals) {
+      if (meals[i].Id == mealId) {
+        meals.splice(i, 1);
+        this.setState({meals: meals});
+        return;
+      }
+    }
   },
   render: function() {
     var handleMealDelete = this.handleMealDelete;
     var listItems = [];
     if (this.state.meals)
       listItems = this.state.meals.map(function(meal, index){
+        console.log("key: " + index);
         return <MealListItem 
           data={meal}
-          title={meal.Title} 
-          starts={meal.Starts}
-          price={meal.Price}
-          seats={meal.Capacity}
           id={meal.Id}
           pic={(meal.Pics.length != 0)? meal.Pics[0].Name : ''}
           key={index}
