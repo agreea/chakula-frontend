@@ -82,7 +82,7 @@ var PaymentField = React.createClass({
                     <input type="radio" 
                         name="card" 
                         onChange={radioChanged} 
-                        id="add-card"> Add Card</input>
+                        id="add-card"> <strong>Add Card</strong></input>
                 </p>;
         }
         cards.push(add_card);
@@ -90,7 +90,7 @@ var PaymentField = React.createClass({
     },
     getInitialState: function() {
         return(
-            {showAddCardForm: false, 
+            {showAddCardForm: this.props.cards.length == 0, 
             paymentPressed: false, 
             selected: this.props.cards[0]});
     },
@@ -201,6 +201,7 @@ module.exports = React.createClass({
             );
         }
         var popup = this.props.popup;
+        var style = (this.props.cards.length)? {display: "none"} : {};
         var follow_box = (this.props.follows_host)? "" : <input type="checkbox" onClick={this.handleFollowClicked} checked={this.state.follow_checked}>Follow this chef to receive email updates when they host future meals</input>
         return(
             <div className="text-left row">
@@ -227,7 +228,8 @@ module.exports = React.createClass({
                 </div>
                 <div className="row">
                     <div className="col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2">
-                        <button className="brand-btn" 
+                        <button className="brand-btn"
+                            style={style}
                             hidden={this.props.cards.length === 0}
                             onClick={this.handleBookPressed}>Book</button>
                     </div>
