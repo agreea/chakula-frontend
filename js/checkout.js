@@ -201,7 +201,7 @@ module.exports = React.createClass({
             );
         }
         var popup = this.props.popup;
-        var style = (this.props.cards.length)? {display: "none"} : {};
+        var style = (this.props.cards.length == 0)? {display: "none"} : {};
         var follow_box = (this.props.follows_host)? "" : <input type="checkbox" onClick={this.handleFollowClicked} checked={this.state.follow_checked}>Follow this chef to receive email updates when they host future meals</input>
         return(
             <div className="text-left row">
@@ -230,7 +230,7 @@ module.exports = React.createClass({
                     <div className="col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2">
                         <button className="brand-btn"
                             style={style}
-                            hidden={this.props.cards.length === 0}
+                            disabled={this.props.cards.length === 0}
                             onClick={this.handleBookPressed}>Book</button>
                     </div>
                 </div>
