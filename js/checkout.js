@@ -47,6 +47,7 @@ var PaymentField = React.createClass({
             addCardError: ''});
     },
     handleAddCardSuccess: function(last4) {
+        // if cards.length == 0 ==> BOOK
         this.props.cards.push(last4);
         this.props.handleSelectedCardChange(last4);
         this.setState({showAddCardForm: false, selected: last4});
@@ -116,6 +117,7 @@ var PaymentField = React.createClass({
             </div>);
     }
 });
+
 var SeatsSelect = React.createClass({
     handleSelectChange: function(e){
         this.props.handleSeatChange(e.target.value);
@@ -159,10 +161,8 @@ module.exports = React.createClass({
         var selectedCard = this.state.selectedCard;
         if (!selectedCard || !/^\d{4}$/.test(selectedCard)) { 
             this.setState({error: 'Select a valid card.'})
-            console.log('Card was invalid: ' + selectedCard);
             return;
         }
-        console.log(this.props.popup);
         var api_resp = api_call('mealrequest', {
             method: 'BookPopup', 
             popupId: this.props.popup.Id,
@@ -188,10 +188,10 @@ module.exports = React.createClass({
             selectedCard: ((this.props.cards)? this.props.cards[0] : ''), 
             seats: 1,
             follow_checked: true,
+            showBookButton: true
         });
     },
     render: function() {
-        console.log(this.state);
         if (this.state.booked_success) {
             return (
                 <div className="text-center">
@@ -207,17 +207,19 @@ module.exports = React.createClass({
                 <div className="text-center">
                     <p>{moment(popup.Starts).format("dddd, MMMM Do, h:mma")}</p>
                 </div>
-                <div className="row">
-                    <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">
-                        {follow_box}
-                    </div>
-                </div>
                 <SeatsSelect handleSeatChange={this.handleSeatChange} seats={this.state.seats} popup={popup}/>
                 <div className="row">
                     <div className="col-xs-4 text-right">Total</div>
                     <div className="col-xs-8">{"$" + this.state.seats * this.props.price}</div>
                 </div>
-                <PaymentField cards={this.props.cards} handleSelectedCardChange={this.handleSelectedCardChange}></PaymentField>
+                <PaymentField 
+                    cards={this.props.cards} 
+                    handleSelectedCardChange={this.handleSelectedCardChange}></PaymentField>
+                <div className="row">
+                    <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">
+                        {follow_box}
+                    </div>
+                </div>
                 <div className="row error-field">
                     <div className="col-xs-9 col-xs-offset-3 col-sm-8 col-sm-offset-2">
                         <p>{this.state.error}</p>
@@ -226,7 +228,7 @@ module.exports = React.createClass({
                 <div className="row">
                     <div className="col-xs-8 col-xs-offset-3 col-sm-6 col-sm-offset-2">
                         <button className="brand-btn" 
-                            disabled={this.props.cards.length === 0} 
+                            hidden={this.props.cards.length === 0}
                             onClick={this.handleBookPressed}>Book</button>
                     </div>
                 </div>
