@@ -118,28 +118,33 @@ var HostInfo = React.createClass({
     // else show attendees too
     var data = this.props.data;
     var followsBadge = (data.Follows_host)? 
-      <span className="badge inline-block seapunk">Following</span> :
+      <span className="badge inline-block seapunk-bg">Following</span> :
       <span className="badge inline-block c-blue-bg" onClick={this.handleFollowClicked}>Follow Chef</span>;
     return (<div className="row host-attendees-col">
       <Link to={"/chef/" + data.Host_id}>
         <div className="col-xs-12 col-sm-3 col-md-2">
           <ProfImg src={data.Host_pic}/>
         </div>
+      </Link>
+
         <div className="col-xs-12 col-sm-9">
           <div>
-            <h3 className="chef-header inline-block">{"About " + data.Host_name}</h3>
+            <Link to={"/chef/" + data.Host_id}>
+              <h3 className="chef-header inline-block">{"About " + data.Host_name}</h3>
+            </Link>
             {followsBadge}
           </div>
           <p>{data.Host_bio}</p>
         </div>
-      </Link>
     </div>);
   }
 });
 
 var BookMeal = React.createClass({
   getInitialState: function() {
-    return({selectedPopup: this.props.data.Popups[0].Id});
+    var selectedPopup = 
+      (this.props.data.Popups.length > 0)? this.props.data.Popups[0].Id : -1;
+    return({selectedPopup: selectedPopup});
   },
   handlePopupSelected: function(e) {
     this.setState({selectedPopup: e.target.id});
@@ -152,6 +157,14 @@ var BookMeal = React.createClass({
   },
   renderOrderBtn: function() {
     var popup = this.getSelectedPopup();
+    if (!popup){
+      return <button 
+          className="c-blue-light-bg book-btn" 
+          id="request-meal-btn" 
+          disabled={req_btn_disabled} 
+          data-toggle="modal" 
+          data-target="#request-modal">Meal is Closed</button>;
+    }
     var data = this.props.data,
         meal_closes = moment(popup.Starts),
         openSpots = getOpenSpots(popup.Capacity, popup.Attendees);
@@ -197,32 +210,17 @@ var BookMeal = React.createClass({
       {this.renderMealClosesInfo()}
       </div>); 
   },
-  renderAttendeeRows: function(attNodes) {
-    var attendeeRows = [], // two dimensional array. Each row contains 3 pic items
-        thisRow = []; // second dimension of the array. Once a row stores 3 pics, you add it to the pic rows
-    for (var i in attNodes) {
-      // add this row to pic rows if it's full
-      if (thisRow.length === 3) {
-        var fullRow = thisRow;
-        attendeeRows.push(<div className="row">{fullRow}</div>);
-        thisRow = []; // empty the array
-      }
-      thisRow.push(attNodes[i]);
-      if (i == (attNodes.length - 1)) { // if this is the last pic, add the current row once you've added the pic
-        attendeeRows.push(<div className="row">{thisRow}</div>);
-      }
-    }
-    return attendeeRows;
-  },
   renderAttendees: function() {
+    var selectedPopup = this.getSelectedPopup();
+    if (!selectedPopup)
+      return;
     var attendees = this.getSelectedPopup().Attendees,
         maxPerRow = { xs: 3 };
     var attendeeNodes = attendees.map(function(attendee, i) {
       console.log(attendee.Prof_pic_url);
       return (
         <div className="col-xs-6 col-sm-4" key={i}>
-          <ProfImg 
-            src={attendee.Prof_pic_url} />
+          <ProfImg src={attendee.Prof_pic_url} />
           <p className="text-center">{attendee.First_name}</p>
         </div>);
     });
@@ -235,6 +233,8 @@ var BookMeal = React.createClass({
   },
   getSelectedPopup: function() {
     var selectedPopupId = this.state.selectedPopup;
+    if (selectedPopupId == -1) 
+      return;
     return this.props.data.Popups.reduce(function(previous, current){
       if(previous.Id == selectedPopupId)
         return previous;
@@ -242,10 +242,9 @@ var BookMeal = React.createClass({
         return current;
     });
   },
-  renderPopups: function() {
-    var d = this.props.data.Popups;
+  renderPopupsList: function() {
     var handlePopupSelected = this.handlePopupSelected;
-    var popups = d.map(function(popup){
+    return this.props.data.Popups.map(function(popup){
       var openSpots = getOpenSpots(popup.Capacity, popup.Attendees);
       return(
         <li key={popup.Id}>
@@ -256,7 +255,11 @@ var BookMeal = React.createClass({
           </button>
         </li>);
     });
+  },
+  renderPopups: function() {
     var selectedPopup = this.getSelectedPopup();
+    if (!selectedPopup)
+      return;
     return(
       <div className="dropdown">
         <button className="border-btn white-bg" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -264,14 +267,16 @@ var BookMeal = React.createClass({
           <span className="caret"></span>
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-          {popups}
+          {this.renderPopupsList()}
         </ul>
       </div>
     )
   },
   renderPopupInfo: function(){
-    var popup = this.getSelectedPopup();
-    var openSpots = getOpenSpots(popup.Capacity, popup.Attendees);
+    var selectedPopup = this.getSelectedPopup();
+    if (!selectedPopup)
+      return;
+    var openSpots = getOpenSpots(selectedPopup.Capacity, selectedPopup.Attendees);
     if (openSpots < 5)
       return <p>{"Only " + openSpots + " seats left"}</p>;
     else if (this.props.data.New_host)
@@ -308,6 +313,8 @@ var BookMeal = React.createClass({
 var MealInfo = React.createClass({
   renderMapsRow: function() {
     var popup = this.props.popup;
+    if (popup = -1) 
+      return;
     if (popup.Attending)
       return( 
         <div className="row map-row">
@@ -326,7 +333,6 @@ var MealInfo = React.createClass({
   },
   render: function() {
     // todo: truncate descriptions
-    moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
     var data = this.props.data;
     var avg_stars = [];
     if (data.Host_reviews !== null && data.Host_reviews.length > 0) { // process avg rating
@@ -336,9 +342,7 @@ var MealInfo = React.createClass({
       var sum_ratings = ratings.reduce(function(previous, current) {
         return previous + current;
       });
-      console.log("Sum ratings: " + sum_ratings);
       var avg_rating = (sum_ratings/data.Host_reviews.length);
-      console.log("Average rating: " + avg_rating);
       while(avg_rating > 0) { // show the average rating in filled stars
         if (avg_rating > .3 && avg_rating < .7) {
             avg_stars.push(<i className="fa fa-star-half-o" id={5 - avg_rating}></i>);
@@ -399,7 +403,7 @@ module.exports = React.createClass({
   },
   getSelectedPopup: function() {
     var selectedPopupId = this.state.selectedPopup;
-    if (this.state.selectedPopup === 0) {
+    if (this.state.selectedPopup === -1) {
       return;
     }
     return this.state.data.Popups.reduce(function(previous, current){
@@ -407,7 +411,7 @@ module.exports = React.createClass({
         return previous;
       if(current.Id == selectedPopupId)
         return current;
-    });
+    }) || -1;
   },
   componentWillMount: function(){
     var resp = 
@@ -417,7 +421,8 @@ module.exports = React.createClass({
         mealId: this.props.params.id});
     if (resp.Success) {
       var data = resp.Return;
-    this.setState({data: data, selectedPopup: data.Popups[0].Id});
+      var selectedPopup = (data.Popups.length > 0)? data.Popups[0].Id : -1;
+      this.setState({data: data, selectedPopup: selectedPopup});
     }
   },
   componentDidMount: function() {
@@ -437,8 +442,8 @@ module.exports = React.createClass({
     var data = this.state.data;
     // checkout needs popup_id
     var selectedPopup = this.getSelectedPopup();
-    var checkout = 
-      <Checkout cards={(data.Cards)? data.Cards : []} popup={selectedPopup} price={data.Price} />;
+    var checkout = (selectedPopup)?
+      <Checkout cards={(data.Cards)? data.Cards : []} popup={selectedPopup} price={data.Price} /> : "";
     var emailSignup = <EmailSignup />;
     return(
       <div className="row">
