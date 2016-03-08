@@ -316,7 +316,7 @@ var BookMeal = React.createClass({
 var MealInfo = React.createClass({
   renderMapsRow: function() {
     var popup = this.props.popup;
-    if (popup = -1) 
+    if (popup == -1) 
       return;
     if (popup.Attending)
       return( 
