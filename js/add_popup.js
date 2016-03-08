@@ -1,5 +1,7 @@
 var React = require('react'),
-    Modal = require('./modal.js');
+    Modal = require('./modal.js'),
+    FormSelectRow = require('./form_select_row.js'),
+    FormTextRow = require('./form-row.js');
 var DatesRow = React.createClass({
   getInitialState: function() {
     var d = this.props.data;
@@ -17,7 +19,7 @@ var DatesRow = React.createClass({
     this.initDatepicker('#Starts', this.state.Starts);
     this.initDatepicker('#Rsvp_by', this.state.Rsvp_by);
   },
-  handleChange: function(e) {
+  handleInputChanged: function(e) {
     console.log(e);
     var key = e.target.id,
         val = e.target.value,
@@ -27,33 +29,20 @@ var DatesRow = React.createClass({
     this.props.handleChange(obj);
   },
   render: function() {
-    var s = this.state;
-    return (
-      <div>
-        <div className="row form-row">
-          <div className="col-xs-5 col-sm-3 form-label">
-            <p className="text-right">Meal Time</p>
-          </div>
-          <div className="col-xs-7">
-            <input className="text-field" type="text" size="20" id={"Starts"}
-              placeholder="When do you break bread?" 
-              value={s.Starts}
-              onChange={this.handleChange}/>
-          </div>
-        </div>
-        <div className="row form-row">
-          <div className="col-xs-5 col-sm-3 form-label">
-            <p className="text-right">RSVP By</p>
-          </div>
-          <div className="col-xs-7">
-            <input className="text-field" type="text" size="40" id={"Rsvp_by"}
-              placeholder="Rsvp by?" 
-              value={s.Rsvp_by} 
-              onChange={this.handleChange}/>
-          </div>
-        </div>
-      </div>
-    );
+    return (<div>
+        <FormTextRow 
+          id="Starts"
+          label="Meal Time"
+          placeholder="When do you break bread?"
+          defaultValue={this.state.Starts}
+          handleInputChanged={this.handleInputChanged} />
+        <FormTextRow 
+          id="Rsvp_by"
+          label="RSVP By"
+          placeholder="Rsvp by?" 
+          defaultValue={this.state.Rsvp_by}
+          handleInputChanged={this.handleInputChanged} />
+      </div>);
   }
 });
 
@@ -63,7 +52,7 @@ var SeatsRow = React.createClass({
       Capacity: 2
     };
   },
-  handleChange: function(e) {
+  handleInputChanged: function(e) {
     var key = e.target.id,
         val = e.target.value,
         obj = {};
@@ -72,25 +61,18 @@ var SeatsRow = React.createClass({
     this.props.handleChange(obj);
   },
   render: function() {
-    var s = this.state;
-    var possSeats = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+    var s = this.state,
+        possSeats = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
     return (
       <div>
+        <FormSelectRow 
+          id="Capacity"
+          handleInputChanged={this.handleInputChanged}
+          options={possSeats}
+          label="Capacity" />
         <div className="row form-row">
-          <div className="col-xs-5 col-sm-3 form-label">
-            <p className="text-right">Guest Seats</p>
-          </div>
-          <div className="col-xs-2 col-sm-1">
-            <select value={s.Capacity} className="border-btn" id="Capacity" onChange={this.handleChange}>
-              {possSeats.map(function(seat_count, i) {
-                  return <option value={seat_count} key={i}>{seat_count}</option>;})
-              }
-            </select>
-          </div>
-        </div>
-        <div className="row form-row">
-          <div className="col-xs-5 col-sm-3 form-label">
-            <p className="text-right">Max pay</p>
+          <div className="col-xs-5 col-sm-3">
+            <p className="form-label text-right">Max pay</p>
           </div>
           <div className="col-xs-7 col-sm-9">
             <p id="payout-val">{"$" + s.Capacity * this.props.price}</p>
@@ -118,47 +100,23 @@ var AddressRow = React.createClass({
     });
   },
   render: function() {
-    var s = this.state;
-    var states = ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"];
-    var states_select_options = states.map(function(state) { return <option value={state}>{state}</option>;});
+    var s = this.state,
+        states = ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"];
     return (
       <div>
-        <div className="row form-row">
-          <div className="col-xs-5 col-sm-3 form-label">
-            <p className="text-right">Street Address</p>
-          </div>
-          <div className="col-xs-7">
-            <div className="text-field">
-              <input className="text-field" id="Address" type="text" 
-                value={s.Address} 
-                placeholder="3700 O St"
-                onChange={this.handleChange}/>
-            </div>
-          </div>
-        </div>
-        <div className="row form-row">
-          <div className="col-xs-5 col-sm-3 form-label">
-            <p className="text-right">City</p>
-          </div>
-          <div className="col-xs-7">
-            <div className="text-field">
-              <input className="text-field" id="City" type="text" 
-                value={s.City} 
-                placeholder="Washington"
-                onChange={this.handleChange}/>
-            </div>
-          </div>
-        </div>
-        <div className="row form-row">
-          <div className="col-xs-5 col-sm-3 form-label">
-            <p className="text-right">State</p>
-          </div>
-          <div className="col-xs-7">
-            <select className="state-select border-btn" value={s.State} id="State" onChange={this.handleChange}>
-              {states_select_options}
-            </select>
-          </div>
-        </div>
+        <FormTextRow label="Street Address" 
+          handleInputChanged={this.handleChange}
+          placeholder="3700 O St"
+          id="Address" />
+        <FormTextRow label="City" 
+          handleInputChanged={this.handleChange}
+          placeholder="Washington"
+          id="City" />
+        <FormSelectRow 
+          id="State"
+          handleInputChanged={this.handleChange}
+          options={states}
+          label="State" />
       </div>
     );
   }
@@ -211,13 +169,10 @@ module.exports = React.createClass({
         {errorItems}
       </ul>);
   },
-  render: function() {
-    var address = {Address: "", City: "", State: ""};
-    var d = this.props.data;
-    var modalBody = (this.state.success)?
-      <div className="row text-center">
-        <h2>Popup Successfully added!</h2>
-      </div> :
+  renderAddPopupForm: function() {
+    var d = this.props.data,
+        address = {Address: "", City: "", State: ""};
+    return (
       <div className="row">
         <DatesRow handleChange={this.handleChange} data={d}/>
         <SeatsRow handleChange={this.handleChange} price={d.Price} />
@@ -226,7 +181,18 @@ module.exports = React.createClass({
         <div className="text-center">
           <button className="c-blue-bg" onClick={this.createPopup}>Submit</button>
         </div>
-      </div>;
+      </div>);
+  },
+  renderAddPopupSuccess: function() {
+    return(
+      <div className="row text-center">
+        <h2>Popup Successfully added!</h2>
+      </div>);
+  },
+  render: function() {
+    var d = this.props.data;
+    var modalBody = (this.state.success)?
+      this.renderAddPopupSuccess() : this.renderAddPopupForm();
     return(
       <div>
         <button className="transparent-bg"             

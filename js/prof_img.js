@@ -1,6 +1,6 @@
 var React = require('react');
 
-// props: src, style (optional), title (optional)
+// props: src string, style {} (optional), tooltip {placement: string, text: string}
 module.exports = React.createClass({
 	getInitialState: function() {
 		var id = this.hash();
@@ -9,34 +9,30 @@ module.exports = React.createClass({
 	componentDidUpdate: function() {
 		this.loadImage();
 	},
-  	componentDidMount: function() {
-  		this.loadImage();
-  	},
-  	loadImage: function() {
-  		if (this.props.src.length === 0)
-  			return;
-    	var canvas = document.getElementById(this.state.id);
-    	var context = canvas.getContext('2d');
-    	var img = new Image();
-    	img.onload = function() {
-       	// draw cropped image
-    		var width = img.width,
-    			height = img.height;
-       		var sourceX = 0,
-       			sourceY = 0,
-       			destX = 0,
-       			destY = 0;
-   			var destLength = width;
-    		if (width > height) { // if landscape, resize by height
-    			destLength = height;
-    			sourceX = (width - height) / 2;
-    		}
-    		canvas.height = destLength,
-    		canvas.width = destLength;
-       		context.drawImage(img, sourceX, sourceY, destLength, destLength, destX, destY, destLength, destLength);
-    	};
-     	img.src = this.props.src;
-  	},
+  componentDidMount: function() {
+  	this.loadImage();
+  },
+  loadImage: function() {
+  	if (this.props.src.length === 0)
+      return;
+    var canvas = document.getElementById(this.state.id),
+        context = canvas.getContext('2d'),
+        img = new Image();
+    img.onload = function() { // draw cropped image
+    	var width = img.width,
+    		height = img.height;
+     		var sourceX = 0;
+   		var destLength = width;
+    	if (width > height) { // if landscape, resize by height
+    		destLength = height;
+    		sourceX = (width - height) / 2;
+    	}
+    	canvas.height = destLength,
+    	canvas.width = destLength;
+     	context.drawImage(img, sourceX, 0, destLength, destLength, 0, 0, destLength, destLength);
+    };
+    img.src = this.props.src;
+  },
   	hash: function() {
   		var randInt = Math.round(Math.random() * 100000);
   		var s = this.props.src + randInt;
@@ -50,12 +46,27 @@ module.exports = React.createClass({
 		return hash;
 	},
 	render: function() {
+    var props = this.props;
+    var tooltip = this.props.tooltip;
 		return ((this.props.src.length > 0)?
-			<canvas 
+			<i data-toggle={(tooltip)? "tooltip" : ""}
+        data-placement={(tooltip)? tooltip.placement : ""} 
+        title={(tooltip)? tooltip.text : ""}>
+        <canvas 
 				className="img-circle img-responsive img-responsive-center prof-img" 
-				id={this.state.id} height="200" width="200" style={this.props.style} title={this.props.title}/> :
+				id={this.state.id} 
+        height="200" 
+        width="200" 
+        style={props.style} 
+        title={props.title}/>
+      </i>:
 			<img className="img-circle img-responsive img-responsive-center prof-img"
-				src="/img/user-icon.svg" style={this.props.style} title={this.props.title}/>
-		);
+				src="/img/user-icon.svg" 
+        style={props.style} 
+        title={props.title}
+        data-toggle={(tooltip)? "tooltip" : ""}
+        data-placement={(tooltip)? tooltip.placement : ""} 
+        title={(tooltip)? tooltip.text : ""}/>
+    );
 	}
 })

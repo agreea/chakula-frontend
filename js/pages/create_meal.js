@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+    FormRow = require('../form-row.js');
 var TitleDescription = React.createClass({
   getInitialState: function() {
     var d = this.props.data;
@@ -27,17 +28,12 @@ var TitleDescription = React.createClass({
               onChange={this.handleChange}/>
           </div>
         </div>
-        <div className="row form-row">
-          <div className="col-xs-4 col-sm-2 form-label">
-            <p className="text-right">Description</p>
-          </div>
-          <div className="col-xs-8">
-            <textarea className="text-field" id="Description" type="text" rows="8" 
-              placeholder="What's in your meal? What inspired you to make it?" 
-              value={s.Description} 
-              onChange={this.handleChange}></textarea>
-          </div>
-        </div>
+        <FormRow label="Description" 
+          handleInputChanged={this.handleChange}
+          placeholder="What's in your meal? What inspired you to make it?"
+          defaultValue={this.props.data.Description}
+          id="Description" 
+          textarea="true" />
       </div>
     );
   }

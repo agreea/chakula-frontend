@@ -159,9 +159,9 @@ var BookMeal = React.createClass({
     var popup = this.getSelectedPopup();
     if (!popup){
       return <button 
-          className="c-blue-light-bg book-btn" 
+          className="c-blue-bg book-btn" 
           id="request-meal-btn" 
-          disabled={req_btn_disabled} 
+          disabled="true" 
           data-toggle="modal" 
           data-target="#request-modal">Meal is Closed</button>;
     }
@@ -277,9 +277,12 @@ var BookMeal = React.createClass({
     if (!selectedPopup)
       return;
     var openSpots = getOpenSpots(selectedPopup.Capacity, selectedPopup.Attendees);
-    if (openSpots < 5)
-      return <p>{"Only " + openSpots + " seats left"}</p>;
-    else if (this.props.data.New_host)
+    if (openSpots < 5) {
+      if (openSpots == 1)
+        return <p>{"Only one seat left"}</p>;
+      else 
+        return <p>{"Only " + openSpots + " seats left"}</p>;
+    } else if (this.props.data.New_host)
       return <h3><strong>{"New chef discount!"}</strong></h3>;
   },
   render: function() {
