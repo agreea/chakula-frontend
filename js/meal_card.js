@@ -27,6 +27,8 @@ module.exports = React.createClass({
 		    });
 	},
 	getOpenSeats: function(popup) {
+		if (!popup)
+			return -1;
 		var capacity = popup.Capacity;
 		var takenSeats = 0;
 		for (var i in popup.Attendees){
