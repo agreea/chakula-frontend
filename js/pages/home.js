@@ -53,6 +53,7 @@ module.exports = React.createClass({
     },
     renderMealList: function(mealListKey) {
         var mealList = this.state[mealListKey]; // key must be: upcomingMeals OR attendingMeals
+        console.log(mealList);
         if (mealList.length > 0) {
             var title = "",
                 id = "",
