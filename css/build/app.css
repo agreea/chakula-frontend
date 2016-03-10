@@ -542,6 +542,7 @@ select {
 }
 .cta {
   font-size: 22px;
+  padding: 12px;
 }
 *:focus {
   outline: none;
@@ -712,6 +713,7 @@ Form styling
 input[type=text],
 input[type=password],
 textarea {
+  font-size: 16px;
   transition: border-color 0.4s ease;
   border-color: #ddd;
   border-width: 0 0 2px 0;
@@ -970,6 +972,13 @@ hr {
   margin-right: auto;
   margin-bottom: 15px;
 }
+.publish button,
+.publish-sticky button {
+  margin: 8px;
+}
+.publish-sticky {
+  z-index: 2;
+}
 /*
 Payment UI Styling
 */
@@ -982,6 +991,7 @@ Payment UI Styling
 }
 .book-sticky {
   padding-left: 0;
+  z-index: 1;
 }
 .book-meal {
   background-color: #f1f1f1;
@@ -1143,8 +1153,8 @@ Payment UI Styling
 #create-meal .meal-thumb {
   background-color: #aaa;
 }
-#host_meal .meal-list-item:hover .btn-delete-meal,
-#create-meal .meal-list-item:hover .btn-delete-meal {
+#host_meal .meal-list-item:hover .edit-meal-row,
+#create-meal .meal-list-item:hover .edit-meal-row {
   display: inline;
   border: none;
 }
@@ -1211,14 +1221,31 @@ Payment UI Styling
   background-color: #ddd;
   margin: 20px 0 0 0;
 }
-#host_meal .btn-delete-photo,
-#create-meal .btn-delete-photo,
-#host_meal .btn-delete-meal,
-#create-meal .btn-delete-meal {
+#host_meal .edit-meal-row,
+#create-meal .edit-meal-row {
   float: right;
   position: absolute;
   right: 30px;
   z-index: 1000;
+  cursor: pointer;
+  display: none;
+}
+#host_meal .btn-edit-meal:hover,
+#create-meal .btn-edit-meal:hover {
+  background-color: #5bc0de;
+  transition: background-color 0.3s ease;
+}
+#host_meal .btn-delete-meal:hover,
+#create-meal .btn-delete-meal:hover {
+  background-color: #F23A4D;
+  transition: background-color 0.3s ease;
+}
+#host_meal .btn-delete-photo,
+#create-meal .btn-delete-photo,
+#host_meal .btn-edit-meal,
+#create-meal .btn-edit-meal,
+#host_meal .btn-delete-meal,
+#create-meal .btn-delete-meal {
   font-size: 20px;
   height: 40px;
   width: 40px;
@@ -1226,8 +1253,6 @@ Payment UI Styling
   margin: 4px;
   background: #333;
   border-radius: 50%;
-  cursor: pointer;
-  display: none;
 }
 #host_meal .btn-delete-photo,
 #create-meal .btn-delete-photo {

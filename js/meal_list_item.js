@@ -93,7 +93,7 @@ module.exports = React.createClass({
             <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
           </div>
           <p className="error-field">{this.state.delete_error}</p>
-          <div className="col-xs-5 col-xs-offset-1 col-sm-4 col-sm-offset-2">
+          <div className="col-xs-5 col-sm-4">
             <button type="button" className="btn-primary" onClick={this.deleteMeal}>Delete Meal</button>
           </div>
         </div>
@@ -119,19 +119,27 @@ module.exports = React.createClass({
   renderMealPreview: function() {
     var d = this.props.data;
     var edit_link = "/create_meal/" + d.Id,
+        listing_link = "meal/" + d.Id,
         title = (!d.Title)? <p>Untitled</p> : <p>{d.Title}</p>;
     return <div className="row">
-          <button className="btn-delete-meal text-center" 
-            data-toggle="modal" 
-            data-target={"#deleteMeal" + d.Id}>
-              <span className=" glyphicon glyphicon-trash delete-icon" aria-hidden="true" />
-          </button>
+          <div className="edit-meal-row">
+            <Link to={edit_link}>
+              <button className="btn-edit-meal text-center">
+                  <span className=" glyphicon glyphicon-pencil delete-icon" aria-hidden="true" />
+              </button>
+            </Link>
+            <button className="btn-delete-meal text-center" 
+              data-toggle="modal" 
+              data-target={"#deleteMeal" + d.Id}>
+                <span className=" glyphicon glyphicon-trash delete-icon" aria-hidden="true" />
+            </button>
+          </div>
           <div className="col-xs-3 text-center">
             {this.renderPicPreview()}
           </div>
           <div className="col-xs-8">
             <h4 className="meal-list-title">
-              <Link to={edit_link}>
+              <Link to={listing_link}>
                 {title}
               </Link>
             </h4>

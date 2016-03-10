@@ -30,8 +30,13 @@ module.exports = React.createClass({
         var api_resp = api_call("meal", {
             method: "GetUpcomingMeals"
         });
-        if (api_resp.Success)
-            this.setState({upcomingMeals: api_resp.Return});
+        if (api_resp.Success) {
+            var data = api_resp.Return;
+            this.setState({
+                upcomingMeals: data.Upcoming_meals || [],
+                attendingMeals: data.Attending_meals || []
+            });
+        }
     },
     componentDidMount: function() {
         $("#browse-meals").click(function() {
@@ -39,18 +44,36 @@ module.exports = React.createClass({
         });
     },
     getInitialState: function() {
-        return({email: '', emailSubmitSuccess: false});
+        return({
+            email: '', 
+            emailSubmitSuccess: false,
+            attendingMeals: [],
+            upcomingMeals: []
+        });
     },
-    renderUpcomingMeals: function() {
-        var s = this.state;
-        if (s.upcomingMeals && s.upcomingMeals.length > 0)
+    renderMealList: function(mealListKey) {
+        var mealList = this.state[mealListKey]; // key must be: upcomingMeals OR attendingMeals
+        if (mealList.length > 0) {
+            var title = "",
+                id = "",
+                mealNodes = mealList.map(function(meal, index) { 
+                    return <MealCard key={index} data={meal} />
+                });
+            if (mealListKey === "upcomingMeals") {
+                title = "Upcoming Meals";
+                id = "upcoming"
+            } else {
+                title = "Attending Meals";
+                id = "attending";
+            }
             return (
                 <div className="row" id="upcoming">
                     <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
-                        <h2 className="text-center">Upcoming Meals</h2>
-                        { s.upcomingMeals.map(function(meal, index) { return <MealCard key={index} data={meal} />}) }
+                        <h2 className="text-center">{title}</h2>
+                        {mealNodes}
                     </div>
                 </div>);
+        }
     },
     renderHowItWorks: function() {
         return (
@@ -116,9 +139,6 @@ module.exports = React.createClass({
         );
     },
     render: function() {
-        var howItWorks = this.renderHowItWorks(),
-            testimonials = this.renderTestimonials(),
-            upcomingMeals = this.renderUpcomingMeals();
         return(
             <div id="home">
                 <EmailSignupFooter triggerElementId="how-it-works"/>
@@ -136,9 +156,10 @@ module.exports = React.createClass({
                         </div>
                     </div>
                 </header>
-                {howItWorks}
-                {testimonials}
-                {upcomingMeals}
+                {this.renderHowItWorks()}
+                {this.renderTestimonials()}
+                {this.renderMealList("attendingMeals")}
+                {this.renderMealList("upcomingMelas")}
             </div>);
     }
 });

@@ -16,14 +16,7 @@ function getOpenSpots(capacity, attendees) {
 }
 var Carousel = React.createClass({
   componentDidMount: function() { // dynamically center each image in the carousel frame
-    console.log("component did mount");
     $(".carousel img").each(function(){
-        // console.log("carousel image check:");
-        // console.log(this);
-        // console.log("My height: " + $(this).height());
-        // console.log("My width: " + $(this).width());
-        // console.log("Daddy's height: " + $(this).parent().height());
-        // console.log("Daddy's width: " + $(this).parent().width());
         if ($(this).height() > $(this).parent().height()){
           console.log("adjusting for height");
             var top_dif= ($(this).height()-$(this).parent().height())/2;
@@ -36,9 +29,8 @@ var Carousel = React.createClass({
         }
     });
   },
-  render: function() {
-    var data = this.props.data;
-    var pictures = data.Pics.map(function(pic, index) {
+  renderPics: function() {
+    return this.props.data.Pics.map(function(pic, index) {
       if (index == 0) {
         return (<div className="item active" key={index}>
           <img src={"https://yaychakula.com/img/" + pic.Name}></img>
@@ -50,23 +42,27 @@ var Carousel = React.createClass({
         <div className="carousel-caption">{pic.Caption}</div>
       </div>);
     });
-    return (
-      <div className="col-xs-12 col-sm-8 col-md-9" id="carousel-container">
+  },
+  render: function() {
+    var data = this.props.data,
+        pictures = this.renderPics();
+    return (<div className="col-xs-12 col-sm-8 col-md-9" id="carousel-container">
       <div id="carousel" className="carousel slide text-center" data-ride="carousel" data-interval="false">
         <div className="carousel-inner" id="carousel-pics" role="listbox">
           {pictures}
         </div>
-        <a className="left carousel-control" href="#carousel" role="button" data-slide="prev" hidden={pictures.length == 1}>
+        <a className="left carousel-control" href="#carousel" role="button" data-slide="prev" 
+          hidden={pictures.length < 2}>
           <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
           <span className="sr-only">Previous</span>
         </a>
-        <a className="right carousel-control" href="#carousel" role="button" data-slide="next" hidden={pictures.length == 1}>
+        <a className="right carousel-control" href="#carousel" role="button" data-slide="next" 
+          hidden={pictures.length < 2}>
           <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
           <span className="sr-only">Next</span>
         </a>
       </div>
-      </div>
-    );
+    </div>);
   }
 });
 
@@ -144,11 +140,18 @@ var BookMeal = React.createClass({
   getInitialState: function() {
     var selectedPopup = 
       (this.props.data.Popups.length > 0)? this.props.data.Popups[0].Id : -1;
-    return({selectedPopup: selectedPopup});
+    return({
+      selectedPopup: selectedPopup,
+      topOffset: 0
+    });
   },
   handlePopupSelected: function(e) {
     this.setState({selectedPopup: e.target.id});
     this.props.handlePopupSelectedParent(e.target.id);
+  },
+  handleStickyStateChange: function() {
+    var topOffset = $(".publish").height() || 0;
+    this.setState({topOffset: topOffset});
   },
   renderOrderWithLogin: function() {
       return <Link to={"/login?fwd=meal/" + this.props.data.Id + "?book_meal=true"}>
@@ -303,8 +306,16 @@ var BookMeal = React.createClass({
         {this.renderAttendees()}
       </div>
     if (document.documentElement.clientWidth > 768) {
+      var stickyStyle = {
+        position: "fixed",
+        top: this.state.topOffset,
+        left: 0,
+        right: 0};
       return(
-        <Sticky className="col-xs-12 col-sm-4 col-md-3 book-sticky" stickyClass="col-sm-4 col-sm-offset-8 col-md-3 col-md-offset-9 book-sticky">
+        <Sticky className="col-xs-12 col-sm-4 col-md-3 book-sticky" 
+                stickyClass="col-sm-4 col-sm-offset-8 col-md-3 col-md-offset-9 book-sticky"
+                stickyStyle={stickyStyle}
+                onStickyStateChange={this.handleStickyStateChange}>
           {bookMeal}
         </Sticky>
       );
@@ -438,8 +449,37 @@ module.exports = React.createClass({
       $('html,body').animate({scrollTop: $("#other-meals").offset().top},'medium');
     });
   },
+  publishMeal: function() {
+    // do the usual check
+    // if anything is wrong, pop open a modal with a link to edit the meal at the bottom
+  },
   getInitialState: function() {
     return({data: this.props.data, selectedPopup: 0});
+  },
+  renderPublishAlert: function() {
+    if (this.state.data.Published)
+      return
+    var stickyStyle = { 
+      position: "fixed",
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 2
+    };
+    return (
+      <Sticky className="publish row warning-yellow-bg" stickyStyle={stickyStyle}>
+        <div className="col-xs-8 col-sm-6 col-sm-offset-2">
+          <p><strong>This meal is not published and cannot be viewed by others.</strong></p>
+        </div>
+        <div className="col-xs-4 col-sm-4 text-right">
+          <Link to={"create_meal/" + this.state.data.Id}>
+            <button className="inline-block c-blue white-bg">Edit</button>
+          </Link>
+          <button className="inline-block c-blue-bg" onClick={this.publishMeal}>Publish</button>
+        </div>
+      </Sticky>
+    );
+    // if your meal is not published, show an alert
   },
   render: function() {
     var data = this.state.data;
@@ -450,6 +490,7 @@ module.exports = React.createClass({
     var emailSignup = <EmailSignup />;
     return(
       <div className="row">
+        {this.renderPublishAlert()}
         <div className="row text-center">
           <Carousel data={data}></Carousel>
           <BookMeal data={data} handlePopupSelectedParent={this.handlePopupSelected}></BookMeal>
