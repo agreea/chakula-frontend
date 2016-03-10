@@ -160,7 +160,7 @@ module.exports = React.createClass({
                 {this.renderHowItWorks()}
                 {this.renderTestimonials()}
                 {this.renderMealList("attendingMeals")}
-                {this.renderMealList("upcomingMelas")}
+                {this.renderMealList("upcomingMeals")}
             </div>);
     }
 });
