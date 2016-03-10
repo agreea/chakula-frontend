@@ -29,7 +29,7 @@ module.exports = React.createClass({
     componentWillMount: function() {
         var api_resp = api_call("meal", {
             method: "GetUpcomingMeals"
-            session: Cookies.get("session") || ""
+            session: Cookies.get("session")
         });
         if (api_resp.Success) {
             var data = api_resp.Return;
