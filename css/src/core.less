@@ -181,7 +181,9 @@ button {
     z-index: 50000;
     background: #f8f8f8;
 }
-
+/*
+Navbar styling
+*/
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
@@ -226,9 +228,18 @@ button {
 }
 
 .nav > li, .navbar-header {
-    display: inline-flex;
+    @media (min-width: 768px) {
+        display: inline-flex;
+        margin-left: 8px;
+    }
     cursor: pointer;
     height: 100%;
+}
+
+@media (min-width: 768px) {
+    .navbar > .container-fluid .navbar-brand {
+        margin-left: 0;
+    }
 }
 
 .nav > li {
@@ -252,19 +263,25 @@ button {
 .nav > .container-fluid {
     padding-right: 0;
 }
+
+.container-fluid>.navbar-collapse, 
+.container-fluid>.navbar-header, 
+.container>.navbar-collapse, 
+.container>.navbar-header {
+    margin: 0;
+}
+
 .navbar-brand {
-    margin: auto 0;
-    margin-left: 0;
+    margin: 8px;
     display: inline-block;
     padding: 0;
     height: auto;
 }
 
-a#navbar-brand {
-    padding-top: 8px;
-    margin-left: 0;
+.navbar-toggle {
+    margin: 20px;
+    border-radius: 0;
 }
-
 .nav-item-content {
     padding: 0;
     border: none;
@@ -509,6 +526,16 @@ Rules on multiple pages
     font-size: 14px;
     border-radius: 2px;
     margin: 4px;
+}
+.add-email-footer {
+    padding-top: 16px;
+    margin-bottom: 16px;
+}
+.email-footer-x {
+    font-size: 28px;
+}
+input.add-email-input {
+    padding: 6px 8px;
 }
 
 hr {

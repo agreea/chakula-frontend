@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="google-site-verification" content="u-6TfIowNWRajF4xyweh-LzQp6AFwyfFKjXwVD91NHM"/>
+    <title>Chakula - Better than Restaurants</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap Core CSS -->
+    <script src="/js/jquery.js"></script> 
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link href="/css/build/app.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <script src="/js/api_call.js"></script>
+    <script src="/js/js-cookie.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans|Montserrat|Lora|Sorts+Mill+Goudy:400italic|Merriweather+Sans' rel='stylesheet' type='text/css'>
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script type="text/babel" src="js/react_index_upcoming_meals.js"></script>
+    <script type="text/babel" src="js/nav_bar.js"></script> 
+    -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<script>
+    if (!window.location.href.startsWith("https://qa.")) { // dont track analytics for qa
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-66943306-1', 'auto');
+      ga('send', 'pageview');        
+    }
+    // on load --> read as array buffer
+    // send request with array in body
+    var reader = new FileReader();
+    var control = $("#file-upload");  
+    var uploadFile = function(e) {
+        var i = 0;
+        var files = e.target.files;
+        var len = files.length;
+
+        for (var i = 0; i < files.length; i++) {
+            reader.readAsArrayBuffer(files[i]);
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                console.log("Upload complete.");
+            };
+            xhr.open("post", "/api/gif/upload/", true);
+            xhr.send(files[i]);
+        }
+    };
+    $(document).on('change','#file-upload' , uploadFile);
+    // var control = $("#file-upload");
+    // control.change(, false);
+</script>
+</head>
+
+<body>
+      <div className="row">
+        <div className="col-xs-4 col-sm-2">
+          <p className="form-label text-right">Photos</p>
+        </div>
+        <div className="col-xs-8">
+          <div className="upload-img-form">
+            <div className="fileUpload btn-upload btn btn-primary">
+              <span>Upload Photos</span>
+              <input className="upload" id="file-upload" type="file" onchange="uploadFile()"/>
+            </div>
+          </div>
+          <hr/>
+          <div className="picList row pic-grid">
+          </div>
+        </div>
+      </div>
+</body>
+</html>

@@ -60,12 +60,12 @@ module.exports = React.createClass({
                 <p className="white">Never miss another meal</p>
             </div>
             <div className="col-xs-12 col-md-5">
-               <div className="input-group" style={paddingTop}>
+               <div className="input-group add-email-footer add-email-field">
                     <input type="text" 
                         placeholder="Your email" 
                         value={s.email}
                         id="email"
-                        className="text-field"
+                        className="text-field add-email-input"
                         onChange={this.handleInputChange}
                         style={textField}></input>
                    <span className="input-group-btn">
@@ -86,7 +86,7 @@ module.exports = React.createClass({
                         {(s.success)? this.renderSuccess() : this.renderSignup()}
                     </div>
                     <div className="col-xs-1 text-right">
-                        <button className="transparent-bg white" onClick={this.hide}><i className="fa fa-times"></i></button>
+                        <button className="transparent-bg white email-footer-x" onClick={this.hide}><i className="fa fa-times"></i></button>
                     </div>
                 </div>);
     }
