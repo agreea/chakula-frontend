@@ -221,11 +221,13 @@ var BookMeal = React.createClass({
     var attendees = this.getSelectedPopup().Attendees,
         maxPerRow = { xs: 3 };
     var attendeeNodes = attendees.map(function(attendee, i) {
-      console.log(attendee.Prof_pic_url);
+      var attendeeName = attendee.First_name;
+      if (attendee.Seats > 1)
+        attendeeName += " " + attendee.Seats;
       return (
         <div className="col-xs-6 col-sm-4" key={i}>
           <ProfImg src={attendee.Prof_pic_url} />
-          <p className="text-center">{attendee.First_name}</p>
+          <p className="text-center">{attendeeName}</p>
         </div>);
     });
     if (attendees.length > 0)
