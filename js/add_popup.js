@@ -16,8 +16,8 @@ var DatesRow = React.createClass({
       .on('dp.change', this.setState({saveDisabled: false}));
   },
   componentDidMount: function() {
-    this.initDatepicker('#Starts', this.state.Starts);
-    this.initDatepicker('#Rsvp_by', this.state.Rsvp_by);
+    this.initDatepicker('#Starts' + this.props.data.Id, this.state.Starts);
+    this.initDatepicker('#Rsvp_by' + this.props.data.Id, this.state.Rsvp_by);
   },
   handleInputChanged: function(e) {
     console.log(e);
@@ -31,13 +31,13 @@ var DatesRow = React.createClass({
   render: function() {
     return (<div>
         <FormTextRow 
-          id="Starts"
+          id={"Starts" + this.props.data.Id}
           label="Meal Time"
           placeholder="When do you break bread?"
           defaultValue={this.state.Starts}
           handleInputChanged={this.handleInputChanged} />
         <FormTextRow 
-          id="Rsvp_by"
+          id={"Rsvp_by" + this.props.data.Id}
           label="RSVP By"
           placeholder="Rsvp by?" 
           defaultValue={this.state.Rsvp_by}
