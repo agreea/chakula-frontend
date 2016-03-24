@@ -223,7 +223,7 @@ var BookMeal = React.createClass({
     var attendeeNodes = attendees.map(function(attendee, i) {
       var attendeeName = attendee.First_name;
       if (attendee.Seats > 1)
-        attendeeName += " " + attendee.Seats;
+        attendeeName += " +" + (attendee.Seats - 1);
       return (
         <div className="col-xs-6 col-sm-4" key={i}>
           <ProfImg src={attendee.Prof_pic_url} />
