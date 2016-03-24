@@ -136,17 +136,17 @@ module.exports = React.createClass({
        <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 text-center">
         <h3>Your Guest Profile</h3>
         <span className="disclaimer-text">By setting up an account you agree to <b><a target="_blank" href="https://yaychakula.com/tos.html">the Chakula terms of service</a></b></span>
-        <FormTextRow form_name="First Name" 
+        <FormTextRow label="First Name" 
           place_holder="John" 
           id="First_name" 
           handleInputChanged={this.handleInputChanged}
           default_value={guest.First_name}/>
-        <FormTextRow form_name="Last Name" 
+        <FormTextRow label="Last Name" 
           place_holder="Doe" 
           id="Last_name" 
           handleInputChanged={this.handleInputChanged}
           default_value={guest.Last_name}/>
-        <FormTextRow form_name="Email" 
+        <FormTextRow label="Email" 
           place_holder="One you actually check" 
           id="Email" 
           handleInputChanged={this.handleInputChanged}
