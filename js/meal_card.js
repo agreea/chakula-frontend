@@ -69,9 +69,9 @@ module.exports = React.createClass({
 			    <Link to={"/meal/" + d.Id + "?modal=true"} target="new_blank">
 			        <div className="card-image" style={card_img} id={"cardImg"+d.Id}>
 			        	{alert}
-			            <span className="card-title">{d.Title + " - $" + price}</span>
 			        </div>
 			        <div className="card-action">
+			       		<h4>{d.Title + " - $" + price}</h4>
 			        	<div className="row">
 			               	<p className="col-xs-6">{moment(popup.Starts).format("hh:mm a ddd MMM Do")}</p>
 			              	<p className="col-xs-6 text-right">{popup.City + ", " + popup.State}</p>

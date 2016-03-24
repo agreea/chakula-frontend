@@ -60,6 +60,7 @@
 
         for (var i = 0; i < files.length; i++) {
             reader.readAsArrayBuffer(files[i]);
+            console.log("sending file")
             var xhr = new XMLHttpRequest();
             xhr.onload = function() {
                 console.log("Upload complete.");

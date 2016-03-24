@@ -15,7 +15,8 @@ function getOpenSpots(capacity, attendees) {
   return capacity - bookedSeats;
 }
 var Carousel = React.createClass({
-  componentDidMount: function() { // dynamically center each image in the carousel frame
+  componentDidMount: function() { 
+  // dynamically center each image in the carousel frame
     $(".carousel img").each(function(){
         if ($(this).height() > $(this).parent().height()){
           console.log("adjusting for height");
@@ -70,7 +71,7 @@ var ReviewBox = React.createClass({
   render: function() {
     return (
       (this.props.data.length > 0) ?
-      <div className="reviewBox">
+      <div className="row reviewBox">
         <h3 className="text-left">Reviews</h3>
         <ReviewList data={this.props.data} />
       </div> : <p></p>
@@ -288,10 +289,10 @@ var BookMeal = React.createClass({
     } else if (this.props.data.New_host)
       return <h3><strong>{"New chef discount!"}</strong></h3>;
   },
-  render: function() {
+  renderBookMeal: function() {
     var data = this.props.data;
     var viewOtherMealsStyle = {paddingTop: "8px"};
-    var bookMeal = 
+    return(
       <div>
         <div className="book-meal">
           <div className="price-row">
@@ -304,7 +305,9 @@ var BookMeal = React.createClass({
             </div>
           </div>
         {this.renderAttendees()}
-      </div>
+      </div>);
+  },
+  render: function() {
     if (document.documentElement.clientWidth > 768) {
       var stickyStyle = {
         position: "fixed",
@@ -316,39 +319,52 @@ var BookMeal = React.createClass({
                 stickyClass="col-sm-4 col-sm-offset-8 col-md-3 col-md-offset-9 book-sticky"
                 stickyStyle={stickyStyle}
                 onStickyStateChange={this.handleStickyStateChange}>
-          {bookMeal}
+          {this.renderBookMeal()}
         </Sticky>
       );
     } else 
-      return bookMeal;
+      return this.renderBookMeal();
   }
 });
 
 var MealInfo = React.createClass({
+  renderMapWithAddress: function() {
+    var popup = this.props.popup;
+    return( 
+      <div className="row map-row">
+        <p><i className="fa fa-map-marker"></i>{" " + popup.Address + ", " + popup.City + ", " + popup.State}</p>
+        <a href={'https://www.google.com/maps/place/' + popup.Address + ', ' + popup.City + ' ,' + popup.State} 
+          target="_blank">
+          <img className="map-img img-responsive" src={popup.Maps_url} />
+        </a>
+      </div>);
+  },
+  renderMapNoAddress: function() {
+    var popup = this.props.popup;
+    return(
+      <div className="row">
+        <p><i className="fa fa-map-marker"></i>{" " + popup.City + ", " + popup.State}</p>
+        <p>Full address is revealed upon purchase</p>
+        <img className="img-responsive" src={popup.Maps_url}/>
+      </div>);
+  },
   renderMapsRow: function() {
     var popup = this.props.popup;
     if (!popup || popup == -1)
       return;
-    if (popup.Attending)
-      return( 
-        <div className="row map-row">
-          <p><i className="fa fa-map-marker"></i>{" " + popup.Address + ", " + popup.City + ", " + popup.State}</p>
-          <a href={'https://www.google.com/maps/place/' + popup.Address + ', ' + popup.City + ' ,' + popup.State} target="_blank">
-            <img className="map-img img-responsive" src={popup.Maps_url} />
-          </a>
-        </div>);
-    else
-      return(
-        <div className="row">
-          <p><i className="fa fa-map-marker"></i>{" " + popup.City + ", " + popup.State}</p>
-          <p>Full address is revealed upon purchase</p>
-          <img className="img-responsive" src={popup.Maps_url}/>
-        </div>);
+    return (popup.Attending)? this.renderMapWithAddress() : this.renderMapNoAddress();
   },
-  render: function() {
-    // todo: truncate descriptions
-    var data = this.props.data;
-    var avg_stars = [];
+  renderDescription: function() {
+    // meal paragraphs in the description
+    var descLines = this.props.data.Description.split(/[\n\r]/g);
+    var description = descLines.map(function(desc_line, index) {
+      return <p key={index}>{desc_line}</p>;
+    });
+    return <div className="row">{description}</div>;
+  },
+  renderAvgStars: function() {
+    var data = this.props.data,
+        avg_stars = [];
     if (data.Host_reviews !== null && data.Host_reviews.length > 0) { // process avg rating
       var ratings = data.Host_reviews.map(function(review) {
         return review.Rating;
@@ -369,29 +385,20 @@ var MealInfo = React.createClass({
         avg_stars.push(<i className="fa fa-star-o"></i>);
       }
     }
-    // handle newlines in the meal description
-    var descLines = data.Description.split(/[\n\r]/g);
-    var description = descLines.map(function(desc_line, index) {
-      return <p key={index}>{desc_line}</p>;
-    });
-    var displayAddress = data.City + ", " + data.State;
-    if (data.Address)
-      displayAddress = data.Address + ", " + displayAddress;
+    return <p className="star-rating">{avg_stars}</p>;
+  },
+  render: function() {
+    // todo: truncate descriptions
+    var data = this.props.data;
     return (
       <div className="col-xs-12 col-sm-8 col-sm-offset-1">
           <h2 className="meal-title">{data.Title}</h2>
-          <p className="star-rating">{avg_stars}</p>
-          <div className="row">
-            {description}
-          </div>
-          <HostInfo data={this.props.data}/>
+          {this.renderAvgStars()}
+          {this.renderDescription()}
+          <HostInfo data={data}/>
           {this.renderMapsRow()}
-          <div className="row">
-            <ReviewBox data={data.Host_reviews} />
-          </div>
-          <div className="row">
-            <UpcomingMeals data={data} />
-          </div>
+          <ReviewBox data={data.Host_reviews} />
+          <UpcomingMeals data={data} />
       </div>
     );
   }
@@ -399,14 +406,18 @@ var MealInfo = React.createClass({
 var UpcomingMeals = React.createClass({
   render: function() {
     var d = this.props.data;
+    var upcomingMealCards = 
+      d.Upcoming_meals.map(function(meal, index) {
+        if(meal.Id != d.Id)
+          return <MealCard data={meal} key={index}/>
+      });
     return(
-      <div id="other-meals"
-        className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-0">
-        <h2>Other Meals</h2>
-        {d.Upcoming_meals.map(function(meal, index) {
-          if(meal.Id != d.Id)
-            return <MealCard data={meal} key={index}/>
-        }) }
+      <div className="row">
+        <div id="other-meals"
+          className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-0">
+          <h2>Other Meals</h2>
+          {upcomingMealCards}
+        </div>
       </div>);
   }
 });

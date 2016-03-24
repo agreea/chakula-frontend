@@ -71,7 +71,7 @@ var SeatsRow = React.createClass({
           options={possSeats}
           label="Capacity" />
         <div className="row form-row">
-          <div className="col-xs-5 col-sm-3">
+          <div className="col-xs-5 col-sm-3 col-md-2">
             <p className="form-label text-right">Max pay</p>
           </div>
           <div className="col-xs-7 col-sm-9">

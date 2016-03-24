@@ -104,7 +104,7 @@ module.exports = React.createClass({
     renderTestimonials: function() {
         var review_data = [{
     "First_name": "Livia",
-    "Prof_pic_url": "https://graph.facebook.com/10153707959143024/picture?width=200&height=200",
+    "Prof_pic_url": "https://lh3.googleusercontent.com/-tpOhV1sqmbM/AAAAAAAAAAI/AAAAAAAAAAA/WDo0TJFQZbM/photo.jpg",
     "Meal_id": 6,
     "Meal_title": "Sri Lankan Spicy Pumpkin Curry",
     "Rating": 5,
