@@ -134,76 +134,102 @@ module.exports = React.createClass({
           fbLogin: false
         });
     },
-    render: function() {
-        var error_messages;
-        if (this.state.errors.length > 0) 
-          error_messages = this.state.errors.map(function(error) {
-            return(<p className="error-field">{error}</p>)});
-        var forgot_pass_text =                   
-            <div className="col-xs-12 col-sm-6 text-right">
+    renderTextFields: function() {
+      var text_fields = 
+        [<input type="text" 
+            placeholder="email" 
+            id="email"
+            valueLink={this.linkState('email')}></input>,
+        <input 
+            type="password" 
+            placeholder="password"
+            id="password"
+            valueLink={this.linkState('password')}></input>];
+      if (this.state.createAccount){
+        text_fields.push(<input 
+          type="password"
+          placeholder="confirm password"
+          id="confirm-password"
+          valueLink={this.linkState('passwordConf')}/>);
+
+        var first_last = 
+          [<input type="text" 
+              placeholder="first name" 
+              id="first-name"
+              valueLink={this.linkState('firstName')}/>,
+          <input 
+              type="text" 
+              placeholder="last name"
+              id="last-name"
+              valueLink={this.linkState('lastName')}/>];
+        text_fields = first_last.concat(text_fields);
+      }
+      return (<div className="row">{text_fields}</div>);
+    },
+    renderErrorMessages: function() {
+      var error_messages;
+      if (this.state.errors.length > 0) 
+        error_messages = this.state.errors.map(function(error) {
+          return(<p className="error-field">{error}</p>)});
+      return (<div className="row">{error_messages}</div>);
+    },
+    renderLogin: function(){
+      return (
+        <div className="row" id="login">
+          <div className="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <h3 className="text-center">Sign In</h3>
+            <div className="row text-center">
+              <img onClick={this.handleFbLogin} className="fb-login" src="/img/fb-login.svg" id="fb"></img>
+            </div>
+            <p className="text-center"> - or - </p> 
+            {this.renderErrorMessages()}
+            {this.renderTextFields()}
+            <div className="row text-right">
+              <button className="brand-btn btn-login" onClick={this.handleSignin}>Sign In</button>   
+            </div>
+            <div className="row">
+              <div className="col-xs-12 col-sm-6">
+                <a onClick={this.handleCreateAccountLink}>Create Account</a>
+              </div>
+              <div className="col-xs-12 col-sm-6 text-right">
                 <a>Forgot your password?</a>
-            </div>;
-        var text_fields = 
-            [<input type="text" 
-                placeholder="email" 
-                id="email"
-                valueLink={this.linkState('email')}></input>,
-            <input 
-                type="password" 
-                placeholder="password"
-                id="password"
-                valueLink={this.linkState('password')}></input>];
-        var create_account_link = "Create Account";
-        var cta_button = <button className="brand-btn" onClick={this.handleSignin}>Sign In</button>;
-        if (this.state.createAccount) {
-          forgot_pass_text = '';
-          create_account_link = 
-            <p>
-              <i className="fa fa-arrow-left"></i> Back
-            </p>;
-          cta_button = <button className="brand-btn" onClick={this.handleCreateAccountButton}>Create Account</button>
-            text_fields.push(
-              <input 
-                type="password"
-                placeholder="confirm password"
-                id="confirm-password"
-                valueLink={this.linkState('passwordConf')}></input>);
-            var first_last = 
-              [<input type="text" 
-                  placeholder="first name" 
-                  id="first-name"
-                  valueLink={this.linkState('firstName')}></input>,
-              <input 
-                  type="text" 
-                  placeholder="last name"
-                  id="last-name"
-                  valueLink={this.linkState('lastName')}></input>];
-              text_fields = first_last.concat(text_fields);
-        }
+              </div>                
+            </div>
+          </div>
+        </div>);
+    },
+    renderCreateAccount: function(){
         return(
-            <div className="row" id="login">
-              <div className="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                <h3>{(this.state.createAccount)? "Create Account" : "Login"}</h3>
-                <p>{(this.state.createAccount)? "Sign up with Chakula to get updates on all of the most exciting home popups happening in DC." : ""}</p>
-                <div className="row text-center">
-                  <img onClick={this.handleFbLogin} className="fb-login" src="/img/fb-login.svg" id="fb"></img>
+          <div className="row" id="login">
+            <div className="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+              <h3 className="text-center">Create Account</h3>
+              <p>Join the Chakula community to reserve your spot at the table. </p>
+              <div className="row text-center">
+                <img onClick={this.handleFbLogin} className="fb-login" src="/img/fb-login.svg" id="fb"></img>
+              </div>
+              <p className="text-center"> - or - </p> 
+              {this.renderErrorMessages()}
+              <div className="row">
+                {this.renderTextFields()}
+              </div>
+              <div className="row">
+                <div className="col-xs-6">
+                  <a onClick={this.handleCreateAccountLink}>
+                    <i className="fa fa-arrow-left"></i> Back
+                  </a>
                 </div>
-                <p className="text-center"> - or - </p> 
-                {error_messages}
-                <div className="row">
-                  {text_fields}
-                </div>
-                <div className="row">
-                  {cta_button}
-                </div>
-                <div className="row">
-                  <div className="col-xs-12 col-sm-6">
-                    <a onClick={this.handleCreateAccountLink}>{create_account_link}</a>
-                  </div>
-                  {forgot_pass_text}
+                <div className="col-xs-6 text-right">
+                  <button className="brand-btn btn-login" 
+                    onClick={this.handleCreateAccountButton}>Create Account</button>
                 </div>
               </div>
             </div>
-        );
+          </div>);
+    },
+    render: function() {
+      if(this.state.createAccount)
+        return this.renderCreateAccount();
+      else
+        return this.renderLogin();
     }
 });

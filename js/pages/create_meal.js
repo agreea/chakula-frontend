@@ -72,8 +72,8 @@ var PriceSeatsRow = React.createClass({
     return (
       <div>
         <div className="row form-row">
-          <div className="col-xs-4 col-sm-2 form-label">
-            <p className="text-right">Price per spot</p>
+          <div className="col-xs-4 col-sm-2">
+            <p className="text-right form-label">Price per spot</p>
           </div>
           <div className="col-xs-4 col-sm-2">
             <div className="input-group text-field">
@@ -87,7 +87,7 @@ var PriceSeatsRow = React.createClass({
         </div>
         <div className="row form-row">
           <div className="col-xs-4 col-sm-2 form-label">
-            <p className="text-right" id="guests-pay">Guests pay</p>
+            <p className="text-right form-label" id="guests-pay">Guests pay</p>
           </div>
           <div className="col-xs-5 col-sm-4">
             <p>{"$" + this.getPriceWithCommission()}</p>

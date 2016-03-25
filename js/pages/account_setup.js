@@ -297,16 +297,16 @@ module.exports = React.createClass({
 					<button onClick={this.carouselPressed} className="c-blue-bg caro-nav">Continue</button></a>;		
 		var checkmark = <i className="fa fa-check active-green"></i>;
 
-		var addPhoneText = (s.phoneAdded)? <p>{checkmark} Phone Added</p> : <p>Add Phone</p>,
-			addEmailText = (s.emailAdded)? <p>{checkmark} Email Added</p> : <p>Add Email</p>,
+		var addEmailText = (s.emailAdded)? <p>{checkmark} Email Added</p> : <p>Add Email</p>,
 			addBioText = (s.bioAdded)? <p>{checkmark} Bio Added</p> : <p>Add Bio</p>,
+			addPhoneText = (s.phoneAdded)? <p>{checkmark} Phone Added</p> : <p>Add Phone</p>,
 			addFbText = (s.fbAdded)? <p>{checkmark} FB Added</p> : <p>Add FB</p>,
 			addPhotoText = (s.photoAdded)? <p>{checkmark} Photo Added</p> : <p>Add Photo</p>;
 		var items = 
 			[<li className="inactive-gray">{inactive_circle} {(s.fbLogin)? addEmailText : addFbText}</li>,
+				<li className="inactive-gray">{inactive_circle} {addBioText}</li>,
 				<li className="inactive-gray">{inactive_circle} {addPhoneText}</li>,
-				<li className="inactive-gray">{inactive_circle} {addPhotoText}</li>, 
-				<li className="inactive-gray">{inactive_circle} {addBioText}</li>];
+				<li className="inactive-gray">{inactive_circle} {addPhotoText}</li>];
 		switch (s.activeScreen) {
 			case "add_email":
 				items[0] = <li>{active_circle} <b>{addEmailText}</b></li>;
@@ -318,6 +318,12 @@ module.exports = React.createClass({
 						<a href="#carousel" role="button" data-slide="next" id="next" disabled="true">
 							<button onClick={this.carouselPressed} className="caro-nav">Continue</button>
 						</a>
+				break;
+			case "add_bio":
+				items[3] = <li>{active_circle} <b>{addBioText}</b></li>;
+				next = 
+					<button onClick={this.complete} 
+						className={"caro-nav" + (s.bioAdded)? " c-blue-bg" : ""}>Continue</button>;
 				break;
 			case "add_fb":
 				items[0] = <li>{active_circle} <b>{addFbText}</b></li>;
@@ -334,12 +340,6 @@ module.exports = React.createClass({
 				items[2] = <li>{active_circle} <b>{addPhotoText}</b></li>;
 				if (s.photoAdded)
 					next = cont;
-				break;
-			case "add_bio":
-				items[3] = <li>{active_circle} <b>{addBioText}</b></li>;
-				next = 
-					<button onClick={this.complete} 
-						className={"caro-nav" + (s.bioAdded)? " c-blue-bg" : ""}>Continue</button>;
 				break;
 			default:
 				break;
@@ -361,7 +361,10 @@ module.exports = React.createClass({
 					   	 	<div className="item active" id="add_fb">
 					    	   	<AddFb success={this.handleFacebookAdded}/>
 					  		</div>
-				      	}	
+				      	}
+				      	<div className="item" id="add_bio">
+					      	<AddBio success={this.handleSuccess}/>
+					    </div>
 						<div className="item" id="add_phone">
 							<h3>Add Phone</h3>
 							<p>Verifying your phone number will help confirm your identity and 
@@ -374,9 +377,6 @@ module.exports = React.createClass({
 					      			"/img/user-icon.svg"
 					      		}
 					      		success={this.handleSuccess}/>
-					    </div>
-					    <div className="item" id="add_bio">
-					      	<AddBio success={this.handleSuccess}/>
 					    </div>
 					    <div className="row">
 					    	<div className="text-right">
