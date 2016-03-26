@@ -59,7 +59,9 @@ module.exports = React.createClass({
             var title = "",
                 id = "",
                 mealNodes = mealList.map(function(meal, index) { 
-                    return <MealCard key={index} data={meal} />
+                    return (<div className="col-xs-12 col-sm-6">
+                            <MealCard key={index} data={meal} />
+                        </div>);
                 });
             if (mealListKey === "upcomingMeals") {
                 title = "Past Meals";
@@ -70,9 +72,11 @@ module.exports = React.createClass({
             }
             return (
                 <div className="row" id="upcoming">
-                    <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                    <div className="col-xs-10 col-xs-offset-1">
                         <h2 className="text-center">{title}</h2>
-                        {mealNodes}
+                        <div className="row">
+                            {mealNodes}
+                        </div>
                     </div>
                 </div>);
         }
