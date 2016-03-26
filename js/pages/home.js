@@ -62,7 +62,7 @@ module.exports = React.createClass({
                     return <MealCard key={index} data={meal} />
                 });
             if (mealListKey === "upcomingMeals") {
-                title = "Upcoming Meals";
+                title = "Past Meals";
                 id = "upcoming"
             } else {
                 title = "Attending Meals";
