@@ -7,24 +7,22 @@ var React = require('react'),
 module.exports = React.createClass({
 	componentDidMount: function() {
 		var d = this.props.data;
-		$(function(){
-		        //prepare Your data array with img urls
-		        var picSrcs = d.Pics.map(function(pic){
-		        	return "https://yaychakula.com/img/" + pic.Name;
-		        });
-		        console.log(picSrcs);
-		        //start with id=0 after 5 seconds
-		        var index = 0;
-		        window.setInterval(function(){
-		        	var cardImg = $('#cardImg'+d.Id);
-		        	if (!cardImg || !cardImg.is(":hover"))
-		        		return;
-		            cardImg.css('background-image','url('+ picSrcs[index] +')');
-		            index++;
-		            if (index == picSrcs.length) 
-		            	index = 0; //repeat from start
-		        },850);        
-		    });
+		//prepare Your data array with img urls
+		var picSrcs = d.Pics.map(function(pic){
+			return "https://yaychakula.com/img/" + pic.Name;
+		});
+		console.log(picSrcs);
+		//start with id=0 after 5 seconds
+		var index = 0;
+		window.setInterval(function(){
+			var cardImg = document.querySelector("#cardImg"+d.Id+":hover");
+			if (!cardImg)
+				return;
+			cardImg.style.backgroundImage = "url(" + picSrcs[index] + ")";
+		    index++;
+		    if (index == picSrcs.length) 
+		    	index = 0; //repeat from start
+		},850);        
 	},
 	getOpenSeats: function(popup) {
 		if (!popup)
@@ -64,6 +62,8 @@ module.exports = React.createClass({
 		}
 		if (d.New_host)
 			alert = <span className="c-blue-bg meal-card-alert text-right">New Chef Sale!</span>;
+		var titleTrunc = (d.Title.length > 30)? d.Title.substring(0, 27) + "..." : d.Title;
+
 		return(
 			<div className="card">
 			    <Link to={"/meal/" + d.Id + "?modal=true"} target="new_blank">
@@ -71,7 +71,7 @@ module.exports = React.createClass({
 			        	{alert}
 			        </div>
 			        <div className="card-action">
-			       		<h4>{d.Title + " - $" + price}</h4>
+			       		<h4>{titleTrunc + " - $" + price}</h4>
 			        	<div className="row">
 			               	<p className="col-xs-6">{moment(popup.Starts).format("hh:mm a ddd MMM Do")}</p>
 			              	<p className="col-xs-6 text-right">{popup.City + ", " + popup.State}</p>

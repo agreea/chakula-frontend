@@ -9,8 +9,12 @@
   border-radius: 2px;
   background-clip: padding-box;
   text-decoration: none;
-  & a:hover {
+  & a:hover,
+  & a:focus {
     text-decoration: none;
+    & a:focus * {
+      text-decoration: none;
+    }
   }
   & h4 {
     color: #434343;
